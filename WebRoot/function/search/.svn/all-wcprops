@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/iread/!svn/ver/34/trunk/hbAdmin/WebRoot/function/search
+END
+search_keyword_list.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/34/trunk/hbAdmin/WebRoot/function/search/search_keyword_list.jsp
+END
+search_logs_list.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/iread/!svn/ver/34/trunk/hbAdmin/WebRoot/function/search/search_logs_list.jsp
+END
+search_keyword_update.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/iread/!svn/ver/34/trunk/hbAdmin/WebRoot/function/search/search_keyword_update.jsp
+END
+search_keyword_add.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/34/trunk/hbAdmin/WebRoot/function/search/search_keyword_add.jsp
+END

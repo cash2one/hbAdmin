@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+	<memcachedurl>192.168.3.130:11211</memcachedurl>
+	<passportdomain>192.168.3.111</passportdomain>
+	
+	<!-- 图片上传的缓存地址 -->
+	<tempPath>D:\\apache-tomcat-6.0.10\\work\\Catalina\\127.0.0.1\\hbAdmin</tempPath>
+	<!-- APP根目录 -->
+	<filePath>D:\apache-tomcat-6.0.10\webapps\tupian\baby_avatar</filePath>
+	<!-- 后台编辑器资讯图片访问路径 -->
+	<messageimagebereplace>http://192.168.3.199:8888/tupian/</messageimagebereplace>
+	<!-- 后台编辑器资讯图片保存数据库替换字符 -->
+	<messageimagereplace>__image__</messageimagereplace>
+	<!-- 后台保存图片完整路径 -->
+	<editorImageSave>D:\apache-tomcat-6.0.10\webapps\tupian\</editorImageSave>
+	<!-- 后台头像访问路径 -->
+	<baby_avatar>D:\apache-tomcat-6.0.10\webapps\tupian\baby_avatar\</baby_avatar>
+	<!-- 前台显示头像路径 -->
+	<qdimagebereplace>http://127.0.0.1:8888/tupian/baby_avatar/</qdimagebereplace>
+	<!-- 后台BBS附件访问路径 -->
+	<bbs_path>D:\apache-tomcat-6.0.10\webapps\tupian\bbs\</bbs_path>
+	<!-- 前台显示BBS附件路径 -->
+	<bbs_url>http://192.168.3.199:8888/tupian/bbs/</bbs_url>
+	<!-- api key -->
+	<key>100:fe4c439d0d294e40b33317811fb2666a</key>
+	<!-- api 版本号 -->
+	<version>1.0.0</version>
+	
+	
+	<!-- 请求的接口帐号（系统分配） -->
+	<appid>100</appid>
+	
+	
+	<!-- 游戏资源zip保存目录 -->
+	<playpathzip>D:\apache-tomcat-6.0.10\webapps\play\zip\</playpathzip>
+	<!-- 游戏资源解压后保存目录 -->
+	<playpathfile>D:\apache-tomcat-6.0.10\webapps\play\file\</playpathfile>
+	<!-- 游戏资源url前段配置 -->
+	<playpathurl>http://192.168.3.199:8888/play/file/</playpathurl>
+	<!-- 游戏资源url前段配置 占位符 -->
+	<playpathurlreplace>__page__</playpathurlreplace>
+	<!-- 游戏资源页面名称 -->
+	<playpathurlpage>index.html</playpathurlpage>
+	
+	<!-- 邮箱配置 -->
+	<email_sendname>绘本树</email_sendname>
+	<email_host>smtp.exmail.qq.com</email_host>
+	<email_from>kefu@17qiqu.com</email_from>
+	<email_username>kefu@17qiqu.com</email_username>
+	<email_password>haowan123</email_password>
+	
+	<!-- 重置密码url前段 -->
+	<czmm_url>http://127.0.0.1:8888/hbbbs/pwdback.jsp</czmm_url>
+	<!-- 重置密码页面样式保存项目 -->
+	<czmm_css>http://127.0.0.1:8888/hbbbs</czmm_css>
+</Config>

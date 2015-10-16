@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/iread/!svn/ver/182/trunk/hbAdmin/WebRoot/WEB-INF
+END
+config.properties
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/config.properties
+END
+urlrewrite.xml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/urlrewrite.xml
+END
+Config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/iread/!svn/ver/187/trunk/hbAdmin/WebRoot/WEB-INF/Config.xml
+END
+service-beans.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/service-beans.xml
+END
+applicationContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/iread/!svn/ver/182/trunk/hbAdmin/WebRoot/WEB-INF/applicationContext.xml
+END
+dispatcher-servlet.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/dispatcher-servlet.xml
+END
+BeanSqlMapConfig.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/iread/!svn/ver/108/trunk/hbAdmin/WebRoot/WEB-INF/BeanSqlMapConfig.xml
+END
+dao-beans.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/dao-beans.xml
+END
+czmm.html
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/iread/!svn/ver/182/trunk/hbAdmin/WebRoot/WEB-INF/czmm.html
+END
+FCKeditor.tld
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/FCKeditor.tld
+END
+web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/iread/!svn/ver/169/trunk/hbAdmin/WebRoot/WEB-INF/web.xml
+END

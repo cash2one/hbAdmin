@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/iread/!svn/ver/107/trunk/hbAdmin/WebRoot/function/config/globallanguage
+END
+global_language_update.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/iread/!svn/ver/107/trunk/hbAdmin/WebRoot/function/config/globallanguage/global_language_update.jsp
+END
+global_language_add.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/iread/!svn/ver/107/trunk/hbAdmin/WebRoot/function/config/globallanguage/global_language_add.jsp
+END
+global_language_list.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/iread/!svn/ver/107/trunk/hbAdmin/WebRoot/function/config/globallanguage/global_language_list.jsp
+END

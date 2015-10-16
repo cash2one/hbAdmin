@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="FavoriteSql"> 
+	<resultMap type="favorite" id="Favorite">
+		<result property="id" column="id"/>   
+		<result property="user_id" column="user_id"/>   
+		<result property="resource_id" column="resource_id"/>   
+		<result property="create_date" column="create_date"/> 
+	</resultMap>
+	
+	<insert id="add" parameterType="favorite"> 
+		<![CDATA[INSERT INTO tbl_favorite(id,user_id,resource_id,create_date) 
+		VALUES (nextval('tbl_favorite'),#{user_id},#{resource_id},now())]]>
+	</insert>
+	
+	<delete id="delete" parameterType="favorite">
+		<![CDATA[delete from tbl_favorite where user_id=#{user_id} ]]>
+	</delete>
+	
+	<delete id="delete1" parameterType="favorite">
+		<![CDATA[delete from tbl_favorite where user_id=#{user_id} and resource_id = #{resource_id}]]>
+	</delete>
+	
+	<select id="findNum" resultType="int" parameterType="learnplan">
+		<![CDATA[SELECT COUNT(*) FROM tbl_favorite WHERE user_id=#{user_id} AND resource_id = #{resource_id} ]]>
+	</select>
+	
+</mapper>

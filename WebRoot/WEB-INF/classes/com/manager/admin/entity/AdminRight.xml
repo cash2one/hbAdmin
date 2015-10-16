@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="AdminRightSql"> 
+	<resultMap id="AdminRight" type="adminRight">  
+		 <result property="rightId" column="right_id"/> 
+		 <result property="rightName" column="right_name"/> 
+		 <result property="parentId" column="parent_id"/> 
+		 <result property="rightState" column="right_state"/> 
+		 <result property="showOrder" column="show_order"/> 
+		 <result property="rightLevel" column="right_level"/> 
+		 <result property="parentName" column="parent_name"/> 
+	</resultMap>
+	
+	<select id="get" resultMap="AdminRight" parameterType="adminRight">
+    	<![CDATA[select * from tbl_admin_right ]]>
+    	<where>
+    	<if test="rightId!=null and ''!=rightId">
+    		<![CDATA[ and right_id=#{rightId}]]>
+    	</if>
+    	<if test="rightName!=null and ''!=rightName">
+    		<![CDATA[ and right_name=#{rightName}]]>
+    	</if>
+    	<if test="parentId!=null and ''!=parentId">
+    		<![CDATA[ and parent_id=#{parentId}]]>
+    	</if>
+    	<if test="rightState!=null and ''!=rightState">
+    		<![CDATA[ and right_state=#{rightState}]]>
+    	</if>
+    	<if test="rightLevel!=null and ''!=rightLevel">
+    		<![CDATA[ and right_level=#{rightLevel}]]>
+    	</if>
+    	</where>
+    	<![CDATA[ order by show_order]]>
+    </select>
+    
+    <select id="get3" resultMap="AdminRight" parameterType="adminRight">
+    	<![CDATA[select * from tbl_admin_right ]]>
+    	<where>
+    	<if test="rightId!=null and ''!=rightId">
+    		<![CDATA[ and right_id=#{rightId}]]>
+    	</if>
+    	<if test="rightName!=null and ''!=rightName">
+    		<![CDATA[ and right_name=#{rightName}]]>
+    	</if>
+    	<if test="parentId!=null and ''!=parentId">
+    		<![CDATA[ and parent_id=#{parentId}]]>
+    	</if>
+    	<if test="rightState!=null and ''!=rightState">
+    		<![CDATA[ and right_state=#{rightState}]]>
+    	</if>
+    	<if test="rightLevel!=null and ''!=rightLevel">
+    		<![CDATA[ and right_level=#{rightLevel}]]>
+    	</if>
+    	</where>
+    	<![CDATA[ order by right_id]]>
+    </select>
+    
+    <select id="count" resultType="int" parameterType="adminRight">
+    	<![CDATA[select count(*) from tbl_admin_right ]]>
+    	<where>
+    	<if test="rightId!=null and ''!=rightId">
+    		<![CDATA[ and right_id=#{rightId}]]>
+    	</if>
+    	<if test="rightName!=null and ''!=rightName">
+    		<![CDATA[ and right_name=#{rightName}]]>
+    	</if>
+    	<if test="parentId!=null and ''!=parentId">
+    		<![CDATA[ and parent_id=#{parentId}]]>
+    	</if>
+    	<if test="rightState!=null and ''!=rightState">
+    		<![CDATA[ and right_state=#{rightState}]]>
+    	</if>
+    	<if test="rightLevel!=null and ''!=rightLevel">
+    		<![CDATA[ and right_level=#{rightLevel}]]>
+    	</if>
+    	</where>
+    </select>
+    
+    <select id="get2" resultMap="AdminRight" parameterType="adminRight">
+    	<![CDATA[select R.right_id,R.right_name,R1.right_id AS parent_id,R1.right_name AS parent_name 
+    	from tbl_admin_right R inner join tbl_admin_right R1 on R.parent_id=R1.right_id where R.right_level=#{rightLevel} 
+    	order by R1.show_order,R.show_order]]>
+    </select>
+    
+    <insert id="add" parameterType="adminRight">
+    	<![CDATA[insert into tbl_admin_right
+    	 (right_id,right_name,parent_id,right_state,show_order,right_level)
+    	 values(#{rightId},#{rightName},#{parentId},#{rightState},#{showOrder},#{rightLevel})]]>
+    </insert>
+</mapper>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="WeekdayResourceSql"> 
+	<resultMap id="WeekdayResource" type="weekdayResource">  
+		<result property="id" column="id"/> 
+		<result property="resource_id" column="resource_id"/> 
+		<result property="weekday_id" column="weekday_id"/> 
+		<result property="backup" column="backup"/> 
+		<result property="create_date" column="create_date"/> 
+		<result property="create_adminuser" column="create_adminuser"/> 
+		<result property="update_date" column="update_date"/> 
+		<result property="update_adminuser" column="update_adminuser"/> 
+		<result property="start_date" column="start_date"/> 
+		<result property="end_date" column="end_date"/> 
+		<result property="audio" column="audio"/> 
+		<result property="video" column="video"/> 
+		<result property="animation" column="animation"/> 
+		<result property="picturebook" column="picturebook"/> 
+		<result property="game" column="game"/> 
+		<result property="resource_content" column="resource_content"/> 
+		<result property="type_name" column="type_name"/> 
+		<result property="resource_type_id" column="resource_type_id"/> 
+		<result property="status" column="status"/> 
+		<result property="spend_minute" column="spend_minute"/> 
+		<result property="baby_id" column="baby_id"/> 
+		<result property="baby_nickname" column="baby_nickname"/> 
+		
+	</resultMap>
+	
+	<select id="get_1" resultMap="WeekdayResource" parameterType="weekdayResource">
+		<![CDATA[
+		SELECT e.weekday_id weekday_id,
+		date_format(e.start_date,'%Y-%m-%d') start_date,
+		date_format(e.end_date,'%Y-%m-%d') end_date,
+		SUM(CASE WHEN e.resource_type_id='1' THEN 1 ELSE 0 END) AS audio,
+		SUM(CASE WHEN e.resource_type_id='2' THEN 1 ELSE 0 END) AS video,
+		SUM(CASE WHEN e.resource_type_id='3' THEN 1 ELSE 0 END) AS animation,
+		SUM(CASE WHEN e.resource_type_id='4' THEN 1 ELSE 0 END) AS picturebook,
+		SUM(CASE WHEN e.resource_type_id='5' THEN 1 ELSE 0 END) AS game
+		FROM 
+		(SELECT b.id weekday_id,b.start_date start_date,b.end_date end_date,c.resource_type_id resource_type_id 
+		FROM tbl_weekday_resource a
+		RIGHT JOIN tbl_weekday b ON a.weekday_id=b.id
+		LEFT JOIN tbl_resource c ON a.resource_id=c.id ) AS e
+		]]>
+		<where>
+			<if test="weekday_id!=null and ''!=weekday_id">
+				<![CDATA[ and  e.weekday_id=#{weekday_id}]]>
+			</if>
+		</where>
+		<![CDATA[
+		GROUP BY e.weekday_id,e.start_date,e.end_date ORDER BY e.weekday_id DESC
+		 ]]>
+	</select>
+	
+	<select id="count_1" resultType="int" parameterType="weekdayResource">
+		<![CDATA[SELECT COUNT(*) FROM 
+		(
+			SELECT * FROM (
+				SELECT b.id weekday_id,b.start_date start_date,b.end_date end_date,c.resource_type_id resource_type_id 
+				FROM tbl_weekday_resource a
+				RIGHT JOIN tbl_weekday b ON a.weekday_id=b.id
+				LEFT JOIN tbl_resource c ON a.resource_id=c.id
+			) AS e 
+		]]>
+			<where>
+				<if test="weekday_id!=null and ''!=weekday_id">
+					<![CDATA[ and  e.weekday_id=#{weekday_id}]]>
+				</if>
+			</where>
+		<![CDATA[
+			 GROUP BY e.weekday_id,e.start_date,e.end_date
+		) j]]>
+	</select>
+	<select id="get_2" resultMap="WeekdayResource" parameterType="weekdayResource">
+		<![CDATA[SELECT a.id id,b.id weekday_id,b.start_date start_date,b.end_date end_date,a.resource_id resource_id,c.resource_type_id resource_type_id
+				,c.resource_content resource_content, c.type_name type_name,date_format(a.create_date,'%Y-%m-%d %H:%i:%s') create_date,
+				a.create_adminuser create_adminuser,a.baby_id baby_id,e.baby_nickname baby_nickname
+				FROM tbl_weekday_resource a
+				LEFT JOIN tbl_weekday b ON a.weekday_id=b.id
+				LEFT JOIN tbl_baby e ON a.baby_id=e.id
+				LEFT JOIN (SELECT c1.id id,c1.resource_content resource_content,
+				c2.id resource_type_id,c2.type_name type_name
+				FROM tbl_resource c1 LEFT JOIN tbl_resource_type c2 ON c1.resource_type_id=c2.id ) c  ON a.resource_id=c.id
+				]]>
+			<where>
+				<if test="weekday_id!=null and ''!=weekday_id">
+					<![CDATA[ and  b.id=#{weekday_id}]]>
+				</if>
+				<if test="resource_type_id!=null and ''!=resource_type_id">
+					<![CDATA[ and  c.resource_type_id=#{resource_type_id}]]>
+				</if>
+				<if test="baby_id!=null and ''!=baby_id">
+					<![CDATA[ and  a.baby_id=#{baby_id}]]>
+				</if>
+			</where>
+			<![CDATA[
+			 order by a.id desc]]>
+	</select>
+	
+	<select id="count_2" resultType="int" parameterType="weekdayResource">
+		<![CDATA[SELECT COUNT(*)
+				FROM tbl_weekday_resource a
+				LEFT JOIN tbl_weekday b ON a.weekday_id=b.id
+				LEFT JOIN tbl_baby e ON a.baby_id=e.id
+				LEFT JOIN (SELECT c1.id id,c1.resource_content resource_content,
+				c1.resource_type_id resource_type_id,c2.type_name type_name
+				FROM tbl_resource c1 LEFT JOIN tbl_resource_type c2 ON c1.resource_type_id=c2.id ) c ON a.resource_id=c.id
+		]]>
+			<where>
+				<if test="weekday_id!=null and ''!=weekday_id">
+					<![CDATA[ and  b.id=#{weekday_id}]]>
+				</if>
+				<if test="resource_type_id!=null and ''!=resource_type_id">
+					<![CDATA[ and  c.resource_type_id=#{resource_type_id}]]>
+				</if>
+				<if test="baby_id!=null and ''!=baby_id">
+					<![CDATA[ and  a.baby_id=#{baby_id}]]>
+				</if>
+			</where>
+	</select>
+	
+	<select id="get_3" resultMap="WeekdayResource" parameterType="weekdayResource">
+		<![CDATA[SELECT a.weekday_id weekday_id,date_format(b.start_date,'%Y-%m-%d') start_date,
+		date_format(b.end_date,'%Y-%m-%d') end_date,COUNT(DISTINCT a.baby_id) baby_id FROM tbl_weekday_resource a 
+			LEFT JOIN tbl_weekday b ON a.weekday_id=b.id]]>
+			<where>
+				<if test="weekday_id!=null and ''!=weekday_id">
+					<![CDATA[ and  a.weekday_id=#{weekday_id}]]>
+				</if>
+			</where>	
+		<![CDATA[GROUP BY a.weekday_id]]>
+	</select>
+	
+	<select id="count_3" resultType="int" parameterType="weekdayResource">
+		<![CDATA[select count(*) from (
+			SELECT a.weekday_id,b.start_date,b.end_date,COUNT(DISTINCT a.baby_id)  FROM tbl_weekday_resource a 
+			LEFT JOIN tbl_weekday b ON a.weekday_id=b.id]]>
+			<where>
+				<if test="weekday_id!=null and ''!=weekday_id">
+					<![CDATA[ and  a.weekday_id=#{weekday_id}]]>
+				</if>
+			</where>	
+		<![CDATA[GROUP BY a.weekday_id) j]]>
+	</select>
+	
+	<select id="get_weekday" resultMap="WeekdayResource" parameterType="weekdayResource">
+		<![CDATA[select * from tbl_weekday ]]>
+		<where>
+			<if test="weekday_id!=null and ''!=weekday_id">
+				<![CDATA[ and  id=#{weekday_id}]]>
+			</if>
+		</where>
+	</select>
+	
+	<select id="select_weekday" resultMap="WeekdayResource">
+		<![CDATA[select id,start_date,end_date from tbl_weekday order by id]]>
+	</select>
+	
+	<select id="get2" resultMap="WeekdayResource" parameterType="weekdayResource">
+		<![CDATA[select * from tbl_weekday_resource ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+		</where>
+		<![CDATA[ order by id ]]>
+	</select>
+	
+	<delete id="delete" parameterType="weekdayResource">
+		<![CDATA[delete from tbl_weekday_resource where id=#{id} ]]>
+	</delete>
+	
+	<insert id="batch_insert" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			<![CDATA[insert into tbl_weekday_resource(id,resource_id,weekday_id,create_date,create_adminuser) 
+			values (nextval('tbl_weekday_resource'),#{item.resource_id},#{item.weekday_id},now(),#{item.create_adminuser})
+			]]>
+		</foreach>
+	</insert>
+	
+	<insert id="insert" parameterType="weekdayResource">
+		<![CDATA[insert into tbl_weekday_resource(id,resource_id,weekday_id,create_date,backup,create_adminuser) 
+		values (nextval('tbl_weekday_resource'),#{resource_id},#{weekday_id},now(),#{backup},#{create_adminuser})]]>
+	</insert>
+	
+	<insert id="add" parameterType="weekdayResource">
+		<![CDATA[INSERT INTO tbl_weekday_resource (id,resource_id,baby_id,weekday_id,create_date,status) VALUES (#{id},#{resource_id},#{baby_id},#{weekday_id},now(),#{status})]]>
+	</insert>
+	
+	<select id="getId" resultType="int" parameterType="weekdayResource">
+		<![CDATA[ SELECT nextval('tbl_user_learnplan') ]]>
+	</select>
+	
+	<select id="wdCount" resultType="int" parameterType="weekdayResource">
+		<![CDATA[select count(*) from tbl_weekday_resource where weekday_id = #{weekday_id} and baby_id = #{baby_id}]]>
+	</select>
+	
+	<update id="update" parameterType="weekdayResource">
+		<![CDATA[UPDATE tbl_weekday_resource ]]>
+		<set>
+			<if test="status != null" >
+	        	status = #{status},
+	    	</if>
+	    	<if test="spend_minute != null" >
+	        	spend_minute = #{spend_minute},
+	    	</if>
+	    	<![CDATA[
+	    		update_date = NOW()
+	    	 ]]>
+		</set>
+		<where>
+			<![CDATA[ id = #{id}]]>
+		</where>
+	</update>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="GlobalPropertyAttrSql"> 
+	<resultMap type="globalPropertyAttr" id="GlobalPropertyAttr">
+		<result property="id" column="id"/>      
+		<result property="property_id" column="property_id"/>    
+		<result property="level_id" column="level_id"/>
+		<result property="peoperty_flag" column="peoperty_flag"/>
+	</resultMap>
+	
+	<delete id="batch_delete" parameterType="java.util.List">
+		<![CDATA[delete from tbl_global_property_attr where id in ]]>
+		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+			${item.id} 
+		</foreach>
+	</delete>
+	
+	<insert id="batch_insert" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			<![CDATA[insert into tbl_global_property_attr(id,peoperty_id,level_id,peoperty_flag) 
+			values (nextval('tbl_global_property_attr'),${item.peoperty_id},${item.level_id},${item.peoperty_flag})]]>
+		</foreach>
+	</insert>
+	
+	<select id="get" resultMap="GlobalPropertyAttr" parameterType="globalPropertyAttr">
+		<![CDATA[ SELECT id,level_id,peoperty_id,peoperty_flag FROM tbl_global_property_attr where peoperty_id = #{peoperty_id}]]>
+	</select>
+	
+</mapper>

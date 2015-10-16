@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC     
+        "-//mybatis.org//DTD Config 3.0//EN"    
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 设置超时时间，它决定驱动等待一个数据库响应的时间 -->
+		<setting name="defaultStatementTimeout" value="60000" />
+		<!-- 启用或禁用 缓存 -->
+		<setting name="cacheEnabled" value="true" />
+		<!-- 启用或禁用延迟加载。当禁用时, 所有关联对象都会即时加载 -->
+		<setting name="lazyLoadingEnabled" value="true" /> 
+		<!-- [当对象使用延迟加载时 属性的加载取决于能被引用到的那些延迟属性,否则,按需加载(需要的是时候才去加载)] -->  
+        <setting name="aggressiveLazyLoading" value="true"/>  
+	</settings>
+	
+	<typeAliases>
+	<!-- admin -->
+		<typeAlias alias="adminRight" type="com.manager.admin.entity.AdminRight"/>
+		<typeAlias alias="adminUser" type="com.manager.admin.entity.AdminUser"/>
+		<typeAlias alias="adminRightUrl" type="com.manager.admin.entity.AdminRightUrl"/>
+		<typeAlias alias="adminRole" type="com.manager.admin.entity.AdminRole"/>
+		<typeAlias alias="adminUserRole" type="com.manager.admin.entity.AdminUserRole"/>
+		<typeAlias alias="adminRoleRight" type="com.manager.admin.entity.AdminRoleRight"/>
+		<typeAlias alias="adminLog" type="com.manager.admin.entity.AdminLog"/>
+	<!-- admin -->
+	
+	<!-- function -->
+		<typeAlias alias="GlobalHobby" type="com.manager.function.entity.GlobalHobby"/>
+		<typeAlias alias="GlobalLanguage" type="com.manager.function.entity.GlobalLanguage"/>
+		<typeAlias alias="GlobalLevel" type="com.manager.function.entity.GlobalLevel"/>
+		<typeAlias alias="GlobalProperty" type="com.manager.function.entity.GlobalProperty"/>
+		<typeAlias alias="Learnplan" type="com.manager.function.entity.Learnplan"/>
+		<typeAlias alias="Resource" type="com.manager.function.entity.Resource"/>
+		<typeAlias alias="ResourceInfo" type="com.manager.function.entity.ResourceInfo"/>
+		<typeAlias alias="ResourceType" type="com.manager.function.entity.ResourceType"/>
+		<typeAlias alias="User" type="com.manager.function.entity.User"/>
+		<typeAlias alias="UserLearnplan" type="com.manager.function.entity.UserLearnplan"/>
+		<typeAlias alias="Baby" type="com.manager.function.entity.Baby"/>
+		<typeAlias alias="BabyInfo" type="com.manager.function.entity.BabyInfo"/>
+		<typeAlias alias="WeekdayResource" type="com.manager.function.entity.WeekdayResource"/>
+		<typeAlias alias="Weekday" type="com.manager.function.entity.Weekday"/>
+		<typeAlias alias="GlobalPropertyAttr" type="com.manager.function.entity.GlobalPropertyAttr"/>
+		<typeAlias alias="GlobalHobbyAttr" type="com.manager.function.entity.GlobalHobbyAttr"/>
+		<typeAlias alias="UserBilling" type="com.manager.function.entity.UserBilling"/>
+		<typeAlias alias="SearchLogs" type="com.manager.function.entity.SearchLogs"/>
+		<typeAlias alias="SearchKeyword" type="com.manager.function.entity.SearchKeyword"/>
+		<typeAlias alias="Favorite" type="com.manager.function.entity.Favorite"/>
+		<typeAlias alias="GlobalScore" type="com.manager.function.entity.GlobalScore"/>
+		<typeAlias alias="ScoreLog" type="com.manager.function.entity.ScoreLog"/>
+		<typeAlias alias="TopicType" type="com.manager.function.entity.TopicType"/>
+		<typeAlias alias="TopicList" type="com.manager.function.entity.TopicList"/>
+		<typeAlias alias="TopicReply" type="com.manager.function.entity.TopicReply"/>
+		<typeAlias alias="BigeyeModule" type="com.manager.function.entity.BigeyeModule"/>
+		<typeAlias alias="Bigeye" type="com.manager.function.entity.Bigeye"/>
+	<!-- function -->
+	
+	</typeAliases>
+	<mappers>
+	<!-- admin -->
+		<mapper resource="com/manager/admin/entity/AdminRight.xml"/>
+		<mapper resource="com/manager/admin/entity/AdminUser.xml"/>
+		<mapper resource="com/manager/admin/entity/AdminRightUrl.xml"/>
+		<mapper resource="com/manager/admin/entity/AdminRole.xml"/>
+		<mapper resource="com/manager/admin/entity/AdminUserRole.xml"/>
+		<mapper resource="com/manager/admin/entity/AdminRoleRight.xml"/>
+		<mapper resource="com/manager/admin/entity/AdminLog.xml"/>
+	<!-- admin -->
+	
+	<!-- function -->
+		<mapper resource="com/manager/function/sqlmap/GlobalHobby.xml"/>
+		<mapper resource="com/manager/function/sqlmap/GlobalLanguage.xml"/>
+		<mapper resource="com/manager/function/sqlmap/GlobalLevel.xml"/>
+		<mapper resource="com/manager/function/sqlmap/GlobalProperty.xml"/>
+		<mapper resource="com/manager/function/sqlmap/Learnplan.xml"/>
+		<mapper resource="com/manager/function/sqlmap/Resource.xml"/>
+		<mapper resource="com/manager/function/sqlmap/ResourceInfo.xml"/>
+		<mapper resource="com/manager/function/sqlmap/ResourceType.xml"/>
+		<mapper resource="com/manager/function/sqlmap/User.xml"/>
+		<mapper resource="com/manager/function/sqlmap/UserLearnplan.xml"/>
+		<mapper resource="com/manager/function/sqlmap/Baby.xml"/>
+		<mapper resource="com/manager/function/sqlmap/BabyInfo.xml"/>
+		<mapper resource="com/manager/function/sqlmap/WeekdayResource.xml"/>
+		<mapper resource="com/manager/function/sqlmap/Weekday.xml"/>
+		<mapper resource="com/manager/function/sqlmap/GlobalPropertyAttr.xml"/>
+		<mapper resource="com/manager/function/sqlmap/GlobalHobbyAttr.xml"/>
+		<mapper resource="com/manager/function/sqlmap/UserBilling.xml"/>
+		<mapper resource="com/manager/function/sqlmap/SearchKeyword.xml"/>
+		<mapper resource="com/manager/function/sqlmap/SearchLogs.xml"/>
+		<mapper resource="com/manager/function/sqlmap/Favorite.xml"/>
+		<mapper resource="com/manager/function/sqlmap/GlobalScore.xml"/>
+		<mapper resource="com/manager/function/sqlmap/ScoreLog.xml"/>
+		<mapper resource="com/manager/function/sqlmap/TopicType.xml"/>
+		<mapper resource="com/manager/function/sqlmap/TopicList.xml"/>
+		<mapper resource="com/manager/function/sqlmap/TopicReply.xml"/>
+		<mapper resource="com/manager/function/sqlmap/BigeyeModule.xml"/>
+		<mapper resource="com/manager/function/sqlmap/Bigeye.xml"/>
+	<!-- function -->	
+	
+	</mappers>
+	
+</configuration>

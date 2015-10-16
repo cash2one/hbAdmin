@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/iread/!svn/ver/153/trunk/hbAdmin/WebRoot/function/resource
+END
+resource_info_update.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/iread/!svn/ver/133/trunk/hbAdmin/WebRoot/function/resource/resource_info_update.jsp
+END
+resource_update.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/112/trunk/hbAdmin/WebRoot/function/resource/resource_update.jsp
+END
+resource_info_add.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/133/trunk/hbAdmin/WebRoot/function/resource/resource_info_add.jsp
+END
+resource_type_update.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/iread/!svn/ver/8/trunk/hbAdmin/WebRoot/function/resource/resource_type_update.jsp
+END
+resource_info_list.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/iread/!svn/ver/135/trunk/hbAdmin/WebRoot/function/resource/resource_info_list.jsp
+END
+resource_add.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/iread/!svn/ver/132/trunk/hbAdmin/WebRoot/function/resource/resource_add.jsp
+END
+resource_type_add.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/8/trunk/hbAdmin/WebRoot/function/resource/resource_type_add.jsp
+END
+resource_list.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/iread/!svn/ver/153/trunk/hbAdmin/WebRoot/function/resource/resource_list.jsp
+END
+resource_type_list.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/31/trunk/hbAdmin/WebRoot/function/resource/resource_type_list.jsp
+END

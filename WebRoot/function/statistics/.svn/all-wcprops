@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/iread/!svn/ver/160/trunk/hbAdmin/WebRoot/function/statistics
+END
+learnplan_statistics.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/iread/!svn/ver/160/trunk/hbAdmin/WebRoot/function/statistics/learnplan_statistics.jsp
+END
+user_statistics.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/117/trunk/hbAdmin/WebRoot/function/statistics/user_statistics.jsp
+END
+learnplan_statistics_curve.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/iread/!svn/ver/160/trunk/hbAdmin/WebRoot/function/statistics/learnplan_statistics_curve.jsp
+END
+weekday_statistics.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/iread/!svn/ver/21/trunk/hbAdmin/WebRoot/function/statistics/weekday_statistics.jsp
+END

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="GlobalHobbySql"> 
+	<resultMap type="globalHobby" id="GlobalHobby">
+		<result property="id" column="id"/>      
+		<result property="hobby_content" column="hobby_content"/>    
+		<result property="hobby_summary" column="hobby_summary"/> 
+		<result property="hobby_img" column="hobby_img"/>  
+		<result property="hobby_status" column="hobby_status"/> 
+		<result property="create_date" column="create_date" jdbcType="DATE"/>  
+		<result property="create_adminuser" column="create_adminuser"/> 
+		<result property="update_date" column="update_date" jdbcType="DATE"/>
+		<result property="update_adminuser" column="update_adminuser"/>
+		<result property="level_id" column="level_id"/>
+	</resultMap>
+	
+	<select id="get" resultMap="GlobalHobby" parameterType="globalHobby">
+		<![CDATA[ SELECT id,hobby_content,hobby_summary,hobby_img,hobby_status,DATE_FORMAT(create_date,'%Y-%m-%d %H:%i:%s') create_date,create_adminuser,DATE_FORMAT(update_date,'%Y-%m-%d %H:%i:%s') update_date,update_adminuser FROM tbl_global_hobby ORDER BY create_date DESC]]>
+	</select>
+	
+	<select id="getNoAbolish" resultMap="GlobalHobby">
+		<![CDATA[ SELECT id,hobby_content from tbl_global_hobby where hobby_status<>9 order by id]]>
+	</select>
+	
+	<select id="count" resultType="int" parameterType="globalHobby">
+		<![CDATA[ SELECT COUNT(*) FROM tbl_global_hobby ]]>
+	</select>
+	
+	<select id="getId" resultType="int" parameterType="globalHobby">
+		<![CDATA[ SELECT nextval('tbl_global_hobby') ]]>
+	</select>
+	
+	<select id="getOne" resultMap="GlobalHobby" parameterType="globalHobby">
+		<![CDATA[ SELECT id,hobby_content,hobby_summary,hobby_img,hobby_status,DATE_FORMAT(create_date,'%Y-%m-%d %H:%i:%s') create_date,create_adminuser,DATE_FORMAT(update_date,'%Y-%m-%d %H:%i:%s') update_date,update_adminuser FROM tbl_global_hobby where id=#{id}]]>
+	</select>
+	
+	<insert id="add" parameterType="globalHobby">
+		<![CDATA[INSERT INTO tbl_global_hobby (id,hobby_content,hobby_summary,hobby_img,hobby_status,create_date,create_adminuser) VALUES
+		(#{id},#{hobby_content},#{hobby_summary},#{hobby_img},#{hobby_status},now(),#{create_adminuser})]]>
+	</insert>
+	
+	<update id="update" parameterType="globalHobby">
+		<![CDATA[update tbl_global_hobby ]]>
+		<set>
+			<if test="hobby_content != null" >
+	        	hobby_content = #{hobby_content},
+	    	</if>
+	    	<if test="hobby_summary != null" >
+	        	hobby_summary = #{hobby_summary},
+	    	</if>
+	    	<if test="hobby_img != null" >
+	        	hobby_img = #{hobby_img},
+	    	</if>
+	    	<if test="hobby_status != null" >
+	        	hobby_status = #{hobby_status},
+	    	</if>
+	    	<![CDATA[
+	    		update_adminuser = #{update_adminuser},
+	    		update_date = NOW()
+	    	 ]]>
+		</set>
+		<where>
+			<![CDATA[ id = #{id}]]>
+		</where>
+	</update>
+	
+	<delete id="delete" parameterType="globalHobby">
+		<![CDATA[delete from tbl_global_hobby where id=#{id} ]]>
+	</delete>
+	
+</mapper>

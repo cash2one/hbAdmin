@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/service
+END
+AdminRightService.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/service/AdminRightService.java
+END
+AdminUserService.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/service/AdminUserService.java
+END
+AdminLogService.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/service/AdminLogService.java
+END
+AdminRoleService.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/service/AdminRoleService.java
+END

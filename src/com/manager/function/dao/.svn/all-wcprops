@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/iread/!svn/ver/182/trunk/hbAdmin/src/com/manager/function/dao
+END
+UserLearnPlanDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/iread/!svn/ver/156/trunk/hbAdmin/src/com/manager/function/dao/UserLearnPlanDao.java
+END
+LearnplanDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/21/trunk/hbAdmin/src/com/manager/function/dao/LearnplanDao.java
+END
+BabyDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/dao/BabyDao.java
+END
+ScoreLogDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/dao/ScoreLogDao.java
+END
+UserDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/iread/!svn/ver/187/trunk/hbAdmin/src/com/manager/function/dao/UserDao.java
+END
+GlobalHobbyAttrDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/dao/GlobalHobbyAttrDao.java
+END
+FavoriteDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/88/trunk/hbAdmin/src/com/manager/function/dao/FavoriteDao.java
+END
+UserBillingDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/dao/UserBillingDao.java
+END
+TopicTypeDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/69/trunk/hbAdmin/src/com/manager/function/dao/TopicTypeDao.java
+END
+GlobalHobbyDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/8/trunk/hbAdmin/src/com/manager/function/dao/GlobalHobbyDao.java
+END
+ResourceDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/141/trunk/hbAdmin/src/com/manager/function/dao/ResourceDao.java
+END
+GlobalLevelDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/25/trunk/hbAdmin/src/com/manager/function/dao/GlobalLevelDao.java
+END
+ResourceTypeDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/8/trunk/hbAdmin/src/com/manager/function/dao/ResourceTypeDao.java
+END
+BabyInfoDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/11/trunk/hbAdmin/src/com/manager/function/dao/BabyInfoDao.java
+END
+WeekdayDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/iread/!svn/ver/22/trunk/hbAdmin/src/com/manager/function/dao/WeekdayDao.java
+END
+SearchLogsDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/34/trunk/hbAdmin/src/com/manager/function/dao/SearchLogsDao.java
+END
+TopicReplyDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/69/trunk/hbAdmin/src/com/manager/function/dao/TopicReplyDao.java
+END
+GlobalScoreDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/dao/GlobalScoreDao.java
+END
+GlobalPropertyAttrDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/dao/GlobalPropertyAttrDao.java
+END
+WeekdayResourceDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/iread/!svn/ver/22/trunk/hbAdmin/src/com/manager/function/dao/WeekdayResourceDao.java
+END
+ResourceInfoDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/iread/!svn/ver/88/trunk/hbAdmin/src/com/manager/function/dao/ResourceInfoDao.java
+END
+GlobalLanguageDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/iread/!svn/ver/107/trunk/hbAdmin/src/com/manager/function/dao/GlobalLanguageDao.java
+END
+BigeyeDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/iread/!svn/ver/114/trunk/hbAdmin/src/com/manager/function/dao/BigeyeDao.java
+END
+GlobalPropertyDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/iread/!svn/ver/158/trunk/hbAdmin/src/com/manager/function/dao/GlobalPropertyDao.java
+END
+BigeyeModuleDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/iread/!svn/ver/103/trunk/hbAdmin/src/com/manager/function/dao/BigeyeModuleDao.java
+END
+SearchKeywordDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/iread/!svn/ver/34/trunk/hbAdmin/src/com/manager/function/dao/SearchKeywordDao.java
+END
+TopicListDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/69/trunk/hbAdmin/src/com/manager/function/dao/TopicListDao.java
+END

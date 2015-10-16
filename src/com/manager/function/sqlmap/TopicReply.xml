@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="TopicReplySql"> 
+	<resultMap type="topicReply" id="TopicReply">
+		<result property="id" column="id"/>
+		<result property="sort" column="sort"/>
+		<result property="content" column="content" typeHandler="com.manager.function.sqlmap.ConvertBlobTypeHandler"/>
+		<result property="ip" column="ip"/>
+		<result property="ip_address" column="ip_address"/>
+		<result property="topic_id" column="topic_id"/>
+		<result property="uid" column="uid"/>
+		<result property="quote_content" column="quote_content" typeHandler="com.manager.function.sqlmap.ConvertBlobTypeHandler"/>
+		<result property="createtime" column="createtime"/>
+		<result property="status" column="status"/>
+		<result property="topic_name" column="topic_name"/>
+		<result property="user_avatar" column="user_avatar"/>
+		<result property="user_nickname" column="user_nickname"/>
+	</resultMap>
+	
+	<select id="get" resultMap="TopicReply" parameterType="topicReply">
+		<![CDATA[select a.id id,a.sort sort,a.content content,a.ip ip,a.ip_address ip_address,a.topic_id topic_id,
+		a.uid uid,a.quote_content quote_content,date_format(a.createtime,'%Y-%m-%d %H:%i:%s') createtime,a.status status,b.title topic_name
+		from tbl_topic_reply a left join tbl_topic_list b on a.topic_id=b.id ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  a.id=#{id}]]>
+			</if>
+			<if test="content!=null and ''!=content">
+				<![CDATA[  and 1=INSTR(a.content,#{content})]]>
+			</if>
+			<if test="sort!=null and ''!=sort">
+				<![CDATA[  and a.sort=#{sort}]]>
+			</if>
+			<if test="ip!=null and ''!=ip">
+				<![CDATA[  and a.ip=#{ip}]]>
+			</if>
+			<if test="uid!=null and ''!=uid">
+				<![CDATA[  and a.uid=#{uid}]]>
+			</if>
+			<if test="status!=null and ''!=status">
+				<![CDATA[  and a.status=#{status}]]>
+			</if>
+			<if test="topic_id!=null and ''!=topic_id">
+				<![CDATA[  and a.topic_id=#{topic_id}]]>
+			</if>
+		</where>
+		<![CDATA[ order by id]]>
+	</select>
+	
+	<select id="get1" resultMap="TopicReply" parameterType="topicReply">
+		<![CDATA[select a.id id,a.sort sort,a.content content,a.ip ip,a.ip_address ip_address,a.topic_id topic_id,
+		a.uid uid,a.quote_content quote_content,date_format(a.createtime,'%Y-%m-%d %H:%i:%s') createtime,a.status status,b.title topic_name,c.user_avatar user_avatar,c.user_nickname user_nickname
+		from tbl_topic_reply a left join tbl_topic_list b on a.topic_id=b.id left join tbl_user c on c.user_id = a.uid where a.topic_id=#{topic_id} order by a.sort]]>
+	</select>
+	
+	<select id="count" resultType="int" parameterType="topicReply">
+		<![CDATA[select count(*) from tbl_topic_reply a left join tbl_topic_list b on a.topic_id=b.id ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  a.id=#{id}]]>
+			</if>
+			<if test="content!=null and ''!=content">
+				<![CDATA[  and 1=INSTR(a.content,#{content})]]>
+			</if>
+			<if test="sort!=null and ''!=sort">
+				<![CDATA[  and a.sort=#{sort}]]>
+			</if>
+			<if test="ip!=null and ''!=ip">
+				<![CDATA[  and a.ip=#{ip}]]>
+			</if>
+			<if test="uid!=null and ''!=uid">
+				<![CDATA[  and a.uid=#{uid}]]>
+			</if>
+			<if test="status!=null and ''!=status">
+				<![CDATA[  and a.status=#{status}]]>
+			</if>
+			<if test="topic_id!=null and ''!=topic_id">
+				<![CDATA[  and a.topic_id=#{topic_id}]]>
+			</if>
+		</where>
+	</select>
+	
+	<update id="update" parameterType="topicReply">
+		<![CDATA[update tbl_topic_reply set 
+		content=#{content},
+		ip=#{ip},
+		ip_address=#{ip_address},
+		topic_id=#{topic_id},
+		uid=#{uid},
+		quote_content=#{quote_content},
+		createtime=STR_TO_DATE(#{createtime},'%Y-%m-%d %H:%i:%s'),
+		status=#{status}
+		where id=#{id}]]>
+	</update>
+	
+	<select id="getlouceng" resultType="int" parameterType="topicReply">
+		<![CDATA[SELECT (CASE WHEN MAX(sort) IS NULL THEN 0 ELSE MAX(sort) END)+1 AS sort FROM tbl_topic_reply WHERE topic_id = #{topic_id}]]>
+	</select>
+	
+	<update id="updatestatus" parameterType="topicReply">
+		<![CDATA[update tbl_topic_reply set status = #{status} where id = #{id}]]>
+	</update>
+	
+	<delete id="delete1" parameterType="topicReply">
+		<![CDATA[delete from tbl_topic_reply where id=#{id}]]>
+	</delete>
+	
+	<insert id="add"  parameterType="topicReply">
+		<![CDATA[INSERT INTO tbl_topic_reply(id,sort,content,ip,ip_address,topic_id,uid,quote_content,createtime,status) 
+VALUES(nextval('tbl_topic_reply'),#{sort},#{content},#{ip},(SELECT address FROM tbl_ipdata WHERE #{ip} >= sip AND #{ip} <= eip ORDER BY sip DESC LIMIT 1),#{topic_id},#{uid},#{quote_content},now(),#{status})
+		]]>
+	</insert>
+	
+	<delete id="delete2" parameterType="topicReply">
+		<![CDATA[delete from tbl_topic_reply where topic_id=#{topic_id} ]]>
+	</delete>
+</mapper>

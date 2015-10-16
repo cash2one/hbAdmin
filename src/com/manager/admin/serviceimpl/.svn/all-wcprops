@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/serviceimpl
+END
+AdminRightServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/serviceimpl/AdminRightServiceImpl.java
+END
+AdminUserServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/serviceimpl/AdminUserServiceImpl.java
+END
+AdminLogServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/serviceimpl/AdminLogServiceImpl.java
+END
+AdminRoleServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/serviceimpl/AdminRoleServiceImpl.java
+END

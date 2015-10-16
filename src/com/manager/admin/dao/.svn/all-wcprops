@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/dao
+END
+AdminRightDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/dao/AdminRightDao.java
+END
+AdminUserDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/dao/AdminUserDao.java
+END
+AdminRightUrlDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/dao/AdminRightUrlDao.java
+END
+AdminLogDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/dao/AdminLogDao.java
+END
+AdminRoleDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/dao/AdminRoleDao.java
+END

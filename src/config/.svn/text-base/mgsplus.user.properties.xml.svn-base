@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="wsKey4OperatingTool">G46sJ5klwe4i5oP4mn1Cvds</entry>
+	
+	<entry key="log.path">logs/newExtLogs/</entry>
+
+	<!-- 国际化URL -->
+	<entry key="language.conf.path">config/language.cs.properties.xml</entry>
+	
+</properties>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="ResourceTypeSql"> 
+	<resultMap id="ResourceType" type="resourceType">  
+		<result property="id" column="id"/> 
+		<result property="type_name" column="type_name"/> 
+		<result property="type_status" column="type_status"/> 
+		<result property="create_date" column="create_date"/> 
+		<result property="create_adminuser" column="create_adminuser"/> 
+		<result property="update_date" column="update_date"/> 
+		<result property="update_adminuser" column="update_adminuser"/> 
+		
+	</resultMap>
+	
+	<select id="get" resultMap="ResourceType" parameterType="resourceType">
+		<![CDATA[select id,type_name,date_format(create_date,'%Y-%m-%d %H:%i:%s') create_date,create_adminuser,
+		date_format(update_date,'%Y-%m-%d %H:%i:%s') update_date,type_status,update_adminuser from tbl_resource_type ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="type_name!=null and ''!=type_name">
+				<![CDATA[  and type_name=#{type_name}]]>
+			</if>
+			<if test="type_status!=null and ''!=type_status">
+				<![CDATA[  and type_status=#{type_status}]]>
+			</if>
+		</where>
+		<![CDATA[ order by id desc]]>
+	</select>
+	
+	<select id="get2" resultMap="ResourceType" parameterType="resourceType">
+		<![CDATA[select id,type_name,type_status from tbl_resource_type ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="type_name!=null and ''!=type_name">
+				<![CDATA[  and type_name=#{type_name}]]>
+			</if>
+			<if test="type_status!=null and ''!=type_status">
+				<![CDATA[  and type_status=#{type_status}]]>
+			</if>
+		</where>
+		<![CDATA[ order by id ]]>
+	</select>
+	
+	<select id="getNoAbolish" resultMap="ResourceType">
+		<![CDATA[select id,type_name from tbl_resource_type where type_status<>9]]>
+	</select>
+
+	<select id="count" resultType="int" parameterType="resourceType">
+		<![CDATA[select count(*) from tbl_resource_type]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="type_name!=null and ''!=type_name">
+				<![CDATA[  and type_name=#{type_name}]]>
+			</if>
+			<if test="type_status!=null and ''!=type_status">
+				<![CDATA[  and type_status=#{type_status}]]>
+			</if>
+		</where>
+	</select>
+	
+	<update id="update" parameterType="resourceType">
+		<![CDATA[update tbl_resource_type set type_name = #{type_name},update_date = now(),
+		type_status = #{type_status},update_adminuser=#{update_adminuser} where id=#{id}]]>
+	</update>
+	
+	<update id="updatestatus" parameterType="resourceType">
+		<![CDATA[update tbl_resource_type set type_status=#{type_status},update_date = now(),update_adminuser=#{update_adminuser} where id=#{id}]]>
+	</update>
+	
+	<delete id="delete" parameterType="resourceType">
+		<![CDATA[delete from tbl_resource_type where id=#{id} ]]>
+	</delete>
+	
+	<insert id="insert" parameterType="resourceType">
+		<![CDATA[insert into tbl_resource_type(id,type_name,create_date,type_status,create_adminuser) 
+		values (nextval('tbl_resource_type'),#{type_name},now(),#{type_status},#{create_adminuser})]]>
+	</insert>
+</mapper>

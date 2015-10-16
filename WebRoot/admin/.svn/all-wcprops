@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/admin
+END
+admin_log_list.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/admin/admin_log_list.jsp
+END
+admin_role_list.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/admin/admin_role_list.jsp
+END
+admin_user_update.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/admin/admin_user_update.jsp
+END
+admin_role_update.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/admin/admin_role_update.jsp
+END
+admin_user_add.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/admin/admin_user_add.jsp
+END
+admin_right_list.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/admin/admin_right_list.jsp
+END
+admin_role_add.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/admin/admin_role_add.jsp
+END
+admin_user_list.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/admin/admin_user_list.jsp
+END
+admin_user_pwd_update.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/admin/admin_user_pwd_update.jsp
+END

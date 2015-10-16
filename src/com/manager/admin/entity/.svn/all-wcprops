@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity
+END
+AdminRight.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity/AdminRight.xml
+END
+AdminRight.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity/AdminRight.java
+END
+AdminUser.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity/AdminUser.xml
+END
+AdminRoleRight.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity/AdminRoleRight.xml
+END
+AdminUser.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity/AdminUser.java
+END
+AdminRightUrl.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity/AdminRightUrl.xml
+END
+AdminRoleRight.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity/AdminRoleRight.java
+END
+AdminUserRole.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity/AdminUserRole.xml
+END
+AdminLog.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity/AdminLog.xml
+END
+AdminRightUrl.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity/AdminRightUrl.java
+END
+AdminRole.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity/AdminRole.xml
+END
+AdminUserRole.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity/AdminUserRole.java
+END
+AdminLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity/AdminLog.java
+END
+AdminRole.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/admin/entity/AdminRole.java
+END

@@ -1,0 +1,161 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/iread/!svn/ver/185/trunk/hbAdmin/src/com/manager/function/serviceimpl
+END
+GlobalPropertyAttrServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/serviceimpl/GlobalPropertyAttrServiceImpl.java
+END
+WeekdayResourceServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/iread/!svn/ver/15/trunk/hbAdmin/src/com/manager/function/serviceimpl/WeekdayResourceServiceImpl.java
+END
+ResourceInfoServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/iread/!svn/ver/112/trunk/hbAdmin/src/com/manager/function/serviceimpl/ResourceInfoServiceImpl.java
+END
+GlobalLanguageServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/iread/!svn/ver/107/trunk/hbAdmin/src/com/manager/function/serviceimpl/GlobalLanguageServiceImpl.java
+END
+BigeyeServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/iread/!svn/ver/186/trunk/hbAdmin/src/com/manager/function/serviceimpl/BigeyeServiceImpl.java
+END
+GlobalPropertyServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/iread/!svn/ver/158/trunk/hbAdmin/src/com/manager/function/serviceimpl/GlobalPropertyServiceImpl.java
+END
+ApiServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/iread/!svn/ver/187/trunk/hbAdmin/src/com/manager/function/serviceimpl/ApiServiceImpl.java
+END
+BigeyeModuleServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/iread/!svn/ver/103/trunk/hbAdmin/src/com/manager/function/serviceimpl/BigeyeModuleServiceImpl.java
+END
+SearchKeywordServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/iread/!svn/ver/34/trunk/hbAdmin/src/com/manager/function/serviceimpl/SearchKeywordServiceImpl.java
+END
+TopicListServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/iread/!svn/ver/181/trunk/hbAdmin/src/com/manager/function/serviceimpl/TopicListServiceImpl.java
+END
+UserLearnplanServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/iread/!svn/ver/156/trunk/hbAdmin/src/com/manager/function/serviceimpl/UserLearnplanServiceImpl.java
+END
+LearnplanServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/iread/!svn/ver/173/trunk/hbAdmin/src/com/manager/function/serviceimpl/LearnplanServiceImpl.java
+END
+BabyServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/iread/!svn/ver/152/trunk/hbAdmin/src/com/manager/function/serviceimpl/BabyServiceImpl.java
+END
+UserServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/iread/!svn/ver/188/trunk/hbAdmin/src/com/manager/function/serviceimpl/UserServiceImpl.java
+END
+FavoriteServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/iread/!svn/ver/152/trunk/hbAdmin/src/com/manager/function/serviceimpl/FavoriteServiceImpl.java
+END
+GlobalHobbyAttrServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/serviceimpl/GlobalHobbyAttrServiceImpl.java
+END
+TopicTypeServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/iread/!svn/ver/152/trunk/hbAdmin/src/com/manager/function/serviceimpl/TopicTypeServiceImpl.java
+END
+GlobalHobbyServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/iread/!svn/ver/24/trunk/hbAdmin/src/com/manager/function/serviceimpl/GlobalHobbyServiceImpl.java
+END
+CcmsServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/iread/!svn/ver/182/trunk/hbAdmin/src/com/manager/function/serviceimpl/CcmsServiceImpl.java
+END
+ResourceServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/iread/!svn/ver/179/trunk/hbAdmin/src/com/manager/function/serviceimpl/ResourceServiceImpl.java
+END
+GlobalLevelServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/iread/!svn/ver/27/trunk/hbAdmin/src/com/manager/function/serviceimpl/GlobalLevelServiceImpl.java
+END
+BabyInfoServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/iread/!svn/ver/152/trunk/hbAdmin/src/com/manager/function/serviceimpl/BabyInfoServiceImpl.java
+END
+ResourceTypeServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/iread/!svn/ver/8/trunk/hbAdmin/src/com/manager/function/serviceimpl/ResourceTypeServiceImpl.java
+END
+WeekdayServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/iread/!svn/ver/21/trunk/hbAdmin/src/com/manager/function/serviceimpl/WeekdayServiceImpl.java
+END
+SearchLogsServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/iread/!svn/ver/34/trunk/hbAdmin/src/com/manager/function/serviceimpl/SearchLogsServiceImpl.java
+END
+TopicReplyServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/iread/!svn/ver/178/trunk/hbAdmin/src/com/manager/function/serviceimpl/TopicReplyServiceImpl.java
+END

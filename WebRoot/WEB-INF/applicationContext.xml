@@ -1,0 +1,413 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:oscache="http://www.springmodules.org/schema/oscache"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"  
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+						http://www.springmodules.org/schema/oscache 
+						http://www.springmodules.org/schema/cache/springmodules-oscache.xsd 
+						http://www.springframework.org/schema/security
+						http://www.springframework.org/schema/security/spring-security-3.0.xsd
+			          http://www.springframework.org/schema/mvc      
+			          http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd  
+			          http://www.springframework.org/schema/util   
+			          http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<!-- 加载外部配置文件 -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/config.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">   
+          <property name="maxUploadSize"><value>52428800</value></property> 
+          <property name="defaultEncoding"><value>UTF-8</value></property> 
+    </bean> 
+
+	<!-- 数据源配置 -->
+	<bean id="APP" class="org.apache.commons.dbcp.BasicDataSource">
+		<!-- 设置JDBC驱动名称 -->
+		<property name="driverClassName" value="${APP.jdbc.driverClassName}" />
+		<!-- 设置JDBC连接URL -->
+		<property name="url" value="${APP.jdbc.url}" />
+		<!-- 设置数据库用户名 -->
+		<property name="username" value="${APP.jdbc.username}" />
+		<!-- 设置数据库密码 -->
+		<property name="password" value="${APP.jdbc.password}" />
+		<!-- 设置连接池初始值 -->
+		<property name="initialSize" value="${APP.jdbc.initialSize}" />
+		<!-- 设置连接池最大值 -->
+		<property name="maxActive" value="${APP.jdbc.maxActive}" />
+		<!-- 设置连接池最小空闲值 -->
+		<property name="minIdle" value="${APP.jdbc.minIdle}" />
+		<!-- 设置连接池最大空闲值 -->
+		<property name="maxIdle" value="${APP.jdbc.maxIdle}" />
+		<!-- 最大建立连接等待时间 -->
+		<property name="maxWait" value="${APP.jdbc.maxWait}" />
+
+		<property name="testOnBorrow" value="true"></property>
+		<property name="testOnReturn" value="true"></property>
+		<property name="testWhileIdle" value="true"></property>
+		<property name="validationQuery" value="SELECT 1 from dual"></property>
+		<property name="timeBetweenEvictionRunsMillis" value="3600000" />
+		<property name="minEvictableIdleTimeMillis" value="3600000" />
+	</bean>
+
+
+	<!-- dataSource选择，默认为APP -->
+	<bean id="dataSource" class="com.manager.util.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry key="0" value-ref="APP" />
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="APP" />
+	</bean>
+	
+	<!--   
+        自动搜索@Controller标注的类  
+        用于指明系统从哪个路径下寻找controller，然后提前初始化这些对象。  
+    -->  
+    <context:component-scan base-package="com.*" />      
+    <mvc:annotation-driven/>            
+  
+    <bean  
+        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+        <property name="messageConverters">  
+            <list>  
+                <bean  
+                    class="org.springframework.http.converter.StringHttpMessageConverter">  
+                    <property name="supportedMediaTypes">  
+                        <list>  
+                            <value>text/plain;charset=UTF-8</value>  
+                        </list>  
+                    </property>  
+                </bean>  
+            </list>  
+        </property>  
+    </bean>  
+    <bean id="mappingJacksonHttpMessageConverter"  
+        class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />  
+	
+	<!-- 基于全注解的事务 -->
+    <context:annotation-config />
+     <!-- 自动扫描 -->  
+    <context:component-scan base-package="com.manager.admin,com.manager.function" />
+	<!-- 开启事务注解驱动 --> 
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
+	<!-- 事务 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- mybatis 数据库连接 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="WEB-INF/BeanSqlMapConfig.xml" />
+		<property name="dataSource" ref="dataSource" />
+		<!-- 导入Mapper -->
+	</bean>
+
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+	
+	
+	 <!-- 拦截器所有Controller -->  
+    <mvc:interceptors>  
+        <!-- 多个拦截器,顺序执行 -->  
+        <mvc:interceptor>  
+           <mvc:mapping path="/**" /><!-- 如果不配置或/*,将拦截所有的Controller -->  
+           <bean class="com.manager.admin.interceptor.ControllerInterceptor"></bean>  
+        </mvc:interceptor>  
+    </mvc:interceptors>  
+    
+    <bean id="initDataPool" class="com.manager.init.impl.InitDataPoolImpl">
+		<property name="languagePath">
+			<value>config/language.cs.properties.xml</value>
+		</property>
+	</bean>
+	
+	<!-- dao层 start -->
+		<!-- admin -->
+		<bean name="adminRightDao" id="adminRightDao" class="com.manager.admin.daoimpl.AdminRightDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="adminUserDao" id="adminUserDao" class="com.manager.admin.daoimpl.AdminUserDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="adminRightUrlDao" id="adminRightUrlDao" class="com.manager.admin.daoimpl.AdminRightUrlDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="adminRoleDao" id="adminRoleDao" class="com.manager.admin.daoimpl.AdminRoleDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="adminLogDao" id="adminLogDao" class="com.manager.admin.daoimpl.AdminLogDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<!-- admin -->
+	<!-- dao层 end -->
+	<!-- service层 start -->
+		<!-- admin -->
+		<bean name="adminRightService" id="adminRightService" class="com.manager.admin.serviceimpl.AdminRightServiceImpl">
+			<property name="adminRightDao" ref="adminRightDao"></property>
+			<property name="adminRightUrlDao" ref="adminRightUrlDao"></property>
+		</bean>
+		<bean name="adminUserService" id="adminUserService" class="com.manager.admin.serviceimpl.AdminUserServiceImpl">
+			<property name="adminUserDao" ref="adminUserDao"></property>
+		</bean>
+		<bean name="adminRoleService" id="adminRoleService" class="com.manager.admin.serviceimpl.AdminRoleServiceImpl">
+			<property name="adminRoleDao" ref="adminRoleDao"></property>
+		</bean>
+		<bean name="adminLogService" id="adminLogService" class="com.manager.admin.serviceimpl.AdminLogServiceImpl">
+			<property name="adminLogDao" ref="adminLogDao"></property>
+		</bean>
+		<!-- admin -->
+	<!-- service层 end -->
+	
+	<!-- dao层 start -->
+		<!-- function -->
+		<bean name="bigeyeDao" id="bigeyeDao" class="com.manager.function.daoimpl.BigeyeDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="bigeyeModuleDao" id="bigeyeModuleDao" class="com.manager.function.daoimpl.BigeyeModuleDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="topicListDao" id="topicListDao" class="com.manager.function.daoimpl.TopicListDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="topicReplyDao" id="topicReplyDao" class="com.manager.function.daoimpl.TopicReplyDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="topicTypeDao" id="topicTypeDao" class="com.manager.function.daoimpl.TopicTypeDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="resourceTypeDao" id="resourceTypeDao" class="com.manager.function.daoimpl.ResourceTypeDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="resourceDao" id="resourceDao" class="com.manager.function.daoimpl.ResourceDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="resourceInfoDao" id="resourceInfoDao" class="com.manager.function.daoimpl.ResourceInfoDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="weekdayResourceDao" id="weekdayResourceDao" class="com.manager.function.daoimpl.WeekdayResourceDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="weekdayDao" id="weekdayDao" class="com.manager.function.daoimpl.WeekdayDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="globalHobbyDao" id="globalHobbyDao" class="com.manager.function.daoimpl.GlobalHobbyDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="globalLanguageDao" id="globalLanguageDao" class="com.manager.function.daoimpl.GlobalLanguageDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="globalHobbyAttrDao" id="globalHobbyAttrDao" class="com.manager.function.daoimpl.GlobalHobbyAttrDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="globalLevelDao" id="globalLevelDao" class="com.manager.function.daoimpl.GlobalLevelDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="globalPropertyDao" id="globalPropertyDao" class="com.manager.function.daoimpl.GlobalPropertyDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="globalPropertyAttrDao" id="globalPropertyAttrDao" class="com.manager.function.daoimpl.GlobalPropertyAttrDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="userDao" id="userDao" class="com.manager.function.daoimpl.UserDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="babyDao" id="babyDao" class="com.manager.function.daoimpl.BabyDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="babyInfoDao" id="babyInfoDao" class="com.manager.function.daoimpl.BabyInfoDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="learnplanDao" id="learnplanDao" class="com.manager.function.daoimpl.LearnplanDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="userLearnplanDao" id="userLearnplanDao" class="com.manager.function.daoimpl.UserLearnPlanDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="userBillingDao" id="userBillingDao" class="com.manager.function.daoimpl.UserBillingDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="searchKeywordDao" id="searchKeywordDao" class="com.manager.function.daoimpl.SearchKeywordDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="searchLogsDao" id="searchLogsDao" class="com.manager.function.daoimpl.SearchLogsDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="favoriteDao" id="favoriteDao" class="com.manager.function.daoimpl.FavoriteDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="globalScoreDao" id="globalScoreDao" class="com.manager.function.daoimpl.GlobalScoreDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<bean name="scoreLogDao" id="scoreLogDao" class="com.manager.function.daoimpl.ScoreLogDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
+		<!-- function -->
+	<!-- dao层 end -->
+	
+	
+	
+	<!-- service层 start -->
+		<!-- function -->
+		<bean name="userLearnplanService" id="userLearnplanService" class="com.manager.function.serviceimpl.UserLearnplanServiceImpl">
+			<property name="userLearnplanDao" ref="userLearnplanDao"></property>
+		</bean>
+		<bean name="bigeyeService" id="bigeyeService" class="com.manager.function.serviceimpl.BigeyeServiceImpl">
+			<property name="bigeyeDao" ref="bigeyeDao"></property>
+			<property name="initDataPool" ref="initDataPool"></property>
+			<property name="resourceService" ref="resourceService"></property>
+		</bean>
+		<bean name="bigeyeModuleService" id="bigeyeModuleService" class="com.manager.function.serviceimpl.BigeyeModuleServiceImpl">
+			<property name="bigeyeModuleDao" ref="bigeyeModuleDao"></property>
+		</bean>
+		<bean name="topicListService" id="topicListService" class="com.manager.function.serviceimpl.TopicListServiceImpl">
+			<property name="topicListDao" ref="topicListDao"></property>
+			<property name="initDataPool" ref="initDataPool"></property>
+			<property name="userDao" ref="userDao"></property>
+			<property name="topicReplyDao" ref="topicReplyDao"></property>
+		</bean>
+		<bean name="topicReplyService" id="topicReplyService" class="com.manager.function.serviceimpl.TopicReplyServiceImpl">
+			<property name="topicReplyDao" ref="topicReplyDao"></property>
+			<property name="topicListDao" ref="topicListDao"></property>
+			<property name="initDataPool" ref="initDataPool"></property>
+		</bean>
+		<bean name="topicTypeService" id="topicTypeService" class="com.manager.function.serviceimpl.TopicTypeServiceImpl">
+			<property name="topicTypeDao" ref="topicTypeDao"></property>
+			<property name="initDataPool" ref="initDataPool"></property>
+		</bean>
+		<bean name="resourceTypeService" id="resourceTypeService" class="com.manager.function.serviceimpl.ResourceTypeServiceImpl">
+			<property name="resourceTypeDao" ref="resourceTypeDao"></property>
+		</bean>
+		<bean name="searchKeywordService" id="searchKeywordService" class="com.manager.function.serviceimpl.SearchKeywordServiceImpl">
+			<property name="searchKeywordDao" ref="searchKeywordDao"></property>
+		</bean>
+		<bean name="searchLogsService" id="searchLogsService" class="com.manager.function.serviceimpl.SearchLogsServiceImpl">
+			<property name="searchLogsDao" ref="searchLogsDao"></property>
+		</bean>
+		<bean name="resourceInfoService" id="resourceInfoService" class="com.manager.function.serviceimpl.ResourceInfoServiceImpl">
+			<property name="resourceInfoDao" ref="resourceInfoDao"></property>
+		</bean>
+		<bean name="resourceService" id="resourceService" class="com.manager.function.serviceimpl.ResourceServiceImpl">
+			<property name="resourceDao" ref="resourceDao"></property>
+			<property name="resourceInfoDao" ref="resourceInfoDao"></property>
+			<property name="initDataPool" ref="initDataPool"></property>
+			<property name="weekdayDao" ref="weekdayDao"></property>
+			<property name="weekdayResourceDao" ref="weekdayResourceDao"></property>
+			<property name="searchLogsDao" ref="searchLogsDao"></property>
+			<property name="searchKeywordDao" ref="searchKeywordDao"></property>
+			<property name="scoreLogDao" ref="scoreLogDao"></property>
+			<property name="globalScoreDao" ref="globalScoreDao"></property>
+			<property name="userBillingDao" ref="userBillingDao"></property>
+			<property name="favoriteDao" ref="favoriteDao"></property>
+		</bean>
+		<bean name="weekdayResourceService" id="weekdayResourceService" class="com.manager.function.serviceimpl.WeekdayResourceServiceImpl">
+			<property name="weekdayResourceDao" ref="weekdayResourceDao"></property>
+		</bean>
+		<bean name="weekdayService" id="weekdayService" class="com.manager.function.serviceimpl.WeekdayServiceImpl">
+			<property name="weekdayDao" ref="weekdayDao"></property>
+		</bean>
+		<bean name="globalLanguageService" id="globalLanguageService" class="com.manager.function.serviceimpl.GlobalLanguageServiceImpl">
+			<property name="globalLanguageDao" ref="globalLanguageDao"></property>
+		</bean>
+		<bean name="globalHobbyService" id="globalHobbyService" class="com.manager.function.serviceimpl.GlobalHobbyServiceImpl">
+			<property name="globalHobbyDao" ref="globalHobbyDao"></property>
+			<property name="globalHobbyAttrDao" ref="globalHobbyAttrDao"></property>
+		</bean>
+		<bean name="globalLevelService" id="globalLevelService" class="com.manager.function.serviceimpl.GlobalLevelServiceImpl">
+			<property name="globalLevelDao" ref="globalLevelDao"></property>
+		</bean>
+		<bean name="globalPropertyAttrService" id="globalPropertyAttrService" class="com.manager.function.serviceimpl.GlobalPropertyAttrServiceImpl">
+			<property name="globalPropertyAttrDao" ref="globalPropertyAttrDao"></property>
+		</bean>
+		<bean name="globalHobbyAttrService" id="globalHobbyAttrService" class="com.manager.function.serviceimpl.GlobalHobbyAttrServiceImpl">
+			<property name="globalHobbyAttrDao" ref="globalHobbyAttrDao"></property>
+		</bean>
+		<bean name="globalPropertyService" id="globalPropertyService" class="com.manager.function.serviceimpl.GlobalPropertyServiceImpl">
+			<property name="globalPropertyDao" ref="globalPropertyDao"></property>
+			<property name="globalPropertyAttrDao" ref="globalPropertyAttrDao"></property>
+			<property name="initDataPool" ref="initDataPool"></property>
+		</bean>
+		<bean name="userService" id="userService" class="com.manager.function.serviceimpl.UserServiceImpl">
+			<property name="userDao" ref="userDao"></property>
+			<property name="babyDao" ref="babyDao"></property>
+			<property name="babyInfoDao" ref="babyInfoDao"></property>
+			<property name="initDataPool" ref="initDataPool"></property>
+			<property name="userBillingDao" ref="userBillingDao"></property>
+		</bean>
+		<bean name="babyService" id="babyService" class="com.manager.function.serviceimpl.BabyServiceImpl">
+			<property name="babyDao" ref="babyDao"></property>
+			<property name="babyInfoDao" ref="babyInfoDao"></property>
+			<property name="userDao" ref="userDao"></property>
+			<property name="initDataPool" ref="initDataPool"></property>
+		</bean>
+		<bean name="learnplanService" id="learnplanService" class="com.manager.function.serviceimpl.LearnplanServiceImpl">
+			<property name="learnplanDao" ref="learnplanDao"></property>
+			<property name="userLearnplanDao" ref="userLearnplanDao"></property>
+			<property name="resourceDao" ref="resourceDao"></property>
+			<property name="resourceInfoDao" ref="resourceInfoDao"></property>
+			<property name="initDataPool" ref="initDataPool"></property>
+			<property name="scoreLogDao" ref="scoreLogDao"></property>
+			<property name="globalScoreDao" ref="globalScoreDao"></property>
+			<property name="globalPropertyDao" ref="globalPropertyDao"></property>
+			<property name="userBillingDao" ref="userBillingDao"></property>
+			<property name="favoriteDao" ref="favoriteDao"></property>
+		</bean>
+		<bean name="babyInfoService" id="babyInfoService" class="com.manager.function.serviceimpl.BabyInfoServiceImpl">
+			<property name="userDao" ref="userDao"></property>
+			<property name="babyDao" ref="babyDao"></property>
+			<property name="babyInfoDao" ref="babyInfoDao"></property>
+			<property name="initDataPool" ref="initDataPool"></property>
+		</bean>
+		<bean name="apiService" id="apiService" class="com.manager.function.serviceimpl.ApiServiceImpl">
+			<property name="initDataPool" ref="initDataPool"></property>
+			<property name="babyService" ref="babyService"></property>
+			<property name="babyInfoService" ref="babyInfoService"></property>
+			<property name="userService" ref="userService"></property>
+			<property name="resourceService" ref="resourceService"></property>
+			<property name="learnplanService" ref="learnplanService"></property>
+			<property name="favoriteService" ref="favoriteService"></property>
+			<property name="globalPropertyService" ref="globalPropertyService"></property>
+			<property name="topicTypeService" ref="topicTypeService"></property>
+			<property name="topicReplyService" ref="topicReplyService"></property>
+			<property name="bigeyeService" ref="bigeyeService"></property>
+			<property name="topicListService" ref="topicListService"></property>
+			<property name="ccmsService" ref="ccmsService"></property>
+			
+		</bean>
+		<bean name="favoriteService" id="favoriteService" class="com.manager.function.serviceimpl.FavoriteServiceImpl">
+			<property name="favoriteDao" ref="favoriteDao"></property>
+			<property name="initDataPool" ref="initDataPool"></property>
+		</bean>
+		<bean name="ccmsService" id="ccmsService" class="com.manager.function.serviceimpl.CcmsServiceImpl">
+			<property name="initDataPool" ref="initDataPool"></property>
+			<property name="apiService" ref="apiService"></property>
+			<property name="userDao" ref="userDao"></property>
+		</bean>
+		<!-- function -->
+	<!-- service层 end -->
+	
+	<!-- controller层 start -->
+		<!-- function -->
+		<!-- function -->
+	<!-- controller层 end -->
+</beans>

@@ -1,0 +1,173 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/iread/!svn/ver/182/trunk/hbAdmin/src/com/manager/function/sqlmap
+END
+TopicType.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/69/trunk/hbAdmin/src/com/manager/function/sqlmap/TopicType.xml
+END
+GlobalHobby.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/sqlmap/GlobalHobby.xml
+END
+Resource.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/177/trunk/hbAdmin/src/com/manager/function/sqlmap/Resource.xml
+END
+GlobalLevel.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/107/trunk/hbAdmin/src/com/manager/function/sqlmap/GlobalLevel.xml
+END
+Weekday.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/iread/!svn/ver/135/trunk/hbAdmin/src/com/manager/function/sqlmap/Weekday.xml
+END
+ResourceType.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/8/trunk/hbAdmin/src/com/manager/function/sqlmap/ResourceType.xml
+END
+BabyInfo.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/104/trunk/hbAdmin/src/com/manager/function/sqlmap/BabyInfo.xml
+END
+TopicReply.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/174/trunk/hbAdmin/src/com/manager/function/sqlmap/TopicReply.xml
+END
+SearchLogs.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/34/trunk/hbAdmin/src/com/manager/function/sqlmap/SearchLogs.xml
+END
+GlobalScore.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/sqlmap/GlobalScore.xml
+END
+ConvertBlobTypeHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/iread/!svn/ver/171/trunk/hbAdmin/src/com/manager/function/sqlmap/ConvertBlobTypeHandler.java
+END
+GlobalPropertyAttr.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/iread/!svn/ver/69/trunk/hbAdmin/src/com/manager/function/sqlmap/GlobalPropertyAttr.xml
+END
+WeekdayResource.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/iread/!svn/ver/34/trunk/hbAdmin/src/com/manager/function/sqlmap/WeekdayResource.xml
+END
+ResourceInfo.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/iread/!svn/ver/107/trunk/hbAdmin/src/com/manager/function/sqlmap/ResourceInfo.xml
+END
+Bigeye.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/iread/!svn/ver/179/trunk/hbAdmin/src/com/manager/function/sqlmap/Bigeye.xml
+END
+GlobalLanguage.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/iread/!svn/ver/107/trunk/hbAdmin/src/com/manager/function/sqlmap/GlobalLanguage.xml
+END
+GlobalProperty.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/iread/!svn/ver/158/trunk/hbAdmin/src/com/manager/function/sqlmap/GlobalProperty.xml
+END
+BigeyeModule.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/iread/!svn/ver/103/trunk/hbAdmin/src/com/manager/function/sqlmap/BigeyeModule.xml
+END
+SearchKeyword.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/sqlmap/SearchKeyword.xml
+END
+TopicList.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/178/trunk/hbAdmin/src/com/manager/function/sqlmap/TopicList.xml
+END
+UserLearnplan.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/iread/!svn/ver/159/trunk/hbAdmin/src/com/manager/function/sqlmap/UserLearnplan.xml
+END
+Learnplan.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/26/trunk/hbAdmin/src/com/manager/function/sqlmap/Learnplan.xml
+END
+Baby.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/iread/!svn/ver/109/trunk/hbAdmin/src/com/manager/function/sqlmap/Baby.xml
+END
+ScoreLog.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/sqlmap/ScoreLog.xml
+END
+User.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/iread/!svn/ver/189/trunk/hbAdmin/src/com/manager/function/sqlmap/User.xml
+END
+GlobalHobbyAttr.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/sqlmap/GlobalHobbyAttr.xml
+END
+Favorite.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/iread/!svn/ver/88/trunk/hbAdmin/src/com/manager/function/sqlmap/Favorite.xml
+END
+UserBilling.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/sqlmap/UserBilling.xml
+END

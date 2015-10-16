@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="GlobalHobbyAttrSql"> 
+	<resultMap type="globalHobbyAttr" id="GlobalHobbyAttr">
+		<result property="id" column="id"/>      
+		<result property="hobby_id" column="hobby_id"/>    
+		<result property="level_id" column="level_id"/>
+	</resultMap>
+	
+	<delete id="batch_delete" parameterType="java.util.List">
+		<![CDATA[delete from tbl_global_hobby_attr where id in ]]>
+		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+			${item.id} 
+		</foreach>
+	</delete>
+	
+	<insert id="batch_insert" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			<![CDATA[insert into tbl_global_hobby_attr(id,hobby_id,level_id) 
+			values (nextval('tbl_global_hobby_attr'),${item.hobby_id},${item.level_id})]]>
+		</foreach>
+	</insert>
+	
+	<select id="get" resultMap="GlobalHobbyAttr" parameterType="globalHobbyAttr">
+		<![CDATA[ SELECT id,level_id,hobby_id FROM tbl_global_hobby_attr where hobby_id = #{hobby_id}]]>
+	</select>
+	
+</mapper>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="BigeyeSql"> 
+	<resultMap id="Bigeye" type="bigeye">  
+		<result property="id" column="id"/> 
+		<result property="img_url" column="img_url"/> 
+		<result property="link_url" column="link_url"/> 
+		<result property="content" column="content"/> 
+		<result property="module_id" column="module_id"/> 
+		<result property="sort" column="sort"/> 
+		<result property="status" column="status"/> 
+		<result property="module_name" column="module_name"/> 
+		<result property="num" column="num"/> 
+		<result property="link_type" column="link_type"/> 
+		
+	</resultMap>
+	
+	<select id="get" resultMap="Bigeye" parameterType="bigeye">
+		<![CDATA[select a.id id,a.img_url img_url,a.link_url link_url,a.content content,
+			a.module_id module_id,a.status status,a.sort sort,b.module_name module_name,a.link_type link_type 
+			from tbl_bigeye a left join tbl_bigeye_module b on a.module_id=b.module_id]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  a.id=#{id}]]>
+			</if>
+			<if test="module_id!=null and ''!=module_id">
+				<![CDATA[  and a.module_id=#{module_id}]]>
+			</if>
+			<if test="status!=null and ''!=status">
+				<![CDATA[  and a.status=#{status}]]>
+			</if>
+			<if test="link_type!=null and ''!=link_type">
+				<![CDATA[  and a.link_type=#{link_type}]]>
+			</if>
+		</where>
+		<![CDATA[ order by id desc]]>
+	</select>
+	
+	<select id="getBigEyeList" resultMap="Bigeye" parameterType="bigeye">
+		<![CDATA[SELECT id,img_url,link_url,content,module_id,sort,status,link_type FROM tbl_bigeye WHERE module_id = #{module_id} and status = 1 order by sort limit #{num}]]>
+	</select>
+	
+	<select id="get2" resultMap="Bigeye" parameterType="bigeye">
+		<![CDATA[select id,img_url,link_url,content,module_id,sort,status,link_type from tbl_bigeye ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="module_id!=null and ''!=module_id">
+				<![CDATA[  and module_id=#{module_id}]]>
+			</if>
+			<if test="status!=null and ''!=status">
+				<![CDATA[  and status=#{status}]]>
+			</if>
+			<if test="link_type!=null and ''!=link_type">
+				<![CDATA[  and link_type=#{link_type}]]>
+			</if>
+		</where>
+		<![CDATA[ order by id ]]>
+	</select>
+	
+	<select id="count" resultType="int" parameterType="bigeye">
+		<![CDATA[select count(*) from tbl_bigeye]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="module_id!=null and ''!=module_id">
+				<![CDATA[  and module_id=#{module_id}]]>
+			</if>
+			<if test="status!=null and ''!=status">
+				<![CDATA[  and status=#{status}]]>
+			</if>
+			<if test="link_type!=null and ''!=link_type">
+				<![CDATA[  and link_type=#{link_type}]]>
+			</if>
+		</where>
+	</select>
+	
+	<update id="update" parameterType="bigeye">
+		<![CDATA[update tbl_bigeye set 
+		img_url = #{img_url},
+		link_url = #{link_url},
+		content = #{content},
+		module_id = #{module_id},
+		sort = #{sort},
+		link_type = #{link_type},
+		status = #{status}
+		 where id=#{id}]]>
+	</update>
+	
+	<update id="updatestatus" parameterType="bigeye">
+		<![CDATA[update tbl_bigeye set status=#{status} where id=#{id}]]>
+	</update>
+	
+	<delete id="delete" parameterType="bigeye">
+		<![CDATA[delete from tbl_bigeye where id=#{id} ]]>
+	</delete>
+	
+	<insert id="insert" parameterType="bigeye">
+		<![CDATA[insert into tbl_bigeye(id,img_url,link_url,content,module_id,sort,status,link_type) 
+		values (nextval('tbl_bigeye'),#{img_url},#{link_url},#{content},#{module_id},#{sort},#{status},#{link_type})]]>
+	</insert>
+</mapper>

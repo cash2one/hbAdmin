@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="AdminUserSql"> 
+	<resultMap id="AdminUser" type="adminUser">  
+		 <result property="adminAccount" column="admin_user"/> 
+		 <result property="adminPwd" column="admin_pwd"/> 
+		 <result property="adminRealName" column="admin_realname"/> 
+		 <result property="adminEmail" column="admin_email"/> 
+		 <result property="adminPhone" column="admin_phone"/> 
+		 <result property="adminMemo" column="admin_memo"/> 
+		 <result property="adminState" column="admin_state"/> 
+		 <result property="createdDate" column="created_date" jdbcType="DATE"/> 
+		 <result property="modifyDate" column="modify_date" jdbcType="DATE"/> 
+		 <result property="adminUserType" column="admin_user_type"/> 
+		 <result property="lastCpasswordDate" column="last_cpassword_date"/> 
+		 <result property="adminRole" column="role_id"/> 
+	</resultMap>
+	
+	<delete id="delete" parameterType="String">
+		<![CDATA[delete from tbl_admin_user where admin_user=#{adminAccount}]]>
+	</delete>
+	
+	<!-- 登录 or 根据管理员帐号查询-->
+	<select id="getlogin" resultMap="AdminUser" parameterType="adminUser">
+		<![CDATA[select * from tbl_admin_user where admin_user=#{adminAccount} and admin_pwd=#{adminPwd}]]>
+	</select>
+	
+	<!-- 条件查询条数 -->
+	<select id="count" resultType="int" parameterType="adminUser">
+    	<![CDATA[select count(*) from tbl_admin_user]]>
+    	<where>
+	    	<if test="adminAccount!=null and ''!=adminAccount">
+	    		<![CDATA[ and admin_user=#{adminAccount}]]>
+	    	</if>
+	    	<if test="adminRealName!=null and ''!=adminRealName">
+	    		<![CDATA[ and admin_realname=#{adminRealName}]]>
+	    	</if>
+	    	<if test="adminEmail!=null and ''!=adminEmail">
+	    		<![CDATA[ and admin_email=#{adminEmail}]]>
+	    	</if>
+	    	<if test="adminPhone!=null and ''!=adminPhone">
+	    		<![CDATA[ and admin_phone=#{adminPhone}]]>
+	    	</if>
+	    	<if test="adminState!=null and ''!=adminState">
+	    		<![CDATA[ and admin_state=#{adminState}]]>
+	    	</if>
+	    	<if test="createdDate!=null and ''!=createdDate">
+	    		<![CDATA[ and created_date=#{createdDate}]]>
+	    	</if>
+	    	<if test="modifyDate!=null and ''!=modifyDate">
+	    		<![CDATA[ and modify_date=#{modifyDate}]]>
+	    	</if>
+	    	<if test="adminUserType!=null and ''!=adminUserType">
+	    		<![CDATA[ and admin_user_type=#{adminUserType}]]>
+	    	</if>
+	    	<if test="lastCpasswordDate!=null and ''!=lastCpasswordDate">
+	    		<![CDATA[ and last_cpassword_date=#{lastCpasswordDate}]]>
+	    	</if>
+    	</where>
+    </select>
+	
+	<!-- 条件查询管理员 -->
+	<select id="get" resultMap="AdminUser" parameterType="adminUser">
+    	<![CDATA[select admin_user,admin_pwd,admin_realname,admin_email,admin_phone,admin_memo,admin_state,date_format(created_date,'%Y-%m-%d %H:%i:%s') created_date,
+    		date_format(modify_date,'%Y-%m-%d %H:%i:%s') modify_date,admin_user_type,date_format(last_cpassword_date,'%Y-%m-%d %H:%i:%s') last_cpassword_date from tbl_admin_user]]>
+    	<where>
+	    	<if test="adminAccount!=null and ''!=adminAccount">
+	    		<![CDATA[ and admin_user=#{adminAccount}]]>
+	    	</if>
+	    	<if test="adminRealName!=null and ''!=adminRealName">
+	    		<![CDATA[ and admin_realname=#{adminRealName}]]>
+	    	</if>
+	    	<if test="adminEmail!=null and ''!=adminEmail">
+	    		<![CDATA[ and admin_email=#{adminEmail}]]>
+	    	</if>
+	    	<if test="adminPhone!=null and ''!=adminPhone">
+	    		<![CDATA[ and admin_phone=#{adminPhone}]]>
+	    	</if>
+	    	<if test="adminState!=null and ''!=adminState">
+	    		<![CDATA[ and admin_state=#{adminState}]]>
+	    	</if>
+	    	<if test="createdDate!=null and ''!=createdDate">
+	    		<![CDATA[ and created_date=#{createdDate}]]>
+	    	</if>
+	    	<if test="modifyDate!=null and ''!=modifyDate">
+	    		<![CDATA[ and modify_date=#{modifyDate}]]>
+	    	</if>
+	    	<if test="adminUserType!=null and ''!=adminUserType">
+	    		<![CDATA[ and admin_user_type=#{adminUserType}]]>
+	    	</if>
+	    	<if test="lastCpasswordDate!=null and ''!=lastCpasswordDate">
+	    		<![CDATA[ and last_cpassword_date=#{lastCpasswordDate}]]>
+	    	</if>
+    	</where>
+    	<![CDATA[ order by created_date]]>
+    </select>
+    
+    
+    <!-- 条件查询管理员导出 -->
+	<select id="exp" resultType="java.util.HashMap" parameterType="adminUser">
+    	<![CDATA[select admin_user,admin_pwd,admin_realname,admin_email,admin_phone,admin_memo,
+    		(case when admin_state='0' then '停用' when admin_state='1' then '启用' end ) "admin_state"
+    		,date_format(created_date,'%Y-%m-%d %H:%i:%s') created_date,
+    		date_format(modify_date,'%Y-%m-%d %H:%i:%s') modify_date,admin_user_type,date_format(last_cpassword_date,'%Y-%m-%d %H:%i:%s') last_cpassword_date from tbl_admin_user]]>
+    	<where>
+	    	<if test="adminAccount!=null and ''!=adminAccount">
+	    		<![CDATA[ and admin_user=#{adminAccount}]]>
+	    	</if>
+	    	<if test="adminRealName!=null and ''!=adminRealName">
+	    		<![CDATA[ and admin_realname=#{adminRealName}]]>
+	    	</if>
+	    	<if test="adminEmail!=null and ''!=adminEmail">
+	    		<![CDATA[ and admin_email=#{adminEmail}]]>
+	    	</if>
+	    	<if test="adminPhone!=null and ''!=adminPhone">
+	    		<![CDATA[ and admin_phone=#{adminPhone}]]>
+	    	</if>
+	    	<if test="adminState!=null and ''!=adminState">
+	    		<![CDATA[ and admin_state=#{adminState}]]>
+	    	</if>
+	    	<if test="createdDate!=null and ''!=createdDate">
+	    		<![CDATA[ and created_date=#{createdDate}]]>
+	    	</if>
+	    	<if test="modifyDate!=null and ''!=modifyDate">
+	    		<![CDATA[ and modify_date=#{modifyDate}]]>
+	    	</if>
+	    	<if test="adminUserType!=null and ''!=adminUserType">
+	    		<![CDATA[ and admin_user_type=#{adminUserType}]]>
+	    	</if>
+	    	<if test="lastCpasswordDate!=null and ''!=lastCpasswordDate">
+	    		<![CDATA[ and last_cpassword_date=#{lastCpasswordDate}]]>
+	    	</if>
+    	</where>
+    	<![CDATA[ order by created_date]]>
+    </select>
+    
+    <!-- 条件查询管理员 -->
+	<select id="get2" resultMap="AdminUser" parameterType="adminUser">
+    	<![CDATA[select * from tbl_admin_user a left join tbl_admin_userrole b on a.admin_user=b.admin_user]]>
+    	<where>
+    	<if test="adminAccount!=null and ''!=adminAccount">
+    		<![CDATA[ and a.admin_user=#{adminAccount}]]>
+    	</if>
+    	<if test="adminRealName!=null and ''!=adminRealName">
+    		<![CDATA[ and a.admin_realname=#{adminRealName}]]>
+    	</if>
+    	<if test="adminEmail!=null and ''!=adminEmail">
+    		<![CDATA[ and a.admin_email=#{adminEmail}]]>
+    	</if>
+    	<if test="adminPhone!=null and ''!=adminPhone">
+    		<![CDATA[ and a.admin_phone=#{adminPhone}]]>
+    	</if>
+    	<if test="adminState!=null and ''!=adminState">
+    		<![CDATA[ and a.admin_state=#{adminState}]]>
+    	</if>
+    	<if test="createdDate!=null and ''!=createdDate">
+    		<![CDATA[ and a.created_date=#{createdDate}]]>
+    	</if>
+    	<if test="modifyDate!=null and ''!=modifyDate">
+    		<![CDATA[ and a.modify_date=#{modifyDate}]]>
+    	</if>
+    	<if test="adminUserType!=null and ''!=adminUserType">
+    		<![CDATA[ and a.admin_user_type=#{adminUserType}]]>
+    	</if>
+    	<if test="lastCpasswordDate!=null and ''!=lastCpasswordDate">
+    		<![CDATA[ and a.last_cpassword_date=#{lastCpasswordDate}]]>
+    	</if>
+    	<if test="adminRole!=null and ''!=adminRole">
+    		<![CDATA[ and b.role_id=#{adminRole}]]>
+    	</if>
+    	</where>
+    	<![CDATA[ order by a.created_date]]>
+    </select>
+    
+    <!-- 插入管理员 -->
+    <insert id="add" parameterType="adminUser">
+    	<![CDATA[
+    	insert into tbl_admin_user 
+    	(admin_user, admin_pwd, admin_realname, admin_email, admin_phone, admin_memo, admin_state) values 
+		(#{adminAccount}, #{adminPwd}, #{adminRealName}, #{adminEmail}, #{adminPhone}, #{adminMemo}, #{adminState})
+		]]>
+    </insert>
+    
+    <!-- 修改管理员信息 -->
+    <update id="update" parameterType="adminUser">
+    	<![CDATA[ update tbl_admin_user ]]>
+    	<set>
+    		<if test="adminPwd!=null and ''!=adminPwd">
+	    		<![CDATA[ admin_pwd=#{adminPwd},]]>
+	    	</if>
+	    	<if test="adminRealName!=null and ''!=adminRealName">
+	    		<![CDATA[ admin_realname=#{adminRealName},]]>
+	    	</if>
+	    	<if test="adminEmail!=null and ''!=adminEmail">
+	    		<![CDATA[ admin_email=#{adminEmail},]]>
+	    	</if>
+	    	<if test="adminPhone!=null and ''!=adminPhone">
+	    		<![CDATA[ admin_phone=#{adminPhone},]]>
+	    	</if>
+	    	<if test="adminMemo!=null and ''!=adminMemo">
+	    		<![CDATA[ admin_memo=#{adminMemo},]]>
+	    	</if>
+	    	<if test="adminState!=null and ''!=adminState">
+	    		<![CDATA[ admin_state=#{adminState},]]>
+	    	</if>
+	    	<if test="adminUserType!=null and ''!=adminUserType">
+	    		<![CDATA[ admin_user_type=#{adminUserType},]]>
+	    	</if>
+	    	<if test="lastCpasswordDate!=null and ''!=lastCpasswordDate">
+	    		<![CDATA[ last_cpassword_date=str_to_date(#{lastCpasswordDate},'%Y-%m-%d %H:%i:%s'),]]>
+	    	</if>
+	    	<![CDATA[ modify_date=NOW(),]]>
+    	</set>
+    	<![CDATA[ where admin_user=#{adminAccount}]]>
+    </update>
+</mapper>

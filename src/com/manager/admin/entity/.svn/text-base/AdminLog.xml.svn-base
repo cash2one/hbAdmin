@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="AdminLogSql"> 
+	<resultMap type="adminLog" id="AdminLog">
+		<result property="operDate" column="oper_date" jdbcType="DATE"/>      
+		<result property="operService" column="oper_service"/>    
+		<result property="operAdmin" column="oper_admin"/> 
+		<result property="operIp" column="oper_ip"/>  
+		<result property="operLang" column="oper_lang"/> 
+		<result property="operMemo" column="oper_memo" />  
+		<result property="openState" column="open_state"/> 
+		<result property="startDate" column="oper_date" jdbcType="DATE"/>
+		<result property="endDate" column="oper_date" jdbcType="DATE"/>
+		<result property="openStateInfo" column="OPEN_STATE_INFO"/>
+	</resultMap>
+	
+	<select id="get" resultMap="AdminLog" parameterType="adminLog">
+		select date_format(oper_date,'%Y-%m-%d %H:%i:%s') oper_date,oper_service,oper_admin,oper_ip,oper_lang,oper_memo,open_state
+		from tbl_admin_log
+		<where>
+			<if test="startDate!=null and ''!=startDate">
+	    		<![CDATA[ and oper_date>str_to_date(#{startDate},'%Y-%m-%d %H:%i:%s')]]>
+	    	</if>
+	    	<if test="endDate!=null and ''!=endDate">
+	    		<![CDATA[ and oper_date<=str_to_date(#{endDate},'%Y-%m-%d %H:%i:%s')]]>
+	    	</if>
+	    	<if test="operService!=null and ''!=operService">
+	    		<![CDATA[ and oper_service=#{operService}]]>
+	    	</if>
+	    	<if test="openState!=null">
+	    		<![CDATA[ and open_state=#{openState}]]>
+	    	</if>
+	    	<if test="operAdmin!=null and ''!=operAdmin">
+	    		<![CDATA[ and oper_admin=#{operAdmin}]]>
+	    	</if>
+	    	<if test="operIp!=null and ''!=operIp">
+	    		<![CDATA[ and oper_ip=#{operIp}]]>
+	    	</if>
+		</where>
+		<![CDATA[ order by oper_date desc]]>
+	</select>
+	
+	<select id="exp" resultType="java.util.HashMap" parameterType="adminLog">
+		select date_format(oper_date,'%Y-%m-%d %H:%i:%s') oper_date,oper_service,oper_admin,oper_ip,oper_lang,oper_memo,
+		(case  when open_state='0' then '失败'  when  open_state='1' then '成功'  end ) "OPEN_STATE_INFO"
+		from tbl_admin_log
+		<where>
+			<if test="startDate!=null and ''!=startDate">
+	    		<![CDATA[ and oper_date>str_to_date(#{startDate},'%Y-%m-%d %H:%i:%s')]]>
+	    	</if>
+	    	<if test="endDate!=null and ''!=endDate">
+	    		<![CDATA[ and oper_date<=str_to_date(#{endDate},'%Y-%m-%d %H:%i:%s')]]>
+	    	</if>
+	    	
+	    	<if test="operService!=null and ''!=operService">
+	    		<![CDATA[ and oper_service=#{operService}]]>
+	    	</if>
+	    	<if test="openState!=null">
+	    		<![CDATA[ and open_state=#{openState}]]>
+	    	</if>
+	    	<if test="operAdmin!=null and ''!=operAdmin">
+	    		<![CDATA[ and oper_admin=#{operAdmin}]]>
+	    	</if>
+	    	<if test="operIp!=null and ''!=operIp">
+	    		<![CDATA[ and oper_ip=#{operIp}]]>
+	    	</if>
+		</where>
+		<![CDATA[ order by oper_date desc]]>
+	</select>
+	
+	<select id="count" resultType="int" parameterType="adminLog">
+		select count(*) from tbl_admin_log
+		<where>
+			<if test="startDate!=null and ''!=startDate">
+	    		<![CDATA[ and oper_date>str_to_date(#{startDate},'%Y-%m-%d %H:%i:%s')]]>
+	    	</if>
+	    	<if test="endDate!=null and ''!=endDate">
+	    		<![CDATA[ and oper_date<=str_to_date(#{endDate},'%Y-%m-%d %H:%i:%s')]]>
+	    	</if>
+	    	
+	    	<if test="operService!=null and ''!=operService">
+	    		<![CDATA[ and oper_service=#{operService}]]>
+	    	</if>
+	    	<if test="operAdmin!=null and ''!=operAdmin">
+	    		<![CDATA[ and oper_admin=#{operAdmin}]]>
+	    	</if>
+	    	<if test="operIp!=null and ''!=operIp">
+	    		<![CDATA[ and oper_ip=#{operIp}]]>
+	    	</if>
+		</where>
+	</select>
+	
+	<select id="get2" resultType="String">
+		select oper_service from tbl_admin_log group by oper_service
+	</select>
+	
+	<insert id="add" parameterType="adminLog">
+		<![CDATA[insert into tbl_admin_log(oper_service,oper_admin,oper_ip,oper_memo,oper_lang,open_state)
+		 values(#{operService},#{operAdmin},#{operIp},#{operMemo},#{operLang},#{openState})]]>
+	</insert>
+	
+	<insert id="addlist" parameterType="java.util.List">
+		<![CDATA[insert into tbl_admin_log(oper_service,oper_admin,oper_ip,oper_memo,oper_lang,open_state) ]]>
+		<foreach collection="list" item="item" index="index" separator="union all" > 
+		<![CDATA[
+			(select  
+			 #{item.operService},#{item.operAdmin},#{item.operIp},#{item.operMemo},#{operLang},,#{item.openState}
+	        from dual)
+	     ]]>
+		</foreach>
+	</insert>
+</mapper>

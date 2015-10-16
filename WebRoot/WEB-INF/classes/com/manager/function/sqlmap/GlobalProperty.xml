@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="GlobalPropertySql"> 
+	<resultMap type="globalProperty" id="GlobalProperty">
+		<result property="id" column="id"/>      
+		<result property="property_name" column="property_name"/>    
+		<result property="property_status" column="property_status"/> 
+		<result property="create_date" column="create_date" jdbcType="DATE"/>  
+		<result property="create_adminuser" column="create_adminuser"/> 
+		<result property="update_date" column="update_date" jdbcType="DATE"/>
+		<result property="update_adminuser" column="update_adminuser"/>
+		<result property="sort" column="sort"/>
+		<result property="level_id" column="level_id"/>
+		<result property="property_type" column="property_type"/>
+		<result property="baby_id" column="baby_id"/>
+		<result property="property_num" column="property_num"/>
+	</resultMap>
+	
+	<select id="get" resultMap="GlobalProperty" parameterType="globalProperty">
+		<![CDATA[ SELECT p.id id,p.property_name property_name,p.property_status property_status,p.property_num property_num,DATE_FORMAT(p.create_date,'%Y-%m-%d %H:%i:%s') create_date,p.create_adminuser create_adminuser,DATE_FORMAT(p.update_date,'%Y-%m-%d %H:%i:%s') update_date,p.update_adminuser update_adminuser,p.sort sort,p.property_type property_type,l.level_content level_id FROM tbl_global_property p LEFT JOIN tbl_global_level l ON p.level_id = l.id ORDER BY level_id,sort,create_date DESC]]>
+	</select>
+	
+	<select id="get1" resultMap="GlobalProperty" parameterType="globalProperty">
+		<![CDATA[ SELECT id,property_name,property_status,property_num,DATE_FORMAT(create_date,'%Y-%m-%d %H:%i:%s') create_date,create_adminuser,DATE_FORMAT(update_date,'%Y-%m-%d %H:%i:%s') update_date,update_adminuser,sort,property_type,level_id FROM tbl_global_property where property_status = 1 ORDER BY sort]]>
+	</select>
+	
+	<select id="findByLevel" resultMap="GlobalProperty" parameterType="globalProperty">
+		<![CDATA[ SELECT a.id AS id,a.property_name AS property_name,a.property_status AS property_status,a.property_num property_num,DATE_FORMAT(a.create_date,'%Y-%m-%d %H:%i:%s') create_date,a.create_adminuser AS create_adminuser,DATE_FORMAT(a.update_date,'%Y-%m-%d %H:%i:%s') update_date,a.update_adminuser AS update_adminuser,a.sort AS sort,a.property_type AS property_type FROM 
+			tbl_global_property a LEFT JOIN tbl_baby_info b ON b.property_id = a.id WHERE b.baby_id = #{baby_id}]]>
+	</select>
+	
+	<select id="findByBabyId" resultMap="GlobalProperty" parameterType="globalProperty">
+		<![CDATA[ SELECT a.id as id,a.property_name as property_name,a.property_status as property_status,a.property_num property_num,DATE_FORMAT(a.create_date,'%Y-%m-%d %H:%i:%s') create_date,a.create_adminuser as create_adminuser,DATE_FORMAT(a.update_date,'%Y-%m-%d %H:%i:%s') update_date,a.update_adminuser as update_adminuser,a.sort as sort,a.property_type as property_type FROM 
+			tbl_global_property a WHERE property_status = 1 and level_id =(SELECT level_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY level_id)
+			 GROUP BY a.id ORDER BY a.id]]>
+	</select>
+	
+	<select id="shudan" resultMap="GlobalProperty" parameterType="globalProperty">
+		<![CDATA[ SELECT * FROM (SELECT  DISTINCT a.id AS id,a.property_name AS property_name,a.property_status AS property_status,a.property_num property_num,DATE_FORMAT(a.create_date,'%Y-%m-%d %H:%i:%s') create_date,a.create_adminuser AS create_adminuser,DATE_FORMAT(a.update_date,'%Y-%m-%d %H:%i:%s') update_date,a.update_adminuser AS update_adminuser,a.sort AS sort,a.property_type AS property_type FROM 
+			tbl_global_property a RIGHT JOIN `tbl_user_learnplan` b ON b.peoperty_id = a.id WHERE b.baby_id = #{baby_id} and b.replenish = 0 order by a.sort) c
+			UNION ALL
+			SELECT * FROM (SELECT  DISTINCT a.id AS id,a.property_name AS property_name,a.property_status AS property_status,a.property_num property_num,DATE_FORMAT(a.create_date,'%Y-%m-%d %H:%i:%s') create_date,a.create_adminuser AS create_adminuser,DATE_FORMAT(a.update_date,'%Y-%m-%d %H:%i:%s') update_date,a.update_adminuser AS update_adminuser,a.sort AS sort,a.property_type AS property_type FROM 
+						tbl_global_property a RIGHT JOIN `tbl_user_learnplan` b ON b.peoperty_id = a.id WHERE b.baby_id = #{baby_id} AND b.replenish = 1 ORDER BY a.sort) d]]>
+	</select>
+	
+	<select id="findByBabyId_buquan" resultMap="GlobalProperty" parameterType="globalProperty">
+		<![CDATA[ SELECT c.id AS id,c.property_name AS property_name,c.property_status AS property_status,DATE_FORMAT(c.create_date,'%Y-%m-%d %H:%i:%s') create_date,c.create_adminuser AS create_adminuser,DATE_FORMAT(c.update_date,'%Y-%m-%d %H:%i:%s') update_date,c.update_adminuser AS update_adminuser,c.sort AS sort FROM 
+			(SELECT * FROM tbl_global_property WHERE property_status = 1 AND id NOT IN(SELECT a.id AS id FROM 
+			(SELECT * FROM tbl_global_property WHERE property_status = 1) a 
+			 INNER JOIN 
+			(SELECT peoperty_id,property_type FROM tbl_global_property_attr WHERE level_id =(SELECT level_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY level_id)) b1 ON a.id=b1.peoperty_id GROUP BY a.id ORDER BY a.id)) c 
+			 ORDER BY c.id]]>
+	</select>
+	
+	<select id="getNoAbolish" resultMap="GlobalProperty">
+		<![CDATA[ SELECT id,property_name,level_id,property_type from tbl_global_property where property_status<>9 order by id]]>
+	</select>
+	
+	<select id="count" resultType="int" parameterType="globalProperty">
+		<![CDATA[ SELECT COUNT(*) FROM tbl_global_property ]]>
+	</select>
+	
+	<select id="getId" resultType="int" parameterType="globalProperty">
+		<![CDATA[ SELECT nextval('tbl_global_property') ]]>
+	</select>
+	
+	<select id="getOne" resultMap="GlobalProperty" parameterType="globalProperty">
+		<![CDATA[ SELECT id,property_name,property_status,DATE_FORMAT(create_date,'%Y-%m-%d %H:%i:%s') create_date,create_adminuser,DATE_FORMAT(update_date,'%Y-%m-%d %H:%i:%s') update_date,update_adminuser,sort,property_type,level_id,property_num FROM tbl_global_property where id=#{id}]]>
+	</select>
+	
+	<insert id="add" parameterType="globalProperty">
+		<![CDATA[INSERT INTO tbl_global_property (id,property_name,property_status,create_date,create_adminuser,sort,property_type,level_id,property_num) VALUES
+		(nextval('tbl_global_property'),#{property_name},#{property_status},now(),#{create_adminuser},#{sort},#{property_type},#{level_id},#{property_num})]]>
+	</insert>
+	
+	<update id="update" parameterType="globalProperty">
+		<![CDATA[update tbl_global_property ]]>
+		<set>
+			<if test="property_name != null" >
+	        	property_name = #{property_name},
+	    	</if>
+	    	<if test="level_id != null" >
+	        	level_id = #{level_id},
+	    	</if>
+	    	<if test="property_num != null" >
+	        	property_num = #{property_num},
+	    	</if>
+	    	<if test="property_type != null" >
+	        	property_type = #{property_type},
+	    	</if>
+	    	<if test="property_status != null" >
+	        	property_status = #{property_status},
+	    	</if>
+	    	<if test="sort != null" >
+	        	sort = #{sort},
+	    	</if>
+	    	<![CDATA[
+	    		update_adminuser = #{update_adminuser},
+	    		update_date = NOW()
+	    	 ]]>
+		</set>
+		<where>
+			<![CDATA[ id = #{id}]]>
+		</where>
+	</update>
+	
+	<select id="sortcount" resultType="int" parameterType="globalProperty">
+		<![CDATA[ SELECT COUNT(*) FROM tbl_global_property where sort = #{sort} ]]>
+	</select>
+	
+	<delete id="delete" parameterType="globalProperty">
+		<![CDATA[delete from tbl_global_property where id=#{id} ]]>
+	</delete>
+</mapper>

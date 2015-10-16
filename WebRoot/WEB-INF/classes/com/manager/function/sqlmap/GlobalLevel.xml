@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="GlobalLevelSql"> 
+	<resultMap type="globalLevel" id="GlobalLevel">
+		<result property="id" column="id"/>      
+		<result property="level_content" column="level_content"/>    
+		<result property="level_summary" column="level_summary"/> 
+		<result property="sort" column="sort"/>  
+		<result property="level_status" column="level_status"/> 
+		<result property="create_date" column="create_date" jdbcType="DATE"/>  
+		<result property="create_adminuser" column="create_adminuser"/> 
+		<result property="update_date" column="update_date" jdbcType="DATE"/>
+		<result property="update_adminuser" column="update_adminuser"/>
+	</resultMap>
+	
+	<select id="get" resultMap="GlobalLevel" parameterType="globalLevel">
+		<![CDATA[ SELECT id,level_content,level_summary,sort,level_status,DATE_FORMAT(create_date,'%Y-%m-%d %H:%i:%s') create_date,create_adminuser,DATE_FORMAT(update_date,'%Y-%m-%d %H:%i:%s') update_date,update_adminuser FROM tbl_global_level ORDER BY sort,create_date DESC]]>
+	</select>
+	
+	<select id="get1" resultMap="GlobalLevel" parameterType="globalLevel">
+		<![CDATA[ SELECT id,level_content,level_summary,sort,level_status,DATE_FORMAT(create_date,'%Y-%m-%d %H:%i:%s') create_date,create_adminuser,DATE_FORMAT(update_date,'%Y-%m-%d %H:%i:%s') update_date,update_adminuser FROM tbl_global_level where level_status = 1 ORDER BY create_date]]>
+	</select>
+	
+	<select id="getNoAbolish" resultMap="GlobalLevel">
+		<![CDATA[ SELECT id,level_content,level_status FROM tbl_global_level where level_status<>9 ORDER BY id]]>
+	</select>
+	
+	<select id="get_select_peoperty0" resultMap="GlobalLevel">
+		<![CDATA[
+		SELECT id property_id,property_name FROM tbl_global_property WHERE property_status<>9
+		]]>
+	</select>
+	
+	<select id="get_select_hobby0" resultMap="GlobalLevel">
+		<![CDATA[
+			SELECT id hobby_id,hobby_content FROM tbl_global_hobby WHERE hobby_status<>9
+		]]>
+	</select>
+	
+	<select id="get_select_hobby1" resultMap="GlobalLevel">
+		<![CDATA[
+		SELECT a.id id,a.level_content level_content,c.hobby_id hobby_id,c.hobby_content hobby_content 
+		FROM tbl_global_level a
+		LEFT JOIN 
+		(SELECT level_id,hobby_id,hobby_content 
+		FROM tbl_global_hobby_attr  LEFT JOIN tbl_global_hobby  
+		ON tbl_global_hobby_attr.hobby_id=tbl_global_hobby.id 
+		WHERE tbl_global_hobby.hobby_status<>9) c ON a.id=c.level_id
+		WHERE a.level_status<>9  
+		]]>
+	</select>
+	
+	<select id="get_select_peoperty1" resultMap="GlobalLevel">
+		<![CDATA[
+		SELECT a.id id,a.level_content level_content,b.peoperty_id property_id,
+		b.property_name property_name
+		FROM tbl_global_level a
+		LEFT JOIN 
+		(SELECT level_id,peoperty_id,property_name 
+		FROM tbl_global_property_attr  LEFT JOIN tbl_global_property  
+		ON tbl_global_property_attr.peoperty_id=tbl_global_property.id
+		WHERE tbl_global_property.property_status<>9) b ON a.id=b.level_id
+		WHERE a.level_status<>9  
+		]]>
+	</select>
+	
+	<select id="get_div_hobby" resultMap="GlobalLevel" parameterType="java.util.List">
+		<![CDATA[
+		SELECT c.hobby_id hobby_id,c.hobby_content hobby_content 
+		FROM tbl_global_level a
+		LEFT JOIN 
+		(SELECT level_id,hobby_id,hobby_content 
+		FROM tbl_global_hobby_attr  LEFT JOIN tbl_global_hobby  
+		ON tbl_global_hobby_attr.hobby_id=tbl_global_hobby.id 
+		WHERE tbl_global_hobby.hobby_status<>9) c ON a.id=c.level_id
+		WHERE a.level_status<>9 AND a.id in
+		]]>
+		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+			${item.id} 
+		</foreach>
+		<![CDATA[
+		GROUP BY c.hobby_id,c.hobby_content
+		]]>
+	</select>
+	
+	<select id="get_div_peoperty" resultMap="GlobalLevel" parameterType="java.util.List">
+		<![CDATA[
+		SELECT b.id property_id,b.property_name property_name
+		FROM tbl_global_level a
+		LEFT JOIN  tbl_global_property b ON a.id=b.level_id
+		WHERE a.level_status<>9 AND b.property_status<>9 AND a.id IN
+		]]>
+		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+			${item.id} 
+		</foreach>
+		<![CDATA[
+		GROUP BY b.id,b.property_name
+		]]>
+	</select>
+	
+	<select id="count" resultType="int" parameterType="globalLevel">
+		<![CDATA[ SELECT COUNT(*) FROM tbl_global_level ]]>
+	</select>
+	
+	<select id="sortcount" resultType="int" parameterType="globalLevel">
+		<![CDATA[ SELECT COUNT(*) FROM tbl_global_level where sort = #{sort} ]]>
+	</select>
+	
+	<select id="getId" resultType="int" parameterType="globalLevel">
+		<![CDATA[ SELECT nextval('tbl_global_level') ]]>
+	</select>
+	
+	<select id="getOne" resultMap="GlobalLevel" parameterType="globalLevel">
+		<![CDATA[ SELECT id,level_content,level_summary,sort,level_status,DATE_FORMAT(create_date,'%Y-%m-%d %H:%i:%s') create_date,create_adminuser,DATE_FORMAT(update_date,'%Y-%m-%d %H:%i:%s') update_date,update_adminuser FROM tbl_global_level where id=#{id}]]>
+	</select>
+	
+	<insert id="add" parameterType="globalLevel">
+		<![CDATA[INSERT INTO tbl_global_level (id,level_content,level_summary,sort,level_status,create_date,create_adminuser) VALUES
+		(nextval('tbl_global_level'),#{level_content},#{level_summary},#{sort},#{level_status},now(),#{create_adminuser})]]>
+	</insert>
+	
+	<update id="update" parameterType="globalLevel">
+		<![CDATA[update tbl_global_level ]]>
+		<set>
+			<if test="level_content != null" >
+	        	level_content = #{level_content},
+	    	</if>
+	    	<if test="level_summary != null" >
+	        	level_summary = #{level_summary},
+	    	</if>
+	    	<if test="sort != null" >
+	        	sort = #{sort},
+	    	</if>
+	    	<if test="level_status != null" >
+	        	level_status = #{level_status},
+	    	</if>
+	    	<![CDATA[
+	    		update_adminuser = #{update_adminuser},
+	    		update_date = NOW()
+	    	 ]]>
+		</set>
+		<where>
+			<![CDATA[ id = #{id}]]>
+		</where>
+	</update>
+	
+	<delete id="delete" parameterType="globalLevel">
+		<![CDATA[delete from tbl_global_level where id=#{id} ]]>
+	</delete>
+	
+</mapper>

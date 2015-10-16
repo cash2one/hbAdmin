@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="AdminRoleSql"> 
+	<resultMap type="adminRole" id="AdminRole">
+		<result property="roleId" column="role_id"/>      
+		<result property="roleName" column="role_name"/>    
+		<result property="createAdmin" column="create_admin"/> 
+		<result property="createDate" column="create_date"  jdbcType="DATE"/>  
+		<result property="modifyAdmin" column="modify_admin"/> 
+		<result property="modifyDate" column="modify_date" />  
+		<result property="roleState" column="role_state"/> 
+	</resultMap>
+	<insert id="add" parameterType="adminRole">
+		<![CDATA[insert into tbl_admin_role (role_id, role_name, create_admin,role_state)
+			values (#{roleId}, #{roleName}, #{createAdmin}, #{roleState})
+		]]>
+	</insert>
+	<update id="update" parameterType="adminRole">
+		<![CDATA[update tbl_admin_role ]]>
+		<set>
+			<![CDATA[modify_date=NOW(),]]>
+			<if test="roleName!=null and ''!=roleName">
+				<![CDATA[role_name=#{roleName},]]>
+			</if>
+			<if test="roleState!=null and ''!=roleState">
+				<![CDATA[role_state=#{roleState},]]>
+			</if>
+			<if test="modifyAdmin!=null and ''!=modifyAdmin">
+				<![CDATA[modify_admin=#{modifyAdmin},]]>
+			</if>
+		</set>
+		<![CDATA[ where role_id=#{roleId}]]>
+	</update>
+	<delete id="delete" parameterType="String">
+		<![CDATA[delete from tbl_admin_role where role_id=#{roleId}]]>
+	</delete>
+	<select id="get" parameterType="adminRole" resultMap="AdminRole">
+		<![CDATA[select role_id,role_name,create_admin,date_format(create_date,'%Y-%m-%d %H:%i:%s') create_date,modify_admin,
+				date_format(modify_date,'%Y-%m-%d %H:%i:%s') modify_date,role_state from tbl_admin_role]]>
+		<where>
+			<if test="roleId!=null and ''!=roleId">
+				<![CDATA[and role_id=#{roleId}]]>
+			</if>
+			<if test="roleName!=null and ''!=roleName">
+				<![CDATA[and role_name=#{roleName}]]>
+			</if>
+			<if test="createAdmin!=null and ''!=createAdmin">
+				<![CDATA[and create_admin=#{createAdmin}]]>
+			</if>
+			<if test="createDate!=null and ''!=createDate">
+				<![CDATA[and create_date=str_to_date(#{createDate},'yyyy-mm-dd')]]>
+			</if>
+			<if test="roleState!=null and ''!=roleState">
+				<![CDATA[and role_state=#{roleState}]]>
+			</if>
+		</where>
+		<![CDATA[ order by role_id desc]]>
+	</select>
+	
+	<select id="exp" parameterType="adminRole" resultType="java.util.HashMap">
+		<![CDATA[select role_id,role_name,create_admin,date_format(create_date,'%Y-%m-%d %H:%i:%s') create_date,modify_admin,
+				date_format(modify_date,'%Y-%m-%d %H:%i:%s') modify_date,
+				(case when role_state='0' then '停用' when role_state='1' then '启用' end) "role_state" from tbl_admin_role]]>
+		<where>
+			<if test="roleId!=null and ''!=roleId">
+				<![CDATA[and role_id=#{roleId}]]>
+			</if>
+			<if test="roleName!=null and ''!=roleName">
+				<![CDATA[and role_name=#{roleName}]]>
+			</if>
+			<if test="createAdmin!=null and ''!=createAdmin">
+				<![CDATA[and create_admin=#{createAdmin}]]>
+			</if>
+			<if test="createDate!=null and ''!=createDate">
+				<![CDATA[and create_date=str_to_date(#{createDate},'yyyy-mm-dd')]]>
+			</if>
+			<if test="roleState!=null and ''!=roleState">
+				<![CDATA[and role_state=#{roleState}]]>
+			</if>
+		</where>
+		<![CDATA[ order by role_id desc]]>
+	</select>
+	
+	<select id="count" parameterType="adminRole" resultType="int">
+		<![CDATA[select count(*) from tbl_admin_role]]>
+		<where>
+			<if test="roleId!=null and ''!=roleId">
+				<![CDATA[and role_id=#{roleId}]]>
+			</if>
+			<if test="roleName!=null and ''!=roleName">
+				<![CDATA[and role_name=#{roleName}]]>
+			</if>
+			<if test="createAdmin!=null and ''!=createAdmin">
+				<![CDATA[and create_admin=#{createAdmin}]]>
+			</if>
+			<if test="createDate!=null and ''!=createDate">
+				<![CDATA[and create_date=str_to_date(#{createDate},'yyyy-mm-dd')]]>
+			</if>
+			<if test="roleState!=null and ''!=roleState">
+				<![CDATA[and role_state=#{roleState}]]>
+			</if>
+		</where>
+	</select>
+	
+	<select id="maxroleid" resultType="int">
+		<![CDATA[select max(role_id) from tbl_admin_role]]>
+	</select>
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<!-- 
+		A-B-C
+		前面的A代表语言类型: 1/2/3 1:英文 2:English 3：繁体中文
+		中间的B代表信息类型: 1/2/3 1:正确信息 2:错误信息 3:返回值信息 4:系统
+		后面的C代表信息内容: 保留1000内的信息 表示系统固定标签
+	-->
+	<!-- 英文版本 -->
+	<!-- 提示信息 预留200个 -->
+	<entry key="1-4-200"><![CDATA[Default]]></entry>
+	<entry key="1-4-201"><![CDATA[Concern]]></entry>
+	<entry key="1-4-202"><![CDATA[Price]]></entry>
+	<entry key="1-4-203"><![CDATA[Building Time]]></entry>
+	
+	<!-- 中文版本 -->
+	<!-- 提示信息 预留100个 -->
+	<entry key="2-4-000"><![CDATA[接口异常]]></entry>
+	<entry key="2-4-200"><![CDATA[API版本号不正确]]></entry>
+	<entry key="2-4-201"><![CDATA[appid不存在]]></entry>
+	<entry key="2-4-202"><![CDATA[签名不正确]]></entry>
+	<entry key="2-4-203"><![CDATA[参数不符合规则]]></entry>
+	<entry key="2-4-204"><![CDATA[注册成功]]></entry>
+	<entry key="2-4-205"><![CDATA[您注册的账户已经存在。如果已经注册该账户，请使用该账户登录；或者重新选择一个用户名进行注册。]]></entry>
+	<entry key="2-4-206"><![CDATA[登录成功]]></entry>
+	<entry key="2-4-207"><![CDATA[登录失败，请检查账号或者密码是否输入错误。如未注册，请先注册该账户，再使用登录功能。]]></entry>
+	<entry key="2-4-208"><![CDATA[uid不能为空]]></entry>
+	<entry key="2-4-209"><![CDATA[昵称不能为空]]></entry>
+	<entry key="2-4-210"><![CDATA[type不能为空]]></entry>
+	<entry key="2-4-211"><![CDATA[baby_id不能为空]]></entry>
+	<entry key="2-4-212"><![CDATA[type类型不存在]]></entry>
+	<entry key="2-4-213"><![CDATA[未获取到数据]]></entry>
+	<entry key="2-4-214"><![CDATA[获取成功]]></entry>
+	<entry key="2-4-215"><![CDATA[学习计划未完成]]></entry>
+	<entry key="2-4-216"><![CDATA[您已完成所有课程]]></entry>
+	<entry key="2-4-217"><![CDATA[id不能为空]]></entry>
+	<entry key="2-4-218"><![CDATA[spend_minute不能为空]]></entry>
+	<entry key="2-4-219"><![CDATA[更新成功]]></entry>
+	<entry key="2-4-220"><![CDATA[该Baby还未生成阅读计划]]></entry>
+	<entry key="2-4-221"><![CDATA[tbl_weekday超过配置]]></entry>
+	<entry key="2-4-222"><![CDATA[search_key不能为空]]></entry>
+	<entry key="2-4-223"><![CDATA[user_tel不能为空]]></entry>
+	<entry key="2-4-224"><![CDATA[user_address不能为空]]></entry>
+	<entry key="2-4-225"><![CDATA[user_truename不能为空]]></entry>
+	<entry key="2-4-226"><![CDATA[点赞成功]]></entry>
+	<entry key="2-4-227"><![CDATA[该资源已经看过了]]></entry>
+	<entry key="2-4-228"><![CDATA[上传图片失败]]></entry>
+	<entry key="2-4-229"><![CDATA[头像更新成功]]></entry>
+	<entry key="2-4-230"><![CDATA[发布成功]]></entry>
+	<entry key="2-4-231"><![CDATA[该帖子不存在]]></entry>
+	<entry key="2-4-232"><![CDATA[清空点赞成功]]></entry>
+	<entry key="2-4-233"><![CDATA[该资源您已点赞]]></entry>
+	<entry key="2-4-234"><![CDATA[回复成功]]></entry>
+	<entry key="2-4-235"><![CDATA[取消点赞成功]]></entry>
+	<entry key="2-4-236"><![CDATA[baby删除成功]]></entry>
+	<entry key="2-4-237"><![CDATA[重置密码邮件发送成功,请到邮箱查看邮件！]]></entry>
+	<entry key="2-4-238"><![CDATA[邮件发送失败,请检查邮箱地址是否正确！]]></entry>
+	<entry key="2-4-239"><![CDATA[邮件不能为空]]></entry>
+	<entry key="2-4-240"><![CDATA[密码不能为空]]></entry>
+	<entry key="2-4-241"><![CDATA[该邮箱帐号不存在]]></entry>
+	<entry key="2-4-242"><![CDATA[密码重置成功]]></entry>
+</properties>

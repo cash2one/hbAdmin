@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="ResourceInfoSql"> 
+	<resultMap type="resourceInfo" id="ResourceInfo">
+		<result property="id" column="id"/>   
+		<result property="resource_id" column="resource_id"/>   
+		<result property="level_id" column="level_id"/>   
+		<result property="language_level" column="language_level"/>   
+		<result property="property_id" column="property_id"/>   
+		<result property="resource_url" column="resource_url"/>   
+		<result property="resource_lyrics" column="resource_lyrics"/>    
+		<result property="create_date" column="create_date" jdbcType="DATE"/>  
+		<result property="create_adminuser" column="create_adminuser"/> 
+		<result property="update_date" column="update_date" jdbcType="DATE"/>
+		<result property="update_adminuser" column="update_adminuser"/>
+		<result property="resource_type" column="resource_type"/>
+		<result property="resource_info_type" column="resource_info_type"/>
+		<result property="resource_sort" column="resource_sort"/>
+		<result property="baby_id" column="baby_id"/>
+	</resultMap>
+	
+	<select id="get" resultMap="ResourceInfo" parameterType="resourceInfo">
+		<![CDATA[select id,resource_id,set_number,level_id,property_id,
+		property_id,resource_url,resource_lyrics,
+		date_format(create_date,'%Y-%m-%d %H:%i:%s') create_date,create_adminuser,
+		date_format(update_date,'%Y-%m-%d %H:%i:%s') update_date,update_adminuser,
+		resource_type,resource_info_type,resource_sort
+		from tbl_resource_info ]]>
+		<where>
+			<![CDATA[ resource_info_type=4 ]]>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="resource_id!=null and ''!=resource_id">
+				<![CDATA[  and resource_id=#{resource_id}]]>
+			</if>
+			<if test="resource_type!=null and ''!=resource_type">
+				<![CDATA[  and resource_type=#{resource_type}]]>
+			</if>
+			<if test="resource_sort!=null and ''!=resource_sort">
+				<![CDATA[  and resource_sort=#{resource_sort}]]>
+			</if>
+			<if test="set_number!=null and ''!=set_number">
+				<![CDATA[  and set_number=#{set_number}]]>
+			</if>
+			<if test="level_id!=null and ''!=level_id">
+				<![CDATA[  and level_id=#{level_id}]]>
+			</if>
+			<if test="language_level!=null and ''!=language_level">
+				<![CDATA[  and language_level=#{language_level}]]>
+			</if>
+			<if test="property_id!=null and ''!=property_id">
+				<![CDATA[  and property_id=#{property_id}]]>
+			</if>
+			<if test="resource_sort!=null and ''!=resource_sort">
+				<![CDATA[  and resource_sort=#{resource_sort}]]>
+			</if>
+		</where>
+		<![CDATA[ order by id desc]]>
+	</select>
+	
+	<select id="publicresource" resultMap="ResourceInfo" parameterType="resourceInfo">
+		<![CDATA[SELECT a.id,a.resource_id,a.set_number,a.resource_lyrics,a.resource_type,a.resource_url,b1.property_id,b2.level_id FROM 
+			(SELECT * FROM `tbl_resource_info` WHERE resource_info_type=4) a
+			INNER JOIN 
+			(SELECT resource_id,property_id FROM tbl_resource_info WHERE property_id IN (SELECT property_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY property_id )) b1 ON a.resource_id=b1.resource_id 
+			INNER JOIN 
+			(SELECT resource_id,level_id FROM tbl_resource_info WHERE level_id=(SELECT level_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY level_id ) ) b2 ON a.resource_id=b2.resource_id  WHERE a.resource_id = #{resource_id}  GROUP BY a.id ORDER BY a.id
+			]]>
+	</select>
+	
+	<select id="publicresource1" resultMap="ResourceInfo" parameterType="resourceInfo">
+		<![CDATA[SELECT a.id,a.resource_id,a.set_number,a.resource_lyrics,a.resource_type,a.resource_url,b1.property_id,b2.level_id,a.resource_info_type,a.property_id FROM 
+			(SELECT * FROM `tbl_resource_info` WHERE resource_info_type in(2,4)) a
+			INNER JOIN 
+			(SELECT resource_id,property_id FROM tbl_resource_info WHERE property_id IN (SELECT property_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY property_id )) b1 ON a.resource_id=b1.resource_id 
+			INNER JOIN 
+			(SELECT resource_id,level_id FROM tbl_resource_info WHERE level_id=(SELECT level_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY level_id ) ) b2 ON a.resource_id=b2.resource_id  WHERE a.resource_id = #{resource_id}  GROUP BY a.id ORDER BY a.id
+			]]>
+	</select>
+	
+	<select id="findByResourceId" resultMap="ResourceInfo" parameterType="resourceInfo">
+		<![CDATA[ SELECT set_number,resource_lyrics,resource_type,resource_url FROM `tbl_resource_info` WHERE resource_info_type=4 and resource_id = #{resource_id} ]]>
+	</select>
+	
+	<select id="findPropertyId" resultMap="ResourceInfo" parameterType="resourceInfo">
+		<![CDATA[ SELECT a.id,a.resource_id,a.set_number,a.resource_lyrics,a.resource_type,a.resource_url,a.resource_info_type,a.property_id FROM tbl_resource_info a WHERE a.resource_info_type = 2 AND a.resource_id = #{resource_id} ]]>
+	</select>
+	
+	<select id="findByResourceId1" resultMap="ResourceInfo" parameterType="resourceInfo">
+		<![CDATA[ SELECT set_number,resource_lyrics,resource_type,resource_url FROM `tbl_resource_info` WHERE resource_info_type =4 and resource_type = 2 and resource_id = #{resource_id} ]]>
+	</select>
+	
+	<select id="get2" resultMap="ResourceInfo" parameterType="resourceInfo">
+		<![CDATA[select id,resource_id,level_id,language_level,property_id from tbl_resource_info ]]>
+		<where>
+			<![CDATA[ resource_info_type<>4  ]]>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="resource_id!=null and ''!=resource_id">
+				<![CDATA[  and resource_id=#{resource_id}]]>
+			</if>
+		</where>
+		<![CDATA[ order by id desc]]>
+	</select>
+	
+	
+	<select id="count" resultType="int" parameterType="resourceInfo">
+		<![CDATA[select count(*) from tbl_resource_info]]>
+		<where>
+			<![CDATA[ resource_info_type=4 ]]>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="resource_id!=null and ''!=resource_id">
+				<![CDATA[  and resource_id=#{resource_id}]]>
+			</if>
+			<if test="resource_info_type!=null and ''!=resource_info_type">
+				<![CDATA[  and resource_info_type=#{resource_info_type}]]>
+			</if>
+			<if test="resource_type!=null and ''!=resource_type">
+				<![CDATA[  and resource_type=#{resource_type}]]>
+			</if>
+			<if test="resource_sort!=null and ''!=resource_sort">
+				<![CDATA[  and resource_sort=#{resource_sort}]]>
+			</if>
+			<if test="set_number!=null and ''!=set_number">
+				<![CDATA[  and set_number=#{set_number}]]>
+			</if>
+			<if test="level_id!=null and ''!=level_id">
+				<![CDATA[  and level_id=#{level_id}]]>
+			</if>
+			<if test="language_level!=null and ''!=language_level">
+				<![CDATA[  and language_level=#{language_level}]]>
+			</if>
+			<if test="property_id!=null and ''!=property_id">
+				<![CDATA[  and property_id=#{property_id}]]>
+			</if>
+			<if test="resource_sort!=null and ''!=resource_sort">
+				<![CDATA[  and resource_sort=#{resource_sort}]]>
+			</if>
+		</where>
+	</select>
+	
+	<select id="get_check_info" resultMap="ResourceInfo" parameterType="resourceInfo">
+		<![CDATA[SELECT id,resource_type FROM tbl_resource_info WHERE resource_info_type='4' AND resource_id=#{resource_id}]]>
+	</select>
+	
+	<update id="update" parameterType="resourceInfo">
+		<![CDATA[update tbl_resource_info set 
+				resource_id = #{resource_id},
+				set_number = #{set_number},
+				level_id = #{level_id},
+				property_id = #{property_id},
+				language_level = #{language_level},
+				resource_url = #{resource_url},
+				resource_lyrics = #{resource_lyrics},
+				update_date = now(),
+				update_adminuser = #{update_adminuser},
+				resource_type=#{resource_type},
+				resource_info_type=#{resource_info_type},
+				resource_sort=#{resource_sort}
+				where id=#{id}]]>
+	</update>
+	
+	<delete id="delete" parameterType="resourceInfo">
+		<![CDATA[delete from tbl_resource_info where id=#{id} ]]>
+	</delete>
+	
+	<delete id="delete2" parameterType="resourceInfo">
+		<![CDATA[delete from tbl_resource_info where resource_id=#{resource_id}  ]]>
+		<if test="level_id!=null and ''!=level_id">
+			<![CDATA[  and level_id  is not null]]>
+		</if>
+		<if test="language_level!=null and ''!=language_level">
+			<![CDATA[  and language_level is not null]]>
+		</if>
+		<if test="property_id!=null and ''!=property_id">
+			<![CDATA[  and property_id is not null]]>
+		</if>
+	</delete>
+	<delete id="delete_by_resource_id"  parameterType="resourceInfo">
+		<![CDATA[delete from tbl_resource_info where resource_id=#{resource_id}]]>
+	</delete>
+	
+	<delete id="batch_delete_1" parameterType="java.util.List">
+		<![CDATA[delete from tbl_resource_info where id in ]]>
+		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+			${item.id} 
+		</foreach>
+	</delete>
+	
+	<insert id="batch_insert_1" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			<![CDATA[insert into tbl_resource_info(id,resource_id,level_id,create_date,create_adminuser,resource_info_type) 
+			values (nextval('tbl_resource_info'),${item.resource_id},${item.level_id},
+			now(),'${item.create_adminuser}',${item.resource_info_type})]]>
+		</foreach>
+	</insert>
+	<insert id="batch_insert_2" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			<![CDATA[insert into tbl_resource_info(id,resource_id,property_id,create_date,create_adminuser,resource_info_type) 
+			values (nextval('tbl_resource_info'),${item.resource_id},${item.property_id},
+			now(),'${item.create_adminuser}',${item.resource_info_type})]]>
+		</foreach>
+	</insert>
+	<insert id="batch_insert_3" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			<![CDATA[insert into tbl_resource_info(id,resource_id,language_level,create_date,create_adminuser,resource_info_type) 
+			values (nextval('tbl_resource_info'),${item.resource_id},
+			${item.language_level},now(),'${item.create_adminuser}',${item.resource_info_type})]]>
+		</foreach>
+	</insert>
+	
+	<insert id="batch_insert_4" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			<![CDATA[insert into tbl_resource_info(
+			id,resource_id,create_date,create_adminuser,
+			resource_url,resource_type,resource_info_type,resource_sort) 
+			values (nextval('tbl_resource_info'),${item.resource_id},now(),
+			'${item.create_adminuser}','${item.resource_url}',
+			'${item.resource_type}','${item.resource_info_type}','${item.resource_sort}'
+			)]]>
+		</foreach>
+	</insert>
+	
+	<insert id="insert" parameterType="resourceInfo">
+		<![CDATA[insert into tbl_resource_info(id,resource_id,set_number,level_id,property_id,
+		language_level,resource_url,resource_lyrics,create_date,create_adminuser,
+		resource_type,resource_info_type,resource_sort) 
+		values (nextval('tbl_resource_info'),#{resource_id},#{set_number},#{level_id},#{property_id},
+		#{language_level},#{resource_url},#{resource_lyrics},now(),#{create_adminuser},
+		#{resource_type},#{resource_info_type},#{resource_sort})]]>
+	</insert>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SearchLogsSql"> 
+	<resultMap type="searchLogs" id="SearchLogs">
+		<result property="id" column="id"/>   
+		<result property="user_id" column="user_id"/>   
+		<result property="search_value" column="search_value"/>   
+		<result property="search_date" column="search_date" jdbcType="DATE"/>  
+		<result property="search_ip" column="search_ip"/> 
+		<result property="startDate" column="search_date" jdbcType="DATE"/>
+		<result property="endDate" column="search_date" jdbcType="DATE"/>
+	</resultMap>
+	
+	<insert id="add" parameterType="searchLogs"> 
+		<![CDATA[INSERT INTO tbl_search_logs (id,user_id,search_value,search_date,search_ip) VALUES (nextval('tbl_search_logs'),#{user_id},#{search_value},now(),#{search_ip})]]>
+	</insert>
+	
+	<select id="get" resultMap="SearchLogs" parameterType="searchLogs">
+		<![CDATA[select id,user_id,search_value,date_format(search_date,'%Y-%m-%d %H:%i:%s') search_date,
+		search_ip from tbl_search_logs ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="user_id!=null and ''!=user_id">
+				<![CDATA[  and user_id=#{user_id}]]>
+			</if>
+			<if test="search_value!=null and ''!=search_value">
+				<![CDATA[  and search_value=#{search_value}]]>
+			</if>
+			<if test="search_ip!=null and ''!=search_ip">
+				<![CDATA[  and search_ip=#{search_ip}]]>
+			</if>
+			<if test="startDate!=null and ''!=startDate">
+	    		<![CDATA[ and search_date>str_to_date(#{startDate},'%Y-%m-%d %H:%i:%s')]]>
+	    	</if>
+	    	<if test="endDate!=null and ''!=endDate">
+	    		<![CDATA[ and search_date<=str_to_date(#{endDate},'%Y-%m-%d %H:%i:%s')]]>
+	    	</if>
+		</where>
+		<![CDATA[ order by id desc]]>
+	</select>
+	
+	<select id="count" resultType="int" parameterType="searchLogs">
+		<![CDATA[select count(*) from tbl_search_logs ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="user_id!=null and ''!=user_id">
+				<![CDATA[  and user_id=#{user_id}]]>
+			</if>
+			<if test="search_value!=null and ''!=search_value">
+				<![CDATA[  and search_value=#{search_value}]]>
+			</if>
+			<if test="search_ip!=null and ''!=search_ip">
+				<![CDATA[  and search_ip=#{search_ip}]]>
+			</if>
+			<if test="startDate!=null and ''!=startDate">
+	    		<![CDATA[ and search_date>str_to_date(#{startDate},'%Y-%m-%d %H:%i:%s')]]>
+	    	</if>
+	    	<if test="endDate!=null and ''!=endDate">
+	    		<![CDATA[ and search_date<=str_to_date(#{endDate},'%Y-%m-%d %H:%i:%s')]]>
+	    	</if>
+		</where>
+	</select>
+</mapper>

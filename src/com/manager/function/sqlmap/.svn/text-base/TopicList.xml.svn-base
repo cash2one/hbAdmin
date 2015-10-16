@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="TopicListSql"> 
+	<resultMap type="topicList" id="TopicList">
+		<result property="id" column="id"/>                    
+		<result property="topic_typeId" column="topic_typeId"/>
+		<result property="title" column="title"/>              
+		<result property="content" column="content" typeHandler="com.manager.function.sqlmap.ConvertBlobTypeHandler"/>          
+		<result property="ip" column="ip"/>                    
+		<result property="ip_address" column="ip_address"/>    
+		<result property="uid" column="uid"/>                  
+		<result property="createtime" column="createtime"/>    
+		<result property="countback" column="countback"/>      
+		<result property="label" column="label"/>              
+		<result property="countbrowse" column="countbrowse"/>  
+		<result property="affix" column="affix"/>              
+		<result property="status" column="status"/>  
+		<result property="type_name" column="type_name"/> 
+		<result property="user_avatar" column="user_avatar"/>
+		<result property="user_nickname" column="user_nickname"/>
+		<result property="img_size" column="img_size"/>
+		
+	</resultMap>
+	
+	<select id="get" resultMap="TopicList" parameterType="topicList">
+		<![CDATA[select a.id id,a.topic_typeId topic_typeId,a.title title,a.content content,a.ip ip,a.ip_address ip_address,
+			a.uid uid,date_format(a.createtime,'%Y-%m-%d %H:%i:%s') createtime,a.countback countback,a.label label,a.countbrowse countbrowse,
+			a.affix affix,a.status status,a.img_size img_size,b.name type_name from tbl_topic_list a left join tbl_topic_type b on a.topic_typeId=b.id ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  a.id=#{id}]]>
+			</if>
+			<if test="title!=null and ''!=title">
+				<![CDATA[  and 1=INSTR(a.title,#{title})]]>
+			</if>
+			<if test="content!=null and ''!=content">
+				<![CDATA[  and 1=INSTR(a.content,#{content})]]>
+			</if>
+			<if test="ip!=null and ''!=ip">
+				<![CDATA[  and a.ip=#{ip}]]>
+			</if>
+			<if test="uid!=null and ''!=uid">
+				<![CDATA[  and a.uid=#{uid}]]>
+			</if>
+			<if test="label!=null and ''!=label">
+				<![CDATA[  and substring(label,#{label},1)=1  ]]>
+			</if>
+			<if test="status!=null and ''!=status">
+				<![CDATA[  and a.status=#{status}]]>
+			</if>
+			<if test="topic_typeId!=null and ''!=topic_typeId">
+				<![CDATA[  and a.topic_typeId=#{topic_typeId}]]>
+			</if>
+		</where>
+		<![CDATA[ order by id desc]]>
+	</select>
+	
+	<select id="getByType" resultMap="TopicList" parameterType="topicList">
+	<![CDATA[SELECT a.id id,a.topic_typeId topic_typeId,a.title title,a.ip ip,a.ip_address ip_address,
+			a.uid uid,DATE_FORMAT(a.createtime,'%Y-%m-%d %H:%i:%s') createtime,a.countback countback,a.label label,a.countbrowse countbrowse,
+			a.affix affix,a.status status,a.img_size img_size,b.user_avatar user_avatar,b.user_nickname user_nickname FROM tbl_topic_list a
+			LEFT JOIN 
+			(SELECT user_avatar,user_id,user_nickname FROM tbl_user) b ON b.user_id = a.uid
+			 WHERE a.topic_typeId = #{topic_typeId} and status = 1 ORDER by a.label DESC,a.createtime DESC ]]>
+	</select>
+	
+	<select id="findBabyId" resultMap="TopicList" parameterType="topicList">
+	<![CDATA[SELECT a.id id,a.topic_typeId topic_typeId,a.title title,a.ip ip,a.ip_address ip_address,
+			a.uid uid,DATE_FORMAT(a.createtime,'%Y-%m-%d %H:%i:%s') createtime,a.countback countback,a.label label,a.countbrowse countbrowse,
+			a.affix affix,a.status status,a.img_size img_size,b.user_avatar user_avatar,b.user_nickname user_nickname FROM tbl_topic_list a 
+			LEFT JOIN 
+			(SELECT user_avatar,user_id,user_nickname FROM tbl_user) b ON b.user_id = a.uid
+			 WHERE a.uid = #{uid} and status = 1 ORDER by a.createtime DESC ]]>
+	</select>
+	
+	<select id="findOne" resultMap="TopicList" parameterType="topicList">
+	<![CDATA[SELECT a.id id,a.topic_typeId topic_typeId,a.title title,a.content content,a.ip ip,a.ip_address ip_address,
+			a.uid uid,DATE_FORMAT(a.createtime,'%Y-%m-%d %H:%i:%s') createtime,a.countback countback,a.label label,a.countbrowse countbrowse,
+			a.affix affix,a.status status,a.img_size img_size,b.user_nickname user_nickname FROM tbl_topic_list a LEFT JOIN tbl_user b ON b.user_id = a.uid WHERE a.id = #{id}]]>
+	</select>
+	
+	<select id="count" resultType="int" parameterType="topicList">
+		<![CDATA[select count(*) from tbl_topic_list a left join tbl_topic_type b on a.topic_typeId=b.id ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  a.id=#{id}]]>
+			</if>
+			<if test="title!=null and ''!=title">
+				<![CDATA[  and 1=INSTR(a.title,#{title})]]>
+			</if>
+			<if test="content!=null and ''!=content">
+				<![CDATA[  and 1=INSTR(a.content,#{content})]]>
+			</if>
+			<if test="ip!=null and ''!=ip">
+				<![CDATA[  and a.ip=#{ip}]]>
+			</if>
+			<if test="uid!=null and ''!=uid">
+				<![CDATA[  and a.uid=#{uid}]]>
+			</if>
+			<if test="label!=null and ''!=label">
+				<![CDATA[  and substring(label,#{label},1)=1  ]]>
+			</if>
+			<if test="status!=null and ''!=status">
+				<![CDATA[  and a.status=#{status}]]>
+			</if>
+			<if test="topic_typeId!=null and ''!=topic_typeId">
+				<![CDATA[  and a.topic_typeId=#{topic_typeId}]]>
+			</if>
+		</where>
+	</select>
+	
+	
+	<update id="batchupdate_label"  parameterType="java.util.List">
+       <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+             <![CDATA[update tbl_topic_list]]>
+             <set>
+              <![CDATA[label=#{item.label}]]>
+             </set>
+            <![CDATA[ where id = ${item.id}]]>
+      </foreach>
+    </update>
+	
+	<update id="update" parameterType="topicList">
+		<![CDATA[update tbl_topic_list set 
+		topic_typeId=#{topic_typeId},
+		title=#{title},
+		content=#{content},
+		ip=#{ip},
+		ip_address=#{ip_address},
+		uid=#{uid},
+		createtime=STR_TO_DATE(#{createtime},'%Y-%m-%d %H:%i:%s'),
+		countback=#{countback},
+		label=#{label},
+		countbrowse=#{countbrowse},
+		affix=#{affix},
+		img_size=#{img_size},
+		status=#{status}
+		where id=#{id}]]>
+	</update>
+	
+	<update id="updatestatus" parameterType="topicList">
+		<![CDATA[update tbl_topic_list set status = #{status} where id=#{id}]]>
+	</update>
+	
+	<update id="updatelabel" parameterType="topicList">
+		<![CDATA[update tbl_topic_list set label = #{label} where id=#{id}]]>
+	</update>
+	
+	<update id="updateCountback" parameterType="topicList">
+		<![CDATA[update tbl_topic_list set countback = countback + 1 where id=#{id}]]>
+	</update>
+	
+	<update id="updateCountbrowse" parameterType="topicList">
+		<![CDATA[update tbl_topic_list set countbrowse = countbrowse + 1 where id=#{id}]]>
+	</update>
+	
+	<delete id="delete" parameterType="topicList">
+		<![CDATA[delete from tbl_topic_list where id=#{id} ]]>
+	</delete>
+	
+	<insert id="add"  parameterType="topicList">
+		<![CDATA[INSERT INTO tbl_topic_list (id,topic_typeId,title,content,ip,ip_address,uid,createtime,countback,label,countbrowse,affix,status,img_size) 
+VALUES(nextval('tbl_topic_list'),#{topic_typeId},#{title},#{content},#{ip},(SELECT address FROM tbl_ipdata WHERE #{ip} >= sip AND #{ip} <= eip ORDER BY sip DESC LIMIT 1),#{uid},now(),#{countback},#{label},#{countbrowse},#{affix},#{status},#{img_size})
+		]]>
+	</insert>
+	
+</mapper>

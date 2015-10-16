@@ -1,0 +1,34 @@
+9
+
+dir
+185
+https://192.168.0.210/svn/iread/trunk/hbAdmin/src/com
+https://192.168.0.210/svn/iread
+
+
+
+2015-09-22T07:42:22.885973Z
+185
+lhlei
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+5c08ae35-6d04-164f-aa44-81459c4af982
+
+provide
+dir
+
+manager
+dir
+

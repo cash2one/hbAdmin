@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="ScoreLogSql"> 
+	<resultMap type="scoreLog" id="ScoreLog">
+		<result property="id" column="id"/>   
+		<result property="user_id" column="user_id"/>   
+		<result property="get_score" column="get_score"/>  
+		<result property="get_date" column="get_date"/>  
+		<result property="score" column="score"/>   
+	</resultMap>
+	
+	<insert id="add" parameterType="scoreLog"> 
+		<![CDATA[INSERT INTO tbl_score_log(id,user_id,get_score,get_date,source)
+			VALUES (nextval('tbl_score_log'),#{user_id},#{get_score},now(),#{source})]]>
+	</insert>
+</mapper>

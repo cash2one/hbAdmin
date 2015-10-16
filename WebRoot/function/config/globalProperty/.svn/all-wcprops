@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/iread/!svn/ver/106/trunk/hbAdmin/WebRoot/function/config/globalProperty
+END
+globalProperty_update.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/iread/!svn/ver/106/trunk/hbAdmin/WebRoot/function/config/globalProperty/globalProperty_update.jsp
+END
+globalProperty_add.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/iread/!svn/ver/106/trunk/hbAdmin/WebRoot/function/config/globalProperty/globalProperty_add.jsp
+END
+globalProperty_list.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/iread/!svn/ver/106/trunk/hbAdmin/WebRoot/function/config/globalProperty/globalProperty_list.jsp
+END

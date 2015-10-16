@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="GlobalLanguageSql"> 
+	<resultMap id="GlobalLanguage" type="globalLanguage">  
+		<result property="id" column="id"/> 
+		<result property="lan_level_content" column="lan_level_content"/> 
+		<result property="lan_level_summary" column="lan_level_summary"/> 
+		<result property="create_date" column="create_date"/> 
+		<result property="create_adminuser" column="create_adminuser"/> 
+		<result property="update_date" column="update_date"/> 
+		<result property="update_adminuser" column="update_adminuser"/> 
+	</resultMap>
+	
+	<select id="get" resultMap="GlobalLanguage" parameterType="globalLanguage">
+		<![CDATA[select id,lan_level_content,lan_level_summary,date_format(create_date,'%Y-%m-%d %H:%i:%s') create_date,create_adminuser,
+		date_format(update_date,'%Y-%m-%d %H:%i:%s') update_date,update_adminuser from tbl_global_language ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="lan_level_content!=null and ''!=lan_level_content">
+				<![CDATA[  and lan_level_content=#{lan_level_content}]]>
+			</if>
+			<if test="lan_level_summary!=null and ''!=lan_level_summary">
+				<![CDATA[  and lan_level_summary=#{lan_level_summary}]]>
+			</if>
+		</where>
+		<![CDATA[ order by id desc]]>
+	</select>
+	
+	<select id="get2" resultMap="GlobalLanguage" parameterType="globalLanguage">
+		<![CDATA[select id,lan_level_content,lan_level_summary,date_format(create_date,'%Y-%m-%d %H:%i:%s') create_date,create_adminuser,
+		date_format(update_date,'%Y-%m-%d %H:%i:%s') update_date,update_adminuser from tbl_global_language ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="lan_level_content!=null and ''!=lan_level_content">
+				<![CDATA[  and lan_level_content=#{lan_level_content}]]>
+			</if>
+			<if test="lan_level_summary!=null and ''!=lan_level_summary">
+				<![CDATA[  and lan_level_summary=#{lan_level_summary}]]>
+			</if>
+		</where>
+		<![CDATA[ order by id ]]>
+	</select>
+	
+	<select id="getNoAbolish" resultMap="GlobalLanguage">
+		<![CDATA[select id,lan_level_content from tbl_global_language ]]>
+	</select>
+	
+	<select id="count" resultType="int" parameterType="globalLanguage">
+		<![CDATA[select count(*) from tbl_global_language]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="lan_level_content!=null and ''!=lan_level_content">
+				<![CDATA[  and lan_level_content=#{lan_level_content}]]>
+			</if>
+			<if test="lan_level_summary!=null and ''!=lan_level_summary">
+				<![CDATA[  and lan_level_summary=#{lan_level_summary}]]>
+			</if>
+		</where>
+	</select>
+	
+	<update id="update" parameterType="globalLanguage">
+		<![CDATA[update tbl_global_language set lan_level_content = #{lan_level_content},lan_level_summary = #{lan_level_summary},update_date = now(),update_adminuser=#{update_adminuser} where id=#{id}]]>
+	</update>
+	
+	<update id="updatestatus" parameterType="globalLanguage">
+		<![CDATA[update tbl_global_language set status=#{status} where id=#{id}]]>
+	</update>
+	
+	<delete id="delete" parameterType="globalLanguage">
+		<![CDATA[delete from tbl_global_language where id=#{id} ]]>
+	</delete>
+	
+	<insert id="insert" parameterType="globalLanguage">
+		<![CDATA[insert into tbl_global_language(id,lan_level_content,lan_level_summary,create_date,create_adminuser) 
+		values (nextval('tbl_global_language'),#{lan_level_content},#{lan_level_summary},now(),#{create_adminuser})]]>
+	</insert>
+</mapper>

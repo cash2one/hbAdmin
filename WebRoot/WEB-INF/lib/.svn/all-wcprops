@@ -1,0 +1,413 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/iread/!svn/ver/182/trunk/hbAdmin/WebRoot/WEB-INF/lib
+END
+urlrewritefilter-4.0.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/urlrewritefilter-4.0.3.jar
+END
+java_memcached-release_2.6.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/java_memcached-release_2.6.3.jar
+END
+spring-tx-3.1.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-tx-3.1.4.RELEASE.jar
+END
+jstl.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/jstl.jar
+END
+mail-plugin.jar
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/iread/!svn/ver/182/trunk/hbAdmin/WebRoot/WEB-INF/lib/mail-plugin.jar
+END
+jta.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/jta.jar
+END
+log4j.jar
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/log4j.jar
+END
+httpclient-4.3.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/httpclient-4.3.1.jar
+END
+persistence.jar
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/persistence.jar
+END
+commons-pool-1.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/commons-pool-1.5.6.jar
+END
+spring-data-redis-1.0.1.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-data-redis-1.0.1.RELEASE.jar
+END
+solr-solrj-4.10.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/solr-solrj-4.10.4.jar
+END
+jdom.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/jdom.jar
+END
+jedis-2.1.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/jedis-2.1.0.jar
+END
+commons-fileupload-1.2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/commons-fileupload-1.2.1.jar
+END
+aopalliance-1.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/aopalliance-1.0.jar
+END
+spring-core-3.1.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-core-3.1.4.RELEASE.jar
+END
+tomcat-redis-session-manager-1.2-tomcat-6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/tomcat-redis-session-manager-1.2-tomcat-6.jar
+END
+mysql-jdbc-bin.jar
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/mysql-jdbc-bin.jar
+END
+mybatis-3.1.1-javadoc.jar
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/mybatis-3.1.1-javadoc.jar
+END
+netty-all-5.0.0.Alpha1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/netty-all-5.0.0.Alpha1.jar
+END
+ehcache-1.5.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/ehcache-1.5.0.jar
+END
+json_simple-1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/json_simple-1.1.jar
+END
+mail.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/iread/!svn/ver/182/trunk/hbAdmin/WebRoot/WEB-INF/lib/mail.jar
+END
+poi-scratchpad-3.0.1-FINAL-20070705.jar
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/poi-scratchpad-3.0.1-FINAL-20070705.jar
+END
+mysql-connector-java-5.1.6-bin.jar
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/mysql-connector-java-5.1.6-bin.jar
+END
+mybatis-3.1.1-sources.jar
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/mybatis-3.1.1-sources.jar
+END
+httpcore-4.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/httpcore-4.3.jar
+END
+commons-logging-1.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/commons-logging-1.1.1.jar
+END
+spring-web-3.1.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-web-3.1.4.RELEASE.jar
+END
+spring-asm-3.1.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-asm-3.1.4.RELEASE.jar
+END
+activation.jar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/iread/!svn/ver/182/trunk/hbAdmin/WebRoot/WEB-INF/lib/activation.jar
+END
+spring-aspects.jar
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-aspects.jar
+END
+spring-webmvc-3.1.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-webmvc-3.1.4.RELEASE.jar
+END
+cglib-nodep-2.1_3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/cglib-nodep-2.1_3.jar
+END
+spring-context-3.1.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-context-3.1.4.RELEASE.jar
+END
+spring-beans-3.1.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-beans-3.1.4.RELEASE.jar
+END
+slf4j-log4j12-1.7.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/iread/!svn/ver/48/trunk/hbAdmin/WebRoot/WEB-INF/lib/slf4j-log4j12-1.7.7.jar
+END
+slf4j-simple-1.6.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/slf4j-simple-1.6.1.jar
+END
+jackson-mapper-asl-1.9.13.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/jackson-mapper-asl-1.9.13.jar
+END
+dom4j-1.6.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/dom4j-1.6.1.jar
+END
+spring-context-support-3.1.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-context-support-3.1.4.RELEASE.jar
+END
+commons-io-1.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/commons-io-1.4.jar
+END
+jackson-core-asl-1.9.13.jar
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/jackson-core-asl-1.9.13.jar
+END
+commons-collections-3.2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/commons-collections-3.2.1.jar
+END
+commons-httpclient-3.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/commons-httpclient-3.1.jar
+END
+ojdbc14.jar
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/ojdbc14.jar
+END
+json-lib-2.2.3-jdk15.jar
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/json-lib-2.2.3-jdk15.jar
+END
+standard.jar
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/standard.jar
+END
+aspectjweaver.jar
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/aspectjweaver.jar
+END
+mybatis-spring-1.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/mybatis-spring-1.1.1.jar
+END
+mybatis-3.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/mybatis-3.1.1.jar
+END
+spring-security-taglibs-3.0.5.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-security-taglibs-3.0.5.RELEASE.jar
+END
+poi-contrib-3.0.1-FINAL-20070705.jar
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/poi-contrib-3.0.1-FINAL-20070705.jar
+END
+poi-3.0.1-FINAL-20070705.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/poi-3.0.1-FINAL-20070705.jar
+END
+spring-orm-3.1.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-orm-3.1.4.RELEASE.jar
+END
+spring-expression-3.1.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-expression-3.1.4.RELEASE.jar
+END
+ezmorph-1.0.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/ezmorph-1.0.3.jar
+END
+commons-dbcp.jar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/commons-dbcp.jar
+END
+spring-jdbc-3.1.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-jdbc-3.1.4.RELEASE.jar
+END
+noggit-0.5.jar
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/noggit-0.5.jar
+END
+httpmime-4.3.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/httpmime-4.3.1.jar
+END
+antlr-2.7.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/antlr-2.7.6.jar
+END
+slf4j-api-1.6.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/slf4j-api-1.6.1.jar
+END
+commons-lang-2.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/commons-lang-2.3.jar
+END
+spring-aop-3.1.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/spring-aop-3.1.4.RELEASE.jar
+END
+commons-beanutils-1.7.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/commons-beanutils-1.7.0.jar
+END
+backport-util-concurrent.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/WEB-INF/lib/backport-util-concurrent.jar
+END

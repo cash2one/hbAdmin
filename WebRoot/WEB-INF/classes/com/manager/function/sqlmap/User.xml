@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="UserSql"> 
+	<resultMap type="user" id="User">
+		<result property="user_id" column="user_id"/>   
+		<result property="open_id" column="open_id"/>   
+		<result property="user_avatar" column="user_avatar"/>   
+		<result property="user_email" column="user_email"/>  
+		<result property="user_nickname" column="user_nickname"/> 
+		<result property="user_age" column="user_age"/>
+		<result property="user_title" column="user_title"/>
+		<result property="province_id" column="province_id"/>
+		<result property="city_id" column="city_id"/>
+		<result property="district_id" column="district_id"/>
+		<result property="user_status" column="user_status"/>
+		<result property="backup" column="backup"/>
+		<result property="user_pwd" column="user_pwd"/>
+		<result property="reg_date" column="reg_date"/>
+		<result property="reg_source" column="reg_source"/>
+		<result property="user_truename" column="user_truename"/>
+		<result property="user_address" column="user_address"/>
+		<result property="user_tel" column="user_tel"/>
+	</resultMap>
+	
+	<select id="statistics" resultMap="User" parameterType="user">
+		<![CDATA[SELECT DATE_FORMAT(reg_date,'%Y-%m-%d') reg_date,COUNT(*) cou FROM tbl_user
+		]]>
+		<where>
+			<if test="startDate!=null and ''!=startDate">
+	    		<![CDATA[ and reg_date>=str_to_date(#{startDate},'%Y-%m-%d')]]>
+	    	</if>
+	    	<if test="endDate!=null and ''!=endDate">
+	    		<![CDATA[ and reg_date<=str_to_date(#{endDate},'%Y-%m-%d')]]>
+	    	</if>
+		</where>
+		<![CDATA[ GROUP BY DATE_FORMAT(reg_date,'%Y-%m-%d') ORDER BY DATE_FORMAT(reg_date,'%Y-%m-%d') DESC]]>
+	</select>
+	
+	<select id="statistics_count" resultType="int" parameterType="user">
+		<![CDATA[select count(*) from (
+			SELECT DATE_FORMAT(reg_date,'%Y-%m-%d') reg_date,COUNT(*) cou FROM tbl_user
+			]]>
+		<where>
+			<if test="startDate!=null and ''!=startDate">
+	    		<![CDATA[ and reg_date>=str_to_date(#{startDate},'%Y-%m-%d')]]>
+	    	</if>
+	    	<if test="endDate!=null and ''!=endDate">
+	    		<![CDATA[ and reg_date<=str_to_date(#{endDate},'%Y-%m-%d')]]>
+	    	</if>
+		</where>
+		<![CDATA[ GROUP BY DATE_FORMAT(reg_date,'%Y-%m-%d') ) a ]]>
+	</select>
+	
+	<select id="get" resultMap="User" parameterType="user">
+		<![CDATA[select 
+			user_id, 
+			open_id, 
+			user_pwd,
+			user_avatar, 
+			user_email, 
+			user_nickname,
+			user_age, 
+			user_title, 
+			province_id,
+			city_id, 
+			district_id, 
+			user_status,
+			backup, 
+			reg_source,
+			user_truename, 
+			user_address, 
+			user_tel, 
+			DATE_FORMAT(reg_date,'%Y-%m-%d %H:%i:%s') reg_date  
+			from tbl_user ]]>
+		<where>
+			<if test="user_id!=null and ''!=user_id">
+	    		<![CDATA[ and user_id=#{user_id}]]>
+	    	</if>
+	    	<if test="open_id!=null and ''!=open_id">
+	    		<![CDATA[ and open_id=#{open_id}]]>
+	    	</if>
+	    	<if test="reg_source!=null and ''!=reg_source">
+	    		<![CDATA[ and reg_source=#{reg_source}]]>
+	    	</if>
+	    	<if test="user_email!=null and ''!=user_email">
+	    		<![CDATA[ and user_email=#{user_email}]]>
+	    	</if>
+	    	<if test="user_nickname!=null and ''!=user_nickname">
+	    		<![CDATA[ and user_nickname=#{user_nickname}]]>
+	    	</if>
+	    	<if test="min_age!=null and ''!=min_age">
+	    		<![CDATA[ and user_age>=#{min_age}]]>
+	    	</if>
+	    	<if test="max_age!=null and ''!=max_age">
+	    		<![CDATA[ and user_age<=#{max_age}]]>
+	    	</if>
+	    	<if test="user_title!=null and ''!=user_title">
+	    		<![CDATA[ and user_title=#{user_title}]]>
+	    	</if>
+	    	<if test="province_id!=null and ''!=province_id">
+	    		<![CDATA[ and province_id=#{province_id}]]>
+	    	</if>
+	    	<if test="city_id!=null and ''!=city_id">
+	    		<![CDATA[ and city_id=#{city_id}]]>
+	    	</if>
+	    	<if test="district_id!=null and ''!=district_id">
+	    		<![CDATA[ and district_id=#{district_id}]]>
+	    	</if>
+	    	<if test="user_status!=null and ''!=user_status">
+	    		<![CDATA[ and user_status=#{user_status}]]>
+	    	</if>
+	    	<if test="user_tel!=null and ''!=user_tel">
+	    		<![CDATA[ and user_tel=#{user_tel}]]>
+	    	</if>
+	    	<if test="user_truename!=null and ''!=user_truename">
+	    		<![CDATA[ and user_truename=#{user_truename}]]>
+	    	</if>
+	    	<if test="user_address!=null and ''!=user_address">
+	    		<![CDATA[ and user_address LIKE CONCAT('%',#{user_address},'%') ]]>
+	    	</if>
+	    	<if test="backup!=null and ''!=backup">
+	    		<![CDATA[ and backup LIKE CONCAT('%',#{backup},'%') ]]>
+	    	</if>
+	    	
+			<if test="startDate!=null and ''!=startDate">
+	    		<![CDATA[ and reg_date>=str_to_date(#{startDate},'%Y-%m-%d %H:%i:%s')]]>
+	    	</if>
+	    	<if test="endDate!=null and ''!=endDate">
+	    		<![CDATA[ and reg_date<=str_to_date(#{endDate},'%Y-%m-%d %H:%i:%s')]]>
+	    	</if>
+		</where>
+		<![CDATA[ order by user_id desc]]>
+	</select>
+	
+	<update id="update" parameterType="user">
+		<![CDATA[
+			update tbl_user set     
+			open_id = #{open_id},              
+			user_pwd = #{user_pwd},           
+			user_avatar = #{user_avatar},     
+			user_email = #{user_email},       
+			user_nickname = #{user_nickname}, 
+			user_age = #{user_age},           
+			user_title = #{user_title},       
+			province_id = #{province_id},     
+			city_id = #{city_id},             
+			district_id = #{district_id},     
+			user_status = #{user_status},     
+			backup = #{backup},               
+			reg_date = str_to_date(#{reg_date},'%Y-%m-%d %H:%i:%s'),           
+			reg_source = #{reg_source},       
+			user_truename = #{user_truename}, 
+			user_address = #{user_address},   
+			user_tel = #{user_tel}           
+			where user_id = #{user_id}        
+			 
+		]]>
+	</update>
+	
+	<update id="updateUserPwdByOpenId" parameterType="user">
+		<![CDATA[update tbl_user set user_pwd = #{user_pwd} where open_id = #{open_id}]]>
+	</update>
+	
+	<update id="updatestatus" parameterType="user">
+		<![CDATA[update tbl_user set user_status=#{user_status} where user_id=#{user_id}]]>
+	</update>
+	
+	<select id="count" resultType="int" parameterType="user">
+		<![CDATA[select count(*) from tbl_user ]]>
+		<where>
+			<if test="user_id!=null and ''!=user_id">
+	    		<![CDATA[ and user_id=#{user_id}]]>
+	    	</if>
+	    	<if test="open_id!=null and ''!=open_id">
+	    		<![CDATA[ and open_id=#{open_id}]]>
+	    	</if>
+	    	<if test="reg_source!=null and ''!=reg_source">
+	    		<![CDATA[ and reg_source=#{reg_source}]]>
+	    	</if>
+	    	<if test="user_email!=null and ''!=user_email">
+	    		<![CDATA[ and user_email=#{user_email}]]>
+	    	</if>
+	    	<if test="user_nickname!=null and ''!=user_nickname">
+	    		<![CDATA[ and user_nickname=#{user_nickname}]]>
+	    	</if>
+	    	<if test="min_age!=null and ''!=min_age">
+	    		<![CDATA[ and user_age>=#{min_age}]]>
+	    	</if>
+	    	<if test="max_age!=null and ''!=max_age">
+	    		<![CDATA[ and user_age<=#{max_age}]]>
+	    	</if>
+	    	<if test="user_title!=null and ''!=user_title">
+	    		<![CDATA[ and user_title=#{user_title}]]>
+	    	</if>
+	    	<if test="province_id!=null and ''!=province_id">
+	    		<![CDATA[ and province_id=#{province_id}]]>
+	    	</if>
+	    	<if test="city_id!=null and ''!=city_id">
+	    		<![CDATA[ and city_id=#{city_id}]]>
+	    	</if>
+	    	<if test="district_id!=null and ''!=district_id">
+	    		<![CDATA[ and district_id=#{district_id}]]>
+	    	</if>
+	    	<if test="user_status!=null and ''!=user_status">
+	    		<![CDATA[ and user_status=#{user_status}]]>
+	    	</if>
+	    	<if test="user_tel!=null and ''!=user_tel">
+	    		<![CDATA[ and user_tel=#{user_tel}]]>
+	    	</if>
+	    	<if test="user_truename!=null and ''!=user_truename">
+	    		<![CDATA[ and user_truename=#{user_truename}]]>
+	    	</if>
+	    	<if test="user_address!=null and ''!=user_address">
+	    		<![CDATA[ and user_address LIKE CONCAT('%',#{user_address},'%') ]]>
+	    	</if>
+	    	<if test="backup!=null and ''!=backup">
+	    		<![CDATA[ and backup LIKE CONCAT('%',#{backup},'%') ]]>
+	    	</if>
+	    	
+			<if test="startDate!=null and ''!=startDate">
+	    		<![CDATA[ and reg_date>=str_to_date(#{startDate},'%Y-%m-%d %H:%i:%s')]]>
+	    	</if>
+	    	<if test="endDate!=null and ''!=endDate">
+	    		<![CDATA[ and reg_date<=str_to_date(#{endDate},'%Y-%m-%d %H:%i:%s')]]>
+	    	</if>
+		</where>
+	</select>
+	
+	<select id="getId" resultType="int" parameterType="user">
+		<![CDATA[ SELECT nextval('tbl_user') ]]>
+	</select>
+	
+	<select id="getOne" resultMap="User" parameterType="user">
+		<![CDATA[ SELECT user_id,open_id,user_avatar,user_email,user_nickname,user_age,user_title,province_id,city_id,district_id,user_status,backup,user_pwd,reg_date,reg_source,user_tel,user_address,user_truename FROM tbl_user where user_id=#{user_id}]]>
+	</select>
+	
+	<select id="getuserhead" resultMap="User"  parameterType="java.util.List">
+		<![CDATA[SELECT user_avatar,user_id,user_nickname FROM tbl_user where user_id in]]>
+		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+			${item.user_id}
+		</foreach>
+	</select>
+	
+	<select id="isExcit" resultMap="User" parameterType="user">
+		<![CDATA[ SELECT user_id,open_id,user_avatar,user_email,user_nickname,user_age,user_title,province_id,city_id,district_id,user_status,backup,user_pwd,reg_date,reg_source,user_tel,user_address,user_truename FROM tbl_user ]]>
+		<where>
+			<![CDATA[open_id=#{open_id}]]>
+			<if test="user_pwd!=null and ''!=user_pwd">
+	    		<![CDATA[ and user_pwd=#{user_pwd}]]>
+	    	</if>
+    	</where>
+	</select>
+	
+	<insert id="add" parameterType="user"> 
+		<![CDATA[INSERT INTO tbl_user(user_id,open_id,reg_source,reg_date,user_avatar,user_nickname,user_pwd) VALUES (#{user_id},#{open_id},#{reg_source},now(),#{user_avatar},#{user_nickname},#{user_pwd})]]>
+	</insert>
+	
+	<update id="updateaddress" parameterType="user">
+		<![CDATA[
+			UPDATE tbl_user SET user_tel = #{user_tel},user_truename = #{user_truename},user_address = #{user_address} where user_id = #{user_id}
+		]]>
+	</update>
+	
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="SearchKeywordSql"> 
+	<resultMap type="searchKeyword" id="SearchKeyword">
+		<result property="id" column="id"/>   
+		<result property="keyword_name" column="keyword_name"/>   
+		<result property="sort" column="sort"/>   
+		<result property="status" column="status"/>  
+	</resultMap>
+	
+	<select id="findKeyword" resultType="SearchKeyword" parameterType="searchKeyword">
+		<![CDATA[ SELECT id,keyword_name,sort,STATUS FROM tbl_search_keyword WHERE STATUS = 1 ORDER BY sort LIMIT 6 ]]>
+	</select>
+	
+	<select id="get" resultMap="SearchKeyword" parameterType="searchKeyword">
+		<![CDATA[select id,keyword_name,sort,status from tbl_search_keyword ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="keyword_name!=null and ''!=keyword_name">
+				<![CDATA[  and keyword_name=#{keyword_name}]]>
+			</if>
+			<if test="status!=null and ''!=status">
+				<![CDATA[  and status=#{status}]]>
+			</if>
+			<if test="sort!=null and ''!=sort">
+				<![CDATA[  and sort=#{sort}]]>
+			</if>
+		</where>
+		<![CDATA[ order by id desc]]>
+	</select>
+	
+	<select id="count" resultType="int" parameterType="searchKeyword">
+		<![CDATA[select count(*) from tbl_search_keyword ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="keyword_name!=null and ''!=keyword_name">
+				<![CDATA[  and keyword_name=#{keyword_name}]]>
+			</if>
+			<if test="status!=null and ''!=status">
+				<![CDATA[  and status=#{status}]]>
+			</if>
+			<if test="sort!=null and ''!=sort">
+				<![CDATA[  and sort=#{sort}]]>
+			</if>
+		</where>
+	</select>
+	
+	<update id="update" parameterType="searchKeyword">
+		<![CDATA[update tbl_search_keyword set keyword_name = #{keyword_name},
+		status = #{status},sort=#{sort} where id=#{id}]]>
+	</update>
+	
+	<update id="updatestatus" parameterType="searchKeyword">
+		<![CDATA[update tbl_search_keyword set status = #{status} where id=#{id}]]>
+	</update>
+	
+	<delete id="delete" parameterType="searchKeyword">
+		<![CDATA[delete from tbl_search_keyword where id=#{id} ]]>
+	</delete>
+	
+	<insert id="insert" parameterType="SearchKeyword">
+		<![CDATA[insert into tbl_search_keyword(id,keyword_name,status,sort) 
+		values (nextval('tbl_search_keyword'),#{keyword_name},#{status},#{sort})]]>
+	</insert>
+</mapper>

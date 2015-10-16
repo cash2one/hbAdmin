@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/iread/!svn/ver/179/trunk/hbAdmin/src/com/manager/function/controller
+END
+WeekdayResourceController.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/iread/!svn/ver/107/trunk/hbAdmin/src/com/manager/function/controller/WeekdayResourceController.java
+END
+ResourceInfoController.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/iread/!svn/ver/135/trunk/hbAdmin/src/com/manager/function/controller/ResourceInfoController.java
+END
+BigeyeController.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/iread/!svn/ver/179/trunk/hbAdmin/src/com/manager/function/controller/BigeyeController.java
+END
+GlobalLanguageController.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/iread/!svn/ver/107/trunk/hbAdmin/src/com/manager/function/controller/GlobalLanguageController.java
+END
+GlobalPropertyController.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/iread/!svn/ver/106/trunk/hbAdmin/src/com/manager/function/controller/GlobalPropertyController.java
+END
+BigeyeModuleController.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/iread/!svn/ver/159/trunk/hbAdmin/src/com/manager/function/controller/BigeyeModuleController.java
+END
+SearchKeywordController.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/iread/!svn/ver/34/trunk/hbAdmin/src/com/manager/function/controller/SearchKeywordController.java
+END
+TopicListController.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/iread/!svn/ver/178/trunk/hbAdmin/src/com/manager/function/controller/TopicListController.java
+END
+UserLearnplanController.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/iread/!svn/ver/159/trunk/hbAdmin/src/com/manager/function/controller/UserLearnplanController.java
+END
+LearnplanController.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/iread/!svn/ver/21/trunk/hbAdmin/src/com/manager/function/controller/LearnplanController.java
+END
+UserController.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/iread/!svn/ver/153/trunk/hbAdmin/src/com/manager/function/controller/UserController.java
+END
+TopicTypeController.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/iread/!svn/ver/103/trunk/hbAdmin/src/com/manager/function/controller/TopicTypeController.java
+END
+GlobalHobbyController.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/controller/GlobalHobbyController.java
+END
+ResourceController.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/iread/!svn/ver/133/trunk/hbAdmin/src/com/manager/function/controller/ResourceController.java
+END
+GlobalLevelController.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/iread/!svn/ver/27/trunk/hbAdmin/src/com/manager/function/controller/GlobalLevelController.java
+END
+ResourceTypeController.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/iread/!svn/ver/8/trunk/hbAdmin/src/com/manager/function/controller/ResourceTypeController.java
+END
+WeekdayController.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/iread/!svn/ver/21/trunk/hbAdmin/src/com/manager/function/controller/WeekdayController.java
+END
+TopicReplyController.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/iread/!svn/ver/110/trunk/hbAdmin/src/com/manager/function/controller/TopicReplyController.java
+END
+SearchLogsController.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/iread/!svn/ver/34/trunk/hbAdmin/src/com/manager/function/controller/SearchLogsController.java
+END

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/js/com/adobe/serialization/json
+END
+JSONParseError.as
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/js/com/adobe/serialization/json/JSONParseError.as
+END
+JSONDecoder.as
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/js/com/adobe/serialization/json/JSONDecoder.as
+END
+JSONTokenizer.as
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/js/com/adobe/serialization/json/JSONTokenizer.as
+END
+JSON.as
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/js/com/adobe/serialization/json/JSON.as
+END
+JSONEncoder.as
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/js/com/adobe/serialization/json/JSONEncoder.as
+END
+JSONToken.as
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/js/com/adobe/serialization/json/JSONToken.as
+END
+JSONTokenType.as
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/iread/!svn/ver/3/trunk/hbAdmin/WebRoot/js/com/adobe/serialization/json/JSONTokenType.as
+END

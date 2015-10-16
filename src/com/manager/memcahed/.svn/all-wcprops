@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/iread/!svn/ver/128/trunk/hbAdmin/src/com/manager/memcahed
+END
+Init.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/iread/!svn/ver/128/trunk/hbAdmin/src/com/manager/memcahed/Init.java
+END
+MemCached.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/memcahed/MemCached.java
+END
+MemcachedLisener.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/memcahed/MemcachedLisener.java
+END
+MemCachedFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/3/trunk/hbAdmin/src/com/manager/memcahed/MemCachedFactory.java
+END

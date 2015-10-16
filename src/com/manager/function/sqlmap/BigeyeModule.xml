@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="BigeyeModuleSql"> 
+	<resultMap id="BigeyeModule" type="bigeyeModule">  
+	<!-- 
+		<result property="module_id" column="module_id"/> 
+		<result property="module_name" column="module_name"/> 
+		<result property="img_width" column="img_width"/> 
+		<result property="img_height" column="img_height"/> 
+		<result property="status" column="status"/> 
+	 -->
+	</resultMap>
+	
+	<select id="get" resultMap="BigeyeModule" parameterType="bigeyeModule">
+		<![CDATA[select module_id,module_name,img_width,img_height,status from tbl_bigeye_module ]]>
+		<where>
+			<if test="module_id!=null and ''!=module_id">
+				<![CDATA[ and  module_id=#{module_id}]]>
+			</if>
+			<if test="module_name!=null and ''!=module_name">
+				<![CDATA[  and module_name=#{module_name}]]>
+			</if>
+			<if test="status!=null and ''!=status">
+				<![CDATA[  and status=#{status}]]>
+			</if>
+		</where>
+		<![CDATA[ order by module_id desc]]>
+	</select>
+	
+	<select id="get2" resultMap="BigeyeModule" parameterType="bigeyeModule">
+		<![CDATA[select module_id,module_name,img_width,img_height,status from tbl_bigeye_module ]]>
+		<where>
+			<if test="module_id!=null and ''!=module_id">
+				<![CDATA[ and  module_id=#{module_id}]]>
+			</if>
+			<if test="module_name!=null and ''!=module_name">
+				<![CDATA[  and module_name=#{module_name}]]>
+			</if>
+			<if test="status!=null and ''!=status">
+				<![CDATA[  and status=#{status}]]>
+			</if>
+		</where>
+		<![CDATA[ order by module_id ]]>
+	</select>
+	
+	<select id="getNoAbolish" resultMap="BigeyeModule">
+		<![CDATA[select module_id,module_name,img_width,img_height from tbl_bigeye_module where status<>9]]>
+	</select>
+	
+	<select id="count" resultType="int" parameterType="bigeyeModule">
+		<![CDATA[select count(*) from tbl_bigeye_module]]>
+		<where>
+			<if test="module_id!=null and ''!=module_id">
+				<![CDATA[ and  module_id=#{module_id}]]>
+			</if>
+			<if test="module_name!=null and ''!=module_name">
+				<![CDATA[  and module_name=#{module_name}]]>
+			</if>
+			<if test="status!=null and ''!=status">
+				<![CDATA[  and status=#{status}]]>
+			</if>
+		</where>
+	</select>
+	
+	<update id="update" parameterType="bigeyeModule">
+		<![CDATA[update tbl_bigeye_module set module_name = #{module_name},img_width = #{img_width},img_height = #{img_height},status = #{status} where module_id=#{module_id}]]>
+	</update>
+	
+	<update id="updatestatus" parameterType="bigeyeModule">
+		<![CDATA[update tbl_bigeye_module set status=#{status} where module_id=#{module_id}]]>
+	</update>
+	
+	<delete id="delete" parameterType="bigeyeModule">
+		<![CDATA[delete from tbl_bigeye_module where module_id=#{module_id} ]]>
+	</delete>
+	
+	<insert id="insert" parameterType="bigeyeModule">
+		<![CDATA[insert into tbl_bigeye_module(module_id,module_name,status,img_width,img_height) 
+		values (nextval('tbl_bigeye_module'),#{module_name},#{status},#{img_width},#{img_height})]]>
+	</insert>
+</mapper>

@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="ResourceSql"> 
+	<resultMap id="Resource" type="resource">  
+		<result property="id" column="id"/> 
+		<result property="resource_content" column="resource_content"/> 
+		<result property="resource_summary" column="resource_summary"/> 
+		<result property="resource_type_id" column="resource_type_id"/> 
+		<result property="img_index" column="img_index"/> 
+		<result property="img_index_size" column="img_index_size"/> 
+		<result property="img_list" column="img_list"/> 
+		<result property="img_list_size" column="img_list_size"/> 
+		<result property="img_main" column="img_main"/> 
+		<result property="img_main_size" column="img_main_size"/> 
+		<result property="resource_status" column="resource_status"/> 
+		<result property="create_date" column="create_date"  jdbcType="DATE"/> 
+		<result property="create_adminuser" column="create_adminuser"/> 
+		<result property="update_date" column="update_date"  jdbcType="DATE"/> 
+		<result property="update_adminuser" column="update_adminuser"/> 
+		<result property="type_name" column="type_name"/> 
+		<result property="property_id" column="property_id"/> 
+		<result property="language_level" column="language_level"/> 
+		<result property="level_id" column="level_id"/> 
+		<result property="resource_author" column="resource_author"/> 
+		<result property="resource_keyword" column="resource_keyword"/> 
+		<result property="nowtime" column="nowtime"/>
+		<result property="baby_id" column="baby_id"/>
+		<result property="weekday_id" column="weekday_id"/> 
+		<result property="ulp_id" column="ulp_id"/>
+		<result property="plan_id" column="plan_id"/>
+		<result property="img_book" column="img_book"/>
+		<result property="img_book_size" column="img_book_size"/>
+		<result property="len" column="len"/>
+		<result property="plan_status" column="plan_status"/>
+		<result property="spend_minute" column="spend_minute"/>
+		<result property="user_id" column="user_id"/>
+		<result property="replenish" column="replenish"/>
+		<result property="rowno" column="rowno"/>
+	</resultMap>
+	
+	<select id="get_1" resultMap="Resource" parameterType="resource">
+		<![CDATA[select a.id id,a.resource_content resource_content,a.resource_summary resource_summary,
+		a.resource_type_id resource_type_id,a.img_index img_index,a.img_index_size img_index_size,a.img_list img_list,
+		a.img_list_size img_list_size,a.img_main img_main,a.img_main_size img_main_size,a.img_book img_book,a.img_book_size img_book_size,
+		a.resource_status resource_status,
+		date_format(a.create_date,'%Y-%m-%d %H:%i:%s') create_date,a.create_adminuser create_adminuser,
+		date_format(a.update_date,'%Y-%m-%d %H:%i:%s') update_date,a.update_adminuser update_adminuser,b.type_name type_name,
+		a.resource_keyword resource_keyword,a.resource_author resource_author
+		from tbl_resource a 
+		left join tbl_resource_type b on a.resource_type_id=b.id
+		INNER JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+		<if test="property_id!=null and ''!=property_id">
+			<![CDATA[ property_id=#{property_id}]]>
+		</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c ON a.id=c.resource_id 
+		INNER JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+			<if test="level_id!=null and ''!=level_id">
+				<![CDATA[ level_id=#{level_id}]]>
+			</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c2 ON a.id=c2.resource_id 
+		INNER JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+			<if test="language_level!=null and ''!=language_level">
+				<![CDATA[ and  language_level=#{language_level}]]>
+			</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c3 ON a.id=c3.resource_id  ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  a.id=#{id}]]>
+			</if>
+			<if test="resource_type_id!=null and ''!=resource_type_id">
+				<![CDATA[ and  a.resource_type_id=#{resource_type_id}]]>
+			</if>
+			<if test="resource_content!=null and ''!=resource_content">
+				<![CDATA[  and 1=INSTR(a.resource_content,#{resource_content})]]>
+			</if>
+			<if test="resource_status!=null and ''!=resource_status">
+				<![CDATA[  and a.resource_status=#{resource_status}]]>
+			</if>
+		</where>
+		<![CDATA[ order by a.id desc]]>
+	</select>
+	
+	<select id="get_2" resultMap="Resource" parameterType="resource">
+		<![CDATA[select a.id id,a.resource_content resource_content,a.resource_summary resource_summary,
+		a.resource_type_id resource_type_id,a.img_index img_index,a.img_index_size img_index_size,a.img_list img_list,
+		a.img_list_size img_list_size,a.img_main img_main,a.img_main_size img_main_size,a.img_book img_book,a.img_book_size img_book_size,
+		a.resource_status resource_status,
+		date_format(a.create_date,'%Y-%m-%d %H:%i:%s') create_date,a.create_adminuser create_adminuser,
+		date_format(a.update_date,'%Y-%m-%d %H:%i:%s') update_date,a.update_adminuser update_adminuser,b.type_name type_name,
+		a.resource_keyword resource_keyword,a.resource_author resource_author
+		from tbl_resource a 
+		left join tbl_resource_type b on a.resource_type_id=b.id
+		LEFT JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+		<if test="property_id!=null and ''!=property_id">
+			<![CDATA[ property_id=#{property_id}]]>
+		</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c ON a.id=c.resource_id 
+		LEFT JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+			<if test="level_id!=null and ''!=level_id">
+				<![CDATA[ level_id=#{level_id}]]>
+			</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c2 ON a.id=c2.resource_id 
+		LEFT JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+			<if test="language_level!=null and ''!=language_level">
+				<![CDATA[ and  language_level=#{language_level}]]>
+			</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c3 ON a.id=c3.resource_id  ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  a.id=#{id}]]>
+			</if>
+			<if test="resource_type_id!=null and ''!=resource_type_id">
+				<![CDATA[ and  a.resource_type_id=#{resource_type_id}]]>
+			</if>
+			<if test="resource_content!=null and ''!=resource_content">
+				<![CDATA[  and 1=INSTR(a.resource_content,#{resource_content})]]>
+			</if>
+			<if test="resource_status!=null and ''!=resource_status">
+				<![CDATA[  and a.resource_status=#{resource_status}]]>
+			</if>
+		</where>
+		<![CDATA[ order by a.id desc]]>
+	</select>
+	
+	<select id="get_use_info" resultType="Resource" parameterType="resource">
+		<![CDATA[select a.id id,a.resource_content resource_content,a.resource_type_id resource_type_id,b.type_name type_name 
+			from tbl_resource a 
+			left join tbl_resource_type b on a.resource_type_id=b.id
+			where a.id=#{id}
+		]]>
+	</select>
+	
+	<select id="search" resultType="Resource" parameterType="resource">
+		<![CDATA[
+		SELECT * FROM (
+		SELECT (@rowNO := @rowNo+1) AS rowno,a.* FROM (
+		SELECT * FROM tbl_resource WHERE resource_status = 1 AND resource_content LIKE CONCAT('%',#{resource_content},'%')  union 
+		SELECT * FROM tbl_resource WHERE resource_status = 1 AND resource_keyword LIKE CONCAT('%',#{resource_content},'%')  union 
+		SELECT * FROM tbl_resource WHERE resource_status = 1 AND resource_author LIKE CONCAT('%',#{resource_content},'%')  ) a 
+		,(SELECT @rowNO :=0) b LIMIT 30
+		) cc ORDER BY rowno 
+		]]>
+	</select>
+	
+	<select id="getPlay" resultType="Resource" parameterType="resource">
+		<![CDATA[SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_author FROM tbl_resource a where a.resource_type_id = 5 and a.resource_status = 1 order by a.create_date desc]]>
+	</select>
+	
+	<select id="publicresource" resultType="Resource" parameterType="resource">
+		<![CDATA[
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_author FROM 
+		(SELECT re.id,re.resource_content,re.resource_summary,re.img_index,re.img_index_size,re.img_list,re.img_list_size,re.img_main,re.img_main_size,re.resource_author FROM tbl_weekday_resource wr LEFT JOIN tbl_resource re ON wr.resource_id = re.id WHERE  resource_status = 1 and wr.weekday_id =  (SELECT w.id FROM tbl_weekday w WHERE w.start_date<= #{nowtime} AND w.end_date >=#{nowtime})  AND re.resource_type_id =#{resource_type_id}) a
+		INNER JOIN 
+		(SELECT resource_id,property_id FROM tbl_resource_info WHERE property_id IN (SELECT property_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY property_id )) b1 ON a.id=b1.resource_id 
+		INNER JOIN 
+		(SELECT resource_id,level_id FROM tbl_resource_info WHERE level_id=(SELECT level_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY level_id ) ) b2 ON a.id=b2.resource_id  GROUP BY a.id ORDER BY a.id
+		]]>
+	</select>
+	
+	<select id="publicresource1" resultType="Resource" parameterType="resource">
+		<![CDATA[
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author FROM 
+		(SELECT * FROM tbl_resource  WHERE  resource_status = 1 and id NOT IN(SELECT resource_id FROM tbl_weekday_resource WHERE baby_id = #{baby_id} )) a
+		INNER JOIN 
+		(SELECT resource_id,property_id FROM tbl_resource_info WHERE property_id IN (SELECT property_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY property_id )) b1 ON a.id=b1.resource_id 
+		INNER JOIN 
+		(SELECT resource_id,level_id FROM tbl_resource_info WHERE level_id=(SELECT level_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY level_id ) ) b2 ON a.id=b2.resource_id   GROUP BY a.id ORDER BY a.id
+		]]>
+	</select>
+	
+	<select id="getpublicresource" resultType="Resource" parameterType="resource">
+		<![CDATA[
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,b.id AS ulp_id,a.img_book_size,a.img_book,a.resource_author FROM tbl_resource a
+		INNER JOIN (SELECT * FROM tbl_weekday_resource WHERE baby_id = #{baby_id} and weekday_id = #{weekday_id}) b on a.id = b.resource_id
+		]]>
+	</select>
+	
+	<select id="fList" resultType="Resource" parameterType="resource">
+		<![CDATA[
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,b.id AS ulp_id,a.img_book_size,a.img_book,a.resource_author FROM tbl_resource a
+		INNER JOIN (SELECT * FROM tbl_favorite WHERE user_id = #{user_id}) b on a.id = b.resource_id where a.resource_status = 1 order by b.create_date desc
+		]]>
+	</select>
+	
+	<select id="learnplan" resultType="Resource" parameterType="resource">
+		<![CDATA[
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author FROM 
+		(SELECT * FROM tbl_resource WHERE  resource_status = 1 and id NOT IN(SELECT resource_id FROM tbl_user_learnplan WHERE baby_id = #{baby_id} )) a
+		INNER JOIN 
+		(SELECT resource_id,property_id FROM tbl_resource_info WHERE property_id IN (SELECT property_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY property_id )) b1 ON a.id=b1.resource_id 
+		INNER JOIN 
+		(SELECT resource_id,level_id FROM tbl_resource_info WHERE level_id=(SELECT level_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY level_id ) ) b2 ON a.id=b2.resource_id   GROUP BY a.id ORDER BY a.id
+		]]>
+	</select>
+	
+	<select id="buquan" resultType="Resource" parameterType="resource">
+		<![CDATA[
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author FROM 
+		(SELECT * FROM tbl_resource WHERE resource_type_id = #{resource_type_id} and resource_status = 1 and id NOT IN(#{id}) and id NOT IN(SELECT resource_id FROM tbl_user_learnplan WHERE baby_id = #{baby_id} )) a
+		INNER JOIN 
+		(SELECT resource_id,level_id FROM tbl_resource_info WHERE level_id=(SELECT level_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY level_id ) ) b2 ON a.id=b2.resource_id  
+		GROUP BY a.id ORDER BY a.id limit #{len}
+		]]>
+	</select>
+	
+	<select id="buquan1" resultType="Resource" parameterType="resource">
+		<![CDATA[
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author FROM 
+		(SELECT * FROM tbl_resource WHERE resource_type_id = #{resource_type_id} and resource_status = 1 and id NOT IN(#{id}) and id NOT IN(SELECT resource_id FROM tbl_weekday_resource WHERE baby_id = #{baby_id} )) a
+		INNER JOIN 
+		(SELECT resource_id,level_id FROM tbl_resource_info WHERE level_id=(SELECT level_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY level_id ) ) b2 ON a.id=b2.resource_id 
+		GROUP BY a.id ORDER BY a.id limit #{len}
+		]]>
+	</select>
+	
+	<select id="huiben" resultType="Resource" parameterType="resource">
+		<![CDATA[
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author FROM 
+		(SELECT * FROM tbl_resource WHERE  resource_status = 1 AND resource_type_id = 4 AND id NOT IN(SELECT resource_id FROM tbl_user_learnplan WHERE baby_id = #{baby_id} )) a
+		INNER JOIN 
+		(SELECT resource_id,level_id FROM tbl_resource_info WHERE level_id=(SELECT level_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY level_id ) ) b2 ON a.id=b2.resource_id   GROUP BY a.id ORDER BY a.id
+		]]>
+	</select>
+	
+	<select id="huibenbuquan" resultType="Resource" parameterType="resource">
+		<![CDATA[
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author FROM
+		 tbl_resource a WHERE a.resource_type_id = 4 AND a.resource_status = 1 AND a.id NOT IN(${id}) and a.id NOT IN(SELECT resource_id FROM tbl_user_learnplan WHERE baby_id = #{baby_id} ) ORDER BY a.id 
+		]]>
+	</select>
+	
+	<select id="getlearnplan" resultType="Resource" parameterType="resource">
+		<![CDATA[
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,b.id AS ulp_id,a.img_book_size,a.img_book,a.resource_author,b.spend_minute,b.plan_status,b.peoperty_id AS property_id,b.replenish as replenish FROM tbl_resource a
+		INNER JOIN (SELECT * FROM tbl_user_learnplan WHERE baby_id = #{baby_id} and plan_id = #{plan_id}) b on a.id = b.resource_id
+		]]>
+	</select>
+	
+	<select id="getid" resultType="int">
+		<![CDATA[select nextval('tbl_resource') ]]>
+	</select>
+	
+	<select id="get2" resultMap="Resource" parameterType="resource">
+		<![CDATA[select id,resource_content,resource_summary,resource_type_id,img_index,img_index_size,
+		img_list,img_list_size,img_main,img_main_size,img_book,img_book_size,resource_status,
+		date_format(create_date,'%Y-%m-%d %H:%i:%s') create_date,create_adminuser,
+		date_format(update_date,'%Y-%m-%d %H:%i:%s') update_date,update_adminuser,
+		resource_keyword,resource_author
+		from tbl_resource ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  id=#{id}]]>
+			</if>
+			<if test="resource_content!=null and ''!=resource_content">
+				<![CDATA[  and resource_content=#{resource_content}]]>
+			</if>
+			<if test="resource_type_id!=null and ''!=resource_type_id">
+				<![CDATA[  and resource_type_id=#{resource_type_id}]]>
+			</if>
+			<if test="resource_status!=null and ''!=resource_status">
+				<![CDATA[  and resource_status=#{resource_status}]]>
+			</if>
+		</where>
+		<![CDATA[ order by id ]]>
+	</select>
+
+	<select id="count_1" resultType="int" parameterType="resource">
+		<![CDATA[select count(*) from tbl_resource a 
+		left join tbl_resource_type b on a.resource_type_id=b.id
+		INNER JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+		<if test="property_id!=null and ''!=property_id">
+			<![CDATA[ property_id=#{property_id}]]>
+		</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c ON a.id=c.resource_id 
+		INNER JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+			<if test="level_id!=null and ''!=level_id">
+				<![CDATA[ level_id=#{level_id}]]>
+			</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c2 ON a.id=c2.resource_id 
+		INNER JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+			<if test="language_level!=null and ''!=language_level">
+				<![CDATA[ language_level=#{language_level}]]>
+			</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c3 ON a.id=c3.resource_id  ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  a.id=#{id}]]>
+			</if>
+			<if test="resource_type_id!=null and ''!=resource_type_id">
+				<![CDATA[ and  a.resource_type_id=#{resource_type_id}]]>
+			</if>
+			<if test="resource_content!=null and ''!=resource_content">
+				<![CDATA[  and 1=INSTR(a.resource_content,#{resource_content})]]>
+			</if>
+			<if test="resource_status!=null and ''!=resource_status">
+				<![CDATA[  and a.resource_status=#{resource_status}]]>
+			</if>
+		</where>
+	</select>
+	
+	<select id="count_2" resultType="int" parameterType="resource">
+		<![CDATA[select count(*) from tbl_resource a 
+		left join tbl_resource_type b on a.resource_type_id=b.id
+		LEFT JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+		<if test="property_id!=null and ''!=property_id">
+			<![CDATA[ property_id=#{property_id}]]>
+		</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c ON a.id=c.resource_id 
+		LEFT JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+			<if test="level_id!=null and ''!=level_id">
+				<![CDATA[ level_id=#{level_id}]]>
+			</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c2 ON a.id=c2.resource_id 
+		LEFT JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+			<if test="language_level!=null and ''!=language_level">
+				<![CDATA[ language_level=#{language_level}]]>
+			</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c3 ON a.id=c3.resource_id  ]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  a.id=#{id}]]>
+			</if>
+			<if test="resource_type_id!=null and ''!=resource_type_id">
+				<![CDATA[ and  a.resource_type_id=#{resource_type_id}]]>
+			</if>
+			<if test="resource_content!=null and ''!=resource_content">
+				<![CDATA[  and 1=INSTR(a.resource_content,#{resource_content})]]>
+			</if>
+			<if test="resource_status!=null and ''!=resource_status">
+				<![CDATA[  and a.resource_status=#{resource_status}]]>
+			</if>
+		</where>
+	</select>
+	
+	
+	<select id="count_weekday" resultType="int" parameterType="resource">
+		<![CDATA[select count(*) from tbl_resource a 
+		left join tbl_resource_type b on a.resource_type_id=b.id
+		LEFT JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+		<if test="property_id!=null and ''!=property_id">
+			<![CDATA[ property_id=#{property_id}]]>
+		</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c ON a.id=c.resource_id 
+		LEFT JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+			<if test="level_id!=null and ''!=level_id">
+				<![CDATA[ level_id=#{level_id}]]>
+			</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c2 ON a.id=c2.resource_id 
+		LEFT JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+			<if test="language_level!=null and ''!=language_level">
+				<![CDATA[ language_level=#{language_level}]]>
+			</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c3 ON a.id=c3.resource_id  ]]>
+		<where>
+			<![CDATA[ a.id NOT IN (SELECT resource_id FROM tbl_weekday_resource WHERE weekday_id=#{weekday_id})]]>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  a.id=#{id}]]>
+			</if>
+			<if test="resource_type_id!=null and ''!=resource_type_id">
+				<![CDATA[ and  a.resource_type_id=#{resource_type_id}]]>
+			</if>
+			<if test="resource_content!=null and ''!=resource_content">
+				<![CDATA[  and a.resource_content INSTR(resource_content,#{resource_content})]]>
+			</if>
+			<if test="resource_status!=null and ''!=resource_status">
+				<![CDATA[  and a.resource_status=#{resource_status}]]>
+			</if>
+		</where>
+	</select>
+	
+	<select id="get_weekday" resultMap="Resource" parameterType="resource">
+		<![CDATA[select a.id id,a.resource_content resource_content,a.resource_summary resource_summary,
+		a.resource_type_id resource_type_id,a.img_index img_index,a.img_index_size img_index_size,a.img_list img_list,
+		a.img_list_size img_list_size,a.img_main img_main,a.img_main_size img_main_size,
+		a.img_book img_book,a.img_book_size img_book_size,a.resource_status resource_status,
+		date_format(a.create_date,'%Y-%m-%d %H:%i:%s') create_date,a.create_adminuser create_adminuser,
+		date_format(a.update_date,'%Y-%m-%d %H:%i:%s') update_date,a.update_adminuser update_adminuser,b.type_name type_name,
+		a.resource_keyword resource_keyword,a.resource_author resource_author
+		from tbl_resource a 
+		left join tbl_resource_type b on a.resource_type_id=b.id
+		LEFT JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+		<if test="property_id!=null and ''!=property_id">
+			<![CDATA[ property_id=#{property_id}]]>
+		</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c ON a.id=c.resource_id 
+		LEFT JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+			<if test="level_id!=null and ''!=level_id">
+				<![CDATA[ level_id=#{level_id}]]>
+			</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c2 ON a.id=c2.resource_id 
+		LEFT JOIN (SELECT resource_id FROM tbl_resource_info 
+		]]>
+		<where>
+			<if test="language_level!=null and ''!=language_level">
+				<![CDATA[ and  language_level=#{language_level}]]>
+			</if>
+		</where>
+		<![CDATA[ GROUP BY resource_id) c3 ON a.id=c3.resource_id  ]]>
+		<where>
+			<![CDATA[ a.id NOT IN (SELECT resource_id FROM tbl_weekday_resource WHERE weekday_id=#{weekday_id})]]>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and  a.id=#{id}]]>
+			</if>
+			<if test="resource_type_id!=null and ''!=resource_type_id">
+				<![CDATA[ and  a.resource_type_id=#{resource_type_id}]]>
+			</if>
+			<if test="resource_content!=null and ''!=resource_content">
+				<![CDATA[  and a.resource_content INSTR(resource_content,#{resource_content})]]>
+			</if>
+			<if test="resource_status!=null and ''!=resource_status">
+				<![CDATA[  and a.resource_status=#{resource_status}]]>
+			</if>
+		</where>
+		<![CDATA[ order by a.id desc]]>
+	</select>
+	
+	<update id="update" parameterType="resource">
+		<![CDATA[update tbl_resource set 
+				resource_content = #{resource_content},
+				resource_summary = #{resource_summary},
+				resource_type_id = #{resource_type_id},
+				img_index = #{img_index},
+				img_index_size = #{img_index_size},
+				img_list = #{img_list},
+				img_list_size = #{img_list_size},
+				img_main = #{img_main},
+				img_main_size = #{img_main_size},
+				img_book = #{img_book},
+				img_book_size = #{img_book_size},
+				resource_status = #{resource_status},
+				update_date = now(),
+				update_adminuser = #{update_adminuser},
+				resource_author = #{resource_author},
+				resource_keyword = #{resource_keyword}
+				where id=#{id}]]>
+	</update>
+	
+	<update id="updatestatus" parameterType="resource">
+		<![CDATA[update tbl_resource set resource_status=#{resource_status},update_date = now(),update_adminuser=#{update_adminuser} where id=#{id}]]>
+	</update>
+	
+	<delete id="delete" parameterType="resource">
+		<![CDATA[delete from tbl_resource where id=#{id} ]]>
+	</delete>
+	
+	<insert id="insert" parameterType="resource">
+		<![CDATA[insert into tbl_resource(id,resource_content,resource_summary,resource_type_id,
+		img_index,img_index_size,img_list,img_list_size,img_main,img_main_size,img_book,img_book_size,resource_status,
+		create_date,create_adminuser,resource_author,resource_keyword) 
+		values (#{id},#{resource_content},#{resource_summary},#{resource_type_id},
+		#{img_index},#{img_index_size},#{img_list},#{img_list_size},#{img_main},#{img_main_size},#{img_book},#{img_book_size},#{resource_status},
+		now(),#{create_adminuser},#{resource_author},#{resource_keyword})]]>
+	</insert>
+</mapper>

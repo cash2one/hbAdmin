@@ -1,0 +1,40 @@
+9
+
+dir
+185
+https://192.168.0.210/svn/iread/trunk/hbAdmin/WebRoot/function/config
+https://192.168.0.210/svn/iread
+
+
+
+2015-06-14T08:30:41.707147Z
+107
+lhlei
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+5c08ae35-6d04-164f-aa44-81459c4af982
+
+globalHobby
+dir
+
+globallanguage
+dir
+
+globalProperty
+dir
+
+globalLevel
+dir
+

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/iread/!svn/ver/23/trunk/hbAdmin/WebRoot/function/config/globalLevel
+END
+globalLevel_update.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/iread/!svn/ver/5/trunk/hbAdmin/WebRoot/function/config/globalLevel/globalLevel_update.jsp
+END
+globalLevel_add.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/iread/!svn/ver/5/trunk/hbAdmin/WebRoot/function/config/globalLevel/globalLevel_add.jsp
+END
+globalLevel_list.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/iread/!svn/ver/23/trunk/hbAdmin/WebRoot/function/config/globalLevel/globalLevel_list.jsp
+END

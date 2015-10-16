@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="WeekdaySql"> 
+	<resultMap id="Weekday" type="weekday">  
+		<result property="id" column="id"/> 
+		<result property="start_date" column="start_date"/> 
+		<result property="end_date" column="end_date"/> 
+		<result property="create_date" column="create_date"/> 
+		<result property="create_admin" column="create_admin"/> 
+		<result property="update_date" column="update_date"/> 
+		<result property="update_admin" column="update_admin"/> 
+		<result property="weekday_config" column="weekday_config"/> 
+	</resultMap>
+	
+	<select id="get" resultMap="Weekday" parameterType="weekday">
+		<![CDATA[
+		select id,date_format(start_date,'%Y-%m-%d') start_date,
+		date_format(end_date,'%Y-%m-%d') end_date,
+		date_format(create_date,'%Y-%m-%d %H:%i:%s') create_date,create_admin,
+		date_format(update_date,'%Y-%m-%d %H:%i:%s') update_date,update_admin,weekday_config
+		from tbl_weekday
+		]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and id=#{id}]]>
+			</if>
+		</where>
+		<![CDATA[order by id ]]>
+	</select>
+	
+	<select id="count" resultType="int" parameterType="weekday">
+		<![CDATA[select count(*) from tbl_weekday]]>
+			<where>
+				<if test="id!=null and ''!=id">
+					<![CDATA[and id=#{id}]]>
+				</if>
+			</where>
+	</select>
+	
+	<select id="get2" resultMap="Weekday">
+		<![CDATA[select id,date_format(start_date,'%Y-%m-%d') start_date
+			,date_format(end_date,'%Y-%m-%d') end_date,weekday_config from tbl_weekday]]>
+		<where>
+			<if test="id!=null and ''!=id">
+				<![CDATA[ and id=#{id}]]>
+			</if>
+			<if test="start_date!=null and ''!=start_date">
+				<![CDATA[ and start_date<=str_to_date(#{start_date},'%Y-%m-%d')]]>
+			</if>
+			<if test="end_date!=null and ''!=end_date">
+				<![CDATA[ and end_date>=str_to_date(#{end_date},'%Y-%m-%d')]]>
+			</if>
+		</where>
+		<![CDATA[order by id ]]>
+	</select>
+	
+	<select id="get_select" resultMap="Weekday" parameterType="weekday">
+		<![CDATA[select id,date_format(start_date,'%Y-%m-%d') start_date
+			,date_format(end_date,'%Y-%m-%d') end_date from tbl_weekday order by id]]>
+	</select>
+	
+	<delete id="delete" parameterType="weekday">
+		<![CDATA[delete from tbl_weekday where id=#{id}]]>
+	</delete>
+	
+	<update id="update" parameterType="weekday">
+		<![CDATA[update tbl_weekday set start_date=str_to_date(#{start_date},'%Y-%m-%d'),weekday_config=#{weekday_config},
+		end_date=str_to_date(#{end_date},'%Y-%m-%d'),update_date=now(),update_admin=#{update_admin}
+		where id=#{id}]]>
+	</update>
+	
+	<insert id="insert" parameterType="weekday">
+		<![CDATA[insert into tbl_weekday(id,start_date,end_date,create_date,create_admin,weekday_config) 
+		values (nextval('tbl_weekday'),str_to_date(#{start_date},'%Y-%m-%d'),
+		str_to_date(#{end_date},'%Y-%m-%d'),now(),#{create_admin},#{weekday_config})]]>
+	</insert>
+</mapper>
