@@ -297,6 +297,26 @@ public class ApiServiceImpl implements ApiService {
 			}
 			return null;
 		}
+		
+		//添加宝贝详情
+		// http://192.168.3.130:8888/hbadmin/domain?do=createbabyinfo&baby_id=1&level_id=1&hobby_id=1&version=1.0.0&appid=100&sign=ee42dfd6c5e70314109086a3bdab7e10
+		if("createbabyinfopre".equals(doMethod) ){
+			Map hsm = new LinkedHashMap();
+			switch(versioncode){
+				case 100:
+				try {
+					 return babyInfoService.addpre(request);
+				} catch (Exception e) {
+					String result = "error";
+					String message = initDataPool.getSP("2-4-000");
+					hsm.put("version", Constant.version);
+					hsm.put("result", result);
+					hsm.put("message", message);
+					hsm.put("data", "");
+				}
+			}
+			return null;
+		}
 
 		//用户登录
 		// http://192.168.3.130:8888/hbadmin/domain?do=login&open_id=test&user_pwd=96e79218965eb72c92a549dd5a330112&version=1.0.0&appid=100&sign=e51cf7fa7aacf80a2fb570522255074a

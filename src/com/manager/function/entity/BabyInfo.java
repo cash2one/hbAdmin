@@ -18,6 +18,8 @@ public class BabyInfo implements Serializable{
 	private String property_id;
 	
 	private String create_date;
+	
+	private String baby_language;
 
 	public String getId() {
 		return id;
@@ -58,5 +60,12 @@ public class BabyInfo implements Serializable{
 	public void setCreate_date(String create_date) {
 		this.create_date = create_date;
 	}
+	
+	public String getBaby_language() {
+		return baby_language;
+	}
 
+	public void setBaby_language(String baby_language) {
+		this.baby_language = baby_language;
+	}
 }

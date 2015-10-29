@@ -51,7 +51,6 @@ public class User implements Serializable{
 	
 	private String min_age;
 	private String max_age;
-
 	
 	public User() {
 		super();
@@ -314,5 +313,4 @@ public class User implements Serializable{
 	public void setUser_pwd(String user_pwd) {
 		this.user_pwd = user_pwd;
 	}
-
 }
