@@ -28,6 +28,8 @@ public class Baby implements Serializable{
 	private String update_date;
 	
 	private String baby_status;
+	
+	private String baby_language;
 
 	public String getBaby_status() {
 		return baby_status;
@@ -111,5 +113,13 @@ public class Baby implements Serializable{
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
+	}
+	
+	public String getBaby_language() {
+		return baby_language;
+	}
+
+	public void setBaby_language(String baby_language) {
+		this.baby_language = baby_language;
 	}
 }

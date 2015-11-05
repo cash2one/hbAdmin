@@ -18,6 +18,11 @@ public interface UserService {
 	 * @param user
 	 */
 	public Map add(HttpServletRequest request);
+	/**
+	 * 用户注册pre
+	 * @param user
+	 */
+	public Map addpre(HttpServletRequest request);
 	
 	/**
 	 * 用户修改资料
@@ -40,6 +45,11 @@ public interface UserService {
 	 * 登录验证
 	 */
 	public Map isExcit(HttpServletRequest request);
+	
+	/**
+	 * 登录验证pre
+	 */
+	public Map isExcitpre(HttpServletRequest request);
 	
 	/**
 	 * 获取积分

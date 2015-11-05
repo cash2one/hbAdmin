@@ -297,8 +297,15 @@ public class ApiServiceImpl implements ApiService {
 			}
 			return null;
 		}
-		
-		//添加宝贝详情
+		//创建宝贝
+		// http://192.168.3.130:8888/hbadmin/domain?do=createbabypre&uid=1&baby_nickname=adsdsad&level_id=1&hobby_id=8,11,9&language_id=1&version=1.0.0&appid=100&sign=9841976786dcb9dc632d963a1adef93c
+		if("createbabypre".equals(doMethod) ){
+			switch(versioncode){
+				case 100: return babyService.addpre(request);
+			}
+			return null;
+		}
+		//添加宝贝详情pre
 		// http://192.168.3.130:8888/hbadmin/domain?do=createbabyinfo&baby_id=1&level_id=1&hobby_id=1&version=1.0.0&appid=100&sign=ee42dfd6c5e70314109086a3bdab7e10
 		if("createbabyinfopre".equals(doMethod) ){
 			Map hsm = new LinkedHashMap();
@@ -336,7 +343,24 @@ public class ApiServiceImpl implements ApiService {
 			}
 			return null;
 		}
-		
+		//用户登录pre
+		// http://192.168.3.130:8888/hbadmin/domain?do=login&open_id=test&user_pwd=96e79218965eb72c92a549dd5a330112&version=1.0.0&appid=100&sign=e51cf7fa7aacf80a2fb570522255074a
+		if("loginpre".equals(doMethod) ){
+			Map hsm = new LinkedHashMap();
+			switch(versioncode){
+				case 100: try {
+					return userService.isExcitpre(request);
+				} catch (Exception e) {
+					String result = "error";
+					String message = initDataPool.getSP("2-4-000");
+					hsm.put("version", Constant.version);
+					hsm.put("result", result);
+					hsm.put("message", message);
+					hsm.put("data", "");
+				}
+			}
+			return null;
+		}
 		//用户注册
 		// http://192.168.3.130:8888/hbadmin/domain?do=reg&open_id=test2&source=2&user_nickname=test&user_avatar=http://www.baidu.com&user_pwd=1111&version=1.0.0&appid=100&sign=d2dfe1cf2b7f2b634cc95fd1f5bc51e9
 		if("reg".equals(doMethod) ){
@@ -345,6 +369,26 @@ public class ApiServiceImpl implements ApiService {
 				case 100:
 				try {
 					 return userService.add(request);
+				} catch (Exception e) {
+					String result = "error";
+					String message = initDataPool.getSP("2-4-000");
+					hsm.put("version", Constant.version);
+					hsm.put("result", result);
+					hsm.put("message", message);
+					hsm.put("data", "");
+				}
+			}
+			return null;
+		}
+		
+		//用户注册
+		// http://192.168.3.130:8888/hbadmin/domain?do=reg&open_id=test2&source=2&user_nickname=test&user_avatar=http://www.baidu.com&user_pwd=1111&version=1.0.0&appid=100&sign=d2dfe1cf2b7f2b634cc95fd1f5bc51e9
+		if("regpre".equals(doMethod) ){
+			Map hsm = new LinkedHashMap();
+			switch(versioncode){
+				case 100:
+				try {
+					 return userService.addpre(request);
 				} catch (Exception e) {
 					String result = "error";
 					String message = initDataPool.getSP("2-4-000");
@@ -417,7 +461,26 @@ public class ApiServiceImpl implements ApiService {
 			}
 			return hsm;
 		}
-		
+		//开启学习计划pre
+		// http://192.168.3.130:8888/hbadmin/domain?do=learnplan&baby_id=11&version=1.0.0&appid=100&sign=73870e23a4dae8ba2796ed38171ac5dc
+		if("learnplanpre".equals(doMethod) ){
+			Map hsm = new LinkedHashMap();
+			switch(versioncode){
+				case 100: try {
+						return learnplanService.learnplanpre(request);
+					} catch (Exception e) {
+						String result = "error";
+						String message = initDataPool.getSP("2-4-000");
+						hsm.put("version", Constant.version);
+						hsm.put("result", result);
+						hsm.put("message", message);
+						hsm.put("date", date);
+						hsm.put("data", "");
+						hsm.put("datasign", md5(hsm,appKey));
+					}
+			}
+			return hsm;
+		}
 		//重置学习计划
 		// http://192.168.3.130:8888/hbadmin/domain?do=relearnplan&baby_id=11&version=1.0.0&appid=100&sign=729b37127736bb6891d27da223acc5f0
 		if("relearnplan".equals(doMethod) ){
@@ -425,6 +488,27 @@ public class ApiServiceImpl implements ApiService {
 			switch(versioncode){
 				case 100: try {
 						return learnplanService.relearnplan(request);
+					} catch (Exception e) {
+						String result = "error";
+						String message = initDataPool.getSP("2-4-000");
+						hsm.put("version", Constant.version);
+						hsm.put("result", result);
+						hsm.put("message", message); 
+						hsm.put("date", date);
+						hsm.put("data", "");
+						hsm.put("datasign", md5(hsm,appKey));
+					}
+			}
+			return hsm;
+		}
+		
+		//重置学习计划pre
+		// http://192.168.3.130:8888/hbadmin/domain?do=relearnplan&baby_id=11&version=1.0.0&appid=100&sign=729b37127736bb6891d27da223acc5f0
+		if("relearnplanpre".equals(doMethod) ){
+			Map hsm = new LinkedHashMap();
+			switch(versioncode){
+				case 100: try {
+						return learnplanService.relearnplanpre(request);
 					} catch (Exception e) {
 						String result = "error";
 						String message = initDataPool.getSP("2-4-000");
@@ -490,6 +574,27 @@ public class ApiServiceImpl implements ApiService {
 			return hsm;
 		}
 		
+		//搜索pre
+		// http://192.168.3.130:8888/hbadmin/domain?do=search&search_key=Me&uid=9&version=1.0.0&appid=100&sign=2b3b3684930c9472acd75daafc7a71ae
+		if("searchpre".equals(doMethod) ){
+			Map hsm = new LinkedHashMap();
+			switch(versioncode){
+				case 100: try {
+						return resourceService.searchpre(request);
+					} catch (Exception e) {
+						String result = "error";
+						String message = initDataPool.getSP("2-4-000");
+						hsm.put("version", Constant.version);
+						hsm.put("result", result);
+						hsm.put("message", message);
+						hsm.put("date", date);
+						hsm.put("data", "");
+						hsm.put("datasign", md5(hsm,appKey));
+					}
+			}
+			return hsm;
+		}
+		
 		//获取用户地址信息
 		// http://192.168.3.130:8888/hbadmin/domain?do=getAddress&uid=9&version=1.0.0&appid=100&sign=ffc36d73927c5b919131c39e46f935c4
 		if("getAddress".equals(doMethod) ){
@@ -526,6 +631,15 @@ public class ApiServiceImpl implements ApiService {
 			return null;
 		}
 		
+		//获取热门搜索列表pre
+		// http://192.168.3.130:8888/hbadmin/domain?do=getKeyword&version=1.0.0&appid=100&sign=c443b3a9bfce61a7ebe4694fdf1e847e
+		if("getKeywordpre".equals(doMethod) ){
+			switch(versioncode){
+				case 100: return resourceService.getKeywordpre(request);
+			}
+			return null;
+		}
+		
 		//点赞
 		// http://192.168.3.130:8888/hbadmin/domain?do=dianzan&uid=9&resource_id=15&version=1.0.0&appid=100&sign=c443b3a9bfce61a7ebe4694fdf1e847e
 		if("dianzan".equals(doMethod) ){
@@ -549,6 +663,15 @@ public class ApiServiceImpl implements ApiService {
 		if("dianzanList".equals(doMethod) ){
 			switch(versioncode){
 				case 100: return resourceService.fList(request);
+			}
+			return null;
+		}
+		
+		//获取点赞列表pre
+		//http://192.168.3.130:8888/hbadmin/domain?do=dianzanList&uid=9&version=1.0.0&appid=100&sign=c443b3a9bfce61a7ebe4694fdf1e847e
+		if("dianzanListpre".equals(doMethod) ){
+			switch(versioncode){
+				case 100: return resourceService.fListpre(request);
 			}
 			return null;
 		}

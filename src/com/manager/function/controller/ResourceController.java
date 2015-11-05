@@ -101,7 +101,7 @@ public class ResourceController {
 				if(CollectionUtil.checkNull(resource.getImg_list())){
 					resource.setImg_list(CollectionUtil.tobereplace(resource.getImg_list(), 0));
 				}
-				if(resource.getResource_type_id().equals("1")||resource.getResource_type_id().equals("4")){
+				if(resource.getResource_type_id().equals("1")||resource.getResource_type_id().equals("4")||resource.getResource_type_id().equals("2")){
 					if(CollectionUtil.checkNull(resource.getImg_main())){
 						resource.setImg_main(CollectionUtil.tobereplace(resource.getImg_main(), 0));
 					}
@@ -109,6 +109,16 @@ public class ResourceController {
 				if(resource.getResource_type_id().equals("4")){
 					if(CollectionUtil.checkNull(resource.getImg_book()))
 					resource.setImg_book(CollectionUtil.tobereplace(resource.getImg_book(), 0));
+					
+					if(CollectionUtil.checkNull(resource.getRead_img())){
+						resource.setRead_img(CollectionUtil.tobereplace(resource.getRead_img(), 0));
+					}
+					if(CollectionUtil.checkNull(resource.getLian_img())){
+						resource.setLian_img(CollectionUtil.tobereplace(resource.getLian_img(), 0));
+					}
+					if(CollectionUtil.checkNull(resource.getStart_img())){
+						resource.setStart_img(CollectionUtil.tobereplace(resource.getStart_img(), 0));
+					}
 				}
 				
 				
@@ -236,6 +246,14 @@ public class ResourceController {
 			String resource_author=(String)request.getParameter("resource_author");
 			String resource_keyword=(String)request.getParameter("resource_keyword");
 			
+			//拓展介绍字段
+			String read_content=(String)request.getParameter("read_content");
+			String read_img=(String)request.getParameter("read_img");
+			String lian_content=(String)request.getParameter("lian_content");
+			String lian_img=(String)request.getParameter("lian_img");
+			String start_content=(String)request.getParameter("start_content");
+			String start_img=(String)request.getParameter("start_img");
+			
 //			if(!CollectionUtil.checkNull(id)){jsonObj.put("res", "不能为空！");return null;}
 			if(!CollectionUtil.checkNull(resource_content)){jsonObj.put("res", "资源名称不能为空！");return null;}
 			if(!CollectionUtil.checkNull(resource_summary)){jsonObj.put("res", "资源简介不能为空！");return null;}
@@ -244,10 +262,11 @@ public class ResourceController {
 			if(!CollectionUtil.checkNull(img_index_size)){jsonObj.put("res", "首页展示图片尺寸不能为空！");return null;}
 			if(!CollectionUtil.checkNull(img_list )){jsonObj.put("res", "请选择要上传的列表展示图片！");return null;}
 			if(!CollectionUtil.checkNull(img_list_size)){jsonObj.put("res", "列表展示图片尺寸不能为空！");return null;}
-			if(resource_type_id.equals("1")||resource_type_id.equals("4")){
+			if(resource_type_id.equals("1")||resource_type_id.equals("4")||resource_type_id.equals("2")){
 				if(!CollectionUtil.checkNull(img_main )){jsonObj.put("res", "请选择要上传的主界面背景图片！");return null;}
 				if(!CollectionUtil.checkNull(img_main_size)){jsonObj.put("res", "主界面背景图片尺寸不能为空！！");return null;}
 			}
+			
 			//if(resource_type_id.equals("4")){
 			//	if(!CollectionUtil.checkNull(img_book )){jsonObj.put("res", "请选择要上传的书架封面图片！");return null;}
 			//	if(!CollectionUtil.checkNull(img_book_size)){jsonObj.put("res", "书架封面图片尺寸不能为空！！");return null;}
@@ -276,14 +295,37 @@ public class ResourceController {
 			Resource.setImg_index_size(img_index_size);
 			Resource.setImg_list(CollectionUtil.tobereplace(img_list, 1));
 			Resource.setImg_list_size(img_list_size);
-			if(resource_type_id.equals("1")||resource_type_id.equals("4")){
+			if(resource_type_id.equals("1")||resource_type_id.equals("4")||resource_type_id.equals("2")){
 				Resource.setImg_main(CollectionUtil.tobereplace(img_main, 1));
 				Resource.setImg_main_size(img_main_size);
 			}
 			if(resource_type_id.equals("4")){
 				Resource.setImg_book(CollectionUtil.tobereplace(img_index, 1));
 				Resource.setImg_book_size(img_index_size);
+				
+				
+				//拓展介绍字段
+				if(CollectionUtil.checkNull(read_content)){
+					Resource.setRead_content(read_content);
+				}
+				if(CollectionUtil.checkNull(lian_content)){
+					Resource.setLian_content(lian_content);
+				}
+				if(CollectionUtil.checkNull(start_content)){
+					Resource.setStart_content(start_content);
+				}
+				if(CollectionUtil.checkNull(read_img)){
+					Resource.setRead_img(CollectionUtil.tobereplace(read_img, 1));
+				}
+				if(CollectionUtil.checkNull(lian_img)){
+					Resource.setLian_img(CollectionUtil.tobereplace(lian_img, 1));
+				}
+				if(CollectionUtil.checkNull(start_img)){
+					Resource.setStart_img(CollectionUtil.tobereplace(start_img, 1));
+				}
 			}
+			
+			
 			Resource.setResource_status(resource_status);
 //			Resource.setCreate_date(create_date);
 			Resource.setCreate_adminuser(adminAccount);
@@ -405,6 +447,15 @@ public class ResourceController {
 			String resource_author = (String)request.getParameter("resource_author");
 			String resource_keyword=(String)request.getParameter("resource_keyword");
 			
+			
+			//拓展介绍字段
+			String read_content=(String)request.getParameter("read_content");
+			String read_img=(String)request.getParameter("read_img");
+			String lian_content=(String)request.getParameter("lian_content");
+			String lian_img=(String)request.getParameter("lian_img");
+			String start_content=(String)request.getParameter("start_content");
+			String start_img=(String)request.getParameter("start_img");
+			
 			if(!CollectionUtil.checkNull(id)){jsonObj.put("res", "序列号不能为空！");return null;}
 			if(!CollectionUtil.checkNull(resource_content)){jsonObj.put("res", "资源名称不能为空！");return null;}
 			if(!CollectionUtil.checkNull(resource_summary)){jsonObj.put("res", "资源简介不能为空！");return null;}
@@ -446,13 +497,45 @@ public class ResourceController {
 			Resource.setImg_index_size(img_index_size);
 			Resource.setImg_list(CollectionUtil.tobereplace(img_list, 1));
 			Resource.setImg_list_size(img_list_size);
-			if(resource_type_id.equals("1")||resource_type_id.equals("4")){
+			if(resource_type_id.equals("1")||resource_type_id.equals("4")||resource_type_id.equals("2")){
 				Resource.setImg_main(CollectionUtil.tobereplace(img_main, 1));
 				Resource.setImg_main_size(img_main_size);
 			}
 			if(resource_type_id.equals("4")){
 				Resource.setImg_book(CollectionUtil.tobereplace(img_index, 1));
 				Resource.setImg_book_size(img_index_size);
+				
+				//拓展介绍字段
+				if(CollectionUtil.checkNull(read_content)){
+					Resource.setRead_content(read_content);
+				}else{
+					Resource.setRead_content(null);
+				}
+				if(CollectionUtil.checkNull(lian_content)){
+					Resource.setLian_content(lian_content);
+				}else{
+					Resource.setLian_content(null);
+				}
+				if(CollectionUtil.checkNull(start_content)){
+					Resource.setStart_content(start_content);
+				}else{
+					Resource.setStart_content(null);
+				}
+				if(CollectionUtil.checkNull(read_img)){
+					Resource.setRead_img(CollectionUtil.tobereplace(read_img, 1));
+				}else{
+					Resource.setRead_img(null);
+				}
+				if(CollectionUtil.checkNull(lian_img)){
+					Resource.setLian_img(CollectionUtil.tobereplace(lian_img, 1));
+				}else{
+					Resource.setLian_img(null);
+				}
+				if(CollectionUtil.checkNull(start_img)){
+					Resource.setStart_img(CollectionUtil.tobereplace(start_img, 1));
+				}else{
+					Resource.setStart_img(null);
+				}
 			}
 			Resource.setResource_status(resource_status);
 			Resource.setUpdate_adminuser(adminAccount);

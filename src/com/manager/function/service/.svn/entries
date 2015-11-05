@@ -28,14 +28,14 @@ svn:special svn:externals svn:needs-lock
 
 UserService.java
 file
-187
+194
 
 
 
-2015-10-10T05:51:07.415914Z
-9377b907c476c169197caafae42db0d3
-2015-10-10T06:44:04.598332Z
-187
+2015-11-05T07:19:18.249919Z
+3dab8cea703bba0062dac55481c56f54
+2015-11-05T08:57:55.949172Z
+194
 liuquanwei
 
 
@@ -58,41 +58,7 @@ liuquanwei
 
 
 
-1801
-
-FavoriteService.java
-file
-
-
-
-
-2015-10-08T03:31:34.630423Z
-cf182205eee498e973a725a2e7ca3b5a
-2015-06-10T08:17:58.628406Z
-88
-yczhou
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-371
+1989
 
 GlobalHobbyAttrService.java
 file
@@ -127,6 +93,40 @@ yczhou
 
 
 395
+
+FavoriteService.java
+file
+
+
+
+
+2015-10-08T03:31:34.630423Z
+cf182205eee498e973a725a2e7ca3b5a
+2015-06-10T08:17:58.628406Z
+88
+yczhou
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+371
 
 TopicTypeService.java
 file
@@ -232,20 +232,15 @@ lhlei
 
 ResourceService.java
 file
+194
 
 
 
-
-2015-10-08T03:31:34.638424Z
-c82ce24a69df85c6cfa67f2c6c208155
-2015-09-17T02:19:38.056828Z
-179
-lhlei
-
-
-
-
-
+2015-11-05T08:22:40.883418Z
+64ff128231a61b01c5d61325c030444f
+2015-11-05T08:57:55.949172Z
+194
+liuquanwei
 
 
 
@@ -262,7 +257,12 @@ lhlei
 
 
 
-1898
+
+
+
+
+
+2066
 
 GlobalLevelService.java
 file
@@ -298,22 +298,17 @@ lhlei
 
 1095
 
-WeekdayService.java
+BabyInfoService.java
 file
+190
 
 
 
-
-2015-10-08T03:31:34.647424Z
-a6305d2163954db661cda9c0c2a48558
-2015-05-15T08:12:58.087764Z
-15
-lhlei
-
-
-
-
-
+2015-10-23T01:49:25.406202Z
+c128ee4ed2f195f945381c81fd9b1137
+2015-10-23T05:40:58.594154Z
+190
+liuquanwei
 
 
 
@@ -330,7 +325,12 @@ lhlei
 
 
 
-864
+
+
+
+
+
+655
 
 ResourceTypeService.java
 file
@@ -366,51 +366,17 @@ lhlei
 
 1013
 
-BabyInfoService.java
-file
-190
-
-
-
-2015-10-23T01:49:25.406202Z
-c128ee4ed2f195f945381c81fd9b1137
-2015-10-23T05:40:58.594154Z
-190
-liuquanwei
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-655
-
-TopicReplyService.java
+WeekdayService.java
 file
 
 
 
 
-2015-10-08T03:31:34.651424Z
-bb7b27235c26cd214f2fbc3742b2f05a
-2015-06-09T02:45:17.501193Z
-69
-yczhou
+2015-10-08T03:31:34.647424Z
+a6305d2163954db661cda9c0c2a48558
+2015-05-15T08:12:58.087764Z
+15
+lhlei
 
 
 
@@ -432,7 +398,7 @@ yczhou
 
 
 
-961
+864
 
 SearchLogsService.java
 file
@@ -467,6 +433,40 @@ lhlei
 
 
 378
+
+TopicReplyService.java
+file
+
+
+
+
+2015-10-08T03:31:34.651424Z
+bb7b27235c26cd214f2fbc3742b2f05a
+2015-06-09T02:45:17.501193Z
+69
+yczhou
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+961
 
 GlobalPropertyAttrService.java
 file
@@ -844,20 +844,15 @@ lhlei
 
 LearnplanService.java
 file
+194
 
 
 
-
-2015-10-08T03:31:34.676426Z
-ec8d9a61d53a25e486bba15b40c2050b
-2015-05-18T01:45:30.130942Z
-22
-yczhou
-
-
-
-
-
+2015-11-05T08:08:56.792282Z
+0f351196b5627fa11f081ec4955efac7
+2015-11-05T08:57:55.949172Z
+194
+liuquanwei
 
 
 
@@ -874,24 +869,24 @@ yczhou
 
 
 
-966
+
+
+
+
+
+1118
 
 BabyService.java
 file
+194
 
 
 
-
-2015-10-08T03:31:34.678426Z
-20facf62e798a47180ec38f0ef08e49b
-2015-06-14T10:10:55.392910Z
-109
-yczhou
-
-
-
-
-
+2015-11-05T06:05:25.099358Z
+3da997afdd05d1d1e464f85b897183a5
+2015-11-05T08:57:55.949172Z
+194
+liuquanwei
 
 
 
@@ -908,5 +903,10 @@ yczhou
 
 
 
-720
+
+
+
+
+
+803
 

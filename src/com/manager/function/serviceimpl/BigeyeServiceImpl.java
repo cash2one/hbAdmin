@@ -161,7 +161,7 @@ public class BigeyeServiceImpl implements BigeyeService {
 		hsm.put("result", result);
 		hsm.put("module_id", module_id);
 		hsm.put("message", message);
-		hsm.put("data", !obj.isEmpty()?obj:"");
+		hsm.put("data", obj);
 		Date d2 = new Date();
 		logger.info("结束："+adf.format(d2));
         long diff = (d2.getTime() - d1.getTime());

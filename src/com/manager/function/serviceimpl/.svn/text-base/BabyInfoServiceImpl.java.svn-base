@@ -160,7 +160,7 @@ public class BabyInfoServiceImpl implements BabyInfoService {
         hsm.put("version", Constant.version);
         hsm.put("result", result);
         hsm.put("message", message);
-        hsm.put("data", data);
+        hsm.put("data", data!=null?data:"");
         Date d2 = new Date();
 		logger.info("结束："+adf.format(d2));
         long diff = (d2.getTime() - d1.getTime());
@@ -246,7 +246,7 @@ public class BabyInfoServiceImpl implements BabyInfoService {
 				obj.put("city", userModel1.getCity_id()!=null?userModel1.getCity_id():"");
 				obj.put("district", userModel1.getDistrict_id()!=null?userModel1.getDistrict_id():"");
 				obj.put("backup", userModel1.getBackup()!=null?userModel1.getBackup():"");
-				obj.put("baby", ls!=null?list1:"");
+				obj.put("baby", list1);
 				data.put("userinfo", obj);
 			}
 		}catch (Exception e) {

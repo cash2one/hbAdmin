@@ -137,11 +137,77 @@
 		    	var value = response ;
 		    	var file=value.substring(0,value.indexOf("-"));
 		    	var filesize=value.substring(value.indexOf("-")+1);
-		    	$("#img_book_size").val(filesize); 
-			   　//   alert("文件:" + fileObj.name + "上传成功");
-		  		$("#img_book").val(file); 
+		    	//$("#img_main_size").val(filesize); 
+			   　//alert("文件:" + fileObj.name + "上传成功");
+		  		$("#read_img").val(file); 
 		  		$("#see_img_4").attr("src",file);  
                 $("#see_img_4").show();
+		   　},  
+		   　onError: function(event, queueID, fileObj) {  
+		   　 alert("文件:" + fileObj.name + "上传失败");  
+		   　},  
+		   　onCancel: function(event, queueID, fileObj){  
+		   　 alert("取消了" + fileObj.name);  
+		   　　　} 
+		  });
+		  
+		  $("#uploadify5").uploadify({
+		   'uploader'       : '<%=basePath %>js/uploadify.swf',
+		   'script'         : '<%=basePath %>scripts/uploadify',//servlet的路径或者.jsp 这是访问servlet 'scripts/uploadif' 
+		   'method'         : 'GET',  //如果要传参数，就必须改为GET
+		   'cancelImg'      : '<%=basePath %>js/cancel.png',
+		   'folder'         : 'uploads', //要上传到的服务器路径，
+		   'queueID'        : 'fileQueue5',
+		   'auto'           : false, //选定文件后是否自动上传，默认false
+		   'multi'          : true, //是否允许同时上传多文件，默认false
+		   'simUploadLimit' : 1, //一次同步上传的文件数目  
+		   'sizeLimit'      : 19871202, //设置单个文件大小限制，单位为byte  
+		   'queueSizeLimit' : 1, //限制在一次队列中的次数（可选定几个文件）。默认值= 999，而一次可传几个文件有 simUploadLimit属性决定。
+		   'fileDesc'       : '支持格式:jpg或gif或png', //如果配置了以下的'fileExt'属性，那么这个属性是必须的  
+		   'fileExt'        : '*.jpg;*.gif;*.png',//允许的格式
+		   'scriptData'     :{'name':1},
+		   　onComplete: function (event, queueID, fileObj, response, data) {
+		    	var value = response ;
+		    	var file=value.substring(0,value.indexOf("-"));
+		    	var filesize=value.substring(value.indexOf("-")+1);
+		    	//$("#img_main_size").val(filesize); 
+			   　//alert("文件:" + fileObj.name + "上传成功");
+		  		$("#lian_img").val(file); 
+		  		$("#see_img_5").attr("src",file);  
+                $("#see_img_5").show();
+		   　},  
+		   　onError: function(event, queueID, fileObj) {  
+		   　 alert("文件:" + fileObj.name + "上传失败");  
+		   　},  
+		   　onCancel: function(event, queueID, fileObj){  
+		   　 alert("取消了" + fileObj.name);  
+		   　　　} 
+		  });
+		  
+		  $("#uploadify6").uploadify({
+		   'uploader'       : '<%=basePath %>js/uploadify.swf',
+		   'script'         : '<%=basePath %>scripts/uploadify',//servlet的路径或者.jsp 这是访问servlet 'scripts/uploadif' 
+		   'method'         : 'GET',  //如果要传参数，就必须改为GET
+		   'cancelImg'      : '<%=basePath %>js/cancel.png',
+		   'folder'         : 'uploads', //要上传到的服务器路径，
+		   'queueID'        : 'fileQueue6',
+		   'auto'           : false, //选定文件后是否自动上传，默认false
+		   'multi'          : true, //是否允许同时上传多文件，默认false
+		   'simUploadLimit' : 1, //一次同步上传的文件数目  
+		   'sizeLimit'      : 19871202, //设置单个文件大小限制，单位为byte  
+		   'queueSizeLimit' : 1, //限制在一次队列中的次数（可选定几个文件）。默认值= 999，而一次可传几个文件有 simUploadLimit属性决定。
+		   'fileDesc'       : '支持格式:jpg或gif或png', //如果配置了以下的'fileExt'属性，那么这个属性是必须的  
+		   'fileExt'        : '*.jpg;*.gif;*.png',//允许的格式
+		   'scriptData'     :{'name':1},
+		   　onComplete: function (event, queueID, fileObj, response, data) {
+		    	var value = response ;
+		    	var file=value.substring(0,value.indexOf("-"));
+		    	var filesize=value.substring(value.indexOf("-")+1);
+		    	//$("#img_main_size").val(filesize); 
+			   　//alert("文件:" + fileObj.name + "上传成功");
+		  		$("#start_img").val(file); 
+		  		$("#see_img_6").attr("src",file);  
+                $("#see_img_6").show();
 		   　},  
 		   　onError: function(event, queueID, fileObj) {  
 		   　 alert("文件:" + fileObj.name + "上传失败");  
@@ -278,7 +344,7 @@
 		
 		var img_main =document.getElementById("img_main").value;
 		var img_main_size =document.getElementById("img_main_size").value;
-  	 	if(resource_type_id=='1'||resource_type_id=='4'){
+  	 	if(resource_type_id=='1'||resource_type_id=='4'||resource_type_id=='2'){
 			if(img_main==null || ''==img_main){
 	  	 		alert("请选择要上传的主界面背景图片");
 	  	 		return;
@@ -286,6 +352,22 @@
   	 	}else{
   	 		img_main=null;
   	 		img_main_size=null;
+  	 	}
+  	 	
+  	 	var read_content=document.getElementById("read_content").value;
+  	 	var read_img=document.getElementById("read_img").value;
+  	 	var lian_content=document.getElementById("lian_content").value;
+  	 	var lian_img=document.getElementById("lian_img").value;
+  	 	var start_content=document.getElementById("start_content").value;
+  	 	var start_img=document.getElementById("start_img").value;
+  	 	if(resource_type_id=='4'){
+  	 	}else{
+  	 		read_content=null;
+  	 		read_img=null;
+  	 		lian_content=null;
+  	 		lian_img=null;
+  	 		start_content=null;
+  	 		start_img=null;
   	 	}
   	 	
 		//var img_book =document.getElementById("img_book").value;
@@ -337,7 +419,13 @@
 					'level_id':level_id,
 					'property_id':property_id,
 					'resource_author':resource_author,
-					'resource_keyword':resource_keyword
+					'resource_keyword':resource_keyword,
+					"read_content":read_content,
+  	 				"read_img":read_img,
+  	 				"lian_content":lian_content,
+  	 				"lian_img":lian_img,
+  	 				"start_content":start_content,
+  	 				"start_img":start_img
              	   },
              dataType: "json",
              async:	false,
@@ -357,10 +445,12 @@
   		var resource_type_id=document.getElementById("resource_type_id").value;
   		//$("[name=fengmian]").hide();
   		$("[name=beijing]").hide();
-  		//if(resource_type_id=='4'){
-  		//	$("[name=fengmian]").show();
-  		//}
-  		if(resource_type_id=='1'||resource_type_id=='4'){
+  		if(resource_type_id=='4'){
+  			$("#tzjs").show();
+  		}else{
+  			$("#tzjs").hide();
+  		}
+  		if(resource_type_id=='1'||resource_type_id=='4'||resource_type_id=='2'){
   			$("[name=beijing]").show();
   		}
   }
@@ -725,6 +815,87 @@
 		    	</table>
 		    	</div>
 		   	</li>
+		   	
+		   	
+		   	
+		   	
+		   	
+		   	
+		   	
+		   	<li id="tzjs" style="display: none"><label>拓展介绍：<b></b></label>
+		    	<div id="tab2" class="tabson" style="width:80%;float:left;">
+		    	<table class="formtab tablelist " style="border: 1;">
+		    	<tr>
+		    		<td>图片类型</td>
+		    		<td>开始读</td>
+		    		<td>开始练</td>
+		    		<td>起始值</td>
+		    	</tr>
+		    	<tr>
+		    		<td>介绍文字</td>
+		    		<td>
+		    			<textarea class="textinput200" cols="25" rows="2" id="read_content" maxlength="500" name="read_content">${resource.read_content }</textarea>
+		    		</td>
+		    		<td>
+		    			<textarea class="textinput200" cols="25" rows="2" id="lian_content" maxlength="500" name="lian_content">${resource.lian_content }</textarea>
+		    		</td>
+		    		<td>
+		    			<textarea class="textinput200" cols="25" rows="2" id="start_content" maxlength="500" name="start_content">${resource.start_content }</textarea>
+		    		</td>
+		    	</tr>
+		    	<tr>
+		    		<td>上传图片</td>
+		    		<td>
+		    			<input type="hidden" id="read_img" name="read_img" value="${resource.read_img }" class="dfinput" readonly />
+						<div>
+						<div id="fileQueue4"></div> </br>
+							<input type="file" name="uploadify4" id="uploadify4" />
+							<p style="">
+								<a href="javascript:uploasFile(4)">开始上传</a>&nbsp;
+								<a href="javascript:jQuery('#uploadify4').uploadifyClearQueue()">取消上传</a>
+							</p>
+						</div>
+						<div id = "img_4">
+							<img style="display: <c:if test="${empty resource.read_img}">none</c:if>" id="see_img_4" src="${resource.read_img }" width="150" height="90">
+						</div>
+					</td>
+		    		<td>
+		    			<input type="hidden" id="lian_img" name="lian_img" value="${resource.lian_img }" class="dfinput" readonly />
+						<div>
+						<div id="fileQueue5"></div> </br>
+							<input type="file" name="uploadify5" id="uploadify5" />
+							<p style="">
+								<a href="javascript:uploasFile(5)">开始上传</a>&nbsp;
+								<a href="javascript:jQuery('#uploadify5').uploadifyClearQueue()">取消上传</a>
+							</p>
+						</div>
+						<div id = "img_5">
+							<img style="display: <c:if test="${empty resource.lian_img }">none</c:if>" id="see_img_5" src="${resource.lian_img }" width="150" height="90">
+						</div>
+		    		</td>
+		    		<td >
+		    			<input type="hidden" id="start_img" name="start_img" value="${resource.start_img }" class="dfinput" readonly/ >
+						<div>
+						<div id="fileQueue6"></div> </br>
+							<input type="file" name="uploadify6" id="uploadify6" />
+							<p style="">
+								<a href="javascript:uploasFile(6)">开始上传</a>&nbsp;
+								<a href="javascript:jQuery('#uploadify6').uploadifyClearQueue()">取消上传</a>
+							</p>
+						</div>
+						<div id = "img_6">
+							<img style="display: <c:if test="${empty resource.start_img}">none</c:if>" id="see_img_6" src="${resource.start_img }" width="150" height="90">
+						</div>
+		    		</td>
+		    	</tr>
+		    	</table>
+		    	</div>
+		   	</li>
+		   	
+		   	
+		   	
+		   	
+		   	
 		   	<script>changeTypeId()</script>
 		    <li><label><b></b></label>
 		    	<input type="button" value=" 修 改 " name="close" id="close" onclick="update();" class="btn"/>&nbsp;&nbsp;

@@ -50,9 +50,15 @@ public interface ResourceService {
 	
 	public Map search(HttpServletRequest request);
 	
+	public Map searchpre(HttpServletRequest request);
+	
 	public Map getKeyword(HttpServletRequest request);
 	
+	public Map getKeywordpre(HttpServletRequest request);
+	
 	public Map fList(HttpServletRequest request);
+	
+	public Map fListpre(HttpServletRequest request);
 	
 	public Map getPlay(HttpServletRequest request);
 	

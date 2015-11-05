@@ -64,6 +64,69 @@ public class Resource implements Serializable {
 	private String spend_minute;
 	private String plan_status;
 	private String  replenish;
+	
+	//read_content      varchar(500)  utf8_general_ci  YES             (NULL)           select,insert,update,references  开始读介绍                         
+	//read_img          varchar(100)  utf8_general_ci  YES             (NULL)           select,insert,update,references  开始读封面图                      
+	//lian_content      varchar(500)  utf8_general_ci  YES             (NULL)           select,insert,update,references  开始练介绍                         
+	//lian_img          varchar(100)  utf8_general_ci  YES             (NULL)           select,insert,update,references  开始练封面图                      
+	//start_content     varchar(500)  utf8_general_ci  YES             (NULL)           select,insert,update,references  起始介绍                            
+	//start_img         varchar(100)  utf8_general_ci  YES             (NULL)           select,insert,update,references  起始封面图     
+	private String read_content;
+	private String read_img;
+	private String lian_content;
+	private String lian_img;
+	private String start_content;
+	private String start_img;
+	
+	
+	public String getRead_content() {
+		return read_content;
+	}
+
+	public void setRead_content(String read_content) {
+		this.read_content = read_content;
+	}
+
+	public String getRead_img() {
+		return read_img;
+	}
+
+	public void setRead_img(String read_img) {
+		this.read_img = read_img;
+	}
+
+	public String getLian_content() {
+		return lian_content;
+	}
+
+	public void setLian_content(String lian_content) {
+		this.lian_content = lian_content;
+	}
+
+	public String getLian_img() {
+		return lian_img;
+	}
+
+	public void setLian_img(String lian_img) {
+		this.lian_img = lian_img;
+	}
+
+	public String getStart_content() {
+		return start_content;
+	}
+
+	public void setStart_content(String start_content) {
+		this.start_content = start_content;
+	}
+
+	public String getStart_img() {
+		return start_img;
+	}
+
+	public void setStart_img(String start_img) {
+		this.start_img = start_img;
+	}
+
 	public String getReplenish() {
 		return replenish;
 	}

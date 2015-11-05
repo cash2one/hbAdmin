@@ -356,7 +356,7 @@ public class UserServiceImpl implements UserService {
 				obj.put("city", userModel1.getCity_id()!=null?userModel1.getCity_id():"");
 				obj.put("district", userModel1.getDistrict_id()!=null?userModel1.getDistrict_id():"");
 				obj.put("backup", userModel1.getBackup()!=null?userModel1.getBackup():"");
-				obj.put("baby", ls!=null?list1:"");
+				obj.put("baby", list1.size()!=0?list1:"");
 				data.put("userinfo", obj);
 			}
 		}catch (Exception e) {
@@ -371,7 +371,7 @@ public class UserServiceImpl implements UserService {
         hsm.put("version", Constant.version);
         hsm.put("result", result);
         hsm.put("message", message);
-        hsm.put("data", !data.isEmpty()?data:"");
+        hsm.put("data", data!=null?data:"");
         
         Date d2 = new Date();
 		logger.info("结束："+adf.format(d2));
@@ -381,6 +381,126 @@ public class UserServiceImpl implements UserService {
 		return hsm;
 	}
 
+	@Transactional
+	public Map addpre(HttpServletRequest request) {
+		
+		SimpleDateFormat adf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d1 = new Date();
+		logger.info("开始："+adf.format(d1));
+		
+		String result  = "0";
+		String message = "";
+		JSONObject data = new JSONObject();
+		String user_id = "";
+		
+		String appId = (String) request.getParameter("appid");
+		String appKey = Constant.APPID_KEY.get(appId);
+		try{
+			String uid = (String) request.getParameter("open_id");
+			String source = (String) request.getParameter("source");
+			String user_pwd = (String) request.getParameter("user_pwd");
+			String user_avatar = (String) request.getParameter("user_avatar");
+			String user_nickname = (String) request.getParameter("user_nickname");
+			
+			User user = new User();
+			user.setOpen_id(uid);
+			
+			boolean flag = false;
+			
+			if(uid==null||source==null||"".equals(uid)||"".equals(source)||"".equals(user_pwd)||"".equals(user_pwd)){
+				result = "0";
+				message = initDataPool.getSP("2-4-203");
+			}else{
+				flag = true;
+			}
+			
+			if(flag){
+				User userModel = this.userDao.isExcit(user);
+				if(userModel!=null){
+					result = "2";
+					message = initDataPool.getSP("2-4-205");
+				}else{
+					result = "1";
+					message = initDataPool.getSP("2-4-204");
+					user_id = this.userDao.getId()+"";
+					user.setReg_source(source);
+					user.setUser_id(user_id);
+					user.setUser_pwd(user_pwd);
+					user.setUser_nickname(user_nickname);
+					user.setUser_avatar(user_avatar);
+					this.userDao.add(user);
+					UserBilling ub = new UserBilling();
+					ub.setUser_id(user_id);
+					ub.setUser_money("0");
+					ub.setUser_score("0");
+					ub.setLastpay_money("0");
+					ub.setUser_use_money("0");
+					ub.setUser_use_score("0");
+					this.userBillingDao.add(ub);
+				}
+			}
+			
+			if(result.equals("1")){
+				User userModel1 = this.userDao.findById(user_id);
+				List<Baby> ls = this.babyDao.findByUserId(user_id);
+				List<Baby> list1 = new ArrayList<Baby>();
+				if(ls!=null){
+				for(Baby baby:ls){
+					String id = baby.getId();
+					List<BabyInfo> list = this.babyInfoDao.findByBabyId(id);
+					String hobby_ids = "";
+					String Level_ids = "";
+					for(int i = 0;i<list.size();i++){
+						if(id.equals(list.get(i).getBaby_id())){
+							Level_ids = list.get(i).getLevel_id();
+							if("".equals(hobby_ids)){
+								hobby_ids = list.get(i).getProperty_id();
+							}else{
+								hobby_ids +=","+list.get(i).getProperty_id();
+							}
+						}
+					}
+					baby.setProperty_id(hobby_ids);
+					baby.setLevel_id(Level_ids);
+					list1.add(baby);
+					
+				}
+				}
+				JSONObject obj = new JSONObject();
+				obj.put("uid", userModel1.getUser_id()!=null?tobereplace(userModel1.getUser_id(), 0):"");
+				obj.put("user_avatar", userModel1.getUser_avatar()!=null?tobereplace(userModel1.getUser_avatar(), 0):"");
+				obj.put("user_email", userModel1.getUser_email()!=null?userModel1.getUser_email():"");
+				obj.put("user_nickname", userModel1.getUser_nickname()!=null?userModel1.getUser_nickname():"");
+				obj.put("user_title", userModel1.getUser_title()!=null?userModel1.getUser_title():"");
+				obj.put("user_age", userModel1.getUser_age()!=null?userModel1.getUser_age():"");
+				obj.put("province", userModel1.getProvince_id()!=null?userModel1.getProvince_id():"");
+				obj.put("city", userModel1.getCity_id()!=null?userModel1.getCity_id():"");
+				obj.put("district", userModel1.getDistrict_id()!=null?userModel1.getDistrict_id():"");
+				obj.put("backup", userModel1.getBackup()!=null?userModel1.getBackup():"");
+				obj.put("baby", list1);
+				data.put("userinfo", obj);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			result = "error";
+			message = initDataPool.getSP("2-4-000");
+			throw new RuntimeException("userServiceImpl.add异常");
+		}
+		
+		Map hsm = new LinkedHashMap();
+        hsm.put("version", Constant.version);
+        hsm.put("result", result);
+        hsm.put("message", message);
+        hsm.put("data", data);
+        
+        Date d2 = new Date();
+		logger.info("结束："+adf.format(d2));
+        long diff = (d2.getTime() - d1.getTime());
+        logger.info("UserServiceImpl.add执行了"+diff+"毫秒");
+        
+		return hsm;
+	}
 	public Map findById(HttpServletRequest request) {
 		
 		SimpleDateFormat adf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -420,7 +540,7 @@ public class UserServiceImpl implements UserService {
         hsm.put("version", Constant.version);
         hsm.put("result", result);
         hsm.put("message", message);
-        hsm.put("data", !data.isEmpty()?data:"");
+        hsm.put("data", data);
         
         Date d2 = new Date();
 		logger.info("结束："+adf.format(d2));
@@ -513,7 +633,7 @@ public class UserServiceImpl implements UserService {
 				obj.put("city", userModel1.getCity_id()!=null?userModel1.getCity_id():"");
 				obj.put("district", userModel1.getDistrict_id()!=null?userModel1.getDistrict_id():"");
 				obj.put("backup", userModel1.getBackup()!=null?userModel1.getBackup():"");
-				obj.put("baby", ls!=null?list1:"");
+				obj.put("baby", list1.size()!=0?list1:"");
 				data.put("userinfo", obj);
 			}
 		}catch (Exception e) {
@@ -527,7 +647,7 @@ public class UserServiceImpl implements UserService {
         hsm.put("version", Constant.version);
         hsm.put("result", result);
         hsm.put("message", message);
-        hsm.put("data", !data.isEmpty()?data:"");
+        hsm.put("data", data!=null?data:"");
         
         Date d2 = new Date();
 		logger.info("结束："+adf.format(d2));
@@ -537,7 +657,112 @@ public class UserServiceImpl implements UserService {
 		return hsm;
 	}
 	
-	
+public Map isExcitpre(HttpServletRequest request) {
+		
+		SimpleDateFormat adf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d1 = new Date();
+		logger.info("开始："+adf.format(d1));
+		
+		String result  = "0";
+		String message = "";
+		JSONObject data = new JSONObject();
+		String user_id = "";
+		
+		String appId = (String) request.getParameter("appid");
+		String appKey = Constant.APPID_KEY.get(appId);
+		try{
+			String uid = (String) request.getParameter("open_id");
+			String user_pwd = (String) request.getParameter("user_pwd");
+			
+			User user = new User();
+			user.setOpen_id(uid);
+			user.setUser_pwd(user_pwd);
+			
+			boolean flag = false;
+			
+			if(uid==null||"".equals(uid)||"".equals(user_pwd)||"".equals(user_pwd)){
+				result = "0";
+				message = initDataPool.getSP("2-4-203");
+			}else{
+				flag = true;
+			}
+			
+			if(flag){
+				User userModel = this.userDao.isExcit(user);
+				if(userModel!=null){
+					user_id = userModel.getUser_id();
+					result = "1";
+					message = initDataPool.getSP("2-4-206");
+				}else{
+					result = "2";
+					message = initDataPool.getSP("2-4-207");
+				}
+			}
+			
+			if(result.equals("1")){
+				User userModel1 = this.userDao.findById(user_id);
+				List<Baby> ls = this.babyDao.findByUserId(user_id);
+				List<Baby> list1 = new ArrayList<Baby>();
+				if(ls!=null){
+					for(Baby baby:ls){
+						String id = baby.getId();
+						List<BabyInfo> list = this.babyInfoDao.findByBabyId(id);
+						String hobby_ids = "";
+						String Level_ids = "";
+						if(list!=null){
+							for(int i = 0;i<list.size();i++){
+								if(id.equals(list.get(i).getBaby_id())){
+									Level_ids = list.get(i).getLevel_id();
+									if("".equals(hobby_ids)){
+										hobby_ids = list.get(i).getProperty_id();
+									}else{
+										hobby_ids +=","+list.get(i).getProperty_id();
+									}
+								}
+							}
+						}
+						baby.setProperty_id(hobby_ids);
+						baby.setLevel_id(Level_ids);
+						String url = baby.getBaby_avatar()!=null?tobereplace(baby.getBaby_avatar(), 0):"";
+						baby.setBaby_avatar(url);
+						list1.add(baby);
+						
+					}
+				}
+				JSONObject obj = new JSONObject();
+				obj.put("uid", userModel1.getUser_id()!=null?tobereplace(userModel1.getUser_id(), 0):"");
+				obj.put("user_avatar", userModel1.getUser_avatar()!=null?tobereplace(userModel1.getUser_avatar(), 0):"");
+				obj.put("user_email", userModel1.getUser_email()!=null?userModel1.getUser_email():"");
+				obj.put("user_nickname", userModel1.getUser_nickname()!=null?userModel1.getUser_nickname():"");
+				obj.put("user_title", userModel1.getUser_title()!=null?userModel1.getUser_title():"");
+				obj.put("user_age", userModel1.getUser_age()!=null?userModel1.getUser_age():"");
+				obj.put("province", userModel1.getProvince_id()!=null?userModel1.getProvince_id():"");
+				obj.put("city", userModel1.getCity_id()!=null?userModel1.getCity_id():"");
+				obj.put("district", userModel1.getDistrict_id()!=null?userModel1.getDistrict_id():"");
+				obj.put("backup", userModel1.getBackup()!=null?userModel1.getBackup():"");
+				obj.put("baby", list1);
+				data.put("userinfo", obj);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			result = "error";
+			message = initDataPool.getSP("2-4-000");
+		}
+		
+		Map hsm = new LinkedHashMap();
+        hsm.put("version", Constant.version);
+        hsm.put("result", result);
+        hsm.put("message", message);
+        hsm.put("data", data);
+        
+        Date d2 = new Date();
+		logger.info("结束："+adf.format(d2));
+        long diff = (d2.getTime() - d1.getTime());
+        logger.info("UserServiceImpl.isExcit执行了"+diff+"毫秒");
+        
+		return hsm;
+	}
 	/**
 	 * 修改用户密码
 	 * @param request
@@ -733,7 +958,7 @@ public class UserServiceImpl implements UserService {
         hsm.put("version", Constant.version);
         hsm.put("result", result);
         hsm.put("message", message);
-        hsm.put("data", !data.isEmpty()?data:"");
+        hsm.put("data", data);
         
         Date d2 = new Date();
 		logger.info("结束："+adf.format(d2));

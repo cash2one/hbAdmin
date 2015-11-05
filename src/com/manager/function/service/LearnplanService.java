@@ -14,7 +14,11 @@ public interface LearnplanService {
 
 	public Map learnplan(HttpServletRequest request) throws Exception;
 	
+	public Map learnplanpre(HttpServletRequest request) throws Exception;
+	
 	public Map relearnplan(HttpServletRequest request) throws Exception;
+	
+	public Map relearnplanpre(HttpServletRequest request) throws Exception;
 	
 	public Map updatelearnplan(HttpServletRequest request);
 	

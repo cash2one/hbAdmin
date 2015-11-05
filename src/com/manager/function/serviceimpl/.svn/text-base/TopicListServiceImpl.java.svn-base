@@ -238,7 +238,7 @@ public class TopicListServiceImpl implements TopicListService {
 		hsm.put("version", Constant.version);
 		hsm.put("result", result);
 		hsm.put("message", message);
-		hsm.put("data", lsModel!=null?lsModel:"");
+		hsm.put("data", lsModel);
 		
 		Date d2 = new Date();
 		logger.info("结束："+adf.format(d2));
@@ -302,7 +302,7 @@ public class TopicListServiceImpl implements TopicListService {
 		hsm.put("version", Constant.version);
 		hsm.put("result", result);
 		hsm.put("message", message);
-		hsm.put("data", lsModel!=null?lsModel:"");
+		hsm.put("data", lsModel);
 		
 		Date d2 = new Date();
 		logger.info("结束："+adf.format(d2));

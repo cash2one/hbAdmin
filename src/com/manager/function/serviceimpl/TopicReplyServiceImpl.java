@@ -229,7 +229,7 @@ public class TopicReplyServiceImpl implements TopicReplyService {
 		hsm.put("version", Constant.version);
 		hsm.put("result", result);
 		hsm.put("message", message);
-		hsm.put("data", obj!=null&&!obj.isEmpty()?obj:"");
+		hsm.put("data", obj);
 		
 		Date d2 = new Date();
 		logger.info("结束："+adf.format(d2));

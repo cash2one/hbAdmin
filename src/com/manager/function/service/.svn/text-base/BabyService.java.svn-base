@@ -16,6 +16,11 @@ public interface BabyService {
 	public Map add(HttpServletRequest request);
 	
 	/**
+	 * 创建babypre
+	 */
+	public Map addpre(HttpServletRequest request);
+	
+	/**
 	 * 根据ID获取BABY信息
 	 * @param id
 	 * @return

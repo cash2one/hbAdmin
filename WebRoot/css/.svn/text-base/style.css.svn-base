@@ -1014,6 +1014,19 @@ h2 {
 	overflow: hidden;
 }
 
+.textinput200 {
+	border-top: solid 1px #a7b5bc;
+	border-left: solid 1px #a7b5bc;
+	border-right: solid 1px #ced9df;
+	border-bottom: solid 1px #ced9df;
+	background: url(../images/inputbg.gif) repeat-x;
+	padding: 10px;
+	width: 200px;
+	height: 100px;
+	line-height: 20px;
+	overflow: hidden;
+}
+
 .textinput700 {
 	border-top: solid 1px #a7b5bc;
 	border-left: solid 1px #a7b5bc;

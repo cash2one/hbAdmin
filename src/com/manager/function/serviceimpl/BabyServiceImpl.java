@@ -114,7 +114,140 @@ public class BabyServiceImpl implements BabyService {
         logger.info("BabyServiceImpl.add执行了"+diff+"毫秒");
 		return hsm;
 	}
-
+public Map addpre(HttpServletRequest request) {
+		
+		SimpleDateFormat adf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d1 = new Date();
+		logger.info("开始："+adf.format(d1));
+		
+		String result  = "0";
+		String message = "";
+		
+		String appId = (String) request.getParameter("appid");
+		String appKey = Constant.APPID_KEY.get(appId);
+		
+		JSONObject data = new JSONObject();
+		int id = 0;
+		try{
+			String uid = (String) request.getParameter("uid");
+			String baby_nickname = (String) request.getParameter("baby_nickname");
+			
+			Baby baby1 = new Baby();
+			baby1.setUser_id(uid);
+			baby1.setBaby_status("1");
+			baby1.setBaby_nickname(baby_nickname);
+			
+			boolean flag = false;
+			
+			if(uid==null||"".equals(uid)){
+				result = "2";
+				message = initDataPool.getSP("2-4-208");
+			}else if(baby_nickname==null||"".equals(baby_nickname)){
+				result = "3";
+				message = initDataPool.getSP("2-4-209");
+			}else{
+				flag = true;
+			}
+			
+			if(flag){
+				id = this.babyDao.getId();
+				baby1.setId(id+"");
+				this.babyDao.add(baby1);
+				//result = "1";
+			}
+			
+			String baby_id = baby1.getId();//(String) request.getParameter("baby_id");
+			String level_id = (String) request.getParameter("level_id");
+			String hobby_id = (String) request.getParameter("hobby_id");
+			String user_id = (String) request.getParameter("uid");
+			String language_id = (String) request.getParameter("language_id");
+			
+			String[] hobby_ids = hobby_id.split(",");
+			BabyInfo babyInfo = new BabyInfo();
+			babyInfo.setBaby_id(baby_id);
+			babyInfo.setLevel_id(level_id);
+			babyInfo.setBaby_language(language_id);
+			
+			flag = false;
+			
+			if(baby_id==null||level_id==null||hobby_id==null||user_id==null||language_id==null||"".equals(baby_id)||"".equals(level_id)||"".equals(hobby_id)||"".equals(user_id)||"".equals(language_id)){
+				result = "0";
+				message = initDataPool.getSP("2-4-203");
+			}else{
+				flag = true;
+			}
+			
+			if(flag){
+				for(int i = 0;i<hobby_ids.length;i++ ){
+					babyInfo.setProperty_id(hobby_ids[i]);
+					this.babyInfoDao.add(babyInfo);
+				}
+				result = "1";
+			}
+			if(result.equals("1")){
+				User userModel1 = this.userDao.findById(user_id);
+				List<Baby> ls = this.babyDao.findByUserId(user_id);
+				List<Baby> list1 = new ArrayList<Baby>();
+				if(ls!=null){
+					for(Baby baby:ls){
+						String idl = baby.getId();
+						List<BabyInfo> list = this.babyInfoDao.findByBabyId(idl);
+						String hobbyIds = "";
+						String Level_ids = "";
+						String languageid = "";
+						if(list!=null){
+							for(int i = 0;i<list.size();i++){
+								if(idl.equals(list.get(i).getBaby_id())){
+									Level_ids = list.get(i).getLevel_id();
+									languageid = list.get(i).getBaby_language();
+									if(i==0){
+										hobbyIds = list.get(i).getProperty_id();
+									}else{
+										hobbyIds +=","+list.get(i).getProperty_id();
+									}
+								}
+							}
+						}
+						baby.setProperty_id(hobbyIds);
+						baby.setLevel_id(Level_ids);
+						baby.setBaby_language(languageid);
+						list1.add(baby);
+						
+					}
+				}
+				JSONObject obj = new JSONObject();
+				obj.put("uid", userModel1.getUser_id()!=null?userModel1.getUser_id():"");
+				obj.put("user_avatar", userModel1.getUser_avatar()!=null?userModel1.getUser_avatar():"");
+				obj.put("user_email", userModel1.getUser_email()!=null?userModel1.getUser_email():"");
+				obj.put("user_nickname", userModel1.getUser_nickname()!=null?userModel1.getUser_nickname():"");
+				obj.put("user_title", userModel1.getUser_title()!=null?userModel1.getUser_title():"");
+				obj.put("user_age", userModel1.getUser_age()!=null?userModel1.getUser_age():"");
+				obj.put("province", userModel1.getProvince_id()!=null?userModel1.getProvince_id():"");
+				obj.put("city", userModel1.getCity_id()!=null?userModel1.getCity_id():"");
+				obj.put("district", userModel1.getDistrict_id()!=null?userModel1.getDistrict_id():"");
+				obj.put("backup", userModel1.getBackup()!=null?userModel1.getBackup():"");
+				obj.put("baby", list1);
+				data.put("userinfo", obj);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			result = "error";
+			message = initDataPool.getSP("2-4-000");
+		}
+		
+		Map hsm = new LinkedHashMap();
+        hsm.put("version", Constant.version);
+        hsm.put("result", result);
+        hsm.put("message", message);
+        hsm.put("data", data);
+        
+        Date d2 = new Date();
+		logger.info("结束："+adf.format(d2));
+        long diff = (d2.getTime() - d1.getTime());
+        logger.info("BabyServiceImpl.add执行了"+diff+"毫秒");
+		return hsm;
+	}
 	public Map findByUserId(HttpServletRequest request) {
 		return null;
 	}
