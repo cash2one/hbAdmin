@@ -927,7 +927,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 		try{
 			String baby_id = (String) request.getParameter("baby_id");
 			String user_id = (String) request.getParameter("uid");
-			
+			String isOpen = (String) request.getParameter("isnewplan");
 			boolean flag = false;
 			if(baby_id==null||"".equals(baby_id)){
 				result  = "2";
@@ -958,10 +958,11 @@ public class LearnplanServiceImpl implements LearnplanService {
 				
 				if(num>0){
 					//判断是否完成阅读计划
-					UserLearnplan ulp = new UserLearnplan();
-					ulp.setBaby_id(baby_id);
-					int unfinishedNum = this.userLearnplanDao.isFinush(ulp);
-					if(unfinishedNum==0){
+					//UserLearnplan ulp = new UserLearnplan();
+					//ulp.setBaby_id(baby_id);
+					//int unfinishedNum = this.userLearnplanDao.isFinush(ulp);
+					//if(unfinishedNum==0){
+					if(isOpen.equals("0")){
 						res1 = false;
 						Resource r = new Resource();
 						r.setBaby_id(baby_id);

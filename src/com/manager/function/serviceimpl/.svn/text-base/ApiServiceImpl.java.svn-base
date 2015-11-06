@@ -575,7 +575,7 @@ public class ApiServiceImpl implements ApiService {
 		}
 		
 		//搜索pre
-		// http://192.168.3.130:8888/hbadmin/domain?do=search&search_key=Me&uid=9&version=1.0.0&appid=100&sign=2b3b3684930c9472acd75daafc7a71ae
+		// http://192.168.3.130:8888/hbadmin/domain?do=searchpre&search_key=Me&uid=9&version=1.0.0&appid=100&sign=2b3b3684930c9472acd75daafc7a71ae
 		if("searchpre".equals(doMethod) ){
 			Map hsm = new LinkedHashMap();
 			switch(versioncode){

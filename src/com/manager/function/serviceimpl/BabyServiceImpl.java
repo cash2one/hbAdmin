@@ -186,11 +186,11 @@ public Map addpre(HttpServletRequest request) {
 			}
 			if(result.equals("1")){
 				User userModel1 = this.userDao.findById(user_id);
-				List<Baby> ls = this.babyDao.findByUserId(user_id);
+				//List<Baby> ls = this.babyDao.findByUserId(user_id);
 				List<Baby> list1 = new ArrayList<Baby>();
-				if(ls!=null){
-					for(Baby baby:ls){
-						String idl = baby.getId();
+				//if(ls!=null){
+					//for(Baby baby:ls){
+						String idl = baby1.getId();
 						List<BabyInfo> list = this.babyInfoDao.findByBabyId(idl);
 						String hobbyIds = "";
 						String Level_ids = "";
@@ -208,13 +208,13 @@ public Map addpre(HttpServletRequest request) {
 								}
 							}
 						}
-						baby.setProperty_id(hobbyIds);
-						baby.setLevel_id(Level_ids);
-						baby.setBaby_language(languageid);
-						list1.add(baby);
+						baby1.setProperty_id(hobbyIds);
+						baby1.setLevel_id(Level_ids);
+						baby1.setBaby_language(languageid);
+						list1.add(baby1);
 						
-					}
-				}
+					//}
+				//}
 				JSONObject obj = new JSONObject();
 				obj.put("uid", userModel1.getUser_id()!=null?userModel1.getUser_id():"");
 				obj.put("user_avatar", userModel1.getUser_avatar()!=null?userModel1.getUser_avatar():"");
