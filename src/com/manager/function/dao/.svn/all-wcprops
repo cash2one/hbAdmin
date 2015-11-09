@@ -15,17 +15,17 @@ svn:wc:ra_dav:version-url
 V 83
 /svn/iread/!svn/ver/21/trunk/hbAdmin/src/com/manager/function/dao/LearnplanDao.java
 END
-BabyDao.java
-K 25
-svn:wc:ra_dav:version-url
-V 78
-/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/dao/BabyDao.java
-END
 ScoreLogDao.java
 K 25
 svn:wc:ra_dav:version-url
 V 82
 /svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/dao/ScoreLogDao.java
+END
+BabyDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/dao/BabyDao.java
 END
 UserDao.java
 K 25
@@ -33,11 +33,11 @@ svn:wc:ra_dav:version-url
 V 79
 /svn/iread/!svn/ver/187/trunk/hbAdmin/src/com/manager/function/dao/UserDao.java
 END
-GlobalHobbyAttrDao.java
+UserBillingDao.java
 K 25
 svn:wc:ra_dav:version-url
-V 89
-/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/dao/GlobalHobbyAttrDao.java
+V 85
+/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/dao/UserBillingDao.java
 END
 FavoriteDao.java
 K 25
@@ -45,11 +45,11 @@ svn:wc:ra_dav:version-url
 V 82
 /svn/iread/!svn/ver/88/trunk/hbAdmin/src/com/manager/function/dao/FavoriteDao.java
 END
-UserBillingDao.java
+GlobalHobbyAttrDao.java
 K 25
 svn:wc:ra_dav:version-url
-V 85
-/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/dao/UserBillingDao.java
+V 89
+/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/dao/GlobalHobbyAttrDao.java
 END
 TopicTypeDao.java
 K 25
@@ -67,7 +67,7 @@ ResourceDao.java
 K 25
 svn:wc:ra_dav:version-url
 V 83
-/svn/iread/!svn/ver/141/trunk/hbAdmin/src/com/manager/function/dao/ResourceDao.java
+/svn/iread/!svn/ver/196/trunk/hbAdmin/src/com/manager/function/dao/ResourceDao.java
 END
 GlobalLevelDao.java
 K 25
@@ -75,11 +75,11 @@ svn:wc:ra_dav:version-url
 V 85
 /svn/iread/!svn/ver/25/trunk/hbAdmin/src/com/manager/function/dao/GlobalLevelDao.java
 END
-ResourceTypeDao.java
+WeekdayDao.java
 K 25
 svn:wc:ra_dav:version-url
-V 85
-/svn/iread/!svn/ver/8/trunk/hbAdmin/src/com/manager/function/dao/ResourceTypeDao.java
+V 81
+/svn/iread/!svn/ver/22/trunk/hbAdmin/src/com/manager/function/dao/WeekdayDao.java
 END
 BabyInfoDao.java
 K 25
@@ -87,11 +87,11 @@ svn:wc:ra_dav:version-url
 V 82
 /svn/iread/!svn/ver/11/trunk/hbAdmin/src/com/manager/function/dao/BabyInfoDao.java
 END
-WeekdayDao.java
+ResourceTypeDao.java
 K 25
 svn:wc:ra_dav:version-url
-V 81
-/svn/iread/!svn/ver/22/trunk/hbAdmin/src/com/manager/function/dao/WeekdayDao.java
+V 85
+/svn/iread/!svn/ver/8/trunk/hbAdmin/src/com/manager/function/dao/ResourceTypeDao.java
 END
 SearchLogsDao.java
 K 25

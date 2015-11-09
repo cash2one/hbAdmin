@@ -1316,11 +1316,15 @@ public class ResourceServiceImpl implements ResourceService {
 						obj.put("img_main_size", r.getImg_main_size()!=null?r.getImg_main_size():"");
 						
 						obj.put("img_start", r.getStart_img()!=null?tobereplace(r.getStart_img(), 0):"");
+						obj.put("img_start_size",r.getStart_img_size()!=null?r.getStart_img_size():"");
 						obj.put("start_content", r.getStart_content()!=null?r.getStart_content():"");
 						obj.put("img_read", r.getRead_img()!=null?tobereplace(r.getRead_img(), 0):"");
+						obj.put("img_read_size",r.getRead_img_size()!=null?r.getRead_img_size():"");
 						obj.put("read_content", r.getRead_content()!=null?r.getRead_content():"");
 						obj.put("img_practise", r.getLian_img()!=null?tobereplace(r.getLian_img(), 0):"");
+						obj.put("img_practise_size",r.getLian_img_size()!=null?r.getLian_img_size():"");
 						obj.put("practise_content", r.getLian_content()!=null?r.getLian_content():"");
+						obj.put("book_content", r.getBook_content()!=null?r.getBook_content():"");
 						
 						JSONArray objModel = new JSONArray();
 						if(list!=null&&!list.isEmpty()){
@@ -1819,11 +1823,15 @@ public Map fListpre(HttpServletRequest request) {
 						obj.put("img_main_size", r.getImg_main_size()!=null?r.getImg_main_size():"");
 						
 						obj.put("img_start", r.getStart_img()!=null?tobereplace(r.getStart_img(), 0):"");
+						obj.put("img_start_size",r.getStart_img_size()!=null?r.getStart_img_size():"");
 						obj.put("start_content", r.getStart_content()!=null?r.getStart_content():"");
 						obj.put("img_read", r.getRead_img()!=null?tobereplace(r.getRead_img(), 0):"");
+						obj.put("img_read_size",r.getRead_img_size()!=null?r.getRead_img_size():"");
 						obj.put("read_content", r.getRead_content()!=null?r.getRead_content():"");
 						obj.put("img_practise", r.getLian_img()!=null?tobereplace(r.getLian_img(), 0):"");
+						obj.put("img_practise_size",r.getLian_img_size()!=null?r.getLian_img_size():"");
 						obj.put("practise_content", r.getLian_content()!=null?r.getLian_content():"");
+						obj.put("book_content", r.getBook_content()!=null?r.getBook_content():"");
 						
 						JSONArray objModel = new JSONArray();
 						if(list!=null&&!list.isEmpty()){

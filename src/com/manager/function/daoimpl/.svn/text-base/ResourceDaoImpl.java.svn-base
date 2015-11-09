@@ -185,6 +185,16 @@ public class ResourceDaoImpl extends SqlSessionDaoSupport implements ResourceDao
 		return null;
 	}
 	
+	public List<Resource> buquanpre(Resource Resource) {
+		DataSourceContextHolder.setDbType("0");
+		List<Resource> list=this.getSqlSession().selectList("ResourceSql.buquanpre", Resource);
+		DataSourceContextHolder.clearDbType();
+		if(list!=null && list.size()>0){
+			return list;
+		}
+		return null;
+	}
+	
 	public List<Resource> buquan1(Resource Resource) {
 		DataSourceContextHolder.setDbType("0");
 		List<Resource> list=this.getSqlSession().selectList("ResourceSql.buquan1", Resource);

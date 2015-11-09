@@ -709,10 +709,12 @@ public Map isExcitpre(HttpServletRequest request) {
 						List<BabyInfo> list = this.babyInfoDao.findByBabyId(id);
 						String hobby_ids = "";
 						String Level_ids = "";
+						String languageid = "";
 						if(list!=null){
 							for(int i = 0;i<list.size();i++){
 								if(id.equals(list.get(i).getBaby_id())){
 									Level_ids = list.get(i).getLevel_id();
+									languageid = list.get(i).getBaby_language();
 									if("".equals(hobby_ids)){
 										hobby_ids = list.get(i).getProperty_id();
 									}else{
@@ -723,6 +725,7 @@ public Map isExcitpre(HttpServletRequest request) {
 						}
 						baby.setProperty_id(hobby_ids);
 						baby.setLevel_id(Level_ids);
+						baby.setBaby_language(languageid);
 						String url = baby.getBaby_avatar()!=null?tobereplace(baby.getBaby_avatar(), 0):"";
 						baby.setBaby_avatar(url);
 						list1.add(baby);

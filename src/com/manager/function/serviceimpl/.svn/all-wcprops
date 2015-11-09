@@ -21,17 +21,17 @@ svn:wc:ra_dav:version-url
 V 103
 /svn/iread/!svn/ver/112/trunk/hbAdmin/src/com/manager/function/serviceimpl/ResourceInfoServiceImpl.java
 END
-GlobalLanguageServiceImpl.java
-K 25
-svn:wc:ra_dav:version-url
-V 105
-/svn/iread/!svn/ver/107/trunk/hbAdmin/src/com/manager/function/serviceimpl/GlobalLanguageServiceImpl.java
-END
 BigeyeServiceImpl.java
 K 25
 svn:wc:ra_dav:version-url
 V 97
 /svn/iread/!svn/ver/192/trunk/hbAdmin/src/com/manager/function/serviceimpl/BigeyeServiceImpl.java
+END
+GlobalLanguageServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/iread/!svn/ver/107/trunk/hbAdmin/src/com/manager/function/serviceimpl/GlobalLanguageServiceImpl.java
 END
 GlobalPropertyServiceImpl.java
 K 25
@@ -45,11 +45,11 @@ svn:wc:ra_dav:version-url
 V 94
 /svn/iread/!svn/ver/195/trunk/hbAdmin/src/com/manager/function/serviceimpl/ApiServiceImpl.java
 END
-BigeyeModuleServiceImpl.java
+TopicListServiceImpl.java
 K 25
 svn:wc:ra_dav:version-url
-V 103
-/svn/iread/!svn/ver/103/trunk/hbAdmin/src/com/manager/function/serviceimpl/BigeyeModuleServiceImpl.java
+V 100
+/svn/iread/!svn/ver/192/trunk/hbAdmin/src/com/manager/function/serviceimpl/TopicListServiceImpl.java
 END
 SearchKeywordServiceImpl.java
 K 25
@@ -57,11 +57,11 @@ svn:wc:ra_dav:version-url
 V 103
 /svn/iread/!svn/ver/34/trunk/hbAdmin/src/com/manager/function/serviceimpl/SearchKeywordServiceImpl.java
 END
-TopicListServiceImpl.java
+BigeyeModuleServiceImpl.java
 K 25
 svn:wc:ra_dav:version-url
-V 100
-/svn/iread/!svn/ver/192/trunk/hbAdmin/src/com/manager/function/serviceimpl/TopicListServiceImpl.java
+V 103
+/svn/iread/!svn/ver/103/trunk/hbAdmin/src/com/manager/function/serviceimpl/BigeyeModuleServiceImpl.java
 END
 UserLearnplanServiceImpl.java
 K 25
@@ -73,7 +73,7 @@ LearnplanServiceImpl.java
 K 25
 svn:wc:ra_dav:version-url
 V 100
-/svn/iread/!svn/ver/195/trunk/hbAdmin/src/com/manager/function/serviceimpl/LearnplanServiceImpl.java
+/svn/iread/!svn/ver/196/trunk/hbAdmin/src/com/manager/function/serviceimpl/LearnplanServiceImpl.java
 END
 BabyServiceImpl.java
 K 25
@@ -85,7 +85,7 @@ UserServiceImpl.java
 K 25
 svn:wc:ra_dav:version-url
 V 95
-/svn/iread/!svn/ver/194/trunk/hbAdmin/src/com/manager/function/serviceimpl/UserServiceImpl.java
+/svn/iread/!svn/ver/196/trunk/hbAdmin/src/com/manager/function/serviceimpl/UserServiceImpl.java
 END
 FavoriteServiceImpl.java
 K 25
@@ -121,7 +121,7 @@ ResourceServiceImpl.java
 K 25
 svn:wc:ra_dav:version-url
 V 99
-/svn/iread/!svn/ver/194/trunk/hbAdmin/src/com/manager/function/serviceimpl/ResourceServiceImpl.java
+/svn/iread/!svn/ver/196/trunk/hbAdmin/src/com/manager/function/serviceimpl/ResourceServiceImpl.java
 END
 GlobalLevelServiceImpl.java
 K 25

@@ -137,7 +137,7 @@
 		    	var value = response ;
 		    	var file=value.substring(0,value.indexOf("-"));
 		    	var filesize=value.substring(value.indexOf("-")+1);
-		    	//$("#img_main_size").val(filesize); 
+		    	$("#read_img_size").val(filesize); 
 			   　//alert("文件:" + fileObj.name + "上传成功");
 		  		$("#read_img").val(file); 
 		  		$("#see_img_4").attr("src",file);  
@@ -170,7 +170,7 @@
 		    	var value = response ;
 		    	var file=value.substring(0,value.indexOf("-"));
 		    	var filesize=value.substring(value.indexOf("-")+1);
-		    	//$("#img_main_size").val(filesize); 
+		    	$("#lian_img_size").val(filesize); 
 			   　//alert("文件:" + fileObj.name + "上传成功");
 		  		$("#lian_img").val(file); 
 		  		$("#see_img_5").attr("src",file);  
@@ -203,7 +203,7 @@
 		    	var value = response ;
 		    	var file=value.substring(0,value.indexOf("-"));
 		    	var filesize=value.substring(value.indexOf("-")+1);
-		    	//$("#img_main_size").val(filesize); 
+		    	$("#start_img_size").val(filesize); 
 			   　//alert("文件:" + fileObj.name + "上传成功");
 		  		$("#start_img").val(file); 
 		  		$("#see_img_6").attr("src",file);  
@@ -356,18 +356,26 @@
   	 	
   	 	var read_content=document.getElementById("read_content").value;
   	 	var read_img=document.getElementById("read_img").value;
+  	 	var read_img_size=document.getElementById("read_img_size").value;
   	 	var lian_content=document.getElementById("lian_content").value;
   	 	var lian_img=document.getElementById("lian_img").value;
+  	 	var lian_img_size=document.getElementById("lian_img_size").value;
   	 	var start_content=document.getElementById("start_content").value;
   	 	var start_img=document.getElementById("start_img").value;
+  	 	var start_img_size=document.getElementById("start_img_size").value;
+  	 	var book_content=document.getElementById("book_content").value;
   	 	if(resource_type_id=='4'){
   	 	}else{
   	 		read_content=null;
   	 		read_img=null;
+  	 		read_img_size=null;
   	 		lian_content=null;
   	 		lian_img=null;
+  	 		lian_img_size=null;
   	 		start_content=null;
   	 		start_img=null;
+  	 		start_img_size=null;
+  	 		book_content=null;
   	 	}
   	 	
 		//var img_book =document.getElementById("img_book").value;
@@ -422,10 +430,14 @@
 					'resource_keyword':resource_keyword,
 					"read_content":read_content,
   	 				"read_img":read_img,
+  	 				"read_img_size":read_img_size,
   	 				"lian_content":lian_content,
   	 				"lian_img":lian_img,
+  	 				"lian_img_size":lian_img_size,
   	 				"start_content":start_content,
-  	 				"start_img":start_img
+  	 				"start_img":start_img,
+  	 				"start_img_size":start_img_size,
+  	 				"book_content":book_content
              	   },
              dataType: "json",
              async:	false,
@@ -447,8 +459,10 @@
   		$("[name=beijing]").hide();
   		if(resource_type_id=='4'){
   			$("#tzjs").show();
+  			$("#tzjs2").show();
   		}else{
   			$("#tzjs").hide();
+  			$("#tzjs2").hide();
   		}
   		if(resource_type_id=='1'||resource_type_id=='4'||resource_type_id=='2'){
   			$("[name=beijing]").show();
@@ -819,7 +833,9 @@
 		   	
 		   	
 		   	
-		   	
+		   	<li  id="tzjs2" style="display: none"><label>绘本文字说明：<b></b></label>
+		    	<textarea class="textinput" cols="25" rows="2" name="book_content" id="book_content" maxlength="250">${resource.book_content }</textarea>
+		    </li>
 		   	
 		   	
 		   	<li id="tzjs" style="display: none"><label>拓展介绍：<b></b></label>
@@ -830,6 +846,18 @@
 		    		<td>开始读</td>
 		    		<td>开始练</td>
 		    		<td>起始值</td>
+		    	</tr>
+		    	<tr>
+		    		<td>尺寸(宽|高)</td>
+		    		<td>
+		    			<input type="text" id="read_img_size" name="read_img_size" value="${resource.read_img_size }" maxlength="30"  class="dfinput150" readonly="readonly"/>
+		    		</td>
+		    		<td>
+		    			<input type="text" id="lian_img_size" name="lian_img_size" value="${resource.lian_img_size }" maxlength="30"  class="dfinput150" readonly="readonly"/>
+		    		</td>
+		    		<td>
+		    			<input type="text" id="start_img_size" name="start_img_size" value="${resource.start_img_size }" maxlength="30"  class="dfinput150" readonly="readonly"/>
+		    		</td>
 		    	</tr>
 		    	<tr>
 		    		<td>介绍文字</td>

@@ -43,6 +43,8 @@ public interface ResourceDao {
 	
 	public List<Resource> buquan(Resource Resource);
 	
+	public List<Resource> buquanpre(Resource Resource);
+	
 	public List<Resource> buquan1(Resource Resource);
 	
 	public List<Resource> xuanshu(Resource Resource);

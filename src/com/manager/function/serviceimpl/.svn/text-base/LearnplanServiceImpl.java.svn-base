@@ -928,6 +928,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 			String baby_id = (String) request.getParameter("baby_id");
 			String user_id = (String) request.getParameter("uid");
 			String isOpen = (String) request.getParameter("isnewplan");
+			String language = (String) request.getParameter("language");
 			boolean flag = false;
 			if(baby_id==null||"".equals(baby_id)){
 				result  = "2";
@@ -978,24 +979,68 @@ public class LearnplanServiceImpl implements LearnplanService {
 						List<Resource> lsModel = this.resourceDao.learnplan(baby_id);
 						
 						List<Resource> ls1 = new ArrayList<Resource>();
+						List<Resource> ls1last = new ArrayList<Resource>();
+						List<Resource> ls1next = new ArrayList<Resource>();
 						List<Resource> ls2 = new ArrayList<Resource>();
+						List<Resource> ls2last = new ArrayList<Resource>();
+						List<Resource> ls2next = new ArrayList<Resource>();
+						List<Resource> ls4 = new ArrayList<Resource>();
+						List<Resource> ls4last = new ArrayList<Resource>();
+						List<Resource> ls4next = new ArrayList<Resource>();
+						
 						List<Resource> ls3 = new CopyOnWriteArrayList<Resource>();
 						List<Resource> lsModel3 = new ArrayList<Resource>();
-						List<Resource> ls4 = new ArrayList<Resource>();
 						List<Resource> huiben = this.resourceDao.huiben(baby_id);
 						
 						//分类
 						if(lsModel!=null){
-						for(Resource r : lsModel){
-							if(r.getResource_type_id().equals("1")){
-								ls1.add(r);
-							}else if(r.getResource_type_id().equals("2")){
-								ls2.add(r);
-							}else if(r.getResource_type_id().equals("5")){
-								ls4.add(r);
+							for(Resource r : lsModel){
+								if(r.getResource_type_id().equals("1"))
+								{
+									if(r.getLanguage_level().equals(language))
+									{
+										ls1.add(r);
+									}else if(Integer.parseInt(language)-1>0)
+									{
+										if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+											ls1last.add(r);
+									}else if(Integer.parseInt(language)+1<7)
+									{
+										if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+											ls1next.add(r);
+									}
+								}else if(r.getResource_type_id().equals("2"))
+								{
+									if(r.getLanguage_level().equals(language))
+									{
+										ls2.add(r);
+									}else if(Integer.parseInt(language)-1>0)
+									{
+										if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+											ls2last.add(r);
+									}else if(Integer.parseInt(language)+1<7)
+									{
+										if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+											ls2next.add(r);
+									}
+								}else if(r.getResource_type_id().equals("5"))
+								{
+									if(r.getLanguage_level().equals(language))
+									{
+										ls4.add(r);
+									}else if(Integer.parseInt(language)-1>0)
+									{
+										if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+											ls4last.add(r);
+									}else if(Integer.parseInt(language)+1<7)
+									{
+										if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+											ls4next.add(r);
+									}
+								}
 							}
 						}
-						}
+						
 						for(Resource rr:huiben){
 							ls3.add(rr);
 						}
@@ -1058,60 +1103,91 @@ public class LearnplanServiceImpl implements LearnplanService {
 							int d = 0;
 							//属性id
 							String id = gp.getId();
-							if(ls3!=null){
+							
+							if(ls3!=null)
+							{
 								List<Resource> rlist=new ArrayList<Resource>();
+								List<Resource> rlistlast=new ArrayList<Resource>();
+								List<Resource> rlistnext=new ArrayList<Resource>();
 								Iterator it = ls3.iterator();
-								while(it.hasNext()){
-								Resource r = (Resource) it.next();
-								List<ResourceInfo> list = this.resourceInfoDao.findPropertyId(r.getId());
-								if(list!=null){
-									
-									for(ResourceInfo ri :list){
-										if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)){
-											rlist.add(r);
+								while(it.hasNext())
+								{
+									Resource r = (Resource) it.next();
+									List<ResourceInfo> list = this.resourceInfoDao.findPropertyId(r.getId());
+									if(list!=null)
+									{									
+										for(ResourceInfo ri :list)
+										{
+											if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id))
+											{
+												if(r.getLanguage_level().equals(language))
+												{
+													rlist.add(r);
+												}else if(Integer.parseInt(language)-1>0)
+												{
+													if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+														rlistlast.add(r);
+												}else if(Integer.parseInt(language)+1<7)
+												{
+													if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+														rlistnext.add(r);
+												}
+											}							
 										}
-										
 									}
-									
-									
-//									for(ResourceInfo ri :list){
-//										//
-//										if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)&&d<kexuan){
-//											d++;
-//											ls3.remove(r);
-//											r.setProperty_id(id);
-//											r.setReplenish("0");
-//											lsModel3.add(r);
-//											if(ids.equals("")){
-//												ids += r.getId();
-//											}else {
-//												ids +=","+r.getId();
-//											}
-//										}
-//									}
-								}
 								}
 								
-								kexuan=rlist.size()>kexuan?kexuan:rlist.size();
+								//kexuan=rlist.size()>kexuan?kexuan:rlist.size();
 								for(int nn=0;nn<kexuan;nn++){
-									Random rand = new Random();
-									Resource r1 = rlist.get(rand.nextInt(rlist.size()));
-									
-									ls3.remove(r1);
-									r1.setProperty_id(id);
-									r1.setReplenish("0");
-									lsModel3.add(r1);
-									if(ids.equals("")){
-										ids += r1.getId();
-									}else {
-										ids +=","+r1.getId();
+									if(rlist.isEmpty() && rlistlast.isEmpty() && rlistnext.isEmpty())
+										break;
+									if(!rlist.isEmpty())
+									{
+										Random rand = new Random();
+										Resource r1 = rlist.get(rand.nextInt(rlist.size()));
+										
+										ls3.remove(r1);
+										r1.setProperty_id(id);
+										r1.setReplenish("0");
+										lsModel3.add(r1);
+										if(ids.equals("")){
+											ids += r1.getId();
+										}else {
+											ids +=","+r1.getId();
+										}									
+										rlist.remove(r1);
+									}else if(!rlistlast.isEmpty())
+									{
+										Random rand = new Random();
+										Resource r1 = rlist.get(rand.nextInt(rlist.size()));
+										
+										ls3.remove(r1);
+										r1.setProperty_id(id);
+										r1.setReplenish("0");
+										lsModel3.add(r1);
+										if(ids.equals("")){
+											ids += r1.getId();
+										}else {
+											ids +=","+r1.getId();
+										}									
+										rlistlast.remove(r1);
+									}else if(!rlistnext.isEmpty())
+									{
+										Random rand = new Random();
+										Resource r1 = rlist.get(rand.nextInt(rlist.size()));
+										
+										ls3.remove(r1);
+										r1.setProperty_id(id);
+										r1.setReplenish("0");
+										lsModel3.add(r1);
+										if(ids.equals("")){
+											ids += r1.getId();
+										}else {
+											ids +=","+r1.getId();
+										}									
+										rlistnext.remove(r1);
 									}
-									
-									rlist.remove(r1);
-								}
-								
-								
-								
+								}								
 							}
 						}
 						//选择必选项
@@ -1123,167 +1199,195 @@ public class LearnplanServiceImpl implements LearnplanService {
 							String id = gp.getId();
 							if(ls3!=null){
 								List<Resource> rlist=new ArrayList<Resource>();
+								List<Resource> rlistlast=new ArrayList<Resource>();
+								List<Resource> rlistnext=new ArrayList<Resource>();
 								Iterator it = ls3.iterator();
-								while(it.hasNext()){
-								Resource r = (Resource) it.next();
-								List<ResourceInfo> list = this.resourceInfoDao.findPropertyId(r.getId());
-								if(list!=null){
-//									for(ResourceInfo ri :list){
-//										//
-//										if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)&&d<bixuan){
-//											d++;
-//											ls3.remove(r);
-//											r.setProperty_id(id);
-//											r.setReplenish("0");
-//											lsModel3.add(r);
-//											if(ids.equals("")){
-//												ids += r.getId();
-//											}else {
-//												ids +=","+r.getId();
-//											}
-//										}
-//									}
-									
-									
-									for(ResourceInfo ri :list){
-										if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)){
-											rlist.add(r);
+								while(it.hasNext())
+								{
+									Resource r = (Resource) it.next();
+									List<ResourceInfo> list = this.resourceInfoDao.findPropertyId(r.getId());
+									if(list!=null){
+//									
+										for(ResourceInfo ri :list){
+											if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)){
+												if(r.getLanguage_level().equals(language))
+												{
+													rlist.add(r);
+												}else if(Integer.parseInt(language)-1>0)
+												{
+													if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+														rlistlast.add(r);
+												}else if(Integer.parseInt(language)+1<7)
+												{
+													if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+														rlistnext.add(r);
+												}
+											}										
 										}
-										
 									}
 								}
-								}
 								
 								
-								bixuan=rlist.size()>bixuan?bixuan:rlist.size();
+								//bixuan=rlist.size()>bixuan?bixuan:rlist.size();
 								for(int nn=0;nn<bixuan;nn++){
-									Random rand = new Random();
-									Resource r1 = rlist.get(rand.nextInt(rlist.size()));
-									
-									ls3.remove(r1);
-									r1.setProperty_id(id);
-									r1.setReplenish("0");
-									lsModel3.add(r1);
-									if(ids.equals("")){
-										ids += r1.getId();
-									}else {
-										ids +=","+r1.getId();
-									}
-									
-									rlist.remove(r1);
-								}
-								
-							}
-						}
-						if(lsModel3.size()<read*plan_weekday_num){
-						//补充项
-						for(GlobalProperty gp:gpModelList){
-							if(lsModel3.size()>=read*plan_weekday_num){
-								break;
-							}
-							int buquan = Integer.parseInt(gp.getProperty_num());
-							//计数
-							int d = 0;
-							//属性id
-							String id = gp.getId();
-							if(ls3!=null){
-								List<Resource> rlist=new ArrayList<Resource>();
-								Iterator it = ls3.iterator();
-								while(it.hasNext()){
-								Resource r = (Resource) it.next();
-								List<ResourceInfo> list = this.resourceInfoDao.findPropertyId(r.getId());
-								if(list!=null){
-//									for(ResourceInfo ri :list){
-//										//
-//										if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)&&d<buquan){
-//											d++;
-//											if(lsModel3.size()>=read*plan_weekday_num){
-//												break;
-//											}
-//											ls3.remove(r);
-//											r.setProperty_id(id);
-//											r.setReplenish("1");
-//											lsModel3.add(r);
-//											if(ids.equals("")){
-//												ids += r.getId();
-//											}else {
-//												ids +=","+r.getId();
-//											}
-//										}
-//									}
-									
-									
-									for(ResourceInfo ri :list){
-										if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)){
-											rlist.add(r);
-										}
+									if(rlist.isEmpty() && rlistlast.isEmpty() && rlistnext.isEmpty())
+										break;
+									if(!rlist.isEmpty())
+									{
+										Random rand = new Random();
+										Resource r1 = rlist.get(rand.nextInt(rlist.size()));
 										
+										ls3.remove(r1);
+										r1.setProperty_id(id);
+										r1.setReplenish("0");
+										lsModel3.add(r1);
+										if(ids.equals("")){
+											ids += r1.getId();
+										}else {
+											ids +=","+r1.getId();
+										}
+										rlist.remove(r1);
+									}else if(!rlistlast.isEmpty())
+									{
+										Random rand = new Random();
+										Resource r1 = rlistlast.get(rand.nextInt(rlistlast.size()));
+										
+										ls3.remove(r1);
+										r1.setProperty_id(id);
+										r1.setReplenish("0");
+										lsModel3.add(r1);
+										if(ids.equals("")){
+											ids += r1.getId();
+										}else {
+											ids +=","+r1.getId();
+										}
+										rlistlast.remove(r1);
+									}else if(!rlistnext.isEmpty())
+									{
+										Random rand = new Random();
+										Resource r1 = rlistnext.get(rand.nextInt(rlistnext.size()));
+										
+										ls3.remove(r1);
+										r1.setProperty_id(id);
+										r1.setReplenish("0");
+										lsModel3.add(r1);
+										if(ids.equals("")){
+											ids += r1.getId();
+										}else {
+											ids +=","+r1.getId();
+										}
+										rlistnext.remove(r1);
 									}
-									
-								}
-								}
-								
-								int cha=read*plan_weekday_num-lsModel3.size();
-								buquan=cha>buquan?buquan:cha;
-								buquan=rlist.size()>buquan?buquan:rlist.size();
-								for(int nn=0;nn<buquan;nn++){
-									Random rand = new Random();
-									Resource r1 = rlist.get(rand.nextInt(rlist.size()));
-									
-									ls3.remove(r1);
-									r1.setProperty_id(id);
-									r1.setReplenish("0");
-									lsModel3.add(r1);
-									if(ids.equals("")){
-										ids += r1.getId();
-									}else {
-										ids +=","+r1.getId();
-									}
-									
-									rlist.remove(r1);
-								}
-								
+								}								
 							}
 						}
+												
+						if(lsModel3.size()<read*plan_weekday_num)
+						{
+							//补充项
+							for(GlobalProperty gp:gpModelList)
+							{
+								if(lsModel3.size()>=read*plan_weekday_num){
+									break;
+								}
+								int buquan = Integer.parseInt(gp.getProperty_num());
+								//计数
+								int d = 0;
+								//属性id
+								String id = gp.getId();
+								if(ls3!=null)
+								{
+									List<Resource> rlist=new ArrayList<Resource>();
+									List<Resource> rlistlast=new ArrayList<Resource>();
+									List<Resource> rlistnext=new ArrayList<Resource>();
+									Iterator it = ls3.iterator();
+									while(it.hasNext())
+									{
+										Resource r = (Resource) it.next();
+										List<ResourceInfo> list = this.resourceInfoDao.findPropertyId(r.getId());
+										if(list!=null)
+										{
+											for(ResourceInfo ri :list)
+											{
+												if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id))
+												{									
+													if(r.getLanguage_level().equals(language))
+													{
+														rlist.add(r);
+													}else if(Integer.parseInt(language)-1>0)
+													{
+														if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+															rlistlast.add(r);
+													}else if(Integer.parseInt(language)+1<7)
+													{
+														if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+															rlistnext.add(r);
+													}
+												}									
+											}
+										}
+									}
+								
+									int cha=read*plan_weekday_num-lsModel3.size();
+									buquan=cha;//>buquan?buquan:cha;
+									//buquan=rlist.size()>buquan?buquan:rlist.size();
+									for(int nn=0;nn<buquan;nn++){
+										if(rlist.isEmpty() && rlistlast.isEmpty() && rlistnext.isEmpty())
+											break;
+										if(!rlist.isEmpty())
+										{
+											Random rand = new Random();
+											Resource r1 = rlist.get(rand.nextInt(rlist.size()));
+										
+											ls3.remove(r1);
+											r1.setProperty_id(id);
+											r1.setReplenish("0");
+											lsModel3.add(r1);
+											if(ids.equals("")){
+											ids += r1.getId();
+											}else {
+												ids +=","+r1.getId();
+											}
+										
+											rlist.remove(r1);
+										}else if(!rlistlast.isEmpty())
+										{
+											Random rand = new Random();
+											Resource r1 = rlistlast.get(rand.nextInt(rlistlast.size()));
+										
+											ls3.remove(r1);
+											r1.setProperty_id(id);
+											r1.setReplenish("0");
+											lsModel3.add(r1);
+											if(ids.equals("")){
+											ids += r1.getId();
+											}else {
+												ids +=","+r1.getId();
+											}
+										
+											rlistlast.remove(r1);
+										}else if(!rlistnext.isEmpty())
+										{
+											Random rand = new Random();
+											Resource r1 = rlistnext.get(rand.nextInt(rlistnext.size()));
+										
+											ls3.remove(r1);
+											r1.setProperty_id(id);
+											r1.setReplenish("0");
+											lsModel3.add(r1);
+											if(ids.equals("")){
+											ids += r1.getId();
+											}else {
+												ids +=","+r1.getId();
+											}
+										
+											rlistnext.remove(r1);
+										}
+									}								
+								}
+							}
 						}
-//						//本阶段书不够数据补全
-//						if(lsModel3.isEmpty()||lsModel3.size()<read*plan_weekday_num){
-//							List<GlobalProperty> bqgpList = this.globalPropertyDao.findByBabyId(gpModel);//属性补全
-//							List<Resource> bqls = new CopyOnWriteArrayList<Resource>();
-//							List<Resource> bqlsModel = new CopyOnWriteArrayList<Resource>();//绘本补全
-//							Resource rModel = new Resource();
-//							rModel.setId(ids);
-//							rModel.setBaby_id(baby_id);
-//							bqlsModel = this.resourceDao.huibenbuquan(rModel);
-//							for(Resource rrr:bqlsModel){
-//								bqls.add(rrr);
-//							}
-//							for(GlobalProperty gp:bqgpList){
-//								//计数
-//								int d = 0;
-//								//属性id
-//								String id = gp.getId();
-//								if(bqls!=null){
-//									Iterator it = bqls.iterator();
-//									while(it.hasNext()){
-//									Resource r = (Resource) it.next();
-//									List<ResourceInfo> list = this.resourceInfoDao.findPropertyId(r.getId());
-//										for(ResourceInfo ri :list){
-//											//
-//											if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)&&d<buquan){
-//												d++;
-//												if(lsModel3.size()>=read*plan_weekday_num){
-//													break;
-//												}
-//												bqls.remove(r);
-//												r.setProperty_id(id);
-//												lsModel3.add(r);
-//											}
-//										}
-//									}
-//								}
-//							}
-//						}
+						
 						
 						String listen_id = "";
 						String see_id = "";
@@ -1291,68 +1395,230 @@ public class LearnplanServiceImpl implements LearnplanService {
 						String play_id = "";
 						
 						for(int a = 0; a< listen*plan_weekday_num;a++){
-							if(ls1.isEmpty()){
+							if(ls1.isEmpty() && ls1last.isEmpty() && ls1next.isEmpty()){
 								int len = listen*plan_weekday_num - a;
 								Resource r = new Resource();
 								r.setId(listen_id);
 								r.setResource_type_id("1");
 								r.setBaby_id(baby_id);
 								r.setLen(len);
-								List<Resource> list = this.resourceDao.buquan(r);
+								List<Resource> list = this.resourceDao.buquanpre(r);
 								if(list!=null){
+									int bl = 0;
 									for(int c = 0;c<list.size();c++){
-										Resource re = list.get(c);
-										int b = (a+c)/listen+1;
-										re.setNum(b);
-										ls.add(re);
+										if(bl>=len)
+										{
+											break;
+										}else
+										{
+											Resource re = list.get(c);
+											if(re.getLanguage_level().equals(language))
+											{
+												int b = (a+bl)/listen+1;
+												re.setNum(b);
+												ls.add(re);
+												bl++;
+											}
+										}
+									}
+									
+									for(int c = 0;c<list.size();c++){
+										if(bl>=len)
+										{
+											break;
+										}else
+										{
+											Resource re = list.get(c);
+											if(Integer.parseInt(language)-1>0)
+											{
+												if(re.getLanguage_level().equals(Integer.parseInt(language)-1))
+												{
+													int b = (a+bl)/listen+1;
+													re.setNum(b);
+													ls.add(re);
+													bl++;
+												}
+											}
+										}
+									}
+									
+									for(int c = 0;c<list.size();c++){
+										if(bl>=len)
+										{
+											break;
+										}else
+										{
+											Resource re = list.get(c);
+											if(Integer.parseInt(language)+1<7)
+											{
+												if(re.getLanguage_level().equals(Integer.parseInt(language)+1))
+												{
+													int b = (a+bl)/listen+1;
+													re.setNum(b);
+													ls.add(re);
+													bl++;
+												}
+											}
+										}
 									}
 								}
 								break;
 							}
-							Random rand = new Random();
-							Resource re = ls1.get(rand.nextInt(ls1.size()));
-							if(a==0){
-								listen_id += re.getId();
-							}else {
-								listen_id +=","+re.getId();
+							if(!ls1.isEmpty())
+							{
+								Random rand = new Random();
+								Resource re = ls1.get(rand.nextInt(ls1.size()));
+								if(a==0){
+									listen_id += re.getId();
+								}else {
+									listen_id +=","+re.getId();
+								}
+								int b = a/listen+1;
+								re.setNum(b);
+								ls.add(re);
+								ls1.remove(re);
+							}else if(!ls1last.isEmpty())
+							{
+								Random rand = new Random();
+								Resource re = ls1last.get(rand.nextInt(ls1last.size()));
+								if(a==0){
+									listen_id += re.getId();
+								}else {
+									listen_id +=","+re.getId();
+								}
+								int b = a/listen+1;
+								re.setNum(b);
+								ls.add(re);
+								ls1last.remove(re);
+							}else if(!ls1next.isEmpty())
+							{
+								Random rand = new Random();
+								Resource re = ls1next.get(rand.nextInt(ls1next.size()));
+								if(a==0){
+									listen_id += re.getId();
+								}else {
+									listen_id +=","+re.getId();
+								}
+								int b = a/listen+1;
+								re.setNum(b);
+								ls.add(re);
+								ls1next.remove(re);
 							}
-							int b = a/listen+1;
-							re.setNum(b);
-							ls.add(re);
-							ls1.remove(re);
+							
 						}
 					
 					
 						for(int a = 0; a< see*plan_weekday_num;a++){
-							if(ls2.isEmpty()){
+							if(ls2.isEmpty() && ls2last.isEmpty() && ls2next.isEmpty()){
 								int len = see*plan_weekday_num - a;
 								Resource r = new Resource();
 								r.setId(see_id);
 								r.setResource_type_id("2");
 								r.setBaby_id(baby_id);
 								r.setLen(len);
-								List<Resource> list = this.resourceDao.buquan(r);
+								List<Resource> list = this.resourceDao.buquanpre(r);
 								if(list!=null){
+									int bl = 0;
 									for(int c = 0;c<list.size();c++){
-										Resource re = list.get(c);
-										int b = (a+c)/listen+1;
-										re.setNum(b);
-										ls.add(re);
+										if(bl>=len)
+										{
+											break;
+										}else
+										{
+											Resource re = list.get(c);
+											if(re.getLanguage_level().equals(language))
+											{
+												int b = (a+bl)/listen+1;
+												re.setNum(b);
+												ls.add(re);
+												bl++;
+											}
+										}
+									}
+									
+									for(int c = 0;c<list.size();c++){
+										if(bl>=len)
+										{
+											break;
+										}else
+										{
+											Resource re = list.get(c);
+											if(Integer.parseInt(language)-1>0)
+											{
+												if(re.getLanguage_level().equals(Integer.parseInt(language)-1))
+												{
+													int b = (a+bl)/listen+1;
+													re.setNum(b);
+													ls.add(re);
+													bl++;
+												}
+											}
+										}
+									}
+									
+									for(int c = 0;c<list.size();c++){
+										if(bl>=len)
+										{
+											break;
+										}else
+										{
+											Resource re = list.get(c);
+											if(Integer.parseInt(language)+1<7)
+											{
+												if(re.getLanguage_level().equals(Integer.parseInt(language)+1))
+												{
+													int b = (a+bl)/listen+1;
+													re.setNum(b);
+													ls.add(re);
+													bl++;
+												}
+											}
+										}
 									}
 								}
 								break;
 							}
-							Random rand = new Random();
-							Resource re = ls2.get(rand.nextInt(ls2.size()));
-							if(a==0){
-								see_id += re.getId();
-							}else {
-								see_id +=","+re.getId();
+							if(!ls2.isEmpty())
+							{
+								Random rand = new Random();
+								Resource re = ls2.get(rand.nextInt(ls2.size()));
+								if(a==0){
+									see_id += re.getId();
+								}else {
+									see_id +=","+re.getId();
+								}
+								int b = a/see+1;
+								re.setNum(b);
+								ls.add(re);
+								ls2.remove(re);
+							}else if(!ls2last.isEmpty())
+							{
+								Random rand = new Random();
+								Resource re = ls2last.get(rand.nextInt(ls2last.size()));
+								if(a==0){
+									see_id += re.getId();
+								}else {
+									see_id +=","+re.getId();
+								}
+								int b = a/see+1;
+								re.setNum(b);
+								ls.add(re);
+								ls2last.remove(re);
+							}else if(!ls2next.isEmpty())
+							{
+								Random rand = new Random();
+								Resource re = ls2next.get(rand.nextInt(ls2next.size()));
+								if(a==0){
+									see_id += re.getId();
+								}else {
+									see_id +=","+re.getId();
+								}
+								int b = a/see+1;
+								re.setNum(b);
+								ls.add(re);
+								ls2next.remove(re);
 							}
-							int b = a/see+1;
-							re.setNum(b);
-							ls.add(re);
-							ls2.remove(re);
+							
 						}
 						
 						for(int a = 0; a< read*plan_weekday_num;a++){
@@ -1373,22 +1639,50 @@ public class LearnplanServiceImpl implements LearnplanService {
 						}
 						
 						for(int a = 0; a< play*plan_weekday_num;a++){
-							if(ls4.isEmpty()){
+							if(ls4.isEmpty() && ls4last.isEmpty() && ls4next.isEmpty()){
 								break;
 							}
-							Random rand = new Random();
-							Resource re = ls4.get(rand.nextInt(ls4.size()));
-							if(a==0){
-								play_id += re.getId();
-							}else {
-								play_id +=","+re.getId();
-							}
-							int b = a/play+1;
-							re.setNum(b);
-							ls.add(re);
-							ls4.remove(re);
-						}
-						
+							if(!ls4.isEmpty())
+							{
+								Random rand = new Random();
+								Resource re = ls4.get(rand.nextInt(ls4.size()));
+								if(a==0){
+									play_id += re.getId();
+								}else {
+									play_id +=","+re.getId();
+								}
+								int b = a/play+1;
+								re.setNum(b);
+								ls.add(re);
+								ls4.remove(re);
+							}else if(!ls4last.isEmpty())
+							{
+								Random rand = new Random();
+								Resource re = ls4last.get(rand.nextInt(ls4last.size()));
+								if(a==0){
+									play_id += re.getId();
+								}else {
+									play_id +=","+re.getId();
+								}
+								int b = a/play+1;
+								re.setNum(b);
+								ls.add(re);
+								ls4last.remove(re);
+							}else if(!ls4next.isEmpty())
+							{
+								Random rand = new Random();
+								Resource re = ls4next.get(rand.nextInt(ls4next.size()));
+								if(a==0){
+									play_id += re.getId();
+								}else {
+									play_id +=","+re.getId();
+								}
+								int b = a/play+1;
+								re.setNum(b);
+								ls.add(re);
+								ls4next.remove(re);
+							}				
+						}					
 					}
 				}
 				
@@ -1467,6 +1761,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("status", r.getPlan_status()!=null?r.getPlan_status():"0");
 							obj.put("spend_minute", r.getSpend_minute()!=null?r.getSpend_minute():"");
 							obj.put("fstatus", fnum>0?"1":"0");
+							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data1.add(obj);
 						}else if(type_id.equals("2")){
 							JSONObject obj = new JSONObject();
@@ -1496,6 +1791,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("status", r.getPlan_status()!=null?r.getPlan_status():"0");
 							obj.put("spend_minute", r.getSpend_minute()!=null?r.getSpend_minute():"");
 							obj.put("fstatus", fnum>0?"1":"0");
+							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data2.add(obj);
 						}else if(type_id.equals("4")){
 							list = this.resourceInfoDao.findByResourceId(r.getId());
@@ -1517,11 +1813,15 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("img_book_size", r.getImg_book_size()!=null?r.getImg_book_size():"");
 							
 							obj.put("img_start", r.getStart_img()!=null?tobereplace(r.getStart_img(), 0):"");
+							obj.put("img_start_size",r.getStart_img_size()!=null?r.getStart_img_size():"");
 							obj.put("start_content", r.getStart_content()!=null?r.getStart_content():"");
 							obj.put("img_read", r.getRead_img()!=null?tobereplace(r.getRead_img(), 0):"");
+							obj.put("img_read_size",r.getRead_img_size()!=null?r.getRead_img_size():"");
 							obj.put("read_content", r.getRead_content()!=null?r.getRead_content():"");
 							obj.put("img_practise", r.getLian_img()!=null?tobereplace(r.getLian_img(), 0):"");
+							obj.put("img_practise_size",r.getLian_img_size()!=null?r.getLian_img_size():"");
 							obj.put("practise_content", r.getLian_content()!=null?r.getLian_content():"");
+							obj.put("book_content", r.getBook_content()!=null?r.getBook_content():"");
 							
 							JSONArray objModel = new JSONArray();
 							if(list!=null&&!list.isEmpty()){
@@ -1542,6 +1842,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("data", !objModel.isEmpty()?objModel:"");
 							obj.put("property", r.getProperty_id()!=null?r.getProperty_id():"");
 							obj.put("fstatus", fnum>0?"1":"0");
+							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data3.add(obj);
 						}else if(type_id.equals("5")){
 							JSONObject obj = new JSONObject();
@@ -1576,6 +1877,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 								}
 							obj.put("fstatus", fnum>0?"1":"0");
 							obj.put("data", !objModel.isEmpty()?objModel:"");
+							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data4.add(obj);
 						}
 						
@@ -2360,6 +2662,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 		try{
 			String baby_id = (String) request.getParameter("baby_id");
 			String user_id = (String) request.getParameter("uid");
+			String language = (String) request.getParameter("language");
 			
 			boolean flag = false;
 			if(baby_id==null||"".equals(baby_id)){
@@ -2406,23 +2709,66 @@ public class LearnplanServiceImpl implements LearnplanService {
 				List<Resource> lsModel = this.resourceDao.learnplan(baby_id);
 				
 				List<Resource> ls1 = new ArrayList<Resource>();
+				List<Resource> ls1last = new ArrayList<Resource>();
+				List<Resource> ls1next = new ArrayList<Resource>();
 				List<Resource> ls2 = new ArrayList<Resource>();
+				List<Resource> ls2last = new ArrayList<Resource>();
+				List<Resource> ls2next = new ArrayList<Resource>();
+				List<Resource> ls4 = new ArrayList<Resource>();
+				List<Resource> ls4last = new ArrayList<Resource>();
+				List<Resource> ls4next = new ArrayList<Resource>();
+				
 				List<Resource> ls3 = new CopyOnWriteArrayList<Resource>();
 				List<Resource> lsModel3 = new ArrayList<Resource>();
-				List<Resource> ls4 = new ArrayList<Resource>();
 				List<Resource> huiben = this.resourceDao.huiben(baby_id);
 				
 				//分类
 				if(lsModel!=null){
-				for(Resource r : lsModel){
-					if(r.getResource_type_id().equals("1")){
-						ls1.add(r);
-					}else if(r.getResource_type_id().equals("2")){
-						ls2.add(r);
-					}else if(r.getResource_type_id().equals("5")){
-						ls4.add(r);
+					for(Resource r : lsModel){
+						if(r.getResource_type_id().equals("1"))
+						{
+							if(r.getLanguage_level().equals(language))
+							{
+								ls1.add(r);
+							}else if(Integer.parseInt(language)-1>0)
+							{
+								if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+									ls1last.add(r);
+							}else if(Integer.parseInt(language)+1<7)
+							{
+								if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+									ls1next.add(r);
+							}
+						}else if(r.getResource_type_id().equals("2"))
+						{
+							if(r.getLanguage_level().equals(language))
+							{
+								ls2.add(r);
+							}else if(Integer.parseInt(language)-1>0)
+							{
+								if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+									ls2last.add(r);
+							}else if(Integer.parseInt(language)+1<7)
+							{
+								if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+									ls2next.add(r);
+							}
+						}else if(r.getResource_type_id().equals("5"))
+						{
+							if(r.getLanguage_level().equals(language))
+							{
+								ls4.add(r);
+							}else if(Integer.parseInt(language)-1>0)
+							{
+								if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+									ls4last.add(r);
+							}else if(Integer.parseInt(language)+1<7)
+							{
+								if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+									ls4next.add(r);
+							}
+						}
 					}
-				}
 				}
 				for(Resource rr:huiben){
 					ls3.add(rr);
@@ -2489,40 +2835,87 @@ public class LearnplanServiceImpl implements LearnplanService {
 					String id = gp.getId();
 					if(ls3!=null){
 						List<Resource> rlist=new ArrayList<Resource>();
+						List<Resource> rlistlast=new ArrayList<Resource>();
+						List<Resource> rlistnext=new ArrayList<Resource>();
 						Iterator it = ls3.iterator();
-						while(it.hasNext()){
-						Resource r = (Resource) it.next();
-						List<ResourceInfo> list = this.resourceInfoDao.findPropertyId(r.getId());
-						if(list!=null){
-							
-							for(ResourceInfo ri :list){
-								if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)){
-									rlist.add(r);
+						while(it.hasNext())
+						{
+							Resource r = (Resource) it.next();
+							List<ResourceInfo> list = this.resourceInfoDao.findPropertyId(r.getId());
+							if(list!=null)
+							{									
+								for(ResourceInfo ri :list)
+								{
+									if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id))
+									{
+										if(r.getLanguage_level().equals(language))
+										{
+											rlist.add(r);
+										}else if(Integer.parseInt(language)-1>0)
+										{
+											if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+												rlistlast.add(r);
+										}else if(Integer.parseInt(language)+1<7)
+										{
+											if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+												rlistnext.add(r);
+										}
+									}							
 								}
-								
 							}
-							
-						}
 						}
 						
-						kexuan=rlist.size()>kexuan?kexuan:rlist.size();
+						//kexuan=rlist.size()>kexuan?kexuan:rlist.size();
 						for(int nn=0;nn<kexuan;nn++){
-							Random rand = new Random();
-							Resource r1 = rlist.get(rand.nextInt(rlist.size()));
-							
-							ls3.remove(r1);
-							r1.setProperty_id(id);
-							r1.setReplenish("0");
-							lsModel3.add(r1);
-							if(ids.equals("")){
-								ids += r1.getId();
-							}else {
-								ids +=","+r1.getId();
+							if(rlist.isEmpty() && rlistlast.isEmpty() && rlistnext.isEmpty())
+								break;
+							if(!rlist.isEmpty())
+							{
+								Random rand = new Random();
+								Resource r1 = rlist.get(rand.nextInt(rlist.size()));
+								
+								ls3.remove(r1);
+								r1.setProperty_id(id);
+								r1.setReplenish("0");
+								lsModel3.add(r1);
+								if(ids.equals("")){
+									ids += r1.getId();
+								}else {
+									ids +=","+r1.getId();
+								}									
+								rlist.remove(r1);
+							}else if(!rlistlast.isEmpty())
+							{
+								Random rand = new Random();
+								Resource r1 = rlist.get(rand.nextInt(rlist.size()));
+								
+								ls3.remove(r1);
+								r1.setProperty_id(id);
+								r1.setReplenish("0");
+								lsModel3.add(r1);
+								if(ids.equals("")){
+									ids += r1.getId();
+								}else {
+									ids +=","+r1.getId();
+								}									
+								rlistlast.remove(r1);
+							}else if(!rlistnext.isEmpty())
+							{
+								Random rand = new Random();
+								Resource r1 = rlist.get(rand.nextInt(rlist.size()));
+								
+								ls3.remove(r1);
+								r1.setProperty_id(id);
+								r1.setReplenish("0");
+								lsModel3.add(r1);
+								if(ids.equals("")){
+									ids += r1.getId();
+								}else {
+									ids +=","+r1.getId();
+								}									
+								rlistnext.remove(r1);
 							}
-							
-							rlist.remove(r1);
-						}
-						
+						}								
 					}
 				}
 				//选择必选项
@@ -2534,169 +2927,194 @@ public class LearnplanServiceImpl implements LearnplanService {
 					String id = gp.getId();
 					if(ls3!=null){
 						List<Resource> rlist=new ArrayList<Resource>();
+						List<Resource> rlistlast=new ArrayList<Resource>();
+						List<Resource> rlistnext=new ArrayList<Resource>();
 						Iterator it = ls3.iterator();
-						while(it.hasNext()){
-						Resource r = (Resource) it.next();
-						List<ResourceInfo> list = this.resourceInfoDao.findPropertyId(r.getId());
-						if(list!=null){
-							for(ResourceInfo ri :list){
-								if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)){
-									rlist.add(r);
+						while(it.hasNext())
+						{
+							Resource r = (Resource) it.next();
+							List<ResourceInfo> list = this.resourceInfoDao.findPropertyId(r.getId());
+							if(list!=null){
+//							
+								for(ResourceInfo ri :list){
+									if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)){
+										if(r.getLanguage_level().equals(language))
+										{
+											rlist.add(r);
+										}else if(Integer.parseInt(language)-1>0)
+										{
+											if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+												rlistlast.add(r);
+										}else if(Integer.parseInt(language)+1<7)
+										{
+											if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+												rlistnext.add(r);
+										}
+									}										
 								}
-								
 							}
-//							for(ResourceInfo ri :list){
-//								//
-//								if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)&&d<bixuan){
-//									d++;
-//									ls3.remove(r);
-//									r.setProperty_id(id);
-//									r.setReplenish("0");
-//									lsModel3.add(r);
-//									if(ids.equals("")){
-//										ids += r.getId();
-//									}else {
-//										ids +=","+r.getId();
-//									}
-//								}
-//							}
-						}
 						}
 						
-						bixuan=rlist.size()>bixuan?bixuan:rlist.size();
+						
+						//bixuan=rlist.size()>bixuan?bixuan:rlist.size();
 						for(int nn=0;nn<bixuan;nn++){
-							Random rand = new Random();
-							Resource r1 = rlist.get(rand.nextInt(rlist.size()));
-							
-							ls3.remove(r1);
-							r1.setProperty_id(id);
-							r1.setReplenish("0");
-							lsModel3.add(r1);
-							if(ids.equals("")){
-								ids += r1.getId();
-							}else {
-								ids +=","+r1.getId();
-							}
-							
-							rlist.remove(r1);
-						}
-					}
-				}
-				if(lsModel3.size()<read*plan_weekday_num){
-				//补充项
-				for(GlobalProperty gp:gpModelList){
-					
-					if(lsModel3.size()>=read*plan_weekday_num){
-						break;
-					}
-					
-					
-					int buquan = Integer.parseInt(gp.getProperty_num());
-					//计数
-					int d = 0;
-					//属性id
-					String id = gp.getId();
-					if(ls3!=null){
-						List<Resource> rlist=new ArrayList<Resource>();
-						Iterator it = ls3.iterator();
-						while(it.hasNext()){
-						Resource r = (Resource) it.next();
-						List<ResourceInfo> list = this.resourceInfoDao.findPropertyId(r.getId());
-						if(list!=null){
-							
-							
-							for(ResourceInfo ri :list){
-								if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)){
-									rlist.add(r);
-								}
+							if(rlist.isEmpty() && rlistlast.isEmpty() && rlistnext.isEmpty())
+								break;
+							if(!rlist.isEmpty())
+							{
+								Random rand = new Random();
+								Resource r1 = rlist.get(rand.nextInt(rlist.size()));
 								
+								ls3.remove(r1);
+								r1.setProperty_id(id);
+								r1.setReplenish("0");
+								lsModel3.add(r1);
+								if(ids.equals("")){
+									ids += r1.getId();
+								}else {
+									ids +=","+r1.getId();
+								}
+								rlist.remove(r1);
+							}else if(!rlistlast.isEmpty())
+							{
+								Random rand = new Random();
+								Resource r1 = rlistlast.get(rand.nextInt(rlistlast.size()));
+								
+								ls3.remove(r1);
+								r1.setProperty_id(id);
+								r1.setReplenish("0");
+								lsModel3.add(r1);
+								if(ids.equals("")){
+									ids += r1.getId();
+								}else {
+									ids +=","+r1.getId();
+								}
+								rlistlast.remove(r1);
+							}else if(!rlistnext.isEmpty())
+							{
+								Random rand = new Random();
+								Resource r1 = rlistnext.get(rand.nextInt(rlistnext.size()));
+								
+								ls3.remove(r1);
+								r1.setProperty_id(id);
+								r1.setReplenish("0");
+								lsModel3.add(r1);
+								if(ids.equals("")){
+									ids += r1.getId();
+								}else {
+									ids +=","+r1.getId();
+								}
+								rlistnext.remove(r1);
 							}
-							
-							
-							
-							
-//							for(ResourceInfo ri :list){
-//								//
-//								if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)&&d<buquan){
-//									d++;
-//									if(lsModel3.size()>=read*plan_weekday_num){
-//										break;
-//									}
-//									ls3.remove(r);
-//									r.setProperty_id(id);
-//									r.setReplenish("1");
-//									lsModel3.add(r);
-//									if(ids.equals("")){
-//										ids += r.getId();
-//									}else {
-//										ids +=","+r.getId();
-//									}
-//								}
-//							}
-						}
-						}
-						
-						int cha=read*plan_weekday_num-lsModel3.size();
-						buquan=cha>buquan?buquan:cha;
-						buquan=rlist.size()>buquan?buquan:rlist.size();
-						for(int nn=0;nn<buquan;nn++){
-							Random rand = new Random();
-							Resource r1 = rlist.get(rand.nextInt(rlist.size()));
-							
-							ls3.remove(r1);
-							r1.setProperty_id(id);
-							r1.setReplenish("0");
-							lsModel3.add(r1);
-							if(ids.equals("")){
-								ids += r1.getId();
-							}else {
-								ids +=","+r1.getId();
-							}
-							
-							rlist.remove(r1);
-						}
+						}								
 					}
 				}
 				
+				if(lsModel3.size()<read*plan_weekday_num)
+				{
+					//补充项
+					for(GlobalProperty gp:gpModelList)
+					{
+						if(lsModel3.size()>=read*plan_weekday_num){
+							break;
+						}
+						int buquan = Integer.parseInt(gp.getProperty_num());
+						//计数
+						int d = 0;
+						//属性id
+						String id = gp.getId();
+						if(ls3!=null)
+						{
+							List<Resource> rlist=new ArrayList<Resource>();
+							List<Resource> rlistlast=new ArrayList<Resource>();
+							List<Resource> rlistnext=new ArrayList<Resource>();
+							Iterator it = ls3.iterator();
+							while(it.hasNext())
+							{
+								Resource r = (Resource) it.next();
+								List<ResourceInfo> list = this.resourceInfoDao.findPropertyId(r.getId());
+								if(list!=null)
+								{
+									for(ResourceInfo ri :list)
+									{
+										if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id))
+										{									
+											if(r.getLanguage_level().equals(language))
+											{
+												rlist.add(r);
+											}else if(Integer.parseInt(language)-1>0)
+											{
+												if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+													rlistlast.add(r);
+											}else if(Integer.parseInt(language)+1<7)
+											{
+												if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+													rlistnext.add(r);
+											}
+										}									
+									}
+								}
+							}
+						
+							int cha=read*plan_weekday_num-lsModel3.size();
+							buquan=cha;//>buquan?buquan:cha;
+							//buquan=rlist.size()>buquan?buquan:rlist.size();
+							for(int nn=0;nn<buquan;nn++){
+								if(rlist.isEmpty() && rlistlast.isEmpty() && rlistnext.isEmpty())
+									break;
+								if(!rlist.isEmpty())
+								{
+									Random rand = new Random();
+									Resource r1 = rlist.get(rand.nextInt(rlist.size()));
+								
+									ls3.remove(r1);
+									r1.setProperty_id(id);
+									r1.setReplenish("0");
+									lsModel3.add(r1);
+									if(ids.equals("")){
+									ids += r1.getId();
+									}else {
+										ids +=","+r1.getId();
+									}
+								
+									rlist.remove(r1);
+								}else if(!rlistlast.isEmpty())
+								{
+									Random rand = new Random();
+									Resource r1 = rlistlast.get(rand.nextInt(rlistlast.size()));
+								
+									ls3.remove(r1);
+									r1.setProperty_id(id);
+									r1.setReplenish("0");
+									lsModel3.add(r1);
+									if(ids.equals("")){
+									ids += r1.getId();
+									}else {
+										ids +=","+r1.getId();
+									}
+								
+									rlistlast.remove(r1);
+								}else if(!rlistnext.isEmpty())
+								{
+									Random rand = new Random();
+									Resource r1 = rlistnext.get(rand.nextInt(rlistnext.size()));
+								
+									ls3.remove(r1);
+									r1.setProperty_id(id);
+									r1.setReplenish("0");
+									lsModel3.add(r1);
+									if(ids.equals("")){
+									ids += r1.getId();
+									}else {
+										ids +=","+r1.getId();
+									}
+								
+									rlistnext.remove(r1);
+								}
+							}								
+						}
+					}
 				}
-//				//本阶段书不够数据补全
-//				if(lsModel3.isEmpty()||lsModel3.size()<read*plan_weekday_num){
-//					List<GlobalProperty> bqgpList = this.globalPropertyDao.findByBabyId(gpModel);//属性补全
-//					List<Resource> bqls = new CopyOnWriteArrayList<Resource>();
-//					List<Resource> bqlsModel = new CopyOnWriteArrayList<Resource>();//绘本补全
-//					Resource rModel = new Resource();
-//					rModel.setId(ids);
-//					rModel.setBaby_id(baby_id);
-//					bqlsModel = this.resourceDao.huibenbuquan(rModel);
-//					for(Resource rrr:bqlsModel){
-//						bqls.add(rrr);
-//					}
-//					for(GlobalProperty gp:bqgpList){
-//						//计数
-//						int d = 0;
-//						//属性id
-//						String id = gp.getId();
-//						if(bqls!=null){
-//							Iterator it = bqls.iterator();
-//							while(it.hasNext()){
-//							Resource r = (Resource) it.next();
-//							List<ResourceInfo> list = this.resourceInfoDao.findPropertyId(r.getId());
-//								for(ResourceInfo ri :list){
-//									//
-//									if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)&&d<buquan){
-//										d++;
-//										if(lsModel3.size()>=read*plan_weekday_num){
-//											break;
-//										}
-//										bqls.remove(r);
-//										r.setProperty_id(id);
-//										lsModel3.add(r);
-//									}
-//								}
-//							}
-//						}
-//					}
-//				}
 				
 				String listen_id = "";
 				String see_id = "";
@@ -2704,68 +3122,230 @@ public class LearnplanServiceImpl implements LearnplanService {
 				String play_id = "";
 				
 				for(int a = 0; a< listen*plan_weekday_num;a++){
-					if(ls1.isEmpty()){
+					if(ls1.isEmpty() && ls1last.isEmpty() && ls1next.isEmpty()){
 						int len = listen*plan_weekday_num - a;
 						Resource r = new Resource();
 						r.setId(listen_id);
 						r.setResource_type_id("1");
 						r.setBaby_id(baby_id);
 						r.setLen(len);
-						List<Resource> list = this.resourceDao.buquan(r);
+						List<Resource> list = this.resourceDao.buquanpre(r);
 						if(list!=null){
+							int bl = 0;
 							for(int c = 0;c<list.size();c++){
-								Resource re = list.get(c);
-								int b = (a+c)/listen+1;
-								re.setNum(b);
-								ls.add(re);
+								if(bl>=len)
+								{
+									break;
+								}else
+								{
+									Resource re = list.get(c);
+									if(re.getLanguage_level().equals(language))
+									{
+										int b = (a+bl)/listen+1;
+										re.setNum(b);
+										ls.add(re);
+										bl++;
+									}
+								}
+							}
+							
+							for(int c = 0;c<list.size();c++){
+								if(bl>=len)
+								{
+									break;
+								}else
+								{
+									Resource re = list.get(c);
+									if(Integer.parseInt(language)-1>0)
+									{
+										if(re.getLanguage_level().equals(Integer.parseInt(language)-1))
+										{
+											int b = (a+bl)/listen+1;
+											re.setNum(b);
+											ls.add(re);
+											bl++;
+										}
+									}
+								}
+							}
+							
+							for(int c = 0;c<list.size();c++){
+								if(bl>=len)
+								{
+									break;
+								}else
+								{
+									Resource re = list.get(c);
+									if(Integer.parseInt(language)+1<7)
+									{
+										if(re.getLanguage_level().equals(Integer.parseInt(language)+1))
+										{
+											int b = (a+bl)/listen+1;
+											re.setNum(b);
+											ls.add(re);
+											bl++;
+										}
+									}
+								}
 							}
 						}
 						break;
 					}
-					Random rand = new Random();
-					Resource re = ls1.get(rand.nextInt(ls1.size()));
-					if(a==0){
-						listen_id += re.getId();
-					}else {
-						listen_id +=","+re.getId();
+					if(!ls1.isEmpty())
+					{
+						Random rand = new Random();
+						Resource re = ls1.get(rand.nextInt(ls1.size()));
+						if(a==0){
+							listen_id += re.getId();
+						}else {
+							listen_id +=","+re.getId();
+						}
+						int b = a/listen+1;
+						re.setNum(b);
+						ls.add(re);
+						ls1.remove(re);
+					}else if(!ls1last.isEmpty())
+					{
+						Random rand = new Random();
+						Resource re = ls1last.get(rand.nextInt(ls1last.size()));
+						if(a==0){
+							listen_id += re.getId();
+						}else {
+							listen_id +=","+re.getId();
+						}
+						int b = a/listen+1;
+						re.setNum(b);
+						ls.add(re);
+						ls1last.remove(re);
+					}else if(!ls1next.isEmpty())
+					{
+						Random rand = new Random();
+						Resource re = ls1next.get(rand.nextInt(ls1next.size()));
+						if(a==0){
+							listen_id += re.getId();
+						}else {
+							listen_id +=","+re.getId();
+						}
+						int b = a/listen+1;
+						re.setNum(b);
+						ls.add(re);
+						ls1next.remove(re);
 					}
-					int b = a/listen+1;
-					re.setNum(b);
-					ls.add(re);
-					ls1.remove(re);
+					
 				}
 			
 			
 				for(int a = 0; a< see*plan_weekday_num;a++){
-					if(ls2.isEmpty()){
+					if(ls2.isEmpty() && ls2last.isEmpty() && ls2next.isEmpty()){
 						int len = see*plan_weekday_num - a;
 						Resource r = new Resource();
 						r.setId(see_id);
 						r.setResource_type_id("2");
 						r.setBaby_id(baby_id);
 						r.setLen(len);
-						List<Resource> list = this.resourceDao.buquan(r);
+						List<Resource> list = this.resourceDao.buquanpre(r);
 						if(list!=null){
+							int bl = 0;
 							for(int c = 0;c<list.size();c++){
-								Resource re = list.get(c);
-								int b = (a+c)/listen+1;
-								re.setNum(b);
-								ls.add(re);
+								if(bl>=len)
+								{
+									break;
+								}else
+								{
+									Resource re = list.get(c);
+									if(re.getLanguage_level().equals(language))
+									{
+										int b = (a+bl)/listen+1;
+										re.setNum(b);
+										ls.add(re);
+										bl++;
+									}
+								}
+							}
+							
+							for(int c = 0;c<list.size();c++){
+								if(bl>=len)
+								{
+									break;
+								}else
+								{
+									Resource re = list.get(c);
+									if(Integer.parseInt(language)-1>0)
+									{
+										if(re.getLanguage_level().equals(Integer.parseInt(language)-1))
+										{
+											int b = (a+bl)/listen+1;
+											re.setNum(b);
+											ls.add(re);
+											bl++;
+										}
+									}
+								}
+							}
+							
+							for(int c = 0;c<list.size();c++){
+								if(bl>=len)
+								{
+									break;
+								}else
+								{
+									Resource re = list.get(c);
+									if(Integer.parseInt(language)+1<7)
+									{
+										if(re.getLanguage_level().equals(Integer.parseInt(language)+1))
+										{
+											int b = (a+bl)/listen+1;
+											re.setNum(b);
+											ls.add(re);
+											bl++;
+										}
+									}
+								}
 							}
 						}
 						break;
 					}
-					Random rand = new Random();
-					Resource re = ls2.get(rand.nextInt(ls2.size()));
-					if(a==0){
-						see_id += re.getId();
-					}else {
-						see_id +=","+re.getId();
+					if(!ls2.isEmpty())
+					{
+						Random rand = new Random();
+						Resource re = ls2.get(rand.nextInt(ls2.size()));
+						if(a==0){
+							see_id += re.getId();
+						}else {
+							see_id +=","+re.getId();
+						}
+						int b = a/see+1;
+						re.setNum(b);
+						ls.add(re);
+						ls2.remove(re);
+					}else if(!ls2last.isEmpty())
+					{
+						Random rand = new Random();
+						Resource re = ls2last.get(rand.nextInt(ls2last.size()));
+						if(a==0){
+							see_id += re.getId();
+						}else {
+							see_id +=","+re.getId();
+						}
+						int b = a/see+1;
+						re.setNum(b);
+						ls.add(re);
+						ls2last.remove(re);
+					}else if(!ls2next.isEmpty())
+					{
+						Random rand = new Random();
+						Resource re = ls2next.get(rand.nextInt(ls2next.size()));
+						if(a==0){
+							see_id += re.getId();
+						}else {
+							see_id +=","+re.getId();
+						}
+						int b = a/see+1;
+						re.setNum(b);
+						ls.add(re);
+						ls2next.remove(re);
 					}
-					int b = a/see+1;
-					re.setNum(b);
-					ls.add(re);
-					ls2.remove(re);
+					
 				}
 				
 				for(int a = 0; a< read*plan_weekday_num;a++){
@@ -2786,22 +3366,51 @@ public class LearnplanServiceImpl implements LearnplanService {
 				}
 				
 				for(int a = 0; a< play*plan_weekday_num;a++){
-					if(ls4.isEmpty()){
+					if(ls4.isEmpty() && ls4last.isEmpty() && ls4next.isEmpty()){
 						break;
 					}
-					Random rand = new Random();
-					Resource re = ls4.get(rand.nextInt(ls4.size()));
-					if(a==0){
-						play_id += re.getId();
-					}else {
-						play_id +=","+re.getId();
-					}
-					int b = a/play+1;
-					re.setNum(b);
-					ls.add(re);
-					ls4.remove(re);
-				}
-				
+					if(!ls4.isEmpty())
+					{
+						Random rand = new Random();
+						Resource re = ls4.get(rand.nextInt(ls4.size()));
+						if(a==0){
+							play_id += re.getId();
+						}else {
+							play_id +=","+re.getId();
+						}
+						int b = a/play+1;
+						re.setNum(b);
+						ls.add(re);
+						ls4.remove(re);
+					}else if(!ls4last.isEmpty())
+					{
+						Random rand = new Random();
+						Resource re = ls4last.get(rand.nextInt(ls4last.size()));
+						if(a==0){
+							play_id += re.getId();
+						}else {
+							play_id +=","+re.getId();
+						}
+						int b = a/play+1;
+						re.setNum(b);
+						ls.add(re);
+						ls4last.remove(re);
+					}else if(!ls4next.isEmpty())
+					{
+						Random rand = new Random();
+						Resource re = ls4next.get(rand.nextInt(ls4next.size()));
+						if(a==0){
+							play_id += re.getId();
+						}else {
+							play_id +=","+re.getId();
+						}
+						int b = a/play+1;
+						re.setNum(b);
+						ls.add(re);
+						ls4next.remove(re);
+					}				
+				}					
+		
 				if(ls!=null&&!ls.isEmpty()){
 					JSONArray data1 = new JSONArray();
 					JSONArray data2 = new JSONArray();
@@ -2873,6 +3482,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("status", "0");
 							obj.put("spend_minute", "");
 							obj.put("fstatus", fnum>0?"1":"0");
+							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data1.add(obj);
 						}else if(type_id.equals("2")){
 							JSONObject obj = new JSONObject();
@@ -2907,6 +3517,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("status", "0");
 							obj.put("spend_minute", "");
 							obj.put("fstatus", fnum>0?"1":"0");
+							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data2.add(obj);
 						}else if(type_id.equals("4")){
 							list = this.resourceInfoDao.findByResourceId(r.getId());
@@ -2928,11 +3539,15 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("img_book_size", r.getImg_book_size()!=null?r.getImg_book_size():"");
 							
 							obj.put("img_start", r.getStart_img()!=null?tobereplace(r.getStart_img(), 0):"");
+							obj.put("img_start_size",r.getStart_img_size()!=null?r.getStart_img_size():"");
 							obj.put("start_content", r.getStart_content()!=null?r.getStart_content():"");
 							obj.put("img_read", r.getRead_img()!=null?tobereplace(r.getRead_img(), 0):"");
+							obj.put("img_read_size",r.getRead_img_size()!=null?r.getRead_img_size():"");
 							obj.put("read_content", r.getRead_content()!=null?r.getRead_content():"");
 							obj.put("img_practise", r.getLian_img()!=null?tobereplace(r.getLian_img(), 0):"");
+							obj.put("img_practise_size",r.getLian_img_size()!=null?r.getLian_img_size():"");
 							obj.put("practise_content", r.getLian_content()!=null?r.getLian_content():"");
+							obj.put("book_content", r.getBook_content()!=null?r.getBook_content():"");
 							
 							JSONArray objModel = new JSONArray();
 							if(list!=null&&!list.isEmpty()){
@@ -2953,6 +3568,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("data", !objModel.isEmpty()?objModel:"");
 							obj.put("property", r.getProperty_id()!=null?r.getProperty_id():"");
 							obj.put("fstatus", fnum>0?"1":"0");
+							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data3.add(obj);
 						}else if(type_id.equals("5")){
 							JSONObject obj = new JSONObject();
@@ -2987,6 +3603,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 								}
 							obj.put("data", !objModel.isEmpty()?objModel:"");
 							obj.put("fstatus", fnum>0?"1":"0");
+							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data4.add(obj);
 						}
 						

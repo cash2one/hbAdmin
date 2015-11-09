@@ -78,7 +78,48 @@ public class Resource implements Serializable {
 	private String start_content;
 	private String start_img;
 	
+//	read_img_size     varchar(30)   utf8_general_ci  YES             (NULL)           select,insert,update,references  开始读封面图尺寸                
+//	lian_img_size     varchar(30)   utf8_general_ci  YES             (NULL)           select,insert,update,references  开始练封面图尺寸                
+//	start_img_size    varchar(30)   utf8_general_ci  YES             (NULL)           select,insert,update,references  起始封面图尺寸                   
+//	book_content      varchar(500)  utf8_general_ci  YES             (NULL)           select,insert,update,references  绘本文字说明  
 	
+	private String read_img_size;
+	private String lian_img_size;
+	private String start_img_size;
+	private String book_content;
+	
+	public String getRead_img_size() {
+		return read_img_size;
+	}
+
+	public void setRead_img_size(String read_img_size) {
+		this.read_img_size = read_img_size;
+	}
+
+	public String getLian_img_size() {
+		return lian_img_size;
+	}
+
+	public void setLian_img_size(String lian_img_size) {
+		this.lian_img_size = lian_img_size;
+	}
+
+	public String getStart_img_size() {
+		return start_img_size;
+	}
+
+	public void setStart_img_size(String start_img_size) {
+		this.start_img_size = start_img_size;
+	}
+
+	public String getBook_content() {
+		return book_content;
+	}
+
+	public void setBook_content(String book_content) {
+		this.book_content = book_content;
+	}
+
 	public String getRead_content() {
 		return read_content;
 	}

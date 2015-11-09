@@ -254,6 +254,11 @@ public class ResourceController {
 			String start_content=(String)request.getParameter("start_content");
 			String start_img=(String)request.getParameter("start_img");
 			
+			String read_img_size=(String)request.getParameter("read_img_size");
+			String lian_img_size=(String)request.getParameter("lian_img_size");
+			String start_img_size=(String)request.getParameter("start_img_size");
+			String book_content=(String)request.getParameter("book_content");
+			
 //			if(!CollectionUtil.checkNull(id)){jsonObj.put("res", "不能为空！");return null;}
 			if(!CollectionUtil.checkNull(resource_content)){jsonObj.put("res", "资源名称不能为空！");return null;}
 			if(!CollectionUtil.checkNull(resource_summary)){jsonObj.put("res", "资源简介不能为空！");return null;}
@@ -322,6 +327,18 @@ public class ResourceController {
 				}
 				if(CollectionUtil.checkNull(start_img)){
 					Resource.setStart_img(CollectionUtil.tobereplace(start_img, 1));
+				}
+				if(CollectionUtil.checkNull(read_img_size)){
+					Resource.setRead_img_size(read_img_size);
+				}
+				if(CollectionUtil.checkNull(lian_img_size)){
+					Resource.setLian_img_size(lian_img_size);
+				}
+				if(CollectionUtil.checkNull(start_img_size)){
+					Resource.setStart_img_size(start_img_size);
+				}
+				if(CollectionUtil.checkNull(book_content)){
+					Resource.setBook_content(book_content);
 				}
 			}
 			
@@ -456,6 +473,11 @@ public class ResourceController {
 			String start_content=(String)request.getParameter("start_content");
 			String start_img=(String)request.getParameter("start_img");
 			
+			String read_img_size=(String)request.getParameter("read_img_size");
+			String lian_img_size=(String)request.getParameter("lian_img_size");
+			String start_img_size=(String)request.getParameter("start_img_size");
+			String book_content=(String)request.getParameter("book_content");
+			
 			if(!CollectionUtil.checkNull(id)){jsonObj.put("res", "序列号不能为空！");return null;}
 			if(!CollectionUtil.checkNull(resource_content)){jsonObj.put("res", "资源名称不能为空！");return null;}
 			if(!CollectionUtil.checkNull(resource_summary)){jsonObj.put("res", "资源简介不能为空！");return null;}
@@ -535,6 +557,30 @@ public class ResourceController {
 					Resource.setStart_img(CollectionUtil.tobereplace(start_img, 1));
 				}else{
 					Resource.setStart_img(null);
+				}
+				
+				if(CollectionUtil.checkNull(read_img_size)){
+					Resource.setRead_img_size(read_img_size);
+				}else{
+					Resource.setRead_img_size(null);
+				}
+				
+				if(CollectionUtil.checkNull(lian_img_size)){
+					Resource.setLian_img_size(lian_img_size);
+				}else{
+					Resource.setLian_img_size(null);
+				}
+				
+				if(CollectionUtil.checkNull(start_img_size)){
+					Resource.setStart_img_size(start_img_size);
+				}else{
+					Resource.setStart_img_size(null);
+				}
+				
+				if(CollectionUtil.checkNull(book_content)){
+					Resource.setBook_content(book_content);
+				}else{
+					Resource.setBook_content(null);
 				}
 			}
 			Resource.setResource_status(resource_status);
