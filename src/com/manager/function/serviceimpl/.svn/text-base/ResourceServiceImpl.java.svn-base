@@ -1022,6 +1022,7 @@ public class ResourceServiceImpl implements ResourceService {
 						obj.put("status", "0");
 						obj.put("fstatus", fnum>0?"1":"0");
 						obj.put("rowno", r.getRowno()+"");
+						//obj.put("language", language!=null?language:"");
 						data1.add(obj);
 					}else if(type_id.equals("2")){
 						JSONObject obj = new JSONObject();
@@ -1054,6 +1055,7 @@ public class ResourceServiceImpl implements ResourceService {
 						obj.put("status", "0");
 						obj.put("fstatus", fnum>0?"1":"0");
 						obj.put("rowno", r.getRowno()+"");
+						//obj.put("language", language!=null?language:"");
 						data2.add(obj);
 					}else if(type_id.equals("4")){
 						List<ResourceInfo> list1 = this.resourceInfoDao.findByResourceId1(r.getId());
@@ -1094,6 +1096,7 @@ public class ResourceServiceImpl implements ResourceService {
 						obj.put("fstatus", fnum>0?"1":"0");
 						obj.put("data", !objModel.isEmpty()?objModel:"");
 						obj.put("rowno", r.getRowno()+"");
+						//obj.put("language", language!=null?language:"");
 						data3.add(obj);
 					}else if(type_id.equals("5")){
 						JSONObject obj = new JSONObject();
@@ -1118,6 +1121,7 @@ public class ResourceServiceImpl implements ResourceService {
 						}
 						obj.put("fstatus", fnum>0?"1":"0");
 						obj.put("rowno", r.getRowno()+"");
+						//obj.put("language", language!=null?language:"");
 						data4.add(obj);
 					}
 					
@@ -1244,6 +1248,7 @@ public class ResourceServiceImpl implements ResourceService {
 					int fnum = this.favoriteDao.findNum(f);
 					
 					List<ResourceInfo> list = this.resourceInfoDao.findByResourceId(r.getId());
+					String language = this.resourceInfoDao.getResLanguage(r.getId())+"";
 					if(type_id.equals("1")){
 						JSONObject obj = new JSONObject();
 						obj.put("resource_id", r.getId());
@@ -1268,6 +1273,7 @@ public class ResourceServiceImpl implements ResourceService {
 						obj.put("status", "0");
 						obj.put("fstatus", fnum>0?"1":"0");
 						obj.put("rowno", r.getRowno()+"");
+						obj.put("language", language!=null?language:"");
 						data1.add(obj);
 					}else if(type_id.equals("2")){
 						JSONObject obj = new JSONObject();
@@ -1300,6 +1306,7 @@ public class ResourceServiceImpl implements ResourceService {
 						obj.put("status", "0");
 						obj.put("fstatus", fnum>0?"1":"0");
 						obj.put("rowno", r.getRowno()+"");
+						obj.put("language", language!=null?language:"");
 						data2.add(obj);
 					}else if(type_id.equals("4")){
 						List<ResourceInfo> list1 = this.resourceInfoDao.findByResourceId1(r.getId());
@@ -1344,6 +1351,7 @@ public class ResourceServiceImpl implements ResourceService {
 						obj.put("fstatus", fnum>0?"1":"0");
 						obj.put("data", !objModel.isEmpty()?objModel:"");
 						obj.put("rowno", r.getRowno()+"");
+						obj.put("language", language!=null?language:"");
 						data3.add(obj);
 					}else if(type_id.equals("5")){
 						JSONObject obj = new JSONObject();
@@ -1368,6 +1376,7 @@ public class ResourceServiceImpl implements ResourceService {
 						}
 						obj.put("fstatus", fnum>0?"1":"0");
 						obj.put("rowno", r.getRowno()+"");
+						obj.put("language", language!=null?language:"");
 						data4.add(obj);
 					}
 					
@@ -1755,6 +1764,7 @@ public Map fListpre(HttpServletRequest request) {
 					String ulp_id = r.getUlp_id();
 					
 					List<ResourceInfo> list = this.resourceInfoDao.findByResourceId(r.getId());
+					String language = this.resourceInfoDao.getResLanguage(r.getId())+"";
 					if(type_id.equals("1")){
 						JSONObject obj = new JSONObject();
 						obj.put("resource_id", r.getId());
@@ -1777,6 +1787,7 @@ public Map fListpre(HttpServletRequest request) {
 							obj.put("lyrics", "");
 						}
 						obj.put("status", "0");
+						obj.put("language", language!=null?language:"");
 						data1.add(obj);
 					}else if(type_id.equals("2")){
 						JSONObject obj = new JSONObject();
@@ -1807,6 +1818,7 @@ public Map fListpre(HttpServletRequest request) {
 						obj.put("status", "0");
 						obj.put("data", !objModel.isEmpty()?objModel:"");
 						obj.put("status", "0");
+						obj.put("language", language!=null?language:"");
 						data2.add(obj);
 					}else if(type_id.equals("4")){
 						List<ResourceInfo> list1 = this.resourceInfoDao.findByResourceId1(r.getId());
@@ -1849,6 +1861,7 @@ public Map fListpre(HttpServletRequest request) {
 						}
 						obj.put("status", "0");
 						obj.put("data", objModel);
+						obj.put("language", language!=null?language:"");
 						data3.add(obj);
 					}else if(type_id.equals("5")){
 						JSONObject obj = new JSONObject();
@@ -1863,6 +1876,7 @@ public Map fListpre(HttpServletRequest request) {
 						obj.put("img_main", r.getImg_main()!=null?tobereplace(r.getImg_main(), 0):"");
 						obj.put("img_main_size", r.getImg_main_size()!=null?r.getImg_main_size():"");
 						obj.put("status", "0");
+						obj.put("language", language!=null?language:"");
 						if (list != null && !list.isEmpty()) {
 							obj.put("url",list.get(0).getResource_url() != null ? CollectionUtil
 													.toplaybereplace(list.get(0).getResource_url(), 0): "");

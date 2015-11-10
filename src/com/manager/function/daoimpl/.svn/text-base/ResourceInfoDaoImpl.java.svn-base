@@ -156,7 +156,13 @@ public class ResourceInfoDaoImpl extends SqlSessionDaoSupport implements Resourc
 		}
 		return null;
 	}
-	
+	public int getResLanguage(String resource_id)
+	{
+		DataSourceContextHolder.setDbType("0");
+		int list=this.getSqlSession().selectOne("ResourceInfoSql.gerResLanguage",resource_id);
+		DataSourceContextHolder.clearDbType();
+		return list;
+	}
 	public List<ResourceInfo> findByResourceId1(String resource_id) {
 		DataSourceContextHolder.setDbType("0");
 		List<ResourceInfo> list=this.getSqlSession().selectList("ResourceInfoSql.findByResourceId1",resource_id);

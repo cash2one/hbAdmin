@@ -7,7 +7,8 @@
 		<result property="baby_id" column="baby_id"/>   
 		<result property="level_id" column="level_id"/>   
 		<result property="property_id" column="property_id"/>  
-		<result property="create_date" column="create_date"/> 
+		<result property="create_date" column="create_date"/>
+		<result property="baby_language" column="baby_language"/>  
 	</resultMap>
 	
 	<select id="getOne" resultMap="BabyInfo" parameterType="babyInfo">
@@ -16,6 +17,10 @@
 	
 	<select id="findByBabyId" resultMap="BabyInfo" parameterType="babyInfo">
 		<![CDATA[ SELECT id,baby_id,level_id,property_id,create_date FROM tbl_baby_info WHERE baby_id=#{baby_id}]]>
+	</select>
+	
+	<select id="getBabyLangeuage" resultMap="BabyInfo" parameterType="babyInfo">
+		<![CDATA[ SELECT baby_language FROM tbl_baby_info WHERE baby_id=#{baby_id}]]>
 	</select>
 	
 	<insert id="add" parameterType="babyInfo"> 

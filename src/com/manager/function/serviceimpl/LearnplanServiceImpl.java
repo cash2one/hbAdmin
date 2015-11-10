@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,6 +20,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.manager.function.controller.GlobalHobbyController;
+import com.manager.function.dao.BabyInfoDao;
 import com.manager.function.dao.FavoriteDao;
 import com.manager.function.dao.GlobalPropertyDao;
 import com.manager.function.dao.GlobalScoreDao;
@@ -30,6 +30,7 @@ import com.manager.function.dao.ResourceInfoDao;
 import com.manager.function.dao.ScoreLogDao;
 import com.manager.function.dao.UserBillingDao;
 import com.manager.function.dao.UserLearnPlanDao;
+import com.manager.function.entity.BabyInfo;
 import com.manager.function.entity.Favorite;
 import com.manager.function.entity.GlobalProperty;
 import com.manager.function.entity.GlobalScore;
@@ -70,6 +71,16 @@ public class LearnplanServiceImpl implements LearnplanService {
 	private GlobalPropertyDao globalPropertyDao;
 	
 	private FavoriteDao favoriteDao;
+	
+	private BabyInfoDao babyInfoDao;
+	
+	public BabyInfoDao getBabyInfoDao() {
+		return babyInfoDao;
+	}
+	
+	public void setBabyInfoDao(BabyInfoDao babyInfoDao) {
+		this.babyInfoDao = babyInfoDao;
+	}
 	
 	public FavoriteDao getFavoriteDao() {
 		return favoriteDao;
@@ -928,7 +939,12 @@ public class LearnplanServiceImpl implements LearnplanService {
 			String baby_id = (String) request.getParameter("baby_id");
 			String user_id = (String) request.getParameter("uid");
 			String isOpen = (String) request.getParameter("isnewplan");
-			String language = (String) request.getParameter("language");
+			List<BabyInfo> bbbb = this.babyInfoDao.getBabyLanguage(baby_id);
+			String languages = bbbb.get(0).getBaby_language();
+			int language = 0;
+			if(languages!=null)
+				language = Integer.parseInt(languages);
+			
 			boolean flag = false;
 			if(baby_id==null||"".equals(baby_id)){
 				result  = "2";
@@ -947,10 +963,8 @@ public class LearnplanServiceImpl implements LearnplanService {
 			if(flag){
 				//获取plan_id
 				int num = this.userLearnplanDao.getPlanId(baby_id);
-				boolean isexit = false;
-				if(num==0){
-					num = 1;
-				}
+				//boolean isexit = false;
+				
 				String plan_id = num +"";
 				
 				List<Resource> ls = new ArrayList<Resource>();
@@ -963,7 +977,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 					//ulp.setBaby_id(baby_id);
 					//int unfinishedNum = this.userLearnplanDao.isFinush(ulp);
 					//if(unfinishedNum==0){
-					if(isOpen.equals("0")){
+					if(isOpen.equals("0") && num != 0){
 						res1 = false;
 						Resource r = new Resource();
 						r.setBaby_id(baby_id);
@@ -971,6 +985,9 @@ public class LearnplanServiceImpl implements LearnplanService {
 						ls = this.resourceDao.getlearnplan(r);
 					}else{
 						res1 = true;
+						if(num==0){
+							num = 1;
+						}
 						if(num>1){
 							plan_id = (num+1) +"";
 						}
@@ -997,44 +1014,44 @@ public class LearnplanServiceImpl implements LearnplanService {
 							for(Resource r : lsModel){
 								if(r.getResource_type_id().equals("1"))
 								{
-									if(r.getLanguage_level().equals(language))
+									if(r.getLanguage_level().equals(language+""))
 									{
 										ls1.add(r);
-									}else if(Integer.parseInt(language)-1>0)
+									}else if(language-1>0)
 									{
-										if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+										if(r.getLanguage_level().equals((language-1)+""))
 											ls1last.add(r);
-									}else if(Integer.parseInt(language)+1<7)
+									}else if(language+1<7)
 									{
-										if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+										if(r.getLanguage_level().equals((language+1)+""))
 											ls1next.add(r);
 									}
 								}else if(r.getResource_type_id().equals("2"))
 								{
-									if(r.getLanguage_level().equals(language))
+									if(r.getLanguage_level().equals(language+""))
 									{
 										ls2.add(r);
-									}else if(Integer.parseInt(language)-1>0)
+									}else if(language-1>0)
 									{
-										if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+										if(r.getLanguage_level().equals((language-1)+""))
 											ls2last.add(r);
-									}else if(Integer.parseInt(language)+1<7)
+									}else if(language+1<7)
 									{
-										if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+										if(r.getLanguage_level().equals((language+1)+""))
 											ls2next.add(r);
 									}
 								}else if(r.getResource_type_id().equals("5"))
 								{
-									if(r.getLanguage_level().equals(language))
+									if(r.getLanguage_level().equals(language+""))
 									{
 										ls4.add(r);
-									}else if(Integer.parseInt(language)-1>0)
+									}else if(language-1>0)
 									{
-										if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+										if(r.getLanguage_level().equals((language-1)+""))
 											ls4last.add(r);
-									}else if(Integer.parseInt(language)+1<7)
+									}else if(language+1<7)
 									{
-										if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+										if(r.getLanguage_level().equals((language+1)+""))
 											ls4next.add(r);
 									}
 								}
@@ -1120,16 +1137,16 @@ public class LearnplanServiceImpl implements LearnplanService {
 										{
 											if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id))
 											{
-												if(r.getLanguage_level().equals(language))
+												if(r.getLanguage_level().equals(language+""))
 												{
 													rlist.add(r);
-												}else if(Integer.parseInt(language)-1>0)
+												}else if(language-1>0)
 												{
-													if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+													if(r.getLanguage_level().equals((language-1)+""))
 														rlistlast.add(r);
-												}else if(Integer.parseInt(language)+1<7)
+												}else if(language+1<7)
 												{
-													if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+													if(r.getLanguage_level().equals((language+1)+""))
 														rlistnext.add(r);
 												}
 											}							
@@ -1210,16 +1227,16 @@ public class LearnplanServiceImpl implements LearnplanService {
 //									
 										for(ResourceInfo ri :list){
 											if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)){
-												if(r.getLanguage_level().equals(language))
+												if(r.getLanguage_level().equals(language+""))
 												{
 													rlist.add(r);
-												}else if(Integer.parseInt(language)-1>0)
+												}else if(language-1>0)
 												{
-													if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+													if(r.getLanguage_level().equals((language-1)+""))
 														rlistlast.add(r);
-												}else if(Integer.parseInt(language)+1<7)
+												}else if(language+1<7)
 												{
-													if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+													if(r.getLanguage_level().equals((language+1)+""))
 														rlistnext.add(r);
 												}
 											}										
@@ -1311,16 +1328,16 @@ public class LearnplanServiceImpl implements LearnplanService {
 											{
 												if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id))
 												{									
-													if(r.getLanguage_level().equals(language))
+													if(r.getLanguage_level().equals(language+""))
 													{
 														rlist.add(r);
-													}else if(Integer.parseInt(language)-1>0)
+													}else if(language-1>0)
 													{
-														if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+														if(r.getLanguage_level().equals((language-1)+""))
 															rlistlast.add(r);
-													}else if(Integer.parseInt(language)+1<7)
+													}else if(language+1<7)
 													{
-														if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+														if(r.getLanguage_level().equals((language+1)+""))
 															rlistnext.add(r);
 													}
 												}									
@@ -1412,7 +1429,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 										}else
 										{
 											Resource re = list.get(c);
-											if(re.getLanguage_level().equals(language))
+											if(re.getLanguage_level().equals(language+""))
 											{
 												int b = (a+bl)/listen+1;
 												re.setNum(b);
@@ -1429,9 +1446,9 @@ public class LearnplanServiceImpl implements LearnplanService {
 										}else
 										{
 											Resource re = list.get(c);
-											if(Integer.parseInt(language)-1>0)
+											if(language-1>0)
 											{
-												if(re.getLanguage_level().equals(Integer.parseInt(language)-1))
+												if(re.getLanguage_level().equals((language)-1+""))
 												{
 													int b = (a+bl)/listen+1;
 													re.setNum(b);
@@ -1449,9 +1466,9 @@ public class LearnplanServiceImpl implements LearnplanService {
 										}else
 										{
 											Resource re = list.get(c);
-											if(Integer.parseInt(language)+1<7)
+											if(language+1<7)
 											{
-												if(re.getLanguage_level().equals(Integer.parseInt(language)+1))
+												if(re.getLanguage_level().equals((language+1)+""))
 												{
 													int b = (a+bl)/listen+1;
 													re.setNum(b);
@@ -1526,7 +1543,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 										}else
 										{
 											Resource re = list.get(c);
-											if(re.getLanguage_level().equals(language))
+											if(re.getLanguage_level().equals(language+""))
 											{
 												int b = (a+bl)/listen+1;
 												re.setNum(b);
@@ -1543,9 +1560,9 @@ public class LearnplanServiceImpl implements LearnplanService {
 										}else
 										{
 											Resource re = list.get(c);
-											if(Integer.parseInt(language)-1>0)
+											if(language-1>0)
 											{
-												if(re.getLanguage_level().equals(Integer.parseInt(language)-1))
+												if(re.getLanguage_level().equals((language-1)+""))
 												{
 													int b = (a+bl)/listen+1;
 													re.setNum(b);
@@ -1563,9 +1580,9 @@ public class LearnplanServiceImpl implements LearnplanService {
 										}else
 										{
 											Resource re = list.get(c);
-											if(Integer.parseInt(language)+1<7)
+											if(language+1<7)
 											{
-												if(re.getLanguage_level().equals(Integer.parseInt(language)+1))
+												if(re.getLanguage_level().equals((language+1)+""))
 												{
 													int b = (a+bl)/listen+1;
 													re.setNum(b);
@@ -1761,7 +1778,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("status", r.getPlan_status()!=null?r.getPlan_status():"0");
 							obj.put("spend_minute", r.getSpend_minute()!=null?r.getSpend_minute():"");
 							obj.put("fstatus", fnum>0?"1":"0");
-							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data1.add(obj);
 						}else if(type_id.equals("2")){
 							JSONObject obj = new JSONObject();
@@ -1791,7 +1808,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("status", r.getPlan_status()!=null?r.getPlan_status():"0");
 							obj.put("spend_minute", r.getSpend_minute()!=null?r.getSpend_minute():"");
 							obj.put("fstatus", fnum>0?"1":"0");
-							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data2.add(obj);
 						}else if(type_id.equals("4")){
 							list = this.resourceInfoDao.findByResourceId(r.getId());
@@ -1842,7 +1859,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("data", !objModel.isEmpty()?objModel:"");
 							obj.put("property", r.getProperty_id()!=null?r.getProperty_id():"");
 							obj.put("fstatus", fnum>0?"1":"0");
-							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data3.add(obj);
 						}else if(type_id.equals("5")){
 							JSONObject obj = new JSONObject();
@@ -1877,7 +1894,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 								}
 							obj.put("fstatus", fnum>0?"1":"0");
 							obj.put("data", !objModel.isEmpty()?objModel:"");
-							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data4.add(obj);
 						}
 						
@@ -2662,7 +2679,11 @@ public class LearnplanServiceImpl implements LearnplanService {
 		try{
 			String baby_id = (String) request.getParameter("baby_id");
 			String user_id = (String) request.getParameter("uid");
-			String language = (String) request.getParameter("language");
+			List<BabyInfo> bbbb = this.babyInfoDao.getBabyLanguage(baby_id);
+			String languages = bbbb.get(0).getBaby_language();
+			int language = 0;
+			if(languages!=null)
+				language = Integer.parseInt(languages);
 			
 			boolean flag = false;
 			if(baby_id==null||"".equals(baby_id)){
@@ -2727,44 +2748,44 @@ public class LearnplanServiceImpl implements LearnplanService {
 					for(Resource r : lsModel){
 						if(r.getResource_type_id().equals("1"))
 						{
-							if(r.getLanguage_level().equals(language))
+							if(r.getLanguage_level().equals(language+""))
 							{
 								ls1.add(r);
-							}else if(Integer.parseInt(language)-1>0)
+							}else if(language-1>0)
 							{
-								if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+								if(r.getLanguage_level().equals((language-1)+""))
 									ls1last.add(r);
-							}else if(Integer.parseInt(language)+1<7)
+							}else if(language+1<7)
 							{
-								if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+								if(r.getLanguage_level().equals((language+1)+""))
 									ls1next.add(r);
 							}
 						}else if(r.getResource_type_id().equals("2"))
 						{
-							if(r.getLanguage_level().equals(language))
+							if(r.getLanguage_level().equals(language+""))
 							{
 								ls2.add(r);
-							}else if(Integer.parseInt(language)-1>0)
+							}else if(language-1>0)
 							{
-								if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+								if(r.getLanguage_level().equals((language-1)+""))
 									ls2last.add(r);
-							}else if(Integer.parseInt(language)+1<7)
+							}else if(language+1<7)
 							{
-								if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+								if(r.getLanguage_level().equals((language+1)+""))
 									ls2next.add(r);
 							}
 						}else if(r.getResource_type_id().equals("5"))
 						{
-							if(r.getLanguage_level().equals(language))
+							if(r.getLanguage_level().equals(language+""))
 							{
 								ls4.add(r);
-							}else if(Integer.parseInt(language)-1>0)
+							}else if(language-1>0)
 							{
-								if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+								if(r.getLanguage_level().equals((language-1)+""))
 									ls4last.add(r);
-							}else if(Integer.parseInt(language)+1<7)
+							}else if(language+1<7)
 							{
-								if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+								if(r.getLanguage_level().equals((language+1)+""))
 									ls4next.add(r);
 							}
 						}
@@ -2848,16 +2869,16 @@ public class LearnplanServiceImpl implements LearnplanService {
 								{
 									if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id))
 									{
-										if(r.getLanguage_level().equals(language))
+										if(r.getLanguage_level().equals(language+""))
 										{
 											rlist.add(r);
-										}else if(Integer.parseInt(language)-1>0)
+										}else if(language-1>0)
 										{
-											if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+											if(r.getLanguage_level().equals((language-1)+""))
 												rlistlast.add(r);
-										}else if(Integer.parseInt(language)+1<7)
+										}else if(language+1<7)
 										{
-											if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+											if(r.getLanguage_level().equals((language+1)+""))
 												rlistnext.add(r);
 										}
 									}							
@@ -2938,16 +2959,16 @@ public class LearnplanServiceImpl implements LearnplanService {
 //							
 								for(ResourceInfo ri :list){
 									if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id)){
-										if(r.getLanguage_level().equals(language))
+										if(r.getLanguage_level().equals(language+""))
 										{
 											rlist.add(r);
-										}else if(Integer.parseInt(language)-1>0)
+										}else if(language-1>0)
 										{
-											if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+											if(r.getLanguage_level().equals((language-1)+""))
 												rlistlast.add(r);
-										}else if(Integer.parseInt(language)+1<7)
+										}else if(language+1<7)
 										{
-											if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+											if(r.getLanguage_level().equals((language+1)+""))
 												rlistnext.add(r);
 										}
 									}										
@@ -3039,16 +3060,16 @@ public class LearnplanServiceImpl implements LearnplanService {
 									{
 										if(ri.getProperty_id()!=null&&ri.getProperty_id().equals(id))
 										{									
-											if(r.getLanguage_level().equals(language))
+											if(r.getLanguage_level().equals(language+""))
 											{
 												rlist.add(r);
-											}else if(Integer.parseInt(language)-1>0)
+											}else if(language-1>0)
 											{
-												if(r.getLanguage_level().equals(Integer.parseInt(language)-1))
+												if(r.getLanguage_level().equals((language-1)+""))
 													rlistlast.add(r);
-											}else if(Integer.parseInt(language)+1<7)
+											}else if(language+1<7)
 											{
-												if(r.getLanguage_level().equals(Integer.parseInt(language)+1))
+												if(r.getLanguage_level().equals((language+1)+""))
 													rlistnext.add(r);
 											}
 										}									
@@ -3139,7 +3160,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 								}else
 								{
 									Resource re = list.get(c);
-									if(re.getLanguage_level().equals(language))
+									if(re.getLanguage_level().equals(language+""))
 									{
 										int b = (a+bl)/listen+1;
 										re.setNum(b);
@@ -3156,9 +3177,9 @@ public class LearnplanServiceImpl implements LearnplanService {
 								}else
 								{
 									Resource re = list.get(c);
-									if(Integer.parseInt(language)-1>0)
+									if(language-1>0)
 									{
-										if(re.getLanguage_level().equals(Integer.parseInt(language)-1))
+										if(re.getLanguage_level().equals((language-1)+""))
 										{
 											int b = (a+bl)/listen+1;
 											re.setNum(b);
@@ -3176,9 +3197,9 @@ public class LearnplanServiceImpl implements LearnplanService {
 								}else
 								{
 									Resource re = list.get(c);
-									if(Integer.parseInt(language)+1<7)
+									if(language+1<7)
 									{
-										if(re.getLanguage_level().equals(Integer.parseInt(language)+1))
+										if(re.getLanguage_level().equals((language+1)+""))
 										{
 											int b = (a+bl)/listen+1;
 											re.setNum(b);
@@ -3253,7 +3274,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 								}else
 								{
 									Resource re = list.get(c);
-									if(re.getLanguage_level().equals(language))
+									if(re.getLanguage_level().equals(language+""))
 									{
 										int b = (a+bl)/listen+1;
 										re.setNum(b);
@@ -3270,9 +3291,9 @@ public class LearnplanServiceImpl implements LearnplanService {
 								}else
 								{
 									Resource re = list.get(c);
-									if(Integer.parseInt(language)-1>0)
+									if(language-1>0)
 									{
-										if(re.getLanguage_level().equals(Integer.parseInt(language)-1))
+										if(re.getLanguage_level().equals((language-1)+""))
 										{
 											int b = (a+bl)/listen+1;
 											re.setNum(b);
@@ -3290,9 +3311,9 @@ public class LearnplanServiceImpl implements LearnplanService {
 								}else
 								{
 									Resource re = list.get(c);
-									if(Integer.parseInt(language)+1<7)
+									if(language+1<7)
 									{
-										if(re.getLanguage_level().equals(Integer.parseInt(language)+1))
+										if(re.getLanguage_level().equals((language+1)+""))
 										{
 											int b = (a+bl)/listen+1;
 											re.setNum(b);
@@ -3482,7 +3503,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("status", "0");
 							obj.put("spend_minute", "");
 							obj.put("fstatus", fnum>0?"1":"0");
-							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data1.add(obj);
 						}else if(type_id.equals("2")){
 							JSONObject obj = new JSONObject();
@@ -3517,7 +3538,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("status", "0");
 							obj.put("spend_minute", "");
 							obj.put("fstatus", fnum>0?"1":"0");
-							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data2.add(obj);
 						}else if(type_id.equals("4")){
 							list = this.resourceInfoDao.findByResourceId(r.getId());
@@ -3568,7 +3589,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("data", !objModel.isEmpty()?objModel:"");
 							obj.put("property", r.getProperty_id()!=null?r.getProperty_id():"");
 							obj.put("fstatus", fnum>0?"1":"0");
-							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data3.add(obj);
 						}else if(type_id.equals("5")){
 							JSONObject obj = new JSONObject();
@@ -3603,7 +3624,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 								}
 							obj.put("data", !objModel.isEmpty()?objModel:"");
 							obj.put("fstatus", fnum>0?"1":"0");
-							//obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
 							data4.add(obj);
 						}
 						
@@ -3828,4 +3849,5 @@ public class LearnplanServiceImpl implements LearnplanService {
 		this.userBillingDao = userBillingDao;
 	}
 
+	
 }

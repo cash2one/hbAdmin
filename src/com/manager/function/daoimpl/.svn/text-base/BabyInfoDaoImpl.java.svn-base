@@ -25,6 +25,15 @@ public class BabyInfoDaoImpl extends SqlSessionDaoSupport implements BabyInfoDao
 		}
 		return null;
 	}
+	
+	public List<BabyInfo> getBabyLanguage(String baby_id) {
+		DataSourceContextHolder.setDbType("0");
+		List<BabyInfo> ls = this.getSqlSession().selectList("BabyInfoSql.getBabyLangeuage", baby_id);
+		if(ls!=null && ls.size()>0){
+			return ls;
+		}
+		return null;
+	}
 
 	public BabyInfo findOne(String id) {
 		DataSourceContextHolder.setDbType("0");
