@@ -194,12 +194,12 @@ public Map addpre(HttpServletRequest request) {
 						List<BabyInfo> list = this.babyInfoDao.findByBabyId(idl);
 						String hobbyIds = "";
 						String Level_ids = "";
-						String languageid = "";
+						//String languageid = "";
 						if(list!=null){
 							for(int i = 0;i<list.size();i++){
 								if(idl.equals(list.get(i).getBaby_id())){
 									Level_ids = list.get(i).getLevel_id();
-									languageid = list.get(i).getBaby_language();
+									//languageid = list.get(i).getBaby_language();
 									if(i==0){
 										hobbyIds = list.get(i).getProperty_id();
 									}else{
@@ -210,7 +210,7 @@ public Map addpre(HttpServletRequest request) {
 						}
 						baby1.setProperty_id(hobbyIds);
 						baby1.setLevel_id(Level_ids);
-						baby1.setBaby_language(languageid);
+						baby1.setBaby_language(language_id);
 						list1.add(baby1);
 						
 					//}

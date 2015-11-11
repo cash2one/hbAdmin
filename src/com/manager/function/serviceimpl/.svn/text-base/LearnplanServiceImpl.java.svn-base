@@ -945,6 +945,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 			if(languages!=null)
 				language = Integer.parseInt(languages);
 			
+			logger.info("language_id: "+language);
 			boolean flag = false;
 			if(baby_id==null||"".equals(baby_id)){
 				result  = "2";
@@ -964,7 +965,10 @@ public class LearnplanServiceImpl implements LearnplanService {
 				//获取plan_id
 				int num = this.userLearnplanDao.getPlanId(baby_id);
 				//boolean isexit = false;
-				
+				int planNum = num;
+				if(num==0){
+					num = 1;
+				}
 				String plan_id = num +"";
 				
 				List<Resource> ls = new ArrayList<Resource>();
@@ -977,21 +981,21 @@ public class LearnplanServiceImpl implements LearnplanService {
 					//ulp.setBaby_id(baby_id);
 					//int unfinishedNum = this.userLearnplanDao.isFinush(ulp);
 					//if(unfinishedNum==0){
-					if(isOpen.equals("0") && num != 0){
+					if(isOpen.equals("0") || (isOpen.equals("1") && planNum != 0)){
 						res1 = false;
 						Resource r = new Resource();
 						r.setBaby_id(baby_id);
 						r.setPlan_id(plan_id);
 						ls = this.resourceDao.getlearnplan(r);
+						
+						logger.info("old_plan");
 					}else{
 						res1 = true;
-						if(num==0){
-							num = 1;
-						}
+		
 						if(num>1){
 							plan_id = (num+1) +"";
 						}
-						
+						logger.info("new_plan: "+plan_id);
 						//获取符合条件的List
 						List<Resource> lsModel = this.resourceDao.learnplan(baby_id);
 						
@@ -1176,7 +1180,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 									}else if(!rlistlast.isEmpty())
 									{
 										Random rand = new Random();
-										Resource r1 = rlist.get(rand.nextInt(rlist.size()));
+										Resource r1 = rlistlast.get(rand.nextInt(rlistlast.size()));
 										
 										ls3.remove(r1);
 										r1.setProperty_id(id);
@@ -1191,7 +1195,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 									}else if(!rlistnext.isEmpty())
 									{
 										Random rand = new Random();
-										Resource r1 = rlist.get(rand.nextInt(rlist.size()));
+										Resource r1 = rlistnext.get(rand.nextInt(rlistnext.size()));
 										
 										ls3.remove(r1);
 										r1.setProperty_id(id);
@@ -2908,7 +2912,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 							}else if(!rlistlast.isEmpty())
 							{
 								Random rand = new Random();
-								Resource r1 = rlist.get(rand.nextInt(rlist.size()));
+								Resource r1 = rlistlast.get(rand.nextInt(rlistlast.size()));
 								
 								ls3.remove(r1);
 								r1.setProperty_id(id);
@@ -2923,7 +2927,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 							}else if(!rlistnext.isEmpty())
 							{
 								Random rand = new Random();
-								Resource r1 = rlist.get(rand.nextInt(rlist.size()));
+								Resource r1 = rlistnext.get(rand.nextInt(rlistnext.size()));
 								
 								ls3.remove(r1);
 								r1.setProperty_id(id);
