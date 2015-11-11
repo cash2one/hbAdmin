@@ -84,6 +84,10 @@
 		<![CDATA[ SELECT set_number,resource_lyrics,resource_type,resource_url FROM `tbl_resource_info` WHERE resource_info_type=4 and resource_id = #{resource_id} ]]>
 	</select>
 	
+	<select id="leveByResourceId" resultMap="ResourceInfo" parameterType="resourceInfo">
+		<![CDATA[ SELECT level_id FROM `tbl_resource_info` WHERE resource_info_type=1 and resource_id = #{resource_id} ]]>
+	</select>
+	
 	<select id="gerResLanguage" resultType="int" parameterType="resourceInfo">
 		<![CDATA[ SELECT language_level FROM `tbl_resource_info` WHERE language_level  IS NOT NULL AND resource_info_type=3 and resource_id = #{resource_id} ]]>
 	</select>

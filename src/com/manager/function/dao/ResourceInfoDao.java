@@ -35,6 +35,8 @@ public interface ResourceInfoDao {
 	
 	public List<ResourceInfo> findByResourceId(String resource_id);
 	
+	public List<ResourceInfo> levelByResourceId(String resource_id);
+	
 	public int getResLanguage(String resource_id);
 	
 	public List<ResourceInfo> findByResourceId1(String resource_id);

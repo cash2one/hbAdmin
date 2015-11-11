@@ -156,6 +156,17 @@ public class ResourceInfoDaoImpl extends SqlSessionDaoSupport implements Resourc
 		}
 		return null;
 	}
+	
+	public List<ResourceInfo> levelByResourceId(String resource_id) {
+		DataSourceContextHolder.setDbType("0");
+		List<ResourceInfo> list=this.getSqlSession().selectList("ResourceInfoSql.leveByResourceId",resource_id);
+		DataSourceContextHolder.clearDbType();
+		if(list!=null && list.size()>0){
+			return list;
+		}
+		return null;
+	}
+	
 	public int getResLanguage(String resource_id)
 	{
 		DataSourceContextHolder.setDbType("0");
