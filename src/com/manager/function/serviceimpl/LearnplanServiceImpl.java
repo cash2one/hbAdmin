@@ -954,7 +954,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 		        hsm.put("result", result);
 		        hsm.put("message", message);
 		        hsm.put("date", date);
-		        hsm.put("data", "");
+		        hsm.put("data", data);
 		        hsm.put("datasign", "");
 				return hsm;
 			}else{
@@ -981,7 +981,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 					//ulp.setBaby_id(baby_id);
 					//int unfinishedNum = this.userLearnplanDao.isFinush(ulp);
 					//if(unfinishedNum==0){
-					if(isOpen.equals("0") || (isOpen.equals("1") && planNum != 0)){
+					if( isOpen.equals("0") && planNum != 0 ){
 						res1 = false;
 						Resource r = new Resource();
 						r.setBaby_id(baby_id);
@@ -989,7 +989,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 						ls = this.resourceDao.getlearnplan(r);
 						
 						logger.info("old_plan");
-					}else{
+					}else if(isOpen.equals("1") || (isOpen.equals("0") && planNum == 0)){
 						res1 = true;
 		
 						if(num>1){
@@ -1100,7 +1100,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 					        hsm.put("result", result);
 					        hsm.put("message", message);
 					        hsm.put("date", date);
-					        hsm.put("data", "");
+					        hsm.put("data", data);
 					        hsm.put("datasign", "");
 							return hsm;
 						}
@@ -1755,6 +1755,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 						int fnum = this.favoriteDao.findNum(f);
 						
 						List<ResourceInfo> list = this.resourceInfoDao.findByResourceId(r.getId());
+						String language_re = this.resourceInfoDao.getResLanguage(r.getId())+"";
 						if(type_id.equals("1")){
 							JSONObject obj = new JSONObject();
 							obj.put("weekday", usp.getPlan_weekday());
@@ -1782,7 +1783,8 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("status", r.getPlan_status()!=null?r.getPlan_status():"0");
 							obj.put("spend_minute", r.getSpend_minute()!=null?r.getSpend_minute():"");
 							obj.put("fstatus", fnum>0?"1":"0");
-							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", language_re!=null?language_re:"");
+							obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 							data1.add(obj);
 						}else if(type_id.equals("2")){
 							JSONObject obj = new JSONObject();
@@ -1812,7 +1814,8 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("status", r.getPlan_status()!=null?r.getPlan_status():"0");
 							obj.put("spend_minute", r.getSpend_minute()!=null?r.getSpend_minute():"");
 							obj.put("fstatus", fnum>0?"1":"0");
-							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", language_re!=null?language_re:"");
+							obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 							data2.add(obj);
 						}else if(type_id.equals("4")){
 							list = this.resourceInfoDao.findByResourceId(r.getId());
@@ -1863,7 +1866,8 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("data", !objModel.isEmpty()?objModel:"");
 							obj.put("property", r.getProperty_id()!=null?r.getProperty_id():"");
 							obj.put("fstatus", fnum>0?"1":"0");
-							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", language_re!=null?language_re:"");
+							obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 							data3.add(obj);
 						}else if(type_id.equals("5")){
 							JSONObject obj = new JSONObject();
@@ -1898,7 +1902,8 @@ public class LearnplanServiceImpl implements LearnplanService {
 								}
 							obj.put("fstatus", fnum>0?"1":"0");
 							obj.put("data", !objModel.isEmpty()?objModel:"");
-							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", language_re!=null?language_re:"");
+							obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 							data4.add(obj);
 						}
 						
@@ -1924,7 +1929,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 					hsm.put("message", message);
 					hsm.put("date", date);
 					hsm.put("week", week);
-					hsm.put("data", "");
+					hsm.put("data", data);
 					hsm.put("datasign","");
 				}
 			}
@@ -1937,7 +1942,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 			hsm.put("result", result);
 			hsm.put("message", message);
 			hsm.put("date", date);
-			hsm.put("data", "");
+			hsm.put("data", data);
 			hsm.put("datasign","");
 			throw new RuntimeException(date.toString());
 		}
@@ -2697,7 +2702,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 		        hsm.put("result", result);
 		        hsm.put("message", message);
 		        hsm.put("date", date);
-		        hsm.put("data", "");
+		        hsm.put("data", data);
 		        hsm.put("datasign", md5(hsm,appKey));
 				return hsm;
 			}else{
@@ -2716,7 +2721,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 			        hsm.put("result", result);
 			        hsm.put("message", message);
 			        hsm.put("date", date);
-			        hsm.put("data", "");
+			        hsm.put("data", data);
 			        hsm.put("datasign", md5(hsm,appKey));
 					return hsm;
 				}
@@ -2833,7 +2838,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 			        hsm.put("result", result);
 			        hsm.put("message", message);
 			        hsm.put("date", date);
-			        hsm.put("data", "");
+			        hsm.put("data", data);
 			        hsm.put("datasign", "");
 					return hsm;
 				}
@@ -3480,6 +3485,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 						int fnum = this.favoriteDao.findNum(f);
 						
 						List<ResourceInfo> list = this.resourceInfoDao.findByResourceId(r.getId());
+						String language_re = this.resourceInfoDao.getResLanguage(r.getId())+"";
 						if(type_id.equals("1")){
 							JSONObject obj = new JSONObject();
 							obj.put("weekday", usp.getPlan_weekday());
@@ -3507,7 +3513,8 @@ public class LearnplanServiceImpl implements LearnplanService {
 							obj.put("status", "0");
 							obj.put("spend_minute", "");
 							obj.put("fstatus", fnum>0?"1":"0");
-							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", language_re!=null?language_re:"");
+							obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 							data1.add(obj);
 						}else if(type_id.equals("2")){
 							JSONObject obj = new JSONObject();
@@ -3538,11 +3545,12 @@ public class LearnplanServiceImpl implements LearnplanService {
 									obj.put("category","0");
 									objModel.add(jb);
 								}
-							obj.put("data", !objModel.isEmpty()?objModel:"");
+							obj.put("data", objModel);
 							obj.put("status", "0");
 							obj.put("spend_minute", "");
 							obj.put("fstatus", fnum>0?"1":"0");
-							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", language_re!=null?language_re:"");
+							obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 							data2.add(obj);
 						}else if(type_id.equals("4")){
 							list = this.resourceInfoDao.findByResourceId(r.getId());
@@ -3590,10 +3598,11 @@ public class LearnplanServiceImpl implements LearnplanService {
 								}
 							obj.put("status", r.getPlan_status()!=null?r.getPlan_status():"0");
 							obj.put("spend_minute", r.getSpend_minute()!=null?r.getSpend_minute():"");
-							obj.put("data", !objModel.isEmpty()?objModel:"");
+							obj.put("data", objModel);
 							obj.put("property", r.getProperty_id()!=null?r.getProperty_id():"");
 							obj.put("fstatus", fnum>0?"1":"0");
-							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", language_re!=null?language_re:"");
+							obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 							data3.add(obj);
 						}else if(type_id.equals("5")){
 							JSONObject obj = new JSONObject();
@@ -3626,9 +3635,10 @@ public class LearnplanServiceImpl implements LearnplanService {
 									obj.put("category","0");
 									objModel.add(jb);
 								}
-							obj.put("data", !objModel.isEmpty()?objModel:"");
+							obj.put("data", objModel);
 							obj.put("fstatus", fnum>0?"1":"0");
-							obj.put("language", r.getLanguage_level()!=null?r.getLanguage_level():"");
+							obj.put("language", language_re!=null?language_re:"");
+							obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 							data4.add(obj);
 						}
 						
@@ -3653,7 +3663,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 					hsm.put("result", result);
 					hsm.put("message", message);
 					hsm.put("date", date);
-					hsm.put("data", "");
+					hsm.put("data", data);
 					hsm.put("datasign", "");
 				}
 			}
@@ -3666,7 +3676,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 			hsm.put("result", result);
 			hsm.put("message", message);
 			hsm.put("date", date);
-			hsm.put("data", "");
+			hsm.put("data", data);
 			hsm.put("datasign", "");
 			throw new RuntimeException(date.toString());
 		}

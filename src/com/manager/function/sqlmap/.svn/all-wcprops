@@ -19,7 +19,7 @@ Resource.xml
 K 25
 svn:wc:ra_dav:version-url
 V 82
-/svn/iread/!svn/ver/196/trunk/hbAdmin/src/com/manager/function/sqlmap/Resource.xml
+/svn/iread/!svn/ver/201/trunk/hbAdmin/src/com/manager/function/sqlmap/Resource.xml
 END
 GlobalLevel.xml
 K 25
@@ -85,7 +85,7 @@ ResourceInfo.xml
 K 25
 svn:wc:ra_dav:version-url
 V 86
-/svn/iread/!svn/ver/197/trunk/hbAdmin/src/com/manager/function/sqlmap/ResourceInfo.xml
+/svn/iread/!svn/ver/199/trunk/hbAdmin/src/com/manager/function/sqlmap/ResourceInfo.xml
 END
 Bigeye.xml
 K 25

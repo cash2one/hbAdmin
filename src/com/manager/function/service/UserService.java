@@ -50,6 +50,10 @@ public interface UserService {
 	 * 登录验证pre
 	 */
 	public Map isExcitpre(HttpServletRequest request);
+	/**
+	 * 获得用户资料
+	 */
+	public Map getUserInfo(HttpServletRequest request);
 	
 	/**
 	 * 获取积分

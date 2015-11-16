@@ -1208,7 +1208,7 @@ public class ResourceServiceImpl implements ResourceService {
 		        hsm.put("result", result);
 		        hsm.put("message", message);
 		        hsm.put("date", date);
-		        hsm.put("data", "");
+		        hsm.put("data", data);
 		        hsm.put("datasign", md5(hsm,appKey));
 				return hsm;
 			}
@@ -1220,7 +1220,7 @@ public class ResourceServiceImpl implements ResourceService {
 		        hsm.put("result", result);
 		        hsm.put("message", message);
 		        hsm.put("date", date);
-		        hsm.put("data", "");
+		        hsm.put("data", data);
 		        hsm.put("datasign", md5(hsm,appKey));
 				return hsm;
 			}
@@ -1281,6 +1281,7 @@ public class ResourceServiceImpl implements ResourceService {
 								obj.put("fstatus", fnum>0?"1":"0");
 								obj.put("rowno", r.getRowno()+"");
 								obj.put("language", language!=null?language:"");
+								obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 								data1.add(obj);
 							}else if(type_id.equals("2")){
 								JSONObject obj = new JSONObject();
@@ -1314,6 +1315,7 @@ public class ResourceServiceImpl implements ResourceService {
 								obj.put("fstatus", fnum>0?"1":"0");
 								obj.put("rowno", r.getRowno()+"");
 								obj.put("language", language!=null?language:"");
+								obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 								data2.add(obj);
 							}else if(type_id.equals("4")){
 								List<ResourceInfo> list1 = this.resourceInfoDao.findByResourceId1(r.getId());
@@ -1359,6 +1361,7 @@ public class ResourceServiceImpl implements ResourceService {
 								obj.put("data", !objModel.isEmpty()?objModel:"");
 								obj.put("rowno", r.getRowno()+"");
 								obj.put("language", language!=null?language:"");
+								obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 								data3.add(obj);
 							}else if(type_id.equals("5")){
 								JSONObject obj = new JSONObject();
@@ -1384,6 +1387,7 @@ public class ResourceServiceImpl implements ResourceService {
 								obj.put("fstatus", fnum>0?"1":"0");
 								obj.put("rowno", r.getRowno()+"");
 								obj.put("language", language!=null?language:"");
+								obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 								data4.add(obj);
 							}
 							break;
@@ -1411,7 +1415,7 @@ public class ResourceServiceImpl implements ResourceService {
 				hsm.put("message", message);
 				hsm.put("date", date);
 				hsm.put("week", week);
-				hsm.put("data", "");
+				hsm.put("data", data);
 				hsm.put("datasign", "");
 			}
 		}catch (Exception e) {
@@ -1423,7 +1427,7 @@ public class ResourceServiceImpl implements ResourceService {
 			hsm.put("result", result);
 			hsm.put("message", message);
 			hsm.put("date", date);
-			hsm.put("data", "");
+			hsm.put("data", data);
 			hsm.put("datasign", "");
 			throw new RuntimeException(date.toString());
 		}
@@ -1755,7 +1759,7 @@ public Map fListpre(HttpServletRequest request) {
 		        hsm.put("result", result);
 		        hsm.put("message", message);
 		        hsm.put("date", date);
-		        hsm.put("data", "");
+		        hsm.put("data", data);
 		        hsm.put("datasign", md5(hsm,appKey));
 				return hsm;
 			}
@@ -1797,6 +1801,7 @@ public Map fListpre(HttpServletRequest request) {
 						}
 						obj.put("status", "0");
 						obj.put("language", language!=null?language:"");
+						obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 						data1.add(obj);
 					}else if(type_id.equals("2")){
 						JSONObject obj = new JSONObject();
@@ -1825,9 +1830,10 @@ public Map fListpre(HttpServletRequest request) {
 							objModel.add(jb);
 						}
 						obj.put("status", "0");
-						obj.put("data", !objModel.isEmpty()?objModel:"");
+						obj.put("data", objModel);
 						obj.put("status", "0");
 						obj.put("language", language!=null?language:"");
+						obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 						data2.add(obj);
 					}else if(type_id.equals("4")){
 						List<ResourceInfo> list1 = this.resourceInfoDao.findByResourceId1(r.getId());
@@ -1871,6 +1877,7 @@ public Map fListpre(HttpServletRequest request) {
 						obj.put("status", "0");
 						obj.put("data", objModel);
 						obj.put("language", language!=null?language:"");
+						obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 						data3.add(obj);
 					}else if(type_id.equals("5")){
 						JSONObject obj = new JSONObject();
@@ -1886,6 +1893,7 @@ public Map fListpre(HttpServletRequest request) {
 						obj.put("img_main_size", r.getImg_main_size()!=null?r.getImg_main_size():"");
 						obj.put("status", "0");
 						obj.put("language", language!=null?language:"");
+						obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 						if (list != null && !list.isEmpty()) {
 							obj.put("url",list.get(0).getResource_url() != null ? CollectionUtil
 													.toplaybereplace(list.get(0).getResource_url(), 0): "");
@@ -1919,7 +1927,7 @@ public Map fListpre(HttpServletRequest request) {
 				hsm.put("message", message);
 				hsm.put("date", date);
 				hsm.put("week", week);
-				hsm.put("data", "");
+				hsm.put("data", data);
 				hsm.put("datasign", "");
 			}
 		}catch (Exception e) {
@@ -1931,7 +1939,7 @@ public Map fListpre(HttpServletRequest request) {
 			hsm.put("result", result);
 			hsm.put("message", message);
 			hsm.put("date", date);
-			hsm.put("data", "");
+			hsm.put("data", data);
 			hsm.put("datasign", "");
 			throw new RuntimeException(date.toString());
 		}

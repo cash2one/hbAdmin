@@ -259,6 +259,8 @@ public class ResourceController {
 			String start_img_size=(String)request.getParameter("start_img_size");
 			String book_content=(String)request.getParameter("book_content");
 			
+			String between_age=(String)request.getParameter("between_age");
+			
 //			if(!CollectionUtil.checkNull(id)){jsonObj.put("res", "不能为空！");return null;}
 			if(!CollectionUtil.checkNull(resource_content)){jsonObj.put("res", "资源名称不能为空！");return null;}
 			if(!CollectionUtil.checkNull(resource_summary)){jsonObj.put("res", "资源简介不能为空！");return null;}
@@ -342,7 +344,9 @@ public class ResourceController {
 				}
 			}
 			
-			
+			if(CollectionUtil.checkNull(between_age)){
+				Resource.setBook_content(between_age);
+			}
 			Resource.setResource_status(resource_status);
 //			Resource.setCreate_date(create_date);
 			Resource.setCreate_adminuser(adminAccount);
@@ -478,6 +482,8 @@ public class ResourceController {
 			String start_img_size=(String)request.getParameter("start_img_size");
 			String book_content=(String)request.getParameter("book_content");
 			
+			String between_age=(String)request.getParameter("between_age");
+			
 			if(!CollectionUtil.checkNull(id)){jsonObj.put("res", "序列号不能为空！");return null;}
 			if(!CollectionUtil.checkNull(resource_content)){jsonObj.put("res", "资源名称不能为空！");return null;}
 			if(!CollectionUtil.checkNull(resource_summary)){jsonObj.put("res", "资源简介不能为空！");return null;}
@@ -583,6 +589,13 @@ public class ResourceController {
 					Resource.setBook_content(null);
 				}
 			}
+			
+			if(CollectionUtil.checkNull(between_age)){
+				Resource.setBetween_age(between_age);
+			}else{
+				Resource.setBetween_age(null);
+			}
+			
 			Resource.setResource_status(resource_status);
 			Resource.setUpdate_adminuser(adminAccount);
 			Resource.setResource_author(resource_author);

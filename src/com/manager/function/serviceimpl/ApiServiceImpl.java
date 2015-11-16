@@ -361,6 +361,25 @@ public class ApiServiceImpl implements ApiService {
 			}
 			return null;
 		}
+		
+		//获取用户信息
+		// http://192.168.3.130:8888/hbadmin/domain?do=getuserinfo&uid=1&version=1.0.0&appid=100&sign=e51cf7fa7aacf80a2fb570522255074a
+		if("getuserinfo".equals(doMethod) ){
+			Map hsm = new LinkedHashMap();
+			switch(versioncode){
+				case 100: try {
+					return userService.getUserInfo(request);
+				} catch (Exception e) {
+					String result = "error";
+					String message = initDataPool.getSP("2-4-000");
+					hsm.put("version", Constant.version);
+					hsm.put("result", result);
+					hsm.put("message", message);
+					hsm.put("data", "");
+				}
+			}
+			return null;
+		}
 		//用户注册
 		// http://192.168.3.130:8888/hbadmin/domain?do=reg&open_id=test2&source=2&user_nickname=test&user_avatar=http://www.baidu.com&user_pwd=1111&version=1.0.0&appid=100&sign=d2dfe1cf2b7f2b634cc95fd1f5bc51e9
 		if("reg".equals(doMethod) ){

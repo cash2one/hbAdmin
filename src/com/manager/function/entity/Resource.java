@@ -88,6 +88,17 @@ public class Resource implements Serializable {
 	private String start_img_size;
 	private String book_content;
 	
+	private String between_age;
+	
+	public String getBetween_age()
+	{
+		return between_age;
+	}
+	
+	public void setBetween_age(String between_age) {
+		this.between_age = between_age;
+	}
+	
 	public String getRead_img_size() {
 		return read_img_size;
 	}

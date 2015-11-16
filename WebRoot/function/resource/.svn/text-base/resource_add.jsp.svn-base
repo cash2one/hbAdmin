@@ -362,6 +362,7 @@
   	 	var start_img=document.getElementById("start_img").value;
   	 	var start_img_size=document.getElementById("start_img_size").value;
   	 	var book_content=document.getElementById("book_content").value;
+  	 	var between_age=document.getElementById("between_age").value;
   	 	if(resource_type_id=='4'){
   	 	
   	 	}else{
@@ -375,6 +376,7 @@
   	 		start_img=null;
   	 		start_img_size=null;
   	 		book_content=null;
+  	 		between_age=null;
   	 	}
   	 	
 		//var img_book =document.getElementById("img_book").value;
@@ -438,7 +440,8 @@
   	 				"start_content":start_content,
   	 				"start_img":start_img,
   	 				"start_img_size":start_img_size,
-  	 				"book_content":book_content
+  	 				"book_content":book_content,
+  	 				"between_age":between_age
              	   },
              dataType: "json",
              async:	false,
@@ -480,6 +483,8 @@
   		if(resource_type_id=='1'||resource_type_id=='4'||resource_type_id=='2'){
   			$("[name=beijing]").show();
   		}
+  		
+  		$("#tzjs3").show();
   }
   
   function 	onclickLevel(para){
@@ -736,6 +741,10 @@
 		   	
 		   	<li  id="tzjs2" style="display: none"><label>绘本文字说明：<b></b></label>
 		    	<textarea class="textinput" cols="25" rows="2" name="book_content" id="book_content" maxlength="250"></textarea>
+		    </li>
+		    
+		    <li  id="tzjs3" style="display: none"><label>适合年龄：<b></b></label>
+		    	<textarea class="textinput" cols="25" rows="2" name="between_age" id="between_age" maxlength="50"></textarea>
 		    </li>
 		   	
 		   	<li id="tzjs" style="display: none"><label>拓展介绍：<b></b></label>

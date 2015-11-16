@@ -766,6 +766,116 @@ public Map isExcitpre(HttpServletRequest request) {
         
 		return hsm;
 	}
+
+
+public Map getUserInfo(HttpServletRequest request) {
+	
+	SimpleDateFormat adf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	Date d1 = new Date();
+	logger.info("开始："+adf.format(d1));
+	
+	String result  = "0";
+	String message = "";
+	JSONObject data = new JSONObject();
+	String user_id = "";
+	
+	String appId = (String) request.getParameter("appid");
+	String appKey = Constant.APPID_KEY.get(appId);
+	try{
+		user_id = (String) request.getParameter("uid");
+		
+		
+		//User user = new User();
+		//user.setUser_id(uid);
+		
+		boolean flag = false;
+		
+		if(user_id==null||"".equals(user_id)){
+			result = "0";
+			message = initDataPool.getSP("2-4-203");
+		}else{
+			flag = true;
+		}
+		
+		if(flag){
+			//User userModel = this.userDao.isExcit(user);
+			//if(userModel!=null){
+				//user_id = userModel.getUser_id();
+				result = "1";
+				message = initDataPool.getSP("2-4-206");
+			//}else{
+				//result = "2";
+				//message = initDataPool.getSP("2-4-207");
+			//}
+		}
+		
+		if(result.equals("1")){
+			User userModel1 = this.userDao.findById(user_id);
+			List<Baby> ls = this.babyDao.findByUserId(user_id);
+			List<Baby> list1 = new ArrayList<Baby>();
+			if(ls!=null){
+				for(Baby baby:ls){
+					String id = baby.getId();
+					List<BabyInfo> list = this.babyInfoDao.findByBabyId(id);
+					String hobby_ids = "";
+					String Level_ids = "";
+					String languageid = "";
+					if(list!=null){
+						for(int i = 0;i<list.size();i++){
+							if(id.equals(list.get(i).getBaby_id())){
+								Level_ids = list.get(i).getLevel_id();
+								languageid = list.get(i).getBaby_language();
+								if("".equals(hobby_ids)){
+									hobby_ids = list.get(i).getProperty_id();
+								}else{
+									hobby_ids +=","+list.get(i).getProperty_id();
+								}
+							}
+						}
+					}
+					baby.setProperty_id(hobby_ids);
+					baby.setLevel_id(Level_ids);
+					baby.setBaby_language(languageid);
+					String url = baby.getBaby_avatar()!=null?tobereplace(baby.getBaby_avatar(), 0):"";
+					baby.setBaby_avatar(url);
+					list1.add(baby);
+					
+				}
+			}
+			JSONObject obj = new JSONObject();
+			obj.put("uid", userModel1.getUser_id()!=null?tobereplace(userModel1.getUser_id(), 0):"");
+			obj.put("user_avatar", userModel1.getUser_avatar()!=null?tobereplace(userModel1.getUser_avatar(), 0):"");
+			obj.put("user_email", userModel1.getUser_email()!=null?userModel1.getUser_email():"");
+			obj.put("user_nickname", userModel1.getUser_nickname()!=null?userModel1.getUser_nickname():"");
+			obj.put("user_title", userModel1.getUser_title()!=null?userModel1.getUser_title():"");
+			obj.put("user_age", userModel1.getUser_age()!=null?userModel1.getUser_age():"");
+			obj.put("province", userModel1.getProvince_id()!=null?userModel1.getProvince_id():"");
+			obj.put("city", userModel1.getCity_id()!=null?userModel1.getCity_id():"");
+			obj.put("district", userModel1.getDistrict_id()!=null?userModel1.getDistrict_id():"");
+			obj.put("backup", userModel1.getBackup()!=null?userModel1.getBackup():"");
+			obj.put("baby", list1);
+			data.put("userinfo", obj);
+		}
+	}catch (Exception e) {
+		e.printStackTrace();
+		logger.error(e.getMessage());
+		result = "error";
+		message = initDataPool.getSP("2-4-000");
+	}
+	
+	Map hsm = new LinkedHashMap();
+    hsm.put("version", Constant.version);
+    hsm.put("result", result);
+    hsm.put("message", message);
+    hsm.put("data", data);
+    
+    Date d2 = new Date();
+	logger.info("结束："+adf.format(d2));
+    long diff = (d2.getTime() - d1.getTime());
+    logger.info("UserServiceImpl.isExcit执行了"+diff+"毫秒");
+    
+	return hsm;
+}
 	/**
 	 * 修改用户密码
 	 * @param request

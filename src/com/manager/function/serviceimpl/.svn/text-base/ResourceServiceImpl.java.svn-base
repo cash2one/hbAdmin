@@ -1199,6 +1199,7 @@ public class ResourceServiceImpl implements ResourceService {
 		try{
 			String search_key = (String) request.getParameter("search_key");
 			String user_id = (String) request.getParameter("uid");
+			String levelid = (String) request.getParameter("levelid");
 			
 			if(search_key==null||"".equals(search_key)){
 				result  = "2";
@@ -1207,7 +1208,7 @@ public class ResourceServiceImpl implements ResourceService {
 		        hsm.put("result", result);
 		        hsm.put("message", message);
 		        hsm.put("date", date);
-		        hsm.put("data", "");
+		        hsm.put("data", data);
 		        hsm.put("datasign", md5(hsm,appKey));
 				return hsm;
 			}
@@ -1219,7 +1220,7 @@ public class ResourceServiceImpl implements ResourceService {
 		        hsm.put("result", result);
 		        hsm.put("message", message);
 		        hsm.put("date", date);
-		        hsm.put("data", "");
+		        hsm.put("data", data);
 		        hsm.put("datasign", md5(hsm,appKey));
 				return hsm;
 			}
@@ -1247,139 +1248,151 @@ public class ResourceServiceImpl implements ResourceService {
 					
 					int fnum = this.favoriteDao.findNum(f);
 					
-					List<ResourceInfo> list = this.resourceInfoDao.findByResourceId(r.getId());
-					String language = this.resourceInfoDao.getResLanguage(r.getId())+"";
-					if(type_id.equals("1")){
-						JSONObject obj = new JSONObject();
-						obj.put("resource_id", r.getId());
-						obj.put("content", r.getResource_content()!=null?r.getResource_content():"");
-						obj.put("summary", r.getResource_summary()!=null?r.getResource_summary():"");
-						obj.put("author", r.getResource_author()!=null?r.getResource_author():"");
-						obj.put("img_index", r.getImg_index()!=null?tobereplace(r.getImg_index(),0):"");
-						obj.put("img_index_size", r.getImg_index_size()!=null?r.getImg_index_size():"");
-						obj.put("img_list", r.getImg_list()!=null?tobereplace(r.getImg_list(),0):"");
-						obj.put("img_list_size", r.getImg_list_size()!=null?r.getImg_list_size():"");
-						obj.put("img_main", r.getImg_main()!=null?tobereplace(r.getImg_main(), 0):"");
-						obj.put("img_main_size", r.getImg_main_size()!=null?r.getImg_main_size():"");
-						if(list!=null){
-							obj.put("url", list.get(0).getResource_url()!=null?tobereplace(list.get(0).getResource_url(), 0):"");
-							obj.put("category", list.get(0).getResource_type());
-							obj.put("lyrics", list.get(0).getResource_lyrics()!=null?tobereplace(list.get(0).getResource_lyrics(), 0):"");
-						}else{
-							obj.put("url", "");
-							obj.put("category", "0");
-							obj.put("lyrics", "");
-						}
-						obj.put("status", "0");
-						obj.put("fstatus", fnum>0?"1":"0");
-						obj.put("rowno", r.getRowno()+"");
-						obj.put("language", language!=null?language:"");
-						data1.add(obj);
-					}else if(type_id.equals("2")){
-						JSONObject obj = new JSONObject();
-						obj.put("resource_id", r.getId());
-						obj.put("content", r.getResource_content()!=null?r.getResource_content():"");
-						obj.put("summary", r.getResource_summary()!=null?r.getResource_summary():"");
-						obj.put("author", r.getResource_author()!=null?r.getResource_author():"");
-						obj.put("img_index", r.getImg_index()!=null?tobereplace(r.getImg_index(),0):"");
-						obj.put("img_index_size", r.getImg_index_size()!=null?r.getImg_index_size():"");
-						obj.put("img_list", r.getImg_list()!=null?tobereplace(r.getImg_list(),0):"");
-						obj.put("img_list_size", r.getImg_list_size()!=null?r.getImg_list_size():"");
-						obj.put("img_main", r.getImg_main()!=null?tobereplace(r.getImg_main(), 0):"");
-						obj.put("img_main_size", r.getImg_main_size()!=null?r.getImg_main_size():"");
-						JSONArray objModel = new JSONArray();
-						if(list!=null&&!list.isEmpty()){
-							for(ResourceInfo ri:list){
-									JSONObject jb = new JSONObject();
-									jb.put("url", ri.getResource_url()!=null?tobereplace(ri.getResource_url(), 0):"");
-									jb.put("category", ri.getResource_type());
-									objModel.add(jb);
-							}
-						}else{
-							JSONObject jb = new JSONObject();
-							obj.put("url", "");
-							obj.put("category","0");
-							objModel.add(jb);
-						}
-						obj.put("status", "0");
-						obj.put("data", !objModel.isEmpty()?objModel:"");
-						obj.put("status", "0");
-						obj.put("fstatus", fnum>0?"1":"0");
-						obj.put("rowno", r.getRowno()+"");
-						obj.put("language", language!=null?language:"");
-						data2.add(obj);
-					}else if(type_id.equals("4")){
-						List<ResourceInfo> list1 = this.resourceInfoDao.findByResourceId1(r.getId());
-						JSONObject obj = new JSONObject();
-						obj.put("resource_id", r.getId());
-						obj.put("content", r.getResource_content()!=null?r.getResource_content():"");
-						obj.put("summary", r.getResource_summary()!=null?r.getResource_summary():"");
-						obj.put("author", r.getResource_author()!=null?r.getResource_author():"");
-						obj.put("img_index", r.getImg_index()!=null?tobereplace(r.getImg_index(),0):"");
-						obj.put("img_index_size", r.getImg_index_size()!=null?r.getImg_index_size():"");
-						obj.put("img_list", r.getImg_list()!=null?tobereplace(r.getImg_list(),0):"");
-						obj.put("img_list_size", r.getImg_list_size()!=null?r.getImg_list_size():"");
-						obj.put("img_main", r.getImg_main()!=null?tobereplace(r.getImg_main(), 0):"");
-						obj.put("img_main_size", r.getImg_main_size()!=null?r.getImg_main_size():"");
-						
-						obj.put("img_start", r.getStart_img()!=null?tobereplace(r.getStart_img(), 0):"");
-						obj.put("img_start_size",r.getStart_img_size()!=null?r.getStart_img_size():"");
-						obj.put("start_content", r.getStart_content()!=null?r.getStart_content():"");
-						obj.put("img_read", r.getRead_img()!=null?tobereplace(r.getRead_img(), 0):"");
-						obj.put("img_read_size",r.getRead_img_size()!=null?r.getRead_img_size():"");
-						obj.put("read_content", r.getRead_content()!=null?r.getRead_content():"");
-						obj.put("img_practise", r.getLian_img()!=null?tobereplace(r.getLian_img(), 0):"");
-						obj.put("img_practise_size",r.getLian_img_size()!=null?r.getLian_img_size():"");
-						obj.put("practise_content", r.getLian_content()!=null?r.getLian_content():"");
-						obj.put("book_content", r.getBook_content()!=null?r.getBook_content():"");
-						
-						JSONArray objModel = new JSONArray();
-						if(list!=null&&!list.isEmpty()){
-							for(ResourceInfo ri:list){
-									JSONObject jb = new JSONObject();
-									jb.put("url", ri.getResource_url()!=null?tobereplace(ri.getResource_url(), 0):"");
-									jb.put("category", ri.getResource_type());
-									objModel.add(jb);
-							}
-						}else{
-							JSONObject jb = new JSONObject();
-							obj.put("url", "");
-							obj.put("category","0");
-							objModel.add(jb);
-						}
-						obj.put("status", "0");
-						obj.put("fstatus", fnum>0?"1":"0");
-						obj.put("data", !objModel.isEmpty()?objModel:"");
-						obj.put("rowno", r.getRowno()+"");
-						obj.put("language", language!=null?language:"");
-						data3.add(obj);
-					}else if(type_id.equals("5")){
-						JSONObject obj = new JSONObject();
-						obj.put("resource_id", r.getId());
-						obj.put("content", r.getResource_content()!=null?r.getResource_content():"");
-						obj.put("summary", r.getResource_summary()!=null?r.getResource_summary():"");
-						obj.put("author", r.getResource_author()!=null?r.getResource_author():"");
-						obj.put("img_index", r.getImg_index()!=null?tobereplace(r.getImg_index(),0):"");
-						obj.put("img_index_size", r.getImg_index_size()!=null?r.getImg_index_size():"");
-						obj.put("img_list", r.getImg_list()!=null?tobereplace(r.getImg_list(),0):"");
-						obj.put("img_list_size", r.getImg_list_size()!=null?r.getImg_list_size():"");
-						obj.put("img_main", r.getImg_main()!=null?tobereplace(r.getImg_main(), 0):"");
-						obj.put("img_main_size", r.getImg_main_size()!=null?r.getImg_main_size():"");
-						obj.put("status", "0");
-						if (list != null && !list.isEmpty()) {
-							obj.put("url",list.get(0).getResource_url() != null ? CollectionUtil
-													.toplaybereplace(list.get(0).getResource_url(), 0): "");
-							obj.put("category", list.get(0).getResource_type());
-						} else {
-							obj.put("url", "");
-							obj.put("category", "0");
-						}
-						obj.put("fstatus", fnum>0?"1":"0");
-						obj.put("rowno", r.getRowno()+"");
-						obj.put("language", language!=null?language:"");
-						data4.add(obj);
-					}
+					List<ResourceInfo> lelist = this.resourceInfoDao.levelByResourceId(r.getId());
 					
+					for(ResourceInfo rr:lelist)
+					{
+						if(rr.getLevel_id().equals(levelid) || levelid.equals("0"))
+						{
+							List<ResourceInfo> list = this.resourceInfoDao.findByResourceId(r.getId());
+							String language = this.resourceInfoDao.getResLanguage(r.getId())+"";
+							if(type_id.equals("1")){
+								JSONObject obj = new JSONObject();
+								obj.put("resource_id", r.getId());
+								obj.put("content", r.getResource_content()!=null?r.getResource_content():"");
+								obj.put("summary", r.getResource_summary()!=null?r.getResource_summary():"");
+								obj.put("author", r.getResource_author()!=null?r.getResource_author():"");
+								obj.put("img_index", r.getImg_index()!=null?tobereplace(r.getImg_index(),0):"");
+								obj.put("img_index_size", r.getImg_index_size()!=null?r.getImg_index_size():"");
+								obj.put("img_list", r.getImg_list()!=null?tobereplace(r.getImg_list(),0):"");
+								obj.put("img_list_size", r.getImg_list_size()!=null?r.getImg_list_size():"");
+								obj.put("img_main", r.getImg_main()!=null?tobereplace(r.getImg_main(), 0):"");
+								obj.put("img_main_size", r.getImg_main_size()!=null?r.getImg_main_size():"");
+								if(list!=null){
+									obj.put("url", list.get(0).getResource_url()!=null?tobereplace(list.get(0).getResource_url(), 0):"");
+									obj.put("category", list.get(0).getResource_type());
+									obj.put("lyrics", list.get(0).getResource_lyrics()!=null?tobereplace(list.get(0).getResource_lyrics(), 0):"");
+								}else{
+									obj.put("url", "");
+									obj.put("category", "0");
+									obj.put("lyrics", "");
+								}
+								obj.put("status", "0");
+								obj.put("fstatus", fnum>0?"1":"0");
+								obj.put("rowno", r.getRowno()+"");
+								obj.put("language", language!=null?language:"");
+								obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
+								data1.add(obj);
+							}else if(type_id.equals("2")){
+								JSONObject obj = new JSONObject();
+								obj.put("resource_id", r.getId());
+								obj.put("content", r.getResource_content()!=null?r.getResource_content():"");
+								obj.put("summary", r.getResource_summary()!=null?r.getResource_summary():"");
+								obj.put("author", r.getResource_author()!=null?r.getResource_author():"");
+								obj.put("img_index", r.getImg_index()!=null?tobereplace(r.getImg_index(),0):"");
+								obj.put("img_index_size", r.getImg_index_size()!=null?r.getImg_index_size():"");
+								obj.put("img_list", r.getImg_list()!=null?tobereplace(r.getImg_list(),0):"");
+								obj.put("img_list_size", r.getImg_list_size()!=null?r.getImg_list_size():"");
+								obj.put("img_main", r.getImg_main()!=null?tobereplace(r.getImg_main(), 0):"");
+								obj.put("img_main_size", r.getImg_main_size()!=null?r.getImg_main_size():"");
+								JSONArray objModel = new JSONArray();
+								if(list!=null&&!list.isEmpty()){
+									for(ResourceInfo ri:list){
+											JSONObject jb = new JSONObject();
+											jb.put("url", ri.getResource_url()!=null?tobereplace(ri.getResource_url(), 0):"");
+											jb.put("category", ri.getResource_type());
+											objModel.add(jb);
+									}
+								}else{
+									JSONObject jb = new JSONObject();
+									obj.put("url", "");
+									obj.put("category","0");
+									objModel.add(jb);
+								}
+								obj.put("status", "0");
+								obj.put("data", !objModel.isEmpty()?objModel:"");
+								obj.put("status", "0");
+								obj.put("fstatus", fnum>0?"1":"0");
+								obj.put("rowno", r.getRowno()+"");
+								obj.put("language", language!=null?language:"");
+								obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
+								data2.add(obj);
+							}else if(type_id.equals("4")){
+								List<ResourceInfo> list1 = this.resourceInfoDao.findByResourceId1(r.getId());
+								JSONObject obj = new JSONObject();
+								obj.put("resource_id", r.getId());
+								obj.put("content", r.getResource_content()!=null?r.getResource_content():"");
+								obj.put("summary", r.getResource_summary()!=null?r.getResource_summary():"");
+								obj.put("author", r.getResource_author()!=null?r.getResource_author():"");
+								obj.put("img_index", r.getImg_index()!=null?tobereplace(r.getImg_index(),0):"");
+								obj.put("img_index_size", r.getImg_index_size()!=null?r.getImg_index_size():"");
+								obj.put("img_list", r.getImg_list()!=null?tobereplace(r.getImg_list(),0):"");
+								obj.put("img_list_size", r.getImg_list_size()!=null?r.getImg_list_size():"");
+								obj.put("img_main", r.getImg_main()!=null?tobereplace(r.getImg_main(), 0):"");
+								obj.put("img_main_size", r.getImg_main_size()!=null?r.getImg_main_size():"");
+								
+								obj.put("img_start", r.getStart_img()!=null?tobereplace(r.getStart_img(), 0):"");
+								obj.put("img_start_size",r.getStart_img_size()!=null?r.getStart_img_size():"");
+								obj.put("start_content", r.getStart_content()!=null?r.getStart_content():"");
+								obj.put("img_read", r.getRead_img()!=null?tobereplace(r.getRead_img(), 0):"");
+								obj.put("img_read_size",r.getRead_img_size()!=null?r.getRead_img_size():"");
+								obj.put("read_content", r.getRead_content()!=null?r.getRead_content():"");
+								obj.put("img_practise", r.getLian_img()!=null?tobereplace(r.getLian_img(), 0):"");
+								obj.put("img_practise_size",r.getLian_img_size()!=null?r.getLian_img_size():"");
+								obj.put("practise_content", r.getLian_content()!=null?r.getLian_content():"");
+								obj.put("book_content", r.getBook_content()!=null?r.getBook_content():"");
+								
+								JSONArray objModel = new JSONArray();
+								if(list!=null&&!list.isEmpty()){
+									for(ResourceInfo ri:list){
+											JSONObject jb = new JSONObject();
+											jb.put("url", ri.getResource_url()!=null?tobereplace(ri.getResource_url(), 0):"");
+											jb.put("category", ri.getResource_type());
+											objModel.add(jb);
+									}
+								}else{
+									JSONObject jb = new JSONObject();
+									obj.put("url", "");
+									obj.put("category","0");
+									objModel.add(jb);
+								}
+								obj.put("status", "0");
+								obj.put("fstatus", fnum>0?"1":"0");
+								obj.put("data", !objModel.isEmpty()?objModel:"");
+								obj.put("rowno", r.getRowno()+"");
+								obj.put("language", language!=null?language:"");
+								obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
+								data3.add(obj);
+							}else if(type_id.equals("5")){
+								JSONObject obj = new JSONObject();
+								obj.put("resource_id", r.getId());
+								obj.put("content", r.getResource_content()!=null?r.getResource_content():"");
+								obj.put("summary", r.getResource_summary()!=null?r.getResource_summary():"");
+								obj.put("author", r.getResource_author()!=null?r.getResource_author():"");
+								obj.put("img_index", r.getImg_index()!=null?tobereplace(r.getImg_index(),0):"");
+								obj.put("img_index_size", r.getImg_index_size()!=null?r.getImg_index_size():"");
+								obj.put("img_list", r.getImg_list()!=null?tobereplace(r.getImg_list(),0):"");
+								obj.put("img_list_size", r.getImg_list_size()!=null?r.getImg_list_size():"");
+								obj.put("img_main", r.getImg_main()!=null?tobereplace(r.getImg_main(), 0):"");
+								obj.put("img_main_size", r.getImg_main_size()!=null?r.getImg_main_size():"");
+								obj.put("status", "0");
+								if (list != null && !list.isEmpty()) {
+									obj.put("url",list.get(0).getResource_url() != null ? CollectionUtil
+															.toplaybereplace(list.get(0).getResource_url(), 0): "");
+									obj.put("category", list.get(0).getResource_type());
+								} else {
+									obj.put("url", "");
+									obj.put("category", "0");
+								}
+								obj.put("fstatus", fnum>0?"1":"0");
+								obj.put("rowno", r.getRowno()+"");
+								obj.put("language", language!=null?language:"");
+								obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
+								data4.add(obj);
+							}
+							break;
+						}
+					}		
 				}
 				data.put("audio", data1);
 				data.put("video", data2);
@@ -1402,7 +1415,7 @@ public class ResourceServiceImpl implements ResourceService {
 				hsm.put("message", message);
 				hsm.put("date", date);
 				hsm.put("week", week);
-				hsm.put("data", "");
+				hsm.put("data", data);
 				hsm.put("datasign", "");
 			}
 		}catch (Exception e) {
@@ -1414,7 +1427,7 @@ public class ResourceServiceImpl implements ResourceService {
 			hsm.put("result", result);
 			hsm.put("message", message);
 			hsm.put("date", date);
-			hsm.put("data", "");
+			hsm.put("data", data);
 			hsm.put("datasign", "");
 			throw new RuntimeException(date.toString());
 		}
@@ -1746,7 +1759,7 @@ public Map fListpre(HttpServletRequest request) {
 		        hsm.put("result", result);
 		        hsm.put("message", message);
 		        hsm.put("date", date);
-		        hsm.put("data", "");
+		        hsm.put("data", data);
 		        hsm.put("datasign", md5(hsm,appKey));
 				return hsm;
 			}
@@ -1788,6 +1801,7 @@ public Map fListpre(HttpServletRequest request) {
 						}
 						obj.put("status", "0");
 						obj.put("language", language!=null?language:"");
+						obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 						data1.add(obj);
 					}else if(type_id.equals("2")){
 						JSONObject obj = new JSONObject();
@@ -1816,9 +1830,10 @@ public Map fListpre(HttpServletRequest request) {
 							objModel.add(jb);
 						}
 						obj.put("status", "0");
-						obj.put("data", !objModel.isEmpty()?objModel:"");
+						obj.put("data", objModel);
 						obj.put("status", "0");
 						obj.put("language", language!=null?language:"");
+						obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 						data2.add(obj);
 					}else if(type_id.equals("4")){
 						List<ResourceInfo> list1 = this.resourceInfoDao.findByResourceId1(r.getId());
@@ -1862,6 +1877,7 @@ public Map fListpre(HttpServletRequest request) {
 						obj.put("status", "0");
 						obj.put("data", objModel);
 						obj.put("language", language!=null?language:"");
+						obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 						data3.add(obj);
 					}else if(type_id.equals("5")){
 						JSONObject obj = new JSONObject();
@@ -1877,6 +1893,7 @@ public Map fListpre(HttpServletRequest request) {
 						obj.put("img_main_size", r.getImg_main_size()!=null?r.getImg_main_size():"");
 						obj.put("status", "0");
 						obj.put("language", language!=null?language:"");
+						obj.put("between_age", r.getBetween_age()!=null?r.getBetween_age():"");
 						if (list != null && !list.isEmpty()) {
 							obj.put("url",list.get(0).getResource_url() != null ? CollectionUtil
 													.toplaybereplace(list.get(0).getResource_url(), 0): "");
@@ -1910,7 +1927,7 @@ public Map fListpre(HttpServletRequest request) {
 				hsm.put("message", message);
 				hsm.put("date", date);
 				hsm.put("week", week);
-				hsm.put("data", "");
+				hsm.put("data", data);
 				hsm.put("datasign", "");
 			}
 		}catch (Exception e) {
@@ -1922,7 +1939,7 @@ public Map fListpre(HttpServletRequest request) {
 			hsm.put("result", result);
 			hsm.put("message", message);
 			hsm.put("date", date);
-			hsm.put("data", "");
+			hsm.put("data", data);
 			hsm.put("datasign", "");
 			throw new RuntimeException(date.toString());
 		}
