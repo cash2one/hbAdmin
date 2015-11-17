@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="MedalSql"> 
+	<resultMap type="medal" id="Medal">
+		<result property="baby_id" column="baby_id"/>   
+		<result property="resourse_id" column="resourse_id"/>   
+	</resultMap>
+	
+	<insert id="add" parameterType="medal"> 
+		<![CDATA[INSERT INTO tbl_medal (baby_id,resourse_id) 
+		VALUES(#{baby_id},#{resourse_id})]]>
+	</insert>
+	
+	<select id="find" resultMap="Medal" parameterType="baby">
+		<![CDATA[SELECT * FROM tbl_medal WHERE  baby_id=#{baby_id} and resourse_id = #{resourse_id} ]]>
+	</select>
+</mapper>

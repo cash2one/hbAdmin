@@ -60,4 +60,6 @@
 	<entry key="2-4-240"><![CDATA[密码不能为空]]></entry>
 	<entry key="2-4-241"><![CDATA[该邮箱帐号不存在]]></entry>
 	<entry key="2-4-242"><![CDATA[密码重置成功]]></entry>
+	<entry key="2-4-243"><![CDATA[计数成功]]></entry>
+	<entry key="2-4-244"><![CDATA[该类型已满]]></entry>
 </properties>

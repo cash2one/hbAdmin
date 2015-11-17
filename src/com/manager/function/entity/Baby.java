@@ -30,6 +30,26 @@ public class Baby implements Serializable{
 	private String baby_status;
 	
 	private String baby_language;
+	
+	private String lison_count;
+	
+	private String read_count;
+
+	public String getLison_count() {
+		return lison_count;
+	}
+
+	public void setLison_count(String lison_count) {
+		this.lison_count = lison_count;
+	}
+
+	public String getRead_count() {
+		return read_count;
+	}
+
+	public void setRead_count(String read_count) {
+		this.read_count = read_count;
+	}
 
 	public String getBaby_status() {
 		return baby_status;

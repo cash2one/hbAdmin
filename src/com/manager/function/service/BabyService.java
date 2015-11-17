@@ -43,4 +43,9 @@ public interface BabyService {
 	 * 删除baby
 	 */
 	public Map deleteBaby(HttpServletRequest request);
+	
+	/**
+	 * 增加阅读计数
+	 */
+	public Map addcount(HttpServletRequest request);
 }

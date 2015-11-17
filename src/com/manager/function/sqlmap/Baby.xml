@@ -14,11 +14,11 @@
 	</resultMap>
 	
 	<select id="getOne" resultMap="Baby" parameterType="baby">
-		<![CDATA[ SELECT id,user_id,baby_nickname,baby_avatar,baby_birthday,create_date FROM tbl_baby WHERE  id=#{id}]]>
+		<![CDATA[ SELECT id,user_id,baby_nickname,baby_avatar,baby_birthday,create_date,lison_count,read_count FROM tbl_baby WHERE  id=#{id}]]>
 	</select>
 	
 	<select id="getByUserId" resultMap="Baby" parameterType="baby">
-		<![CDATA[SELECT id,user_id,baby_nickname,baby_avatar,baby_birthday,create_date FROM tbl_baby WHERE  user_id=#{user_id} and baby_status = 1 ]]>
+		<![CDATA[SELECT id,user_id,baby_nickname,baby_avatar,baby_birthday,create_date,lison_count,read_count FROM tbl_baby WHERE  user_id=#{user_id} and baby_status = 1 ]]>
 	</select>
 	
 	<select id="getId" resultType="int" parameterType="baby">
@@ -44,6 +44,12 @@
 	    	</if>
 	    	<if test="baby_status != null" >
 	        	baby_status = #{baby_status},
+	    	</if>
+	    	<if test="lison_count != null" >
+	        	lison_count = #{lison_count},
+	    	</if>
+	    	<if test="read_count != null" >
+	        	read_count = #{read_count},
 	    	</if>
 	    	<![CDATA[
 	    		update_date = NOW()

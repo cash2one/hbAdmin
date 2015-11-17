@@ -714,10 +714,19 @@ public class ApiServiceImpl implements ApiService {
 		}
 		
 		//宝贝头像上传
-		// http://192.168.3.130:8888/hbadmin/domain?do=uploadImg&baby_id=9&version=1.0.0&appid=100&sign=c443b3a9bfce61a7ebe4694fdf1e847e
+		// http://192.168.3.199:8888/hbAdmin/domain?do=uploadImg&baby_id=9&version=1.0.0&appid=100&sign=c443b3a9bfce61a7ebe4694fdf1e847e
 		if("uploadImg".equals(doMethod) ){
 			switch(versioncode){
 				case 100: return babyService.updateAvatar(request);
+			}
+			return null;
+		}
+		
+		//看过的资源计数
+		// http://192.168.3.199:8888/hbAdmin/domain?do=addcount&res_type=1&baby_id=9&res_id=2&version=1.0.0&appid=100&sign=c443b3a9bfce61a7ebe4694fdf1e847e
+		if("addcount".equals(doMethod) ){
+			switch(versioncode){
+				case 100: return babyService.addcount(request);
 			}
 			return null;
 		}
@@ -854,8 +863,6 @@ public class ApiServiceImpl implements ApiService {
 			}
 			return null;
 		}
-		
-		
 		
 		//密码找回修改
 		//

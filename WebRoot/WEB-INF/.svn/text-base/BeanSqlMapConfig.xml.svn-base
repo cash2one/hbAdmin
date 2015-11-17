@@ -53,6 +53,7 @@
 		<typeAlias alias="TopicReply" type="com.manager.function.entity.TopicReply"/>
 		<typeAlias alias="BigeyeModule" type="com.manager.function.entity.BigeyeModule"/>
 		<typeAlias alias="Bigeye" type="com.manager.function.entity.Bigeye"/>
+		<typeAlias alias="Medal" type="com.manager.function.entity.Medal"/>
 	<!-- function -->
 	
 	</typeAliases>
@@ -95,6 +96,7 @@
 		<mapper resource="com/manager/function/sqlmap/TopicReply.xml"/>
 		<mapper resource="com/manager/function/sqlmap/BigeyeModule.xml"/>
 		<mapper resource="com/manager/function/sqlmap/Bigeye.xml"/>
+		<mapper resource="com/manager/function/sqlmap/Medal.xml"/>
 	<!-- function -->	
 	
 	</mappers>

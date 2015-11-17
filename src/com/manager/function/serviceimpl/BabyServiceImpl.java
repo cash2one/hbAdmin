@@ -16,9 +16,11 @@ import net.sf.json.JSONObject;
 import com.manager.function.dao.BabyDao;
 import com.manager.function.dao.BabyInfoDao;
 import com.manager.function.dao.UserDao;
+import com.manager.function.dao.MedalDao;
 import com.manager.function.entity.Baby;
 import com.manager.function.entity.BabyInfo;
 import com.manager.function.entity.User;
+import com.manager.function.entity.Medal;
 import com.manager.function.service.BabyService;
 import com.manager.init.InitDataPool;
 import com.manager.util.CollectionUtil;
@@ -37,6 +39,16 @@ public class BabyServiceImpl implements BabyService {
 	private BabyInfoDao babyInfoDao;
 	
 	private InitDataPool initDataPool;
+	
+	private MedalDao medalDao;
+
+	public MedalDao getMedalDao() {
+		return medalDao;
+	}
+
+	public void setMedalDao(MedalDao medalDao) {
+		this.medalDao = medalDao;
+	}
 
 	public InitDataPool getInitDataPool() {
 		return initDataPool;
@@ -211,6 +223,8 @@ public Map addpre(HttpServletRequest request) {
 						baby1.setProperty_id(hobbyIds);
 						baby1.setLevel_id(Level_ids);
 						baby1.setBaby_language(language_id);
+						baby1.setLison_count("0");
+						baby1.setRead_count("0");
 						list1.add(baby1);
 						
 					//}
@@ -256,6 +270,112 @@ public Map addpre(HttpServletRequest request) {
 		return null;
 	}
 
+	public Map addcount(HttpServletRequest request)
+	{
+		SimpleDateFormat adf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d1 = new Date();
+		logger.info("开始："+adf.format(d1));
+		
+		String result  = "0";
+		String message = "";
+		int lnum = 0;
+		
+		String appId = (String) request.getParameter("appid");
+		String appKey = Constant.APPID_KEY.get(appId);
+		
+		JSONObject obj = new JSONObject();
+		int id = 0;
+		try{
+			String baby_id = (String) request.getParameter("baby_id");
+			String res_type = (String) request.getParameter("res_type");
+			String res_id = (String) request.getParameter("res_id");
+			
+			boolean flag = false;
+			
+			if(baby_id==null||"".equals(baby_id)){
+				result = "2";
+				message = initDataPool.getSP("2-4-211");
+			}else{
+				flag = true;
+			}
+			
+			if(res_id==null||"".equals(res_id)){
+				result = "2";
+				message = initDataPool.getSP("2-4-211");
+			}else{
+				flag = true;
+			}
+			
+			Medal medal = new Medal();
+			medal.setBaby_id(baby_id);
+			medal.setResourse_id(res_id);
+			int isLook = medalDao.getMedal(medal);
+			if(isLook==0)
+			{
+				medalDao.add(medal);
+				
+				Baby baby = babyDao.findOne(baby_id);
+				//baby.setId(baby_id);
+				if(res_type.equals("1"))
+				{
+					lnum =Integer.parseInt(baby.getLison_count());
+					if(lnum < 120)
+					{
+						lnum+=1;
+						baby.setLison_count(lnum+"");
+						result = "1";
+						message = initDataPool.getSP("2-4-243");
+					}else
+					{
+						result = "0";
+						message = initDataPool.getSP("2-4-244");
+					}
+				}else if(res_type.equals("2"))
+				{
+					lnum =Integer.parseInt(baby.getRead_count());
+					if(lnum < 120)
+					{
+						lnum+=1;
+						baby.setRead_count(lnum+"");
+						result = "1";
+						message = initDataPool.getSP("2-4-243");
+					}else
+					{
+						result = "0";
+						message = initDataPool.getSP("2-4-244");
+					}
+				}
+				
+				if(flag){
+					this.babyDao.update(baby);	
+					obj.put("lison_count", baby.getLison_count()!=null?baby.getLison_count():"0");
+					obj.put("read_count", baby.getRead_count()!=null?baby.getRead_count():"0");
+				}
+			}else
+			{
+				result = "2";
+				message = initDataPool.getSP("2-4-227");
+			}
+	
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			result = "error";
+			message = initDataPool.getSP("2-4-000");
+		}
+		
+		Map hsm = new LinkedHashMap();
+        hsm.put("version", Constant.version);
+        hsm.put("result", result);
+        hsm.put("message", message);
+        hsm.put("data", obj);
+        
+        Date d2 = new Date();
+		logger.info("结束："+adf.format(d2));
+        long diff = (d2.getTime() - d1.getTime());
+        logger.info("BabyServiceImpl.updateAvatar执行了"+diff+"毫秒");
+		return hsm;
+	}
 	public Map updateAvatar(HttpServletRequest request) {
 		
 		SimpleDateFormat adf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -312,7 +432,7 @@ public Map addpre(HttpServletRequest request) {
         hsm.put("version", Constant.version);
         hsm.put("result", result);
         hsm.put("message", message);
-        hsm.put("data", url);
+       // hsm.put("data", url);
         
         Date d2 = new Date();
 		logger.info("结束："+adf.format(d2));

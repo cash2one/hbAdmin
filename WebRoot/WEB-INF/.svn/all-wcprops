@@ -31,7 +31,7 @@ applicationContext.xml
 K 25
 svn:wc:ra_dav:version-url
 V 76
-/svn/iread/!svn/ver/197/trunk/hbAdmin/WebRoot/WEB-INF/applicationContext.xml
+/svn/iread/!svn/ver/202/trunk/hbAdmin/WebRoot/WEB-INF/applicationContext.xml
 END
 dispatcher-servlet.xml
 K 25
@@ -43,7 +43,7 @@ BeanSqlMapConfig.xml
 K 25
 svn:wc:ra_dav:version-url
 V 74
-/svn/iread/!svn/ver/108/trunk/hbAdmin/WebRoot/WEB-INF/BeanSqlMapConfig.xml
+/svn/iread/!svn/ver/202/trunk/hbAdmin/WebRoot/WEB-INF/BeanSqlMapConfig.xml
 END
 dao-beans.xml
 K 25
