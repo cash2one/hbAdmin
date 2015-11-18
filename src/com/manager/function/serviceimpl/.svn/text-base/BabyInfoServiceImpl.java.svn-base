@@ -183,17 +183,17 @@ public class BabyInfoServiceImpl implements BabyInfoService {
 			String level_id = (String) request.getParameter("level_id");
 			String hobby_id = (String) request.getParameter("hobby_id");
 			String user_id = (String) request.getParameter("uid");
-			String language_id = (String) request.getParameter("language_id");
+			//String language_id = (String) request.getParameter("language_id");
 			
 			String[] hobby_ids = hobby_id.split(",");
 			BabyInfo babyInfo = new BabyInfo();
 			babyInfo.setBaby_id(baby_id);
 			babyInfo.setLevel_id(level_id);
-			babyInfo.setBaby_language(language_id);
+			//babyInfo.setBaby_language(language_id);
 			
 			boolean flag = false;
 			
-			if(baby_id==null||level_id==null||hobby_id==null||user_id==null||language_id==null||"".equals(baby_id)||"".equals(level_id)||"".equals(hobby_id)||"".equals(user_id)||"".equals(language_id)){
+			if(baby_id==null||level_id==null||hobby_id==null||user_id==null||"".equals(baby_id)||"".equals(level_id)||"".equals(hobby_id)||"".equals(user_id)){
 				result = "0";
 				message = initDataPool.getSP("2-4-203");
 			}else{

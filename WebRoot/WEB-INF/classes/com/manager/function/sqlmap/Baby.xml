@@ -13,12 +13,12 @@
 		<result property="baby_status" column="baby_status"/>
 	</resultMap>
 	
-	<select id="getOne" resultMap="Baby" parameterType="baby">
-		<![CDATA[ SELECT id,user_id,baby_nickname,baby_avatar,baby_birthday,create_date,lison_count,read_count FROM tbl_baby WHERE  id=#{id}]]>
+	<select id="findOne" resultMap="Baby" parameterType="baby">
+		<![CDATA[ SELECT id,user_id,baby_nickname,baby_avatar,baby_birthday,create_date,lison_count,read_count,baby_language FROM tbl_baby WHERE  id=#{id}]]>
 	</select>
 	
 	<select id="getByUserId" resultMap="Baby" parameterType="baby">
-		<![CDATA[SELECT id,user_id,baby_nickname,baby_avatar,baby_birthday,create_date,lison_count,read_count FROM tbl_baby WHERE  user_id=#{user_id} and baby_status = 1 ]]>
+		<![CDATA[SELECT id,user_id,baby_nickname,baby_avatar,baby_birthday,create_date,lison_count,read_count,baby_language FROM tbl_baby WHERE  user_id=#{user_id} and baby_status = 1 ]]>
 	</select>
 	
 	<select id="getId" resultType="int" parameterType="baby">
@@ -26,8 +26,8 @@
 	</select>
 	
 	<insert id="add" parameterType="baby"> 
-		<![CDATA[INSERT INTO tbl_baby (id,user_id,baby_nickname,create_date,baby_status) 
-		VALUES(#{id},#{user_id},#{baby_nickname},now(),#{baby_status})]]>
+		<![CDATA[INSERT INTO tbl_baby (id,user_id,baby_nickname,create_date,baby_status,baby_language) 
+		VALUES(#{id},#{user_id},#{baby_nickname},now(),#{baby_status},#{baby_language})]]>
 	</insert>
 	
 	<update id="update" parameterType="userBilling">
@@ -50,6 +50,9 @@
 	    	</if>
 	    	<if test="read_count != null" >
 	        	read_count = #{read_count},
+	    	</if>
+	    	<if test="baby_language != null" >
+	        	baby_language = #{baby_language},
 	    	</if>
 	    	<![CDATA[
 	    		update_date = NOW()

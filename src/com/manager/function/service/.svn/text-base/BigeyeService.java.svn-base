@@ -30,4 +30,6 @@ public interface BigeyeService {
 	
 	public Map getBigEyeList(HttpServletRequest request);
 	
+	public Map getMainImg(HttpServletRequest request);
+	
 }

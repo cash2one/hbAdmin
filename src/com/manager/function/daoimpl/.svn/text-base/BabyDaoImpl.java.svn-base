@@ -27,7 +27,7 @@ public class BabyDaoImpl  extends SqlSessionDaoSupport implements BabyDao {
 
 	public Baby findOne(String id) {
 		DataSourceContextHolder.setDbType("0");
-		List<Baby> ls = this.getSqlSession().selectList("BabySql.getOne", id);
+		List<Baby> ls = this.getSqlSession().selectList("BabySql.findOne", id);
 		if(ls!=null && ls.size()>0){
 			return ls.get(0);
 		}

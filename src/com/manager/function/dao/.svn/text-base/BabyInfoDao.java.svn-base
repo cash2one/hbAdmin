@@ -24,11 +24,4 @@ public interface BabyInfoDao {
 	 * @return
 	 */
 	public List<BabyInfo> findByBabyId(String baby_id);
-	
-	/**
-	 * babylanguage
-	 * @param id
-	 * @return
-	 */
-	public List<BabyInfo> getBabyLanguage(String baby_id);
 }

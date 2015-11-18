@@ -9,17 +9,17 @@ svn:wc:ra_dav:version-url
 V 87
 /svn/iread/!svn/ver/200/trunk/hbAdmin/src/com/manager/function/service/UserService.java
 END
-GlobalHobbyAttrService.java
-K 25
-svn:wc:ra_dav:version-url
-V 97
-/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/service/GlobalHobbyAttrService.java
-END
 FavoriteService.java
 K 25
 svn:wc:ra_dav:version-url
 V 90
 /svn/iread/!svn/ver/88/trunk/hbAdmin/src/com/manager/function/service/FavoriteService.java
+END
+GlobalHobbyAttrService.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/service/GlobalHobbyAttrService.java
 END
 TopicTypeService.java
 K 25
@@ -51,11 +51,11 @@ svn:wc:ra_dav:version-url
 V 93
 /svn/iread/!svn/ver/27/trunk/hbAdmin/src/com/manager/function/service/GlobalLevelService.java
 END
-BabyInfoService.java
+WeekdayService.java
 K 25
 svn:wc:ra_dav:version-url
-V 91
-/svn/iread/!svn/ver/190/trunk/hbAdmin/src/com/manager/function/service/BabyInfoService.java
+V 89
+/svn/iread/!svn/ver/15/trunk/hbAdmin/src/com/manager/function/service/WeekdayService.java
 END
 ResourceTypeService.java
 K 25
@@ -63,23 +63,23 @@ svn:wc:ra_dav:version-url
 V 93
 /svn/iread/!svn/ver/8/trunk/hbAdmin/src/com/manager/function/service/ResourceTypeService.java
 END
-WeekdayService.java
+BabyInfoService.java
 K 25
 svn:wc:ra_dav:version-url
-V 89
-/svn/iread/!svn/ver/15/trunk/hbAdmin/src/com/manager/function/service/WeekdayService.java
-END
-SearchLogsService.java
-K 25
-svn:wc:ra_dav:version-url
-V 92
-/svn/iread/!svn/ver/34/trunk/hbAdmin/src/com/manager/function/service/SearchLogsService.java
+V 91
+/svn/iread/!svn/ver/190/trunk/hbAdmin/src/com/manager/function/service/BabyInfoService.java
 END
 TopicReplyService.java
 K 25
 svn:wc:ra_dav:version-url
 V 92
 /svn/iread/!svn/ver/69/trunk/hbAdmin/src/com/manager/function/service/TopicReplyService.java
+END
+SearchLogsService.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/iread/!svn/ver/34/trunk/hbAdmin/src/com/manager/function/service/SearchLogsService.java
 END
 GlobalPropertyAttrService.java
 K 25
@@ -109,7 +109,7 @@ BigeyeService.java
 K 25
 svn:wc:ra_dav:version-url
 V 89
-/svn/iread/!svn/ver/114/trunk/hbAdmin/src/com/manager/function/service/BigeyeService.java
+/svn/iread/!svn/ver/203/trunk/hbAdmin/src/com/manager/function/service/BigeyeService.java
 END
 GlobalPropertyService.java
 K 25

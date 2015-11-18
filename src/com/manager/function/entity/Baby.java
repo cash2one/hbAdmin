@@ -29,11 +29,11 @@ public class Baby implements Serializable{
 	
 	private String baby_status;
 	
-	private String baby_language;
-	
 	private String lison_count;
 	
 	private String read_count;
+	
+	private String baby_language;
 
 	public String getLison_count() {
 		return lison_count;

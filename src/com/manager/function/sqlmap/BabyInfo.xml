@@ -19,12 +19,8 @@
 		<![CDATA[ SELECT id,baby_id,level_id,property_id,create_date FROM tbl_baby_info WHERE baby_id=#{baby_id}]]>
 	</select>
 	
-	<select id="getBabyLangeuage" resultMap="BabyInfo" parameterType="babyInfo">
-		<![CDATA[ SELECT baby_language FROM tbl_baby_info WHERE baby_id=#{baby_id}]]>
-	</select>
-	
 	<insert id="add" parameterType="babyInfo"> 
-		<![CDATA[INSERT INTO tbl_baby_info(id,baby_id,level_id,property_id,create_date,baby_language) 
-		VALUES (nextval('tbl_baby_info'),#{baby_id},#{level_id},#{property_id},now(),#{baby_language})]]>
+		<![CDATA[INSERT INTO tbl_baby_info(id,baby_id,level_id,property_id,create_date) 
+		VALUES (nextval('tbl_baby_info'),#{baby_id},#{level_id},#{property_id},now())]]>
 	</insert>
 </mapper>

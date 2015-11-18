@@ -20,7 +20,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.manager.function.controller.GlobalHobbyController;
-import com.manager.function.dao.BabyInfoDao;
+import com.manager.function.dao.BabyDao;
 import com.manager.function.dao.FavoriteDao;
 import com.manager.function.dao.GlobalPropertyDao;
 import com.manager.function.dao.GlobalScoreDao;
@@ -30,7 +30,7 @@ import com.manager.function.dao.ResourceInfoDao;
 import com.manager.function.dao.ScoreLogDao;
 import com.manager.function.dao.UserBillingDao;
 import com.manager.function.dao.UserLearnPlanDao;
-import com.manager.function.entity.BabyInfo;
+import com.manager.function.entity.Baby;
 import com.manager.function.entity.Favorite;
 import com.manager.function.entity.GlobalProperty;
 import com.manager.function.entity.GlobalScore;
@@ -72,14 +72,14 @@ public class LearnplanServiceImpl implements LearnplanService {
 	
 	private FavoriteDao favoriteDao;
 	
-	private BabyInfoDao babyInfoDao;
+	private BabyDao babyDao;
 	
-	public BabyInfoDao getBabyInfoDao() {
-		return babyInfoDao;
+	public BabyDao getBabyDao() {
+		return babyDao;
 	}
 	
-	public void setBabyInfoDao(BabyInfoDao babyInfoDao) {
-		this.babyInfoDao = babyInfoDao;
+	public void setBabyDao(BabyDao babyDao) {
+		this.babyDao = babyDao;
 	}
 	
 	public FavoriteDao getFavoriteDao() {
@@ -939,8 +939,8 @@ public class LearnplanServiceImpl implements LearnplanService {
 			String baby_id = (String) request.getParameter("baby_id");
 			String user_id = (String) request.getParameter("uid");
 			String isOpen = (String) request.getParameter("isnewplan");
-			List<BabyInfo> bbbb = this.babyInfoDao.getBabyLanguage(baby_id);
-			String languages = bbbb.get(0).getBaby_language();
+			Baby bbbb= this.babyDao.findOne(baby_id);
+			String languages = bbbb.getBaby_language();
 			int language = 0;
 			if(languages!=null)
 				language = Integer.parseInt(languages);
@@ -2688,8 +2688,8 @@ public class LearnplanServiceImpl implements LearnplanService {
 		try{
 			String baby_id = (String) request.getParameter("baby_id");
 			String user_id = (String) request.getParameter("uid");
-			List<BabyInfo> bbbb = this.babyInfoDao.getBabyLanguage(baby_id);
-			String languages = bbbb.get(0).getBaby_language();
+			Baby bbbb= this.babyDao.findOne(baby_id);
+			String languages = bbbb.getBaby_language();
 			int language = 0;
 			if(languages!=null)
 				language = Integer.parseInt(languages);

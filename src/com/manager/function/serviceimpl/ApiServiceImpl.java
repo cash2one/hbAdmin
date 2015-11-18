@@ -785,6 +785,15 @@ public class ApiServiceImpl implements ApiService {
 			return null;
 		}
 		
+		//获取广告图片列表
+		// http://192.168.3.199:8888/hbAdmin/domain?do=getMainImg&version=1.0.0&appid=100&sign=c30be0365450242b92080e9f2e602dcc
+		if("getMainImg".equals(doMethod) ){
+			switch(versioncode){
+				case 100: return BigeyeService.getMainImg(request);
+			}
+			return null;
+		}
+		
 		//回复帖子
 		// http://192.168.3.130:8888/hbadmin/domain?do=addTopicReply&content=asdas&topic_id=4&uid=1&quote_content=测试&version=1.0.0&appid=100&sign=c30be0365450242b92080e9f2e602dcc
 		if("addTopicReply".equals(doMethod) ){

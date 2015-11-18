@@ -143,11 +143,13 @@ public Map addpre(HttpServletRequest request) {
 		try{
 			String uid = (String) request.getParameter("uid");
 			String baby_nickname = (String) request.getParameter("baby_nickname");
+			String language_id = (String) request.getParameter("language_id");
 			
 			Baby baby1 = new Baby();
 			baby1.setUser_id(uid);
 			baby1.setBaby_status("1");
 			baby1.setBaby_nickname(baby_nickname);
+			baby1.setBaby_language(language_id);
 			
 			boolean flag = false;
 			
@@ -172,13 +174,12 @@ public Map addpre(HttpServletRequest request) {
 			String level_id = (String) request.getParameter("level_id");
 			String hobby_id = (String) request.getParameter("hobby_id");
 			String user_id = (String) request.getParameter("uid");
-			String language_id = (String) request.getParameter("language_id");
 			
 			String[] hobby_ids = hobby_id.split(",");
 			BabyInfo babyInfo = new BabyInfo();
 			babyInfo.setBaby_id(baby_id);
 			babyInfo.setLevel_id(level_id);
-			babyInfo.setBaby_language(language_id);
+			//babyInfo.setBaby_language(language_id);
 			
 			flag = false;
 			
@@ -222,7 +223,7 @@ public Map addpre(HttpServletRequest request) {
 						}
 						baby1.setProperty_id(hobbyIds);
 						baby1.setLevel_id(Level_ids);
-						baby1.setBaby_language(language_id);
+						//baby1.setBaby_language(language_id);
 						baby1.setLison_count("0");
 						baby1.setRead_count("0");
 						list1.add(baby1);
@@ -310,11 +311,10 @@ public Map addpre(HttpServletRequest request) {
 			medal.setBaby_id(baby_id);
 			medal.setResourse_id(res_id);
 			int isLook = medalDao.getMedal(medal);
+			Baby baby = babyDao.findOne(baby_id);
 			if(isLook==0)
 			{
 				medalDao.add(medal);
-				
-				Baby baby = babyDao.findOne(baby_id);
 				//baby.setId(baby_id);
 				if(res_type.equals("1"))
 				{
@@ -353,6 +353,8 @@ public Map addpre(HttpServletRequest request) {
 				}
 			}else
 			{
+				obj.put("lison_count", baby.getLison_count()!=null?baby.getLison_count():"0");
+				obj.put("read_count", baby.getRead_count()!=null?baby.getRead_count():"0");
 				result = "2";
 				message = initDataPool.getSP("2-4-227");
 			}

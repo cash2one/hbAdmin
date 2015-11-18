@@ -169,6 +169,52 @@ public class BigeyeServiceImpl implements BigeyeService {
 		return hsm;
 	}
 	
+public Map getMainImg(HttpServletRequest request) {
+		
+		SimpleDateFormat adf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d1 = new Date();
+		logger.info("开始："+adf.format(d1));
+		
+		String result  = "0";
+		String message = "";
+		List<Bigeye> ls = new ArrayList<Bigeye>();
+		Map hsm = new LinkedHashMap();
+		JSONArray obj = new JSONArray();
+		String module_id = "4";//(String) request.getParameter("module_id");
+		try{
+			String num = "1";//(String) request.getParameter("len");
+			Bigeye b = new Bigeye();
+			b.setModule_id(module_id);
+			b.setNum(Integer.parseInt(num));
+			ls = this.BigeyeDao.getBigEyeList(b);
+			if(ls!=null){
+				for(Bigeye be :ls){
+					JSONObject jb = new JSONObject();
+					jb.put("img_url", be.getImg_url()!=null?tobereplace(be.getImg_url(), 0):"");					
+					obj.add(jb);
+				}
+				result = "1";
+				message = initDataPool.getSP("2-4-214");
+			}else{
+				result = "0";
+				message = initDataPool.getSP("2-4-213");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			result = "error";
+			message = initDataPool.getSP("2-4-000");
+		}
+		hsm.put("version", Constant.version);
+		hsm.put("result", result);
+		hsm.put("message", message);
+		hsm.put("data", obj);
+		Date d2 = new Date();
+		logger.info("结束："+adf.format(d2));
+        long diff = (d2.getTime() - d1.getTime());
+        logger.info("BigeyeServiceImpl.getBigEyeList执行了"+diff+"毫秒");
+		return hsm;
+	}
+	
 	public static String tobereplace(String message, int in) throws Exception {
 		String path = BigeyeServiceImpl.class.getClassLoader().getResource("").toURI().getPath();
 		path = path.split("WEB-INF")[0] + "WEB-INF/Config.xml";

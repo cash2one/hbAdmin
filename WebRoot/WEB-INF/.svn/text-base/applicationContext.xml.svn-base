@@ -375,7 +375,7 @@
 			<property name="globalPropertyDao" ref="globalPropertyDao"></property>
 			<property name="userBillingDao" ref="userBillingDao"></property>
 			<property name="favoriteDao" ref="favoriteDao"></property>
-			<property name="babyInfoDao" ref="babyInfoDao"></property>
+			<property name="babyDao" ref="babyDao"></property>
 		</bean>
 		<bean name="babyInfoService" id="babyInfoService" class="com.manager.function.serviceimpl.BabyInfoServiceImpl">
 			<property name="userDao" ref="userDao"></property>
