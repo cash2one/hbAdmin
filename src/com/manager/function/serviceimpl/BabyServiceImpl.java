@@ -226,6 +226,10 @@ public Map addpre(HttpServletRequest request) {
 						//baby1.setBaby_language(language_id);
 						baby1.setLison_count("0");
 						baby1.setRead_count("0");
+						
+						int rank = this.babyDao.getRank(idl);
+						baby1.setBaby_Rank(rank+"");
+						
 						list1.add(baby1);
 						
 					//}
@@ -280,6 +284,7 @@ public Map addpre(HttpServletRequest request) {
 		String result  = "0";
 		String message = "";
 		int lnum = 0;
+		int rnum = 0;
 		
 		String appId = (String) request.getParameter("appid");
 		String appKey = Constant.APPID_KEY.get(appId);
@@ -314,11 +319,12 @@ public Map addpre(HttpServletRequest request) {
 			Baby baby = babyDao.findOne(baby_id);
 			if(isLook==0)
 			{
-				medalDao.add(medal);
-				//baby.setId(baby_id);
+				if(baby.getLison_count()!=null)
+					lnum =Integer.parseInt(baby.getLison_count());
+				if(baby.getRead_count()!=null)
+					rnum =Integer.parseInt(baby.getRead_count());
 				if(res_type.equals("1"))
 				{
-					lnum =Integer.parseInt(baby.getLison_count());
 					if(lnum < 120)
 					{
 						lnum+=1;
@@ -332,11 +338,10 @@ public Map addpre(HttpServletRequest request) {
 					}
 				}else if(res_type.equals("2"))
 				{
-					lnum =Integer.parseInt(baby.getRead_count());
-					if(lnum < 120)
+					if(rnum < 120)
 					{
-						lnum+=1;
-						baby.setRead_count(lnum+"");
+						rnum+=1;
+						baby.setRead_count(rnum+"");
 						result = "1";
 						message = initDataPool.getSP("2-4-243");
 					}else
@@ -345,16 +350,24 @@ public Map addpre(HttpServletRequest request) {
 						message = initDataPool.getSP("2-4-244");
 					}
 				}
+				int sum = lnum+rnum;
+				baby.setSum_count(sum+"");
 				
 				if(flag){
 					this.babyDao.update(baby);	
 					obj.put("lison_count", baby.getLison_count()!=null?baby.getLison_count():"0");
 					obj.put("read_count", baby.getRead_count()!=null?baby.getRead_count():"0");
+					int rank = this.babyDao.getRank(baby_id);
+					obj.put("baby_rank", rank+"");
 				}
+				
+				medalDao.add(medal);
 			}else
 			{
 				obj.put("lison_count", baby.getLison_count()!=null?baby.getLison_count():"0");
 				obj.put("read_count", baby.getRead_count()!=null?baby.getRead_count():"0");
+				int rank = this.babyDao.getRank(baby_id);
+				obj.put("baby_rank", rank+"");
 				result = "2";
 				message = initDataPool.getSP("2-4-227");
 			}

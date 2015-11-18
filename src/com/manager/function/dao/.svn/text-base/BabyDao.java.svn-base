@@ -32,4 +32,5 @@ public interface BabyDao {
 	
 	public void update(Baby baby);
 
+	public int getRank(String id);
 }

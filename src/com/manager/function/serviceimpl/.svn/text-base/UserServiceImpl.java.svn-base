@@ -709,7 +709,12 @@ public Map isExcitpre(HttpServletRequest request) {
 							baby.setLison_count("0");
 						if(baby.getRead_count() == null)
 							baby.setRead_count("0");
+						
 						String id = baby.getId();
+						
+						int rank = this.babyDao.getRank(id);
+						baby.setBaby_Rank(rank+"");
+						
 						List<BabyInfo> list = this.babyInfoDao.findByBabyId(id);
 						String hobby_ids = "";
 						String Level_ids = "";
@@ -824,6 +829,10 @@ public Map getUserInfo(HttpServletRequest request) {
 					if(baby.getRead_count() == null)
 						baby.setRead_count("0");
 					String id = baby.getId();
+					
+					int rank = this.babyDao.getRank(id);
+					baby.setBaby_Rank(rank+"");
+					
 					List<BabyInfo> list = this.babyInfoDao.findByBabyId(id);
 					String hobby_ids = "";
 					String Level_ids = "";

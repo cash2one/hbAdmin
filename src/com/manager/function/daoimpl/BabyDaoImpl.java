@@ -46,5 +46,11 @@ public class BabyDaoImpl  extends SqlSessionDaoSupport implements BabyDao {
 		this.getSqlSession().update("BabySql.update", baby);
 		DataSourceContextHolder.clearDbType();
 	}
-
+	public int getRank(String id)
+	{
+		DataSourceContextHolder.setDbType("0");
+		int in=this.getSqlSession().selectOne("BabySql.getRank",id);
+		DataSourceContextHolder.clearDbType();
+		return in;
+	}
 }

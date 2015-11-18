@@ -25,6 +25,10 @@
 		<![CDATA[SELECT nextval('tbl_baby') ]]>
 	</select>
 	
+	<select id="getRank" resultType="int" parameterType="baby">
+		<![CDATA[SELECT C.pm FROM ( SELECT A.*,@rank:=@rank+1 AS pm FROM ( SELECT id,AVG(sum_count) AS rank FROM tbl_baby GROUP BY id  ORDER BY sum_count  DESC ) A ,(SELECT @rank:=0) B ) C WHERE id = #{id} ]]>
+	</select>
+	
 	<insert id="add" parameterType="baby"> 
 		<![CDATA[INSERT INTO tbl_baby (id,user_id,baby_nickname,create_date,baby_status,baby_language) 
 		VALUES(#{id},#{user_id},#{baby_nickname},now(),#{baby_status},#{baby_language})]]>
@@ -53,6 +57,9 @@
 	    	</if>
 	    	<if test="baby_language != null" >
 	        	baby_language = #{baby_language},
+	    	</if>
+	    	<if test="sum_count != null" >
+	        	sum_count = #{sum_count},
 	    	</if>
 	    	<![CDATA[
 	    		update_date = NOW()
