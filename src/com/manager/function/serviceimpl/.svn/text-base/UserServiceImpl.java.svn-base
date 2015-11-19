@@ -713,7 +713,7 @@ public Map isExcitpre(HttpServletRequest request) {
 						String id = baby.getId();
 						
 						int rank = this.babyDao.getRank(id);
-						baby.setBaby_Rank(rank+"");
+						baby.setBaby_rank(rank+"");
 						
 						List<BabyInfo> list = this.babyInfoDao.findByBabyId(id);
 						String hobby_ids = "";
@@ -831,7 +831,7 @@ public Map getUserInfo(HttpServletRequest request) {
 					String id = baby.getId();
 					
 					int rank = this.babyDao.getRank(id);
-					baby.setBaby_Rank(rank+"");
+					baby.setBaby_rank(rank+"");
 					
 					List<BabyInfo> list = this.babyInfoDao.findByBabyId(id);
 					String hobby_ids = "";

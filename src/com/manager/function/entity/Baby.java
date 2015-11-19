@@ -37,7 +37,7 @@ public class Baby implements Serializable{
 	
 	private String sum_count;
 	
-	private String baby_Rank;
+	private String baby_rank;
 
 	public String getLison_count() {
 		return lison_count;
@@ -147,12 +147,12 @@ public class Baby implements Serializable{
 		this.baby_language = baby_language;
 	}
 
-	public String getBaby_Rank() {
-		return baby_Rank;
+	public String getBaby_rank() {
+		return baby_rank;
 	}
 
-	public void setBaby_Rank(String baby_Rank) {
-		this.baby_Rank = baby_Rank;
+	public void setBaby_rank(String baby_Rank) {
+		this.baby_rank = baby_Rank;
 	}
 
 	public String getSum_count() {

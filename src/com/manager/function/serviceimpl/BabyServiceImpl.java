@@ -228,7 +228,7 @@ public Map addpre(HttpServletRequest request) {
 						baby1.setRead_count("0");
 						
 						int rank = this.babyDao.getRank(idl);
-						baby1.setBaby_Rank(rank+"");
+						baby1.setBaby_rank(rank+"");
 						
 						list1.add(baby1);
 						
@@ -368,7 +368,7 @@ public Map addpre(HttpServletRequest request) {
 				obj.put("read_count", baby.getRead_count()!=null?baby.getRead_count():"0");
 				int rank = this.babyDao.getRank(baby_id);
 				obj.put("baby_rank", rank+"");
-				result = "2";
+				result = "1";
 				message = initDataPool.getSP("2-4-227");
 			}
 	
@@ -447,7 +447,7 @@ public Map addpre(HttpServletRequest request) {
         hsm.put("version", Constant.version);
         hsm.put("result", result);
         hsm.put("message", message);
-       // hsm.put("data", url);
+        hsm.put("data", url);
         
         Date d2 = new Date();
 		logger.info("结束："+adf.format(d2));

@@ -345,7 +345,7 @@ public class ResourceController {
 			}
 			
 			if(CollectionUtil.checkNull(between_age)){
-				Resource.setBook_content(between_age);
+				Resource.setBetween_age(between_age);
 			}
 			Resource.setResource_status(resource_status);
 //			Resource.setCreate_date(create_date);
