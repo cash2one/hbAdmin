@@ -9,24 +9,6 @@ svn:wc:ra_dav:version-url
 V 92
 /svn/iread/!svn/ver/69/trunk/hbAdmin/src/com/manager/function/entity/GlobalPropertyAttr.java
 END
-WeekdayResource.java
-K 25
-svn:wc:ra_dav:version-url
-V 89
-/svn/iread/!svn/ver/22/trunk/hbAdmin/src/com/manager/function/entity/WeekdayResource.java
-END
-ResourceInfo.java
-K 25
-svn:wc:ra_dav:version-url
-V 87
-/svn/iread/!svn/ver/130/trunk/hbAdmin/src/com/manager/function/entity/ResourceInfo.java
-END
-EmailInfo.java
-K 25
-svn:wc:ra_dav:version-url
-V 84
-/svn/iread/!svn/ver/182/trunk/hbAdmin/src/com/manager/function/entity/EmailInfo.java
-END
 Bigeye.java
 K 25
 svn:wc:ra_dav:version-url
@@ -38,18 +20,6 @@ K 25
 svn:wc:ra_dav:version-url
 V 89
 /svn/iread/!svn/ver/107/trunk/hbAdmin/src/com/manager/function/entity/GlobalLanguage.java
-END
-GlobalProperty.java
-K 25
-svn:wc:ra_dav:version-url
-V 89
-/svn/iread/!svn/ver/106/trunk/hbAdmin/src/com/manager/function/entity/GlobalProperty.java
-END
-TopicList.java
-K 25
-svn:wc:ra_dav:version-url
-V 84
-/svn/iread/!svn/ver/178/trunk/hbAdmin/src/com/manager/function/entity/TopicList.java
 END
 SearchKeyword.java
 K 25
@@ -63,23 +33,11 @@ svn:wc:ra_dav:version-url
 V 87
 /svn/iread/!svn/ver/103/trunk/hbAdmin/src/com/manager/function/entity/BigeyeModule.java
 END
-UserLearnplan.java
-K 25
-svn:wc:ra_dav:version-url
-V 88
-/svn/iread/!svn/ver/158/trunk/hbAdmin/src/com/manager/function/entity/UserLearnplan.java
-END
 Learnplan.java
 K 25
 svn:wc:ra_dav:version-url
 V 83
 /svn/iread/!svn/ver/21/trunk/hbAdmin/src/com/manager/function/entity/Learnplan.java
-END
-ScoreLog.java
-K 25
-svn:wc:ra_dav:version-url
-V 82
-/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/entity/ScoreLog.java
 END
 Baby.java
 K 25
@@ -99,23 +57,11 @@ svn:wc:ra_dav:version-url
 V 79
 /svn/iread/!svn/ver/190/trunk/hbAdmin/src/com/manager/function/entity/User.java
 END
-GlobalHobbyAttr.java
-K 25
-svn:wc:ra_dav:version-url
-V 89
-/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/entity/GlobalHobbyAttr.java
-END
 Favorite.java
 K 25
 svn:wc:ra_dav:version-url
 V 82
 /svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/entity/Favorite.java
-END
-UserBilling.java
-K 25
-svn:wc:ra_dav:version-url
-V 85
-/svn/iread/!svn/ver/33/trunk/hbAdmin/src/com/manager/function/entity/UserBilling.java
 END
 TopicType.java
 K 25
@@ -135,6 +81,84 @@ svn:wc:ra_dav:version-url
 V 86
 /svn/iread/!svn/ver/104/trunk/hbAdmin/src/com/manager/function/entity/GlobalHobby.java
 END
+ResourceType.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/8/trunk/hbAdmin/src/com/manager/function/entity/ResourceType.java
+END
+SearchLogs.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/34/trunk/hbAdmin/src/com/manager/function/entity/SearchLogs.java
+END
+GlobalScore.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/entity/GlobalScore.java
+END
+WeekdayResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/iread/!svn/ver/22/trunk/hbAdmin/src/com/manager/function/entity/WeekdayResource.java
+END
+ResourceInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/iread/!svn/ver/130/trunk/hbAdmin/src/com/manager/function/entity/ResourceInfo.java
+END
+EmailInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/182/trunk/hbAdmin/src/com/manager/function/entity/EmailInfo.java
+END
+GlobalProperty.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/iread/!svn/ver/106/trunk/hbAdmin/src/com/manager/function/entity/GlobalProperty.java
+END
+TopicList.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/178/trunk/hbAdmin/src/com/manager/function/entity/TopicList.java
+END
+UserLearnplan.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/iread/!svn/ver/158/trunk/hbAdmin/src/com/manager/function/entity/UserLearnplan.java
+END
+ScoreLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/entity/ScoreLog.java
+END
+UserBilling.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/iread/!svn/ver/33/trunk/hbAdmin/src/com/manager/function/entity/UserBilling.java
+END
+GlobalHobbyAttr.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/entity/GlobalHobbyAttr.java
+END
+Token.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/iread/!svn/ver/207/trunk/hbAdmin/src/com/manager/function/entity/Token.java
+END
 Resource.java
 K 25
 svn:wc:ra_dav:version-url
@@ -147,39 +171,21 @@ svn:wc:ra_dav:version-url
 V 85
 /svn/iread/!svn/ver/25/trunk/hbAdmin/src/com/manager/function/entity/GlobalLevel.java
 END
-BabyInfo.java
-K 25
-svn:wc:ra_dav:version-url
-V 83
-/svn/iread/!svn/ver/203/trunk/hbAdmin/src/com/manager/function/entity/BabyInfo.java
-END
-ResourceType.java
-K 25
-svn:wc:ra_dav:version-url
-V 85
-/svn/iread/!svn/ver/8/trunk/hbAdmin/src/com/manager/function/entity/ResourceType.java
-END
 Weekday.java
 K 25
 svn:wc:ra_dav:version-url
 V 81
 /svn/iread/!svn/ver/17/trunk/hbAdmin/src/com/manager/function/entity/Weekday.java
 END
-SearchLogs.java
+BabyInfo.java
 K 25
 svn:wc:ra_dav:version-url
-V 84
-/svn/iread/!svn/ver/34/trunk/hbAdmin/src/com/manager/function/entity/SearchLogs.java
+V 83
+/svn/iread/!svn/ver/203/trunk/hbAdmin/src/com/manager/function/entity/BabyInfo.java
 END
 TopicReply.java
 K 25
 svn:wc:ra_dav:version-url
 V 84
 /svn/iread/!svn/ver/69/trunk/hbAdmin/src/com/manager/function/entity/TopicReply.java
-END
-GlobalScore.java
-K 25
-svn:wc:ra_dav:version-url
-V 85
-/svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/entity/GlobalScore.java
 END

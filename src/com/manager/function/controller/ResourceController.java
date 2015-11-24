@@ -267,8 +267,11 @@ public class ResourceController {
 			if(!CollectionUtil.checkNull(resource_type_id)){jsonObj.put("res", "请选择资源类型！");return null;}
 			if(!CollectionUtil.checkNull(img_index)){jsonObj.put("res", "请选择要上传的首页展示图片！");return null;}
 			if(!CollectionUtil.checkNull(img_index_size)){jsonObj.put("res", "首页展示图片尺寸不能为空！");return null;}
-			if(!CollectionUtil.checkNull(img_list )){jsonObj.put("res", "请选择要上传的列表展示图片！");return null;}
-			if(!CollectionUtil.checkNull(img_list_size)){jsonObj.put("res", "列表展示图片尺寸不能为空！");return null;}
+			if(!resource_type_id.equals("2")){
+				if(!CollectionUtil.checkNull(img_list )){jsonObj.put("res", "请选择要上传的列表展示图片！");return null;}
+				if(!CollectionUtil.checkNull(img_list_size)){jsonObj.put("res", "列表展示图片尺寸不能为空！");return null;}
+			}
+			
 			if(resource_type_id.equals("1")||resource_type_id.equals("4")||resource_type_id.equals("2")){
 				if(!CollectionUtil.checkNull(img_main )){jsonObj.put("res", "请选择要上传的主界面背景图片！");return null;}
 				if(!CollectionUtil.checkNull(img_main_size)){jsonObj.put("res", "主界面背景图片尺寸不能为空！！");return null;}
@@ -300,8 +303,10 @@ public class ResourceController {
 			Resource.setResource_type_id(resource_type_id);
 			Resource.setImg_index(CollectionUtil.tobereplace(img_index, 1));
 			Resource.setImg_index_size(img_index_size);
-			Resource.setImg_list(CollectionUtil.tobereplace(img_list, 1));
-			Resource.setImg_list_size(img_list_size);
+			if(!resource_type_id.equals("2")){
+				Resource.setImg_list(CollectionUtil.tobereplace(img_list, 1));
+				Resource.setImg_list_size(img_list_size);
+			}
 			if(resource_type_id.equals("1")||resource_type_id.equals("4")||resource_type_id.equals("2")){
 				Resource.setImg_main(CollectionUtil.tobereplace(img_main, 1));
 				Resource.setImg_main_size(img_main_size);
@@ -490,9 +495,11 @@ public class ResourceController {
 			if(!CollectionUtil.checkNull(resource_type_id)){jsonObj.put("res", "请选择资源类型！");return null;}
 			if(!CollectionUtil.checkNull(img_index)){jsonObj.put("res", "请选择要上传的首页展示图片！");return null;}
 			if(!CollectionUtil.checkNull(img_index_size)){jsonObj.put("res", "首页展示图片尺寸不能为空！");return null;}
-			if(!CollectionUtil.checkNull(img_list )){jsonObj.put("res", "请选择要上传的列表展示图片！");return null;}
-			if(!CollectionUtil.checkNull(img_list_size)){jsonObj.put("res", "列表展示图片尺寸不能为空！");return null;}
-			if(resource_type_id.equals("1")||resource_type_id.equals("4")){
+			if(!resource_type_id.equals("2")){
+				if(!CollectionUtil.checkNull(img_list )){jsonObj.put("res", "请选择要上传的列表展示图片！");return null;}
+				if(!CollectionUtil.checkNull(img_list_size)){jsonObj.put("res", "列表展示图片尺寸不能为空！");return null;}
+			}
+			if(resource_type_id.equals("1")||resource_type_id.equals("4")||resource_type_id.equals("2")){
 				if(!CollectionUtil.checkNull(img_main )){jsonObj.put("res", "请选择要上传的主界面背景图片！");return null;}
 				if(!CollectionUtil.checkNull(img_main_size)){jsonObj.put("res", "主界面背景图片尺寸不能为空！！");return null;}
 			}
@@ -523,8 +530,10 @@ public class ResourceController {
 			Resource.setResource_type_id(resource_type_id);
 			Resource.setImg_index(CollectionUtil.tobereplace(img_index, 1));
 			Resource.setImg_index_size(img_index_size);
-			Resource.setImg_list(CollectionUtil.tobereplace(img_list, 1));
-			Resource.setImg_list_size(img_list_size);
+			if(!resource_type_id.equals("2")){
+				Resource.setImg_list(CollectionUtil.tobereplace(img_list, 1));
+				Resource.setImg_list_size(img_list_size);
+			}
 			if(resource_type_id.equals("1")||resource_type_id.equals("4")||resource_type_id.equals("2")){
 				Resource.setImg_main(CollectionUtil.tobereplace(img_main, 1));
 				Resource.setImg_main_size(img_main_size);

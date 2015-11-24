@@ -60,40 +60,6 @@ has-props
 
 177497
 
-java_memcached-release_2.6.3.jar
-file
-
-
-
-
-2015-10-08T03:31:29.061105Z
-90787656d80a855bb97dc90d3d3a6d82
-2015-05-06T06:05:40.925981Z
-3
-lhlei
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-81303
-
 spring-tx-3.1.4.RELEASE.jar
 file
 
@@ -127,6 +93,40 @@ has-props
 
 
 245483
+
+java_memcached-release_2.6.3.jar
+file
+
+
+
+
+2015-10-08T03:31:29.061105Z
+90787656d80a855bb97dc90d3d3a6d82
+2015-05-06T06:05:40.925981Z
+3
+lhlei
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+81303
 
 jstl.jar
 file
@@ -162,40 +162,6 @@ has-props
 
 20682
 
-mail-plugin.jar
-file
-
-
-
-
-2015-10-08T03:31:29.070105Z
-a2c6abe698e19bbc2c421a8b445e13fc
-2015-09-22T05:41:23.335223Z
-182
-lhlei
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-5466
-
 jta.jar
 file
 
@@ -230,16 +196,16 @@ has-props
 
 13236
 
-log4j.jar
+mail-plugin.jar
 file
 
 
 
 
-2015-10-08T03:31:29.079106Z
-52169b4a318e3246483f39f62b84b948
-2015-05-06T06:05:40.925981Z
-3
+2015-10-08T03:31:29.070105Z
+a2c6abe698e19bbc2c421a8b445e13fc
+2015-09-22T05:41:23.335223Z
+182
 lhlei
 has-props
 
@@ -262,7 +228,7 @@ has-props
 
 
 
-358180
+5466
 
 httpclient-4.3.1.jar
 file
@@ -298,6 +264,40 @@ has-props
 
 585602
 
+log4j.jar
+file
+
+
+
+
+2015-10-08T03:31:29.079106Z
+52169b4a318e3246483f39f62b84b948
+2015-05-06T06:05:40.925981Z
+3
+lhlei
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+358180
+
 persistence.jar
 file
 
@@ -332,40 +332,6 @@ has-props
 
 70934
 
-commons-pool-1.5.6.jar
-file
-
-
-
-
-2015-10-08T03:31:29.089106Z
-5d52fa44d13620bb8774b8de28195e1b
-2015-05-06T06:05:40.925981Z
-3
-lhlei
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-100472
-
 spring-data-redis-1.0.1.RELEASE.jar
 file
 
@@ -399,6 +365,40 @@ has-props
 
 
 373793
+
+commons-pool-1.5.6.jar
+file
+
+
+
+
+2015-10-08T03:31:29.089106Z
+5d52fa44d13620bb8774b8de28195e1b
+2015-05-06T06:05:40.925981Z
+3
+lhlei
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100472
 
 solr-solrj-4.10.4.jar
 file
@@ -468,40 +468,6 @@ has-props
 
 153253
 
-jedis-2.1.0.jar
-file
-
-
-
-
-2015-10-08T03:31:29.102107Z
-dfb67db412b1a9829d7ce573132ee2cb
-2015-05-06T06:05:40.925981Z
-3
-lhlei
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-139430
-
 commons-fileupload-1.2.1.jar
 file
 
@@ -535,6 +501,40 @@ has-props
 
 
 57779
+
+jedis-2.1.0.jar
+file
+
+
+
+
+2015-10-08T03:31:29.102107Z
+dfb67db412b1a9829d7ce573132ee2cb
+2015-05-06T06:05:40.925981Z
+3
+lhlei
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+139430
 
 aopalliance-1.0.jar
 file
@@ -808,6 +808,40 @@ has-props
 
 16046
 
+bcprov-jdk16-145.jar
+file
+207
+
+
+
+2015-11-23T08:50:11.857694Z
+a10f05349ea468084f605588037c1214
+2015-11-24T07:01:16.175385Z
+207
+liuquanwei
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1719483
+
 mail.jar
 file
 
@@ -841,6 +875,40 @@ has-props
 
 
 387690
+
+javapns-jdk16-163.jar
+file
+207
+
+
+
+2015-11-23T08:50:11.871694Z
+867d651d98b4dca8c3196a60fa29a655
+2015-11-24T07:01:16.175385Z
+207
+liuquanwei
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+53150
 
 poi-scratchpad-3.0.1-FINAL-20070705.jar
 file
@@ -1148,40 +1216,6 @@ has-props
 
 20422
 
-spring-webmvc-3.1.4.RELEASE.jar
-file
-
-
-
-
-2015-10-08T03:31:29.182112Z
-69ac77ff5f21f897d555109d77e91526
-2015-05-06T06:05:40.925981Z
-3
-lhlei
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-579461
-
 cglib-nodep-2.1_3.jar
 file
 
@@ -1215,6 +1249,40 @@ has-props
 
 
 324238
+
+spring-webmvc-3.1.4.RELEASE.jar
+file
+
+
+
+
+2015-10-08T03:31:29.182112Z
+69ac77ff5f21f897d555109d77e91526
+2015-05-06T06:05:40.925981Z
+3
+lhlei
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+579461
 
 spring-context-3.1.4.RELEASE.jar
 file
@@ -1284,40 +1352,6 @@ has-props
 
 597184
 
-slf4j-log4j12-1.7.7.jar
-file
-
-
-
-
-2015-10-08T03:31:29.197112Z
-26616deb8888e6dc6dc54f19bd02f907
-2015-06-07T07:16:02.833419Z
-48
-lhlei
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-8870
-
 slf4j-simple-1.6.1.jar
 file
 
@@ -1352,14 +1386,48 @@ has-props
 
 7669
 
-jackson-mapper-asl-1.9.13.jar
+slf4j-log4j12-1.7.7.jar
 file
 
 
 
 
-2015-10-08T03:31:29.210113Z
-1750f9c339352fc4b728d61b57171613
+2015-10-08T03:31:29.197112Z
+26616deb8888e6dc6dc54f19bd02f907
+2015-06-07T07:16:02.833419Z
+48
+lhlei
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8870
+
+spring-context-support-3.1.4.RELEASE.jar
+file
+
+
+
+
+2015-10-08T03:31:29.201113Z
+0f03d3fb3beb6cfb6722beaf3a855852
 2015-05-06T06:05:40.925981Z
 3
 lhlei
@@ -1384,7 +1452,7 @@ has-props
 
 
 
-780664
+107164
 
 dom4j-1.6.1.jar
 file
@@ -1420,14 +1488,14 @@ has-props
 
 313898
 
-spring-context-support-3.1.4.RELEASE.jar
+jackson-mapper-asl-1.9.13.jar
 file
 
 
 
 
-2015-10-08T03:31:29.201113Z
-0f03d3fb3beb6cfb6722beaf3a855852
+2015-10-08T03:31:29.210113Z
+1750f9c339352fc4b728d61b57171613
 2015-05-06T06:05:40.925981Z
 3
 lhlei
@@ -1452,7 +1520,7 @@ has-props
 
 
 
-107164
+780664
 
 commons-io-1.4.jar
 file
@@ -1522,14 +1590,14 @@ has-props
 
 232248
 
-commons-collections-3.2.1.jar
+ojdbc14.jar
 file
 
 
 
 
-2015-10-08T03:31:29.232114Z
-13bc641afd7fd95e09b260f69c1e4c91
+2015-10-08T03:31:29.223114Z
+8ae726d3a32c3cc3adbbe6793ade57f8
 2015-05-06T06:05:40.925981Z
 3
 lhlei
@@ -1554,7 +1622,7 @@ has-props
 
 
 
-575389
+1540457
 
 commons-httpclient-3.1.jar
 file
@@ -1590,14 +1658,14 @@ has-props
 
 305001
 
-ojdbc14.jar
+commons-collections-3.2.1.jar
 file
 
 
 
 
-2015-10-08T03:31:29.223114Z
-8ae726d3a32c3cc3adbbe6793ade57f8
+2015-10-08T03:31:29.232114Z
+13bc641afd7fd95e09b260f69c1e4c91
 2015-05-06T06:05:40.925981Z
 3
 lhlei
@@ -1622,7 +1690,7 @@ has-props
 
 
 
-1540457
+575389
 
 json-lib-2.2.3-jdk15.jar
 file
@@ -1862,40 +1930,6 @@ has-props
 
 59349
 
-poi-3.0.1-FINAL-20070705.jar
-file
-
-
-
-
-2015-10-08T03:31:29.268116Z
-75bbea9117da1ca75abb2ffac85ff34a
-2015-05-06T06:05:40.925981Z
-3
-lhlei
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-909270
-
 spring-orm-3.1.4.RELEASE.jar
 file
 
@@ -1929,6 +1963,40 @@ has-props
 
 
 380775
+
+poi-3.0.1-FINAL-20070705.jar
+file
+
+
+
+
+2015-10-08T03:31:29.268116Z
+75bbea9117da1ca75abb2ffac85ff34a
+2015-05-06T06:05:40.925981Z
+3
+lhlei
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+909270
 
 spring-expression-3.1.4.RELEASE.jar
 file
@@ -1964,40 +2032,6 @@ has-props
 
 179323
 
-ezmorph-1.0.3.jar
-file
-
-
-
-
-2015-10-08T03:31:29.279117Z
-cf8e41b76b926150f838c4e14d3243c8
-2015-05-06T06:05:40.925981Z
-3
-lhlei
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-77826
-
 commons-dbcp.jar
 file
 
@@ -2031,6 +2065,40 @@ has-props
 
 
 121757
+
+ezmorph-1.0.3.jar
+file
+
+
+
+
+2015-10-08T03:31:29.279117Z
+cf8e41b76b926150f838c4e14d3243c8
+2015-05-06T06:05:40.925981Z
+3
+lhlei
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+77826
 
 spring-jdbc-3.1.4.RELEASE.jar
 file
@@ -2100,40 +2168,6 @@ has-props
 
 22545
 
-httpmime-4.3.1.jar
-file
-
-
-
-
-2015-10-08T03:31:29.295118Z
-a594b6ac72ee4f3e3e7b83065f0c06a0
-2015-05-06T06:05:40.925981Z
-3
-lhlei
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-37078
-
 antlr-2.7.6.jar
 file
 
@@ -2167,6 +2201,40 @@ has-props
 
 
 443432
+
+httpmime-4.3.1.jar
+file
+
+
+
+
+2015-10-08T03:31:29.295118Z
+a594b6ac72ee4f3e3e7b83065f0c06a0
+2015-05-06T06:05:40.925981Z
+3
+lhlei
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+37078
 
 slf4j-api-1.6.1.jar
 file

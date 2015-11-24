@@ -12,7 +12,7 @@
 		VALUES(#{baby_id},#{resourse_id})]]>
 	</insert>
 	
-	<select id="find" resultMap="Medal" parameterType="baby">
+	<select id="find" resultMap="Medal" parameterType="medal">
 		<![CDATA[SELECT * FROM tbl_medal WHERE  baby_id=#{baby_id} and resourse_id = #{resourse_id} ]]>
 	</select>
 </mapper>

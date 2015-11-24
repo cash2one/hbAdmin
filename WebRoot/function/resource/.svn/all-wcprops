@@ -13,7 +13,7 @@ resource_update.jsp
 K 25
 svn:wc:ra_dav:version-url
 V 83
-/svn/iread/!svn/ver/201/trunk/hbAdmin/WebRoot/function/resource/resource_update.jsp
+/svn/iread/!svn/ver/206/trunk/hbAdmin/WebRoot/function/resource/resource_update.jsp
 END
 resource_info_add.jsp
 K 25
@@ -37,7 +37,7 @@ resource_add.jsp
 K 25
 svn:wc:ra_dav:version-url
 V 80
-/svn/iread/!svn/ver/201/trunk/hbAdmin/WebRoot/function/resource/resource_add.jsp
+/svn/iread/!svn/ver/206/trunk/hbAdmin/WebRoot/function/resource/resource_add.jsp
 END
 resource_type_add.jsp
 K 25

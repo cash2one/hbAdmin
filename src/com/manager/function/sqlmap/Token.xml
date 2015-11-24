@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="TokenSql"> 
+	<resultMap type="token" id="Token">
+		<result property="token_str" column="token_str"/>      
+	</resultMap>
+	
+	<insert id="add" parameterType="token"> 
+		<![CDATA[INSERT INTO tbl_token (token_str,token_id) 
+		VALUES(#{token_str},#{token_id})]]>
+	</insert>
+	
+	<select id="find" resultMap="Token" parameterType="token">
+		<![CDATA[SELECT * FROM tbl_token WHERE  token_str=#{token_str} ]]>
+	</select>
+	
+	<select id="findall" resultMap="Token">
+		<![CDATA[SELECT * FROM tbl_token ]]>
+	</select>
+</mapper>

@@ -7,6 +7,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javapns.back.PushNotificationManager;
+import javapns.back.SSLConnectionHelper;
+import javapns.data.Device;
+import javapns.data.PayLoad;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -17,16 +22,27 @@ import com.manager.function.dao.BabyDao;
 import com.manager.function.dao.BabyInfoDao;
 import com.manager.function.dao.UserDao;
 import com.manager.function.dao.MedalDao;
+import com.manager.function.dao.TokenDao;
 import com.manager.function.entity.Baby;
 import com.manager.function.entity.BabyInfo;
 import com.manager.function.entity.User;
 import com.manager.function.entity.Medal;
+import com.manager.function.entity.Token;
 import com.manager.function.service.BabyService;
 import com.manager.init.InitDataPool;
 import com.manager.util.CollectionUtil;
 import com.manager.util.Constant;
 import com.manager.util.ImgDownload;
 import com.manager.util.Xml;
+
+/**
+ * 推送
+ */
+
+//import javapns.back.PushNotificationManager;
+//import javapns.back.SSLConnectionHelper;
+//import javapns.data.Device;
+//import javapns.data.PayLoad;
 
 public class BabyServiceImpl implements BabyService {
 	
@@ -41,6 +57,16 @@ public class BabyServiceImpl implements BabyService {
 	private InitDataPool initDataPool;
 	
 	private MedalDao medalDao;
+	
+	private TokenDao tokenDao;
+
+	public TokenDao getTokenDao() {
+		return tokenDao;
+	}
+
+	public void setTokenDao(TokenDao tokenDao) {
+		this.tokenDao = tokenDao;
+	}
 
 	public MedalDao getMedalDao() {
 		return medalDao;
@@ -275,6 +301,157 @@ public Map addpre(HttpServletRequest request) {
 		return null;
 	}
 
+	public Map addToken(HttpServletRequest request)
+	{
+		SimpleDateFormat adf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d1 = new Date();
+		logger.info("开始："+adf.format(d1));
+		
+		String result  = "0";
+		String message = "";
+		
+		
+		String appId = (String) request.getParameter("appid");
+		String appKey = Constant.APPID_KEY.get(appId);
+	
+		try{
+			String token_str = (String) request.getParameter("token");
+			List<Token> tokenls = tokenDao.getToken();
+			
+			boolean flag = false;
+			
+			if(token_str==null||"".equals(token_str)){
+				result = "2";
+				message = "token为空";
+			}else{
+				flag = true;
+			}
+			int id = 0;
+			if(tokenls!=null)
+				id = tokenls.size()+1;
+			else
+				id = 1;
+			Token medal = new Token();
+			medal.setToken_str(token_str);
+			medal.setToken_id(id+"");
+			
+			int isLook = tokenDao.getTokenCount(medal);
+			
+			if(isLook==0)
+			{
+				tokenDao.add(medal);
+				
+				result = "1";
+				message = "添加Token成功";
+			}else
+			{
+				result = "2";
+				message = "已经存在,不需添加";
+			}
+	
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			result = "error";
+			message = initDataPool.getSP("2-4-000");
+		}
+		
+		Map hsm = new LinkedHashMap();
+        hsm.put("version", Constant.version);
+        hsm.put("result", result);
+        hsm.put("message", message);
+        
+        Date d2 = new Date();
+		logger.info("结束："+adf.format(d2));
+        long diff = (d2.getTime() - d1.getTime());
+        logger.info("BabyServiceImpl.updateAvatar执行了"+diff+"毫秒");
+		return hsm;
+	}
+	
+	public Map pushToken(HttpServletRequest request)
+	{
+		SimpleDateFormat adf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d1 = new Date();
+		logger.info("开始："+adf.format(d1));
+		
+		String result  = "0";
+		String message = "";
+		
+		
+		String appId = (String) request.getParameter("appid");
+		String appKey = Constant.APPID_KEY.get(appId);
+		String content = (String) request.getParameter("push_content");
+		if(content.length()>256)
+		{
+			Map hsm = new LinkedHashMap();
+	        hsm.put("version", Constant.version);
+	        hsm.put("result", "error");
+	        hsm.put("message", "内容太长了，发不了");
+	        return hsm;
+		}
+		JSONObject obj = new JSONObject();
+		
+		List<Token> tokenls = tokenDao.getToken();
+		if(tokenls!=null)
+		{
+			int resut = 0;
+			for(Token tok:tokenls)
+			{
+				String deviceToken = tok.getToken_str();
+				String id = tok.getToken_id();
+				try{
+		
+					//被推送的iphone应用程序标示符      
+			           
+		            PayLoad payLoad = new PayLoad();
+		            payLoad.addAlert(content);
+		            payLoad.addBadge(1);
+		            payLoad.addSound("default");
+		            
+		            PushNotificationManager pushManager = PushNotificationManager.getInstance();
+		            pushManager.addDevice("iPhone", deviceToken);
+		            
+		            String host= "gateway.sandbox.push.apple.com";  //测试用的苹果推送服务器
+		            int port = 2195;
+		            String certificatePath = "c:/huibenshu.p12"; //刚才在mac系统下导出的证书
+		              
+		            String certificatePassword= "122101586";
+		            
+		            pushManager.initializeConnection(host, port, certificatePath,certificatePassword, SSLConnectionHelper.KEYSTORE_TYPE_PKCS12);
+		              
+		            //Send Push
+		            Device client = pushManager.getDevice("iPhone");
+		            pushManager.sendNotification(client, payLoad); 
+		            pushManager.stopConnection();
+		            pushManager.removeDevice("iPhone");
+				}catch (Exception e) {
+					e.printStackTrace();
+					logger.error(e.getMessage());
+					result = "error";
+					message = "数据有错";
+					obj.put(id, deviceToken);
+					resut = 1;
+				}
+			}
+			if(resut == 0)
+			{
+				result = "1";
+				message = "push成功";
+			}
+		}
+		
+		Map hsm = new LinkedHashMap();
+        hsm.put("version", Constant.version);
+        hsm.put("result", result);
+        hsm.put("message", message);
+        hsm.put("data", obj);
+        
+        Date d2 = new Date();
+		logger.info("结束："+adf.format(d2));
+        long diff = (d2.getTime() - d1.getTime());
+        logger.info("BabyServiceImpl.updateAvatar执行了"+diff+"毫秒");
+		return hsm;
+	}
 	public Map addcount(HttpServletRequest request)
 	{
 		SimpleDateFormat adf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

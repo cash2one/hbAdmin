@@ -334,9 +334,11 @@
 		var img_index_size =document.getElementById("img_index_size").value;
 		
 		var img_list =document.getElementById("img_list").value;
-		if(img_list==null || ''==img_list){
-  	 		alert("请选择要上传的列表展示图片");
-  	 		return;
+		if(resource_type_id!='2'){
+			if(img_list==null || ''==img_list){
+  	 			alert("请选择要上传的列表展示图片");
+  	 			return;
+  	 		}
   	 	}
 		var img_list_size =document.getElementById("img_list_size").value;
 		
@@ -376,7 +378,6 @@
   	 		start_img=null;
   	 		start_img_size=null;
   	 		book_content=null;
-  	 		between_age=null;
   	 	}
   	 	
 		//var img_book =document.getElementById("img_book").value;
@@ -473,6 +474,7 @@
   		var resource_type_id=document.getElementById("resource_type_id").value;
   		//$("[name=fengmian]").hide();
   		$("[name=beijing]").hide();
+  	
   		if(resource_type_id=='4'){
   			$("#tzjs").show();
   			$("#tzjs2").show();
@@ -482,6 +484,9 @@
   		}
   		if(resource_type_id=='1'||resource_type_id=='4'||resource_type_id=='2'){
   			$("[name=beijing]").show();
+  		}
+  		if(resource_type_id=='2'){
+  			$("[name=liebiao]").hide();
   		}
   		
   		$("#tzjs3").show();
@@ -651,7 +656,7 @@
 		    	<tr>
 		    		<td>图片类型</td>
 		    		<td>首页展示</td>
-		    		<td>列表展示</td>
+		    		<td name="liebiao">列表展示</td>
 		    		<td name="beijing">主界面背景</td>
 		    		<!-- 
 		    		<td name="fengmian">书架封面图</td>
@@ -662,7 +667,7 @@
 		    		<td>
 		    			<input type="text" id="img_index_size" name="img_index_size" value="" maxlength="30"  class="dfinput150" readonly="readonly"/>
 		    		</td>
-		    		<td>
+		    		<td name="liebiao">
 		    			<input type="text" id="img_list_size" name="img_list_size" value="" maxlength="30"  class="dfinput150" readonly="readonly"/>
 		    		</td>
 		    		<td name="beijing">
@@ -690,7 +695,7 @@
 							<img style="display: none" id="see_img_1" src="" width="150" height="90">
 						</div>
 					</td>
-		    		<td>
+		    		<td name="liebiao">
 		    			<input type="hidden" id="img_list" name="img_list" value="" class="dfinput" readonly >
 						<div>
 						<div id="fileQueue2"></div> </br>

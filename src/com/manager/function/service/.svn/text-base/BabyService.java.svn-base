@@ -48,4 +48,13 @@ public interface BabyService {
 	 * 增加阅读计数
 	 */
 	public Map addcount(HttpServletRequest request);
+	
+	/**
+	 * 增加token
+	 */
+	public Map addToken(HttpServletRequest request);
+	/**
+	 * Push token
+	 */
+	public Map pushToken(HttpServletRequest request);
 }

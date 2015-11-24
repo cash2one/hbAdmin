@@ -265,6 +265,9 @@
 		<bean name="medalDao" id="medalDao" class="com.manager.function.daoimpl.MedalDaoImpl">
 			<property name="sqlSessionTemplate" ref="sqlSession"></property>
 		</bean>
+		<bean name="tokenDao" id="tokenDao" class="com.manager.function.daoimpl.TokenDaoImpl">
+			<property name="sqlSessionTemplate" ref="sqlSession"></property>
+		</bean>
 		<!-- function -->
 	<!-- dao层 end -->
 	
@@ -363,6 +366,7 @@
 			<property name="userDao" ref="userDao"></property>
 			<property name="initDataPool" ref="initDataPool"></property>
 			<property name="medalDao" ref="medalDao"></property>
+			<property name="tokenDao" ref="tokenDao"></property>
 		</bean>
 		<bean name="learnplanService" id="learnplanService" class="com.manager.function.serviceimpl.LearnplanServiceImpl">
 			<property name="learnplanDao" ref="learnplanDao"></property>
