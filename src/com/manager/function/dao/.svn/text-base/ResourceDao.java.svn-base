@@ -57,4 +57,6 @@ public interface ResourceDao {
 	
 	public Resource getPlay();
 	
+	public Resource getOneRes(String id);
+	
 }

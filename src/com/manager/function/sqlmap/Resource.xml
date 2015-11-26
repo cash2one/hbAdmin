@@ -218,6 +218,12 @@
 		]]>
 	</select>
 	
+	<select id="getOneRes" resultType="Resource" parameterType="resource">
+		<![CDATA[
+		SELECT * FROM tbl_resource WHERE id = #{id}
+		]]>
+	</select>
+	
 	<select id="learnplan" resultType="Resource" parameterType="resource">
 		<![CDATA[
 		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size,a.lian_img_size,a.start_img_size,a.book_content,a.between_age,b3.language_level FROM 

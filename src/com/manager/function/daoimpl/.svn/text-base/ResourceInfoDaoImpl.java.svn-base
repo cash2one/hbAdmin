@@ -174,6 +174,17 @@ public class ResourceInfoDaoImpl extends SqlSessionDaoSupport implements Resourc
 		DataSourceContextHolder.clearDbType();
 		return list;
 	}
+	
+	public String getResUrl(String resource_id)
+	{
+		DataSourceContextHolder.setDbType("0");
+		List<ResourceInfo> info=this.getSqlSession().selectList("ResourceInfoSql.get_Res_url",resource_id);
+		DataSourceContextHolder.clearDbType();
+		if(info.size()>0)
+			return info.get(0).getResource_url();
+		
+		return null;
+	}
 	public List<ResourceInfo> findByResourceId1(String resource_id) {
 		DataSourceContextHolder.setDbType("0");
 		List<ResourceInfo> list=this.getSqlSession().selectList("ResourceInfoSql.findByResourceId1",resource_id);

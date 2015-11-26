@@ -254,5 +254,14 @@ public class ResourceDaoImpl extends SqlSessionDaoSupport implements ResourceDao
 		}
 		return null;
 	}
-
+	
+	public Resource getOneRes(String id) {
+		DataSourceContextHolder.setDbType("0");
+		List<Resource> list=this.getSqlSession().selectList("ResourceSql.getOneRes",id);
+		DataSourceContextHolder.clearDbType();
+		if(list!=null && list.size()>0){
+			return list.get(0);
+		}
+		return null;
+	}
 }

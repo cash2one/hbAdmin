@@ -47,4 +47,6 @@ public interface ResourceInfoDao {
 	
 	public List<ResourceInfo> findPropertyId(String resource_id);
 	
+	public String getResUrl(String resource_id);
+	
 }

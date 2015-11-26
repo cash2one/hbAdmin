@@ -481,7 +481,7 @@ public class ApiServiceImpl implements ApiService {
 			return hsm;
 		}
 		//开启学习计划pre
-		// http://192.168.3.130:8888/hbadmin/domain?do=learnplan&baby_id=11&version=1.0.0&appid=100&sign=73870e23a4dae8ba2796ed38171ac5dc
+		// http://192.168.3.130:8888/hbadmin/domain?do=learnplan&uid=1&baby_id=11&version=1.0.0&appid=100&sign=73870e23a4dae8ba2796ed38171ac5dc
 		if("learnplanpre".equals(doMethod) ){
 			Map hsm = new LinkedHashMap();
 			switch(versioncode){
@@ -522,7 +522,7 @@ public class ApiServiceImpl implements ApiService {
 		}
 		
 		//重置学习计划pre
-		// http://192.168.3.130:8888/hbadmin/domain?do=relearnplan&baby_id=11&version=1.0.0&appid=100&sign=729b37127736bb6891d27da223acc5f0
+		// http://192.168.3.130:8888/hbadmin/domain?do=relearnplan&uid=1&baby_id=11&version=1.0.0&appid=100&sign=729b37127736bb6891d27da223acc5f0
 		if("relearnplanpre".equals(doMethod) ){
 			Map hsm = new LinkedHashMap();
 			switch(versioncode){
@@ -600,6 +600,27 @@ public class ApiServiceImpl implements ApiService {
 			switch(versioncode){
 				case 100: try {
 						return resourceService.searchpre(request);
+					} catch (Exception e) {
+						String result = "error";
+						String message = initDataPool.getSP("2-4-000");
+						hsm.put("version", Constant.version);
+						hsm.put("result", result);
+						hsm.put("message", message);
+						hsm.put("date", date);
+						hsm.put("data", "");
+						hsm.put("datasign", md5(hsm,appKey));
+					}
+			}
+			return hsm;
+		}
+		
+		//搜索pre
+		// http://192.168.3.130:8888/hbadmin/domain?do=getResUrl&resource_id=12&version=1.0.0&appid=100&sign=2b3b3684930c9472acd75daafc7a71ae
+		if("getResUrl".equals(doMethod) ){
+			Map hsm = new LinkedHashMap();
+			switch(versioncode){
+				case 100: try {
+						return resourceService.getResUrl(request);
 					} catch (Exception e) {
 						String result = "error";
 						String message = initDataPool.getSP("2-4-000");

@@ -52,6 +52,8 @@ public interface ResourceService {
 	
 	public Map searchpre(HttpServletRequest request);
 	
+	public Map getResUrl(HttpServletRequest request);
+	
 	public Map getKeyword(HttpServletRequest request);
 	
 	public Map getKeywordpre(HttpServletRequest request);

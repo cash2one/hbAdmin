@@ -156,6 +156,10 @@
 		<![CDATA[SELECT id,resource_type FROM tbl_resource_info WHERE resource_info_type='4' AND resource_id=#{resource_id}]]>
 	</select>
 	
+	<select id="get_Res_url" resultMap="ResourceInfo" parameterType="resourceInfo">
+		<![CDATA[SELECT resource_url FROM tbl_resource_info WHERE resource_info_type='4' AND resource_id=#{resource_id}]]>
+	</select>
+	
 	<update id="update" parameterType="resourceInfo">
 		<![CDATA[update tbl_resource_info set 
 				resource_id = #{resource_id},
