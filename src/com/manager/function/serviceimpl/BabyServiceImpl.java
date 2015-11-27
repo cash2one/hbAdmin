@@ -23,11 +23,13 @@ import com.manager.function.dao.BabyInfoDao;
 import com.manager.function.dao.UserDao;
 import com.manager.function.dao.MedalDao;
 import com.manager.function.dao.TokenDao;
+import com.manager.function.dao.UserLearnPlanDao;
 import com.manager.function.entity.Baby;
 import com.manager.function.entity.BabyInfo;
 import com.manager.function.entity.User;
 import com.manager.function.entity.Medal;
 import com.manager.function.entity.Token;
+import com.manager.function.entity.UserLearnplan;
 import com.manager.function.service.BabyService;
 import com.manager.init.InitDataPool;
 import com.manager.util.CollectionUtil;
@@ -59,6 +61,16 @@ public class BabyServiceImpl implements BabyService {
 	private MedalDao medalDao;
 	
 	private TokenDao tokenDao;
+	
+	private UserLearnPlanDao userLearnplanDao;
+
+	public UserLearnPlanDao getUserLearnplanDao() {
+		return userLearnplanDao;
+	}
+
+	public void setUserLearnplanDao(UserLearnPlanDao userLearnplanDao) {
+		this.userLearnplanDao = userLearnplanDao;
+	}
 
 	public TokenDao getTokenDao() {
 		return tokenDao;
@@ -472,9 +484,13 @@ public Map addpre(HttpServletRequest request) {
 			String baby_id = (String) request.getParameter("baby_id");
 			String res_type = (String) request.getParameter("res_type");
 			String res_id = (String) request.getParameter("res_id");
+			String plan_res_id = (String) request.getParameter("inf_id");
 			
 			boolean flag = false;
-			
+			if(plan_res_id==null||"".equals(plan_res_id)){
+				result = "2";
+				message = initDataPool.getSP("2-4-217");
+			}else
 			if(baby_id==null||"".equals(baby_id)){
 				result = "2";
 				message = initDataPool.getSP("2-4-211");
@@ -487,6 +503,17 @@ public Map addpre(HttpServletRequest request) {
 				message = initDataPool.getSP("2-4-211");
 			}else{
 				flag = true;
+			}
+			
+			UserLearnplan upModel = this.userLearnplanDao.findOne(plan_res_id);
+			if(upModel.getPlan_status().equals("0")){
+			
+				//更新状态
+				UserLearnplan ulp = new UserLearnplan();
+				ulp.setId(plan_res_id);
+				//ulp.setSpend_minute(spend_minute);
+				ulp.setPlan_status("1");
+				this.userLearnplanDao.update(ulp);
 			}
 			
 			Medal medal = new Medal();

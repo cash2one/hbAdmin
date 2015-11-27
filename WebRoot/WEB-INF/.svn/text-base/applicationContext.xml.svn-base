@@ -367,6 +367,7 @@
 			<property name="initDataPool" ref="initDataPool"></property>
 			<property name="medalDao" ref="medalDao"></property>
 			<property name="tokenDao" ref="tokenDao"></property>
+			<property name="userLearnplanDao" ref="userLearnplanDao"></property>
 		</bean>
 		<bean name="learnplanService" id="learnplanService" class="com.manager.function.serviceimpl.LearnplanServiceImpl">
 			<property name="learnplanDao" ref="learnplanDao"></property>
