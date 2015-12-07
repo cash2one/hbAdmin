@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>成长分享</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="./rs/css/main.css" type="text/css">
+    <style>
+        body{
+            min-height: 100%;
+        }
+        .mybody{
+            padding: 5%;
+            position: absolute;
+            width: 100%;
+            height: auto;
+            top: 50px;
+        }
+        label,input,textarea{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<header id="head">
+    <ul>
+        <li><a href="./index.html">爸妈学堂</a></li>
+        <li class="active"><a>成长分享</a></li>
+        <li><a href="hz.html">互助交流</a></li>
+    </ul>
+</header>
+
+<div class="mybody">
+    <form method="post" ENCTYPE="multipart/form-data" action=".">
+        <input style="display: none" id="file1" type="file" name="file1">
+        <label>标题</label>
+        <input name="title">
+        <label>内容</label>
+        <textarea name="content" style="height: 100px"></textarea>
+        <table style="width: 100%">
+            <tr>
+                <td><label>图片</label></td>
+                <td><img id="img" width="80" style="float: right"></td>
+                <td><div id="btselect" class="blockicon icon_img" style="width: 40px;height: 35px;float: right"></div></td>
+            </tr>
+        </table>
+        <img src="./rs/img/btn_ok.png" width="100%" name='submit'>
+        <!--<table style="margin: 0 auto" name='submit'>-->
+            <!--<tr><td>发布</td><td><div class="blockicon icon_img" style="width: 40px;height: 35px;float: right"></div></td></tr>-->
+        <!--</table>-->
+    </form>
+</div>
+
+</body>
+<script src="./rs/js/jquery-1.9.1.min.js"></script>
+<script>
+    $('[name=submit]').click(function(){
+        alert('发布');
+        $('form').submit();
+    });
+    var btselect = document.getElementById('btselect');
+    var file = document.getElementById('file1');
+    var img = document.getElementById('img');
+    btselect.onclick = function(){
+        file.click();
+    };
+    file.addEventListener('change', function(){
+        var fileinfo = file.files[0];
+        if(checkfile(fileinfo)){
+
+            console.log(fileinfo);
+            var reader = new FileReader();
+            reader.onload = function(e){
+//               img.style.backgroundImage = 'url('+e.target.result+')';
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(fileinfo);
+
+
+        }
+    });
+    function checkfile(fileinfo){
+        return true;
+    }
+</script>
+
+</html>

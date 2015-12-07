@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/iread/!svn/ver/118/trunk/hbbbs/src/com/bbs/util
+END
+Utils.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/iread/!svn/ver/71/trunk/hbbbs/src/com/bbs/util/Utils.java
+END
+Xml.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/iread/!svn/ver/51/trunk/hbbbs/src/com/bbs/util/Xml.java
+END
+MD5.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/iread/!svn/ver/118/trunk/hbbbs/src/com/bbs/util/MD5.java
+END
+CookieUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/iread/!svn/ver/67/trunk/hbbbs/src/com/bbs/util/CookieUtil.java
+END
+Constant.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/iread/!svn/ver/211/trunk/hbbbs/src/com/bbs/util/Constant.java
+END
+HttpConnectionUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/iread/!svn/ver/51/trunk/hbbbs/src/com/bbs/util/HttpConnectionUtil.java
+END
+MapKeyComparator.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/iread/!svn/ver/51/trunk/hbbbs/src/com/bbs/util/MapKeyComparator.java
+END

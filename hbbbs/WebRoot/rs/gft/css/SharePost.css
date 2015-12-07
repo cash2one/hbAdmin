@@ -1,0 +1,44 @@
+body{ min-height: 100%;}
+        .mybody{position: absolute;width: 100%;height: auto;top: 50px;}
+        h1{margin: 0;padding: 10px;font-size: 16px;word-wrap:break-word;}
+        img.photo{width: 100%;display: block;border: none;padding:10px;}
+        p{margin: 0;padding: 10px;background-color: #fff;word-wrap:break-word; }
+		
+        .list{padding:10px;border-bottom: 1px #e5e5e5 solid;}
+		.list .row{overflow: hidden;list-style: none;position: relative;height: auto;width: 100%;padding: 5px;background-color: #fff;}
+        .list .row>*{height: 100%;}
+        .list .row>.left{float: left;width: 50%;margin-right: 10px;}
+        .list .row>.left>img{display: block;width: 50px;height: 50px;border-radius: 50%;float: left;}
+        .list .row>.left>span{text-align: left;line-height:25px;margin-left:60px;display: block;color: #adff2f;}
+        .list .row>.right{position:absolute;width:25%;height:25px;bottom:3px;right:0px;}
+		.list .row>.right>img{display: block;width: 20px;height: 20px;float: left;}
+		.list .row>.right>span{text-align: left;display: block;color: #ccc;padding-left:25px;}
+        .list .row>.Reply{position:absolute;width:30px;height:30px;bottom:3px;right:0px;}
+		.list .row>li>img{width: 30px;float: right;}
+		.huifu{background-color: #eee;border-radius: 5px;padding: 10px;}
+        
+		.share_Logo {position: absolute;height: 100%;background-size: cover; left:0px;}
+		.share_btn {position: absolute;height: 100%;background-size: cover; right:0px;}
+		.Topics{ background-color:#FFF; margin-bottom:10px;}
+		.MameStyle{ font-size:24px;}
+		.TimeStyle{ color:#CCC!important;}
+		
+		.ShareRead{height:80px; margin:10px; padding:10px; background-color:#9C6; color:#FFF;border-radius: 5px;}
+		.ShareRead>img{ width:60px; height:50px; float:left; margin-top:5px;}
+		.ReadText{ height:60px;width: 50%; line-height:60px; float:left; margin-left:10px;}
+		.ReadPlay{ width:40px; height:40px; float:right; background-image:url(../img/BtnPlay@3x.png); background-size:cover;margin-top: 10px;}
+		
+		.ShareSee{height:80px; margin:10px; padding:10px; background-color:#0CF; color:#FFF;border-radius: 5px;}
+		.ShareSee>img{ width:60px; height:50px; float:left; margin-top:5px;}
+		.SeeText{ height:60px;width: 50%; line-height:60px; float:left; margin-left:10px;}
+		.SeePlay{ width:40px; height:40px; float:right; background-image:url(../img/BtnPlay@3x.png); background-size:cover;margin-top: 10px;}
+		
+		.ShareListen{height:80px; margin:10px; padding:10px; background-color:#C39; color:#FFF;border-radius: 5px;}
+		.ShareListen>img{ width:60px; height:60px; float:left;}
+		.ListenText{ height:60px;width: 50%; line-height:60px; float:left; margin-left:10px;}
+		.ListenPlay{ width:40px; height:40px; float:right; background-image:url(../img/BtnPlay@3x.png); background-size:cover;margin-top: 10px;}
+		
+		.SharePost{height:80px; margin:10px; padding:10px; background-color:#eee; border:1px solid #CCC; color:#000;border-radius: 5px;}
+		.SharePost>img{ width:60px; height:60px; float:left;}
+		.PostText{ height:60px;width: 50%; float:left; margin-left:10px;}
+		.PostPlay{ width:40px; height:40px; float:right; background-image:url(../img/BtnNext@3x.png); background-size:cover;margin-top: 10px;}		

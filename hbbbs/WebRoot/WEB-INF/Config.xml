@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+	 <memcachedurl>192.168.3.199:11211</memcachedurl>
+	 <passportdomain>192.168.3.199</passportdomain>
+	
+	<!-- 请求的接口帐号（系统分配） -->
+	<appid>100</appid>
+	<!-- api key -->
+	<apikey>fe4c439d0d294e40b33317811fb2666a</apikey>
+	<!-- api 版本号 -->
+	<version>1.0.0</version>
+	<!-- apiurl -->
+	<apiurl>http://192.168.3.199:8888/hbAdmin/domain</apiurl>
+	
+	<!-- 大眼睛配置 -->
+	<!-- 模块1 -->
+	<eye1>3</eye1>
+	<!-- 数目1 -->
+	<size1>3</size1>
+	
+	<!-- 模块2 -->
+	<eye2>4</eye2>
+	<!-- 数目2 -->
+	<size2>3</size2>
+	
+	<!-- 模块3 -->
+	<eye3>5</eye3>
+	<!-- 数目3 -->
+	<size3>3</size3>
+	
+	<tie>http://139.196.44.92/tie</tie>
+	<img_url>http://139.196.44.92</img_url>
+</Config>

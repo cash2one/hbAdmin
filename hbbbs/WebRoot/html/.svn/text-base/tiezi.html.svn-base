@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>帖子</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="./rs/css/main.css" type="text/css">
+    <style>
+        body{
+            min-height: 100%;
+        }
+        #body{
+
+        }
+        .mybody{
+            position: absolute;
+            width: 100%;
+            height: auto;
+            top: 50px;
+        }
+        h1{
+            margin: 0;
+            padding: 10px;
+            background-color: #838182;
+            color: #fff;
+            font-size: 16px;
+        }
+        img.photo{
+            width: 100%;
+            height: 200px;
+            display: block;
+            border: none;
+        }
+        p{
+            text-indent: 2em;
+            margin: 0;
+            padding: 5px;
+            background-color: #fff;
+            margin-bottom: 5px;
+        }
+        .list{
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        .list .row{
+            margin-bottom: 5px;
+            overflow: hidden;
+            list-style: none;
+            position: relative;
+            height: auto;
+            width: 100%;
+            padding: 5px;
+            background-color: #fff;
+        }
+        .list .row>*{
+            height: 100%;
+        }
+
+        .list .row>.left{
+            float: left;
+            width: 40px;
+            margin-right: 10px;
+
+        }
+        .list .row>.left>img{
+            display: block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .list .row>.left>span{
+            text-align: center;
+            display: block;
+            line-height: 28px;
+            color: #adff2f;
+        }
+        .list .row>.right{
+            float: right;
+            margin-left: 10px;
+        }
+
+        .list .row>.center{
+        }
+		.list .row>.huifu{
+			width: 96%;
+			background-color: #eee;
+			margin: 10px auto;
+			margin-top: 30px;
+			border-radius: 5px;
+			padding: 10px;
+		}
+        .list .row>.center>span{
+            display: block;
+            text-align: right;
+            font-size: 12px;
+            color: #ccc;
+        }
+        .list .row>.center>h1{
+            line-height: 20px;
+            min-height: 20px;
+            padding: 0;
+            margin: 0;
+            font-size: 16px;
+            background-color: #fff;
+            color: #000;
+        }
+        .list .row>li>img{
+            width: 40px;
+            float: right;
+        }
+        .huifutxt{
+
+        }
+        .info{
+            font-size: 12px;
+            color: #ccc;
+			height:30px;
+            line-height: 30px;
+			background-color:#FFF;
+        }
+        .info>li{
+            float: right;
+            margin-right: 10px;
+            display: inline-block;
+        }
+        .info>li.name{
+            float: left;
+            margin-left: 10px;
+        }
+		#bottom .huifu_bd{width:68%; float:left; margin:10px 0px 0px 5px;}
+		#bottom .huifu_btn{background-image: url(./rs/img/icon/menu_list_4.png);background-size: 100% 100%;width: 95px;height: 55px; float:left;}
+    </style>
+</head>
+<body class="bodypage">
+<header id="head">
+    <ul>
+        <li class="active"><a href="./index.html">爸妈学堂</a></li>
+        <li><a href="fx.html">成长分享</a></li>
+        <li><a href="hz.html">互助交流</a></li>
+    </ul>
+</header>
+<div id="body">
+    <div class="innerlist">
+        <h1>三流的父母做保姆，二流的父母做交流，一流的父母什么样？</h1>
+        <ul class="info">
+            <li class="name lineicon icon_ding">coco</li>
+            <li>评论 300</li>
+            <li>阅读 1000</li>
+            <li>2小时前</li>
+        </ul>
+        <img class="photo" src="./rs/img/1.jpg">
+        <p>
+            姑且不去讨论这个问题对不对，姑且不去讨论这个问题对不对，姑且不去讨论这个问题对不对，姑且不去讨论这个问题对不对，姑且不去讨论这个问题对不对，姑且不去讨论这个问题对不对，
+        </p>
+        <div class="list">
+            <ul class="row">
+                <li class="left"><img src="./rs/img/pic_userHead.jpg"><span>左面</span></li>
+                <li class="center">
+                    <span>沙发 2小时前</span>
+                    <h1>这篇文章太棒了?</h1>
+                </li>
+                <li class="huifu">
+                    <b>回复1楼</b><br/>
+                    回答的很正确，我来顶你！
+                </li>
+                <li><img src="./rs/img/icon/icon_pl.png"></li>
+            </ul>
+            <ul class="row">
+                <li class="left"><img src="./rs/img/pic_userHead.jpg"><span>左面</span></li>
+                <li class="center">
+                    <span>沙发 2小时前</span>
+                    <h1>这篇文章太棒了?</h1>
+                </li>
+                <li><img src="./rs/img/icon/icon_pl.png"></li>
+            </ul>
+            <ul class="row">
+                <li class="left"><img src="./rs/img/pic_userHead.jpg"><span>左面</span></li>
+                <li class="center">
+                    <span>沙发 2小时前</span>
+                    <h1>这篇文章太棒了?</h1>
+                </li>
+                <li><img src="./rs/img/icon/icon_pl.png"></li>
+            </ul>
+            <ul class="row">
+                <li class="left"><img src="./rs/img/pic_userHead.jpg"><span>左面</span></li>
+                <li class="center">
+                    <span>沙发 2小时前</span>
+                    <h1>这篇文章太棒了?</h1>
+                </li>
+                <li><img src="./rs/img/icon/icon_pl.png"></li>
+            </ul>
+         </div>
+        <div style="height: 30px"></div>
+    </div>
+
+</div>
+
+<div id="bottom">
+<div class="huifu_bd"><input name='huifutxt' class="huifutxt" placeholder="回复楼主" /></div>
+<div name='huifu' class="huifu_btn"></div>
+    <div></div>
+</div>
+
+</body>
+<script src="./rs/js/jquery-1.9.1.min.js"></script>
+<script src="./rs/js/iscroll.js"></script>
+<script>
+    $(function(){
+        //列表滚动
+        new iScroll($('.innerlist')[0], {desktopCompatibility:true});
+
+
+        $('[name=huifu]').click(function(){
+            $('[name=huifutxt]').focus();
+        })
+
+    });
+
+</script>
+
+
+</html>

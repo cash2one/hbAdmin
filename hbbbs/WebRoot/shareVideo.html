@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>分享-VIDEO</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="./rs/css/main.css" type="text/css">
+    <link rel="stylesheet" href="./rs/css/loading_2.css">
+	<script type="text/javascript" src="./rs/js/public.js"></script>
+	
+    <style>
+		.share_bg{
+			background-color:#92b831;
+		}
+		#body_share{
+			margin-top:80px;
+		}
+		.share_bg li{
+			text-align:center;
+			font-size:16px;
+			color:#fff;
+			padding:10px;
+		}
+		.share_bg_title{
+			width: 100%;
+			text-align:center;
+			font-size:24px;
+			color:#fff;
+			font-weight:bold;
+			position:absolute;
+			top: 3%;
+		}
+		.share_bg_font{
+			width: 100%;
+			text-align:center;
+			font-size:18px;
+			color:#ccc;
+			position:absolute;
+			top: 8%;
+		}
+		.share_sg{
+			width:100%;
+			margin:18% auto;
+			position: relative;
+		}
+        .share_btn{
+            position: absolute;
+			width:100%;
+			background-size:cover;
+        }
+		.share_bottom{
+			width: 100%;
+			position:absolute;
+			bottom:15%;
+		}
+		.tishi{
+			position:absolute;
+			width:100%;
+			height:100%;
+			z-index:9999;
+			top:0px;
+  			text-align: center;
+			background-image:url(rs/img/we-1.png);
+			background-size:cover;
+		}
+    </style>
+<script>
+	function getParameterByName(name){
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r!=null) return (r[2]); return "";
+	}
+		
+</script>
+</head>
+<body class="share_bg">
+<div class="tishi" id="weixin_tishi" style="display:none"></div>
+<div id="body_share">
+	<ul>
+		<li id="share_bg_title" class="share_bg_title"></li>
+        <li id="share_bg_font" class="share_bg_font"></li>
+      <li class="share_sg" >
+      
+        <div class="video-content">
+			<iframe id="myvideo"  width=100% src="http://player.youku.com/embed/XOTYxNjAwNzQ4" frameborder=0 allowfullscreen></iframe>
+        </div>
+  
+        </li>
+        <li class="share_bottom">宝贝在磨耳朵吗？把握黄金英语启蒙期，立即下载绘本树！</li>
+	</ul>  
+</div>
+<div id="bottom">
+<a id="xiazai" href="javascript:void(0);" onclick="panduan_weixin();">
+<img src="rs/img/share/banner.jpg" class="share_btn">
+</a>
+    <div></div>
+</div>
+</body>
+<script src="./rs/js/jquery-1.9.1.min.js"></script>
+<script src="./rs/js/touchsilder.js"></script>
+<script src="./rs/js/iscroll.js"></script>
+<script>
+document.getElementById('myvideo').src = getParameterByName("video");
+document.getElementById('share_bg_title').innerHTML=decodeURI(getParameterByName("title"));
+document.getElementById('share_bg_font').innerHTML=decodeURI(getParameterByName("author"));
+</script>
+</html>

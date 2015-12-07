@@ -1,0 +1,40 @@
+9
+
+dir
+209
+https://192.168.0.210/svn/iread/trunk/hbbbs/WebRoot/rs
+https://192.168.0.210/svn/iread
+
+
+
+2015-09-22T05:41:36.922847Z
+183
+lhlei
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+5c08ae35-6d04-164f-aa44-81459c4af982
+
+gft
+dir
+
+css
+dir
+
+img
+dir
+
+js
+dir
+

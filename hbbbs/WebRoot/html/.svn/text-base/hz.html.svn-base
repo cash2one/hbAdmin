@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>互助交流</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="./rs/css/main.css" type="text/css">
+    <style>
+        .bg{
+            position: relative;
+            left: 0;
+            height: 200px;
+            width: 100%;
+            border: none;
+
+        }
+        .list{
+            width: 100%;
+        }
+        .main_image{
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: relative;
+        }
+        .main_image>ul{
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .main_image>ul>li{
+            width: 100%;
+            height: 100%;
+            list-style: none;
+            display: block;
+            float: left;
+        }
+        .main_image>ul>li>span{
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-size: 100% 100%;
+        }
+        .mui-slider-indicator {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            text-align: center;
+            background: 0 0;
+        }
+        .mui-slider-indicator .mui-indicator.mui-active{
+            background-color: #ccde7a;
+        }
+        .mui-slider-indicator .mui-indicator {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            margin: 1px 6px;
+            cursor: pointer;
+            background: #92b831;
+            border-radius: 50%;
+        }
+
+        .mui-slider-title{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            left: 0;
+        }
+        .mui-slider-title>div{
+            background-color: rgba(0,0,0,.5);
+            color: #fff;
+            display: none;
+            padding: 5px;
+        }
+        .mui-slider-title>div.mui-active{
+            display: block;
+        }
+
+
+        .list .row{
+            margin-bottom: 10px;
+            overflow: hidden;
+            list-style: none;
+            position: relative;
+            height: 70px;
+            width: 100%;
+            padding: 5px;
+            background-color: #fff;
+        }
+        .list .row>*{
+            height: 100%;
+        }
+
+        .list .row>.left{
+            float: left;
+            width: 40px;
+
+        }
+        .list .row>.left>img{
+            display: block;
+            width: 40px;
+            height: 40px;
+			border-radius: 20px;
+        }
+        .list .row>.left>span{
+            text-align: center;
+            display: block;
+            line-height: 28px;
+            color: #adff2f;
+        }
+        .list .row>.right{
+            float: right;
+            width: 60px;
+        }
+        .list .row>.right>img{
+            height: 100%;
+            width: 100%;
+            border: none;
+        }
+        .list .row>.center{
+            position: absolute;
+            left: 50px;
+            right: 50px;
+
+        }
+        .list .row>.center>h1{
+            line-height: 20px;
+            height: 40px;
+            padding: 0;
+            margin: 0;
+            font-size: 16px;
+        }
+        .list .row>.center>ul{
+            color: #a1a1a1;
+            list-style: none;
+        }
+        .list .row>.center>ul>li{
+            display: inline-block;
+            margin-right: 5px;
+            height: 20px;
+            line-height: 20px;
+            font-size: 12px;
+        }
+
+    </style>
+
+</head>
+<body class="bodypage">
+<header id="head">
+    <ul>
+        <li><a href="index.html">爸妈学堂</a></li>
+        <li><a href="fx.html">成长分享</a></li>
+        <li class="active"><a>互助交流</a></li>
+    </ul>
+</header>
+<div id="body">
+    <div class="innerlist">
+    <div style="text-align: center;display: none" id="refresh_head" >
+        刷新
+    </div>
+    <div class="bg">
+        <div class="main_image"  name='imgslider'><!--图片-->
+            <ul>
+                <li><span style="background-image: url(./rs/img/1.jpg)"></span></li>
+                <li><span style="background-image: url(./rs/img/2.jpg)"></span></li>
+                <li><span style="background-image: url(./rs/img/2.jpg)"></span></li>
+            </ul>
+            <a href="javascript:;" id="btn_prev"></a>
+            <a href="javascript:;" id="btn_next"></a>
+        </div>
+        <div class="mui-slider-indicator" name="slidercontrol"><!--图片对应的点-->
+            <div class="mui-indicator mui-active"></div>
+            <div class="mui-indicator"></div>
+            <div class="mui-indicator"></div>
+        </div>
+        <div class="mui-slider-title" name="slidertitle"><!--图片对应的文字-->
+            <div class="mui-indicator mui-active">图片1标题</div>
+            <div class="mui-indicator">图片2标题</div>
+            <div class="mui-indicator">图片3标题</div>
+        </div>
+    </div>
+
+    <div class="list">
+
+            <ul class="row">
+                        <li class="left"><img src="./rs/img/pic_userHead.jpg"><span>左面</span></li>
+                        <li class="right"><img src="./rs/img/pic_userHead_1.jpg"></li>
+                        <li class="center">
+                            <h1>如何阅读ASJASHJKH DO YOU SEEE?</h1>
+                            <ul>
+                                <li class="lineicon icon_ding">2小时前</li>
+                                <li>阅读 1000</li>
+                                <li>评论 300</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="row">
+                        <li class="left"><img src="./rs/img/pic_userHead.jpg"><span>左面</span></li>
+                        <li class="right"><img src="./rs/img/pic_userHead_1.jpg"></li>
+                        <li class="center">
+                            <h1>如何阅读ASJASHJKH DO YOU SEEE?</h1>
+                            <ul>
+                                <li class="lineicon icon_ding">2小时前</li>
+                                <li>阅读 1000</li>
+                                <li>评论 300</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="row">
+                        <li class="left"><img src="./rs/img/pic_userHead.jpg"><span>左面</span></li>
+                        <li class="right"><img src="./rs/img/pic_userHead_1.jpg"></li>
+                        <li class="center">
+                            <h1>如何阅读ASJASHJKH DO YOU SEEE?</h1>
+                            <ul>
+                                <li class="lineicon icon_ding">2小时前</li>
+                                <li>阅读 1000</li>
+                                <li>评论 300</li>
+                            </ul>
+                        </li>
+                    </ul>
+                <ul class="row">
+                        <li class="left"><img src="./rs/img/pic_userHead.jpg"><span>左面</span></li>
+                        <li class="right"><img src="./rs/img/pic_userHead_1.jpg"></li>
+                        <li class="center">
+                            <h1>如何阅读ASJASHJKH DO YOU SEEE?</h1>
+                            <ul>
+                                <li class="lineicon icon_ding">2小时前</li>
+                                <li>阅读 1000</li>
+                                <li>评论 300</li>
+                            </ul>
+                        </li>
+                    </ul>
+                 <ul class="row">
+                    <li class="left"><img src="./rs/img/pic_userHead.jpg"><span>左面</span></li>
+                    <li class="right"><img src="./rs/img/pic_userHead_1.jpg"></li>
+                    <li class="center">
+                        <h1>如何阅读ASJASHJKH DO YOU SEEE?</h1>
+                        <ul>
+                            <li class="lineicon icon_ding">2小时前</li>
+                            <li>阅读 1000</li>
+                            <li>评论 300</li>
+                        </ul>
+                    </li>
+                </ul>
+        </div>
+
+        <div style="text-align: center;display: none" id="refresh_end" >
+                加载新数据
+            </div>
+
+    </div>
+
+</div>
+<div id="bottom">
+    <ul>
+        <li class="mytz"><a href="mylist.html"></a></li>
+        <li class="back"><a></a></li>
+        <li class="ft"><a href="fx.html"></a></li>
+    </ul>
+    <div></div>
+</div>
+</body>
+<script src="./rs/js/jquery-1.9.1.min.js"></script>
+<script src="./rs/js/touchsilder.js"></script>
+<script src="./rs/js/iscroll.js"></script>
+<script>
+$(function(){
+
+
+    //初始化图片滑动
+   window.test =  $('[name=imgslider]').touchSlider({
+                flexible : true,
+                speed : 200,
+                btn_prev : $("#btn_prev"),
+                btn_next : $("#btn_next"),
+//                    paging : $(".flicking_con a"),
+                counter : function (e){
+                    $('[name=slidercontrol]>div').removeClass("mui-active").eq(e.current-1).addClass("mui-active");
+                    $('[name=slidertitle]>div').removeClass("mui-active").eq(e.current-1).addClass("mui-active");
+                }
+            });
+    //图片自动滚动
+    setInterval(function(){
+        $("#btn_next").click();
+    },3000);
+    //列表滚动
+    new iScroll($('.innerlist')[0], {
+        desktopCompatibility:true
+        ,onScrollMove:function(){
+            if(this.y>20 && $('#refresh_head').is(':hidden')){
+                $('#refresh_head').show();
+                this.minScrollY = 0;
+
+            }else if (this.y < (this.maxScrollY - 30) && $('#refresh_end').is(':hidden')){
+                $('#refresh_end').show();
+//                this.refresh();
+                this.maxScrollY-=30;
+            }
+        }
+        ,onScrollEnd:function(){
+            if($('#refresh_head').is(':visible')){
+
+                alert('找到这行添加刷新');
+
+            }else if($('#refresh_end').is(':visible')){
+
+                alert('找到这行加载新数据');
+
+            }
+        }
+    });
+	
+	/*
+	//帖子点击
+    $('.row').click(function(){
+       window.location.href = 'tiezi.html';
+    });
+	*/
+	
+});
+
+</script>
+</html>

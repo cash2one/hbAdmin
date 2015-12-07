@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>主题帖子</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="./css/Main.css" type="text/css">
+    <link rel="stylesheet" href="./css/SharePost.css" type="text/css">
+    
+	<script>
+	function getParameterByName(name){
+		window.console.log("解码前window.location.search="+window.location.search);
+		var url= decodeURI(window.location.search);
+		window.console.log("解码后window.location.search="+url);
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
+		var r =url.substr(1).match(reg);
+		if (r!=null){ 
+			window.console.log("参数"+name+"="+r[2]);
+			return r[2]; 
+		}
+		return "";
+	}
+		
+	</script>
+</head>
+
+<body class="bodypage">
+
+<!--绘本树App下 开始-->
+<header id="head">
+
+<img src="./img/banner.png" class="share_Logo">
+<img src="./img/bannerBtn.png" class="share_btn">
+</header>
+<!--绘本树App下载 结束-->
+
+<div id="body">
+    <div class="innerlist">
+
+<div class="Topics">
+	<h1 id="TextTitlel">美国校长Janice读故事：Whose Food Is Thie?</h1>
+    
+    <!--用户头像信息 开始-->
+    <div class="list">
+		<ul class="info row">
+			<li class="left">
+                <img src="./img/pic_userHead_1.jpg">
+                <span class="MameStyle">LuLu</span>
+                <span class="TimeStyle">10月10日</span>
+            </li>
+			<li class="right">
+				<img src="./img/BtnAdd@3x.png"><span>上海市</span>
+            </li>
+            
+		</ul>
+	</div>
+    <!--用户头像信息 结束-->
+    
+    <p id="TextContent">首先上宣传图大家看看！</p>
+    <img class="photo" src="./img/1.jpg">
+    <p>大家好，今天Janice老师和大家分享的绘本故事是“Whose Food Is This?”绘本故事书的魅力在于没有语言的隔阂，通过图片就能够了解故事的大意。来听一下Janice老师用英文讲中文故事吧！</p>
+    
+    <!--读分享 开始-->
+    <div class="ShareRead">
+    	<img src="img/Read1.png">
+		<div class="ReadText">Rock-A-Bye Baby</div>
+        <div class="ReadPlay"></div>
+    </div>
+    <!--读分享 结束-->
+    
+    <!--看分享 开始-->
+    <div class="ShareSee">
+    	<img src="img/See5.png">
+		<div class="SeeText">Rock-A-Bye Baby</div>
+        <div class="SeePlay"></div>
+    </div>
+    <!--看分享 结束-->
+    
+    <!--听分享 开始-->
+    <div class="ShareListen">
+    	<img src="img/ListenSmall1.png">
+		<div class="ListenText">Rock-A-Bye Baby</div>
+        <div class="ListenPlay"></div>
+    </div>
+    <!--听分享 结束-->
+    
+    <!--热门推荐贴 开始-->
+    <div class="SharePost">
+    	<img src="img/pic_userHead.jpg">
+		<div class="PostText">美国校长Janice读故事：Whose Food Is Thie?</div>
+        <div class="PostPlay"></div>
+    </div>
+    <!--热门推荐贴 结束-->
+    
+    <!--热门推荐贴 开始-->
+    <div class="SharePost">
+    	<img src="img/pic_userHead_1.jpg">
+		<div class="PostText">美国校长Janice读故事：Whose Food Is Thie?</div>
+        <div class="PostPlay"></div>
+    </div>
+    <!--热门推荐贴 结束-->
+    
+	<p>下面分享一下这本绘本的微店链接，喜欢的朋友们可以在线购买哦！</p>
+    <a href="#" target="_blank"><img class="photo" src="./img/menu_list-5.png"></a>
+    <img class="photo" src="./img/3.png">
+	
+</div>
+
+<!--用户回复 开始-->
+<div class="Topics">
+	<div class="list">
+		<ul class="row">
+			<li class="left">
+				<img src="./img/pic_userHead.jpg">
+				<span>LuLu</span>
+				<span class="TimeStyle">10月10日</span>
+			</li>
+			<li class="Reply">
+				<img src="./img/icon_pl.png">
+			</li>
+		</ul>
+            <p>这篇文章太棒了?</p>
+            <div class="huifu">
+            	<b>回复1楼</b><br/>
+            	回答的很正确，我来顶你！
+            </div>
+	</div>
+        
+	<div class="list">
+		<ul class="row">
+			<li class="left">
+				<img src="./img/pic_userHead.jpg">
+				<span>LuLu</span>
+				<span class="TimeStyle">10月10日</span>
+			</li>
+			<li class="Reply">
+				<img src="./img/icon_pl.png">
+			</li>
+		</ul>
+            <p>这篇文章太棒了?</p>
+	</div> 
+
+</div>
+<!--用户回复 开始-->
+
+	</div>
+</div>
+</body>
+<script src="./js/jquery-1.9.1.min.js"></script>
+<script src="./js/iscroll.js"></script>
+<script>
+    $(function(){
+        //列表滚动
+        new iScroll($('.innerlist')[0], {desktopCompatibility:true});
+
+
+        $('[name=huifu]').click(function(){
+            $('[name=huifutxt]').focus();
+        });
+		
+		//获得参数?id=29&userid=1
+		var tieziid=decodeURI(getParameterByName("id"));
+		var yonghuid=decodeURI(getParameterByName("userid"));
+		
+		$.ajax({
+             type: "post",
+			 //请求地址
+             url: 'http://139.196.44.92/tie',
+             data: {
+				 	//请求参数
+             		'tieziid':tieziid,'yonghuid':yonghuid
+             	   },
+             dataType: "json",
+             async:	false,
+             success: function(data,textStatus){
+				 //data为返回值json格式，json和js数组差不多
+	             	if(data!=null){	
+							//json里面取值data['jsonObj']['biaoti']
+							document.getElementById('TextTitlel').innerHTML=data['jsonObj']['biaoti'];
+	             	}
+             },
+             error: function(XMLHttpRequest, textStatus, errorThrown){
+             	alert("异常:"+errorThrown);
+             }
+             
+		 });
+
+
+
+    });
+
+</script>
+
+</html>
