@@ -8,6 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 
+import net.sf.json.JSONObject;
+
 import org.apache.log4j.Logger;
 
 public class HttpConnectionUtil {
@@ -15,6 +17,8 @@ public class HttpConnectionUtil {
     private final static Logger logger = Logger.getLogger(HttpConnectionUtil.class);
 
     public static String getData(String urlStr) throws Exception {
+    	
+    logger.info("==============HTTP请求API地址为："+urlStr);
 
 	StringBuffer answer = new StringBuffer();
 	InputStream is = null;
@@ -124,11 +128,11 @@ public class HttpConnectionUtil {
 //			System.out.print(str);
 			
 			//String str=getData("http://s1.mycs.17qiqu.com/rookiecard.php?sid=1&passport=abcde1&time=1413965582&sign=471bdbd2367337a752b9737f9eb32e23");
-			String str=getData("http://203.66.14.198:8080/cmsyh/custom/finduser?page=1&pageNo=10&type=1");
+			String str=getData("http://139.196.44.92/tie?tieziid=29&yonghuid=1");
 			
-			System.out.print(str);
-//			JSONObject jsonObject = JSONObject.fromObject(str); 
-//			System.out.println(jsonObject);
+			System.out.print("ssssssssssssss:"+str);
+			JSONObject jsonObject = JSONObject.fromObject(str); 
+			//System.out.println(jsonObject.get("jsonObj"));
 //			System.out.println(jsonObject.get("status"));
 //			System.out.println(jsonObject.get("total_regs"));
 //			System.out.println(jsonObject.get("total_logins"));

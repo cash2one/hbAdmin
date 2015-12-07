@@ -105,6 +105,13 @@ $(function(){
     </ul>
     </dd>
     
+     <dd><div class="title"><span><img src="<%=basePath %>images/leftico04.png" /></span>官方贴管理</div>
+    <ul class="menuson">
+    	<li><cite></cite><a href="<%=basePath %>official/toinsertofficial" target="rightFrame">官方贴添加</a><i></i></li>
+    	<li><cite></cite><a href="<%=basePath %>official/doofficiallist" target="rightFrame">官方贴查询</a><i></i></li>
+    </ul>
+    </dd>
+    
     <dd><div class="title"><span><img src="<%=basePath %>images/leftico04.png" /></span>系统管理</div>
     <ul class="menuson">
         <li><cite></cite><a href="<%=basePath %>adminRole/toadminrolelist" target="rightFrame">角色管理</a><i></i></li>

@@ -28,6 +28,8 @@ public class Constant {
 	
 	public final static String log_zcyh="注册用户";
 	
+	public final static String log_gftgl="官方贴管理";
+	
 	//domain
 	public static String domain = null;
 	

@@ -53,4 +53,10 @@
 	<czmm_url>http://127.0.0.1:8888/hbbbs/pwdback.jsp</czmm_url>
 	<!-- 重置密码页面样式保存项目 -->
 	<czmm_css>http://127.0.0.1:8888/hbbbs</czmm_css>
+	
+	<faguanfangtie>http://139.196.44.92/faguanfangtie</faguanfangtie>
+	<guanfangtie>http://139.196.44.92/guanfangtie</guanfangtie>
+	<tie>http://139.196.44.92/tie</tie>
+	<gaiguanfangtie>http://139.196.44.92/gaiguanfangtie</gaiguanfangtie>
+	<shantie>http://139.196.44.92/shantie</shantie>
 </Config>

@@ -1252,8 +1252,10 @@ public class ResourceServiceImpl implements ResourceService {
 					
 					for(ResourceInfo rr:lelist)
 					{
-						if(rr.getLevel_id().equals(levelid) || levelid.equals("0"))
+						if(levelid.equals("0") || rr.getLevel_id().equals(levelid))
 						{
+							logger.info("res_id："+r.getId());
+							
 							List<ResourceInfo> list = this.resourceInfoDao.findByResourceId(r.getId());
 							String language = this.resourceInfoDao.getResLanguage(r.getId())+"";
 							if(type_id.equals("1")){
@@ -1407,6 +1409,8 @@ public class ResourceServiceImpl implements ResourceService {
 				hsm.put("week", week);
 				hsm.put("data", data);
 				hsm.put("datasign", EncoderHandler.encodeByMD5(data.toString()));
+				
+				logger.info("result  message："+result+":"+message);
 			}else{
 				result = "2";
 				message = initDataPool.getSP("2-4-213");

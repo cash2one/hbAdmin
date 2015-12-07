@@ -487,10 +487,7 @@ public Map addpre(HttpServletRequest request) {
 			String plan_res_id = (String) request.getParameter("inf_id");
 			
 			boolean flag = false;
-			if(plan_res_id==null||"".equals(plan_res_id)){
-				result = "2";
-				message = initDataPool.getSP("2-4-217");
-			}else
+			
 			if(baby_id==null||"".equals(baby_id)){
 				result = "2";
 				message = initDataPool.getSP("2-4-211");
@@ -504,16 +501,18 @@ public Map addpre(HttpServletRequest request) {
 			}else{
 				flag = true;
 			}
+			if(plan_res_id!=null && !"".equals(plan_res_id) && !"0".equals(plan_res_id))
+			{
+				UserLearnplan upModel = this.userLearnplanDao.findOne(plan_res_id);
+				if(upModel.getPlan_status().equals("0")){
 			
-			UserLearnplan upModel = this.userLearnplanDao.findOne(plan_res_id);
-			if(upModel.getPlan_status().equals("0")){
-			
-				//更新状态
-				UserLearnplan ulp = new UserLearnplan();
-				ulp.setId(plan_res_id);
-				//ulp.setSpend_minute(spend_minute);
-				ulp.setPlan_status("1");
-				this.userLearnplanDao.update(ulp);
+					//更新状态
+					UserLearnplan ulp = new UserLearnplan();
+					ulp.setId(plan_res_id);
+					//ulp.setSpend_minute(spend_minute);
+					ulp.setPlan_status("1");
+					this.userLearnplanDao.update(ulp);
+				}
 			}
 			
 			Medal medal = new Medal();

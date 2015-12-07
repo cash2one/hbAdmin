@@ -18,6 +18,8 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
+import com.manager.function.controller.OfficialController;
+
 
 public  class CollectionUtil {
 	
@@ -96,6 +98,13 @@ public  class CollectionUtil {
 			//throw new Exception("writeHtml:"+e.getMessage());
 			e.printStackTrace();
 		}
+	}
+	
+	public static String huoquXml(String paren)throws Exception {
+		String path = Xml.class.getClassLoader().getResource("").toURI().getPath();
+		path = path.split("WEB-INF")[0] + "WEB-INF"+File.separator+"Config.xml";
+		String value = Xml.getXmlTagValue(path, paren);
+		return value;
 	}
 	
 	public static String tobereplace(String message, int in) throws Exception {
