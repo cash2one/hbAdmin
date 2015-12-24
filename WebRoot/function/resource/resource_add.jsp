@@ -239,8 +239,8 @@
   	 		alert("简介不能为空！");
   	 		return;
   	 	}
-  	 	if(resource_summary.length>250){
-  	 		alert("简介长度不能超过250");
+  	 	if(resource_summary.length>1000){
+  	 		alert("简介长度不能超过1000");
   	 		return;
   	 	}
 		var resource_type_id =document.getElementById("resource_type_id").value;

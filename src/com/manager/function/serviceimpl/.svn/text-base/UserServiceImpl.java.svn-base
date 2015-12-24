@@ -31,6 +31,9 @@ import com.manager.util.CollectionUtil;
 import com.manager.util.Constant;
 import com.manager.util.Xml;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class UserServiceImpl implements UserService {
 	
 	private Logger logger = Logger.getLogger(UserServiceImpl.class);
@@ -402,18 +405,41 @@ public class UserServiceImpl implements UserService {
 			String user_avatar = (String) request.getParameter("user_avatar");
 			String user_nickname = (String) request.getParameter("user_nickname");
 			
+			boolean flag = false;
+			
+		    // 邮箱验证规则
+		    String regEx = "^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$";
+		    // 编译正则表达式
+		    Pattern pattern = Pattern.compile(regEx);
+		    // 忽略大小写的写法
+		    // Pattern pat = Pattern.compile(regEx, Pattern.CASE_INSENSITIVE);
+		    Matcher matcher = pattern.matcher(user_nickname);
+		    // 字符串是否与正则表达式相匹配
+		    boolean rs = matcher.matches();
+		    if(rs)
+		    {
+		    	flag = true;
+		    }else
+		    {
+		    	result = "0";
+				message = "昵称只能用字母数字中文字符和下划线组成";
+		    }
+	
+		    
+		    
 			User user = new User();
 			user.setOpen_id(uid);
 			
-			boolean flag = false;
-			
-			if(uid==null||source==null||"".equals(uid)||"".equals(source)||"".equals(user_pwd)||"".equals(user_pwd)){
-				result = "0";
-				message = initDataPool.getSP("2-4-203");
-			}else{
-				flag = true;
+			if(flag)
+			{
+				if(uid==null||source==null||"".equals(uid)||"".equals(source)||"".equals(user_pwd)||"".equals(user_pwd)){
+					result = "0";
+					message = initDataPool.getSP("2-4-203");
+					flag = false;
+				}else{
+					flag = true;
+				}
 			}
-			
 			if(flag){
 				User userModel = this.userDao.isExcit(user);
 				if(userModel!=null){

@@ -427,7 +427,7 @@ public Map addpre(HttpServletRequest request) {
 		            int port = 2195;
 		            String certificatePath = "c:/huibenshu.p12"; //刚才在mac系统下导出的证书
 		              
-		            String certificatePassword= "122101586";
+		            String certificatePassword= "820425";
 		            
 		            pushManager.initializeConnection(host, port, certificatePath,certificatePassword, SSLConnectionHelper.KEYSTORE_TYPE_PKCS12);
 		              

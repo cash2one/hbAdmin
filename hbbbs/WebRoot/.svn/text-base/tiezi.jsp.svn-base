@@ -45,16 +45,29 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="./rs/gft/css/Main.css" type="text/css">
     <link rel="stylesheet" href="./rs/gft/css/SharePost.css" type="text/css">
+    <style>
+    .tishi{
+			position:absolute;
+			width:100%;
+			height:100%;
+			z-index:9999;
+			top:0px;
+  			text-align: center;
+			background-image:url(rs/img/we-1.png);
+			background-size:cover;
+		}
+    </style>
 </head>
 
 <body class="bodypage">
-
+<div class="tishi" id="weixin_tishi" style="display:none"></div>
 <!--绘本树App下 开始-->
-<header id="head">
-
-<img src="./rs/gft/img/banner.png" class="share_Logo">
-<img src="./rs/gft/img/bannerBtn.png" class="share_btn">
-</header>
+<a id="xiazai" style="width:100%;height:62px;overflow: hidden;position: fixed;" href="javascript:void(0);" onclick="panduan_weixin();">
+	<header id="head">
+	<img src="./rs/gft/img/banner.png" class="share_Logo">
+	<img src="./rs/gft/img/bannerBtn.png" class="share_btn">
+	</header>
+</a>
 <!--绘本树App下载 结束-->
 
 <div id="body">
@@ -176,6 +189,7 @@
 </body>
 <script src="./rs/gft/js/jquery-1.9.1.min.js"></script>
 <script src="./rs/gft/js/iscroll.js"></script>
+<script type="text/javascript" src="http://st.17qiqu.com/bbs/rs/js/public.js"></script>
 <script>
 
 	
@@ -373,7 +387,7 @@
 	     	var setInte=setInterval(function(){
 	     		if(isComplete){
 	     			//列表滚动
-	     			new iScroll($('.innerlist')[0], {desktopCompatibility:true});
+	     			setTimeout(function(){new iScroll($('.innerlist')[0], {desktopCompatibility:true});},10);
 	     			clearInterval(setInte);
 	     		}else if(index_ === 20){
 	     			clearInterval(setInte);
