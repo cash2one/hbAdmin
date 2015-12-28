@@ -308,6 +308,148 @@
 	     		var neirong='${tie.neirong}';
 	     		var div_centent=document.getElementById("div_centent");
 	     		if(neirong!=null && neirong.length>0){
+	     			var aryCon = neirong.split("$$");
+	     			for(var i=0;i<aryCon.length;i++){
+	     				var neirong2=aryCon[i];
+	     				if(neirong2 != null && neirong2 != ""){
+	     					var vin=neirong2.substring(0,1);
+	     					if(vin=='['){
+	     						if(neirong2.substring(0,5)=='[img]'){
+		     					
+			     					var end=neirong2.indexOf('[/img]');
+		     						var img=neirong2.substring(5,end);
+		     						
+		     						var end_ititle=img.indexOf('[/ititle]');
+		     						var ititle=img.substring(8,end_ititle);
+		     						
+		     						var end_iurl=img.indexOf('[/iurl]');
+		     						var iurl=img.substring(end_ititle+9+6,end_iurl);
+			     					
+		     						div_centent.innerHTML=div_centent.innerHTML+'<li name="li_img"><label>图片：<b>*</b></label>'
+		     						+'标题：<input type="text" id="" name="ct_img_title" value="'+ititle+'" class="dfinput200 neirong" />'
+	 								+'图片地址：<input type="text" id="" name="ct_img_url" value="'+iurl+'" class="dfinput200 neirong" /></li>';
+		     					}else if(neirong2.substring(0,7)=='[video]'){
+		     						var end=neirong2.indexOf('[/video]');
+		     						var video=neirong2.substring(7,end);
+		     						
+		     						var end_vimg=video.indexOf('[/vimg]');
+		     						var vimg=video.substring(6,end_vimg);
+		     						
+		     						var end_vtitle=video.indexOf('[/vtitle]');
+		     						var vtitle=video.substring(end_vimg+7+8,end_vtitle);
+		     						
+		     						var end_vurl=video.indexOf('[/vurl]');
+		     						var vurl=video.substring(end_vtitle+9+6,end_vurl);
+		     						
+		     						var end_vid=video.indexOf('[/vid]');
+		     						var vid=video.substring(end_vurl+7+5,end_vid);
+		     						
+		     						div_centent.innerHTML=div_centent.innerHTML+'<li name="li_kan"><label>看：<b>*</b></label>'
+						  	    	+'图片地址：<input type="text" id="" name="ct_kan_img" value="'+vimg+'" class="dfinput200 neirong" />'
+						  	    	+'标题：<input type="text" id="" name="ct_kan_title" value="'+vtitle+'" class="dfinput200 neirong" />'
+						  	    	+'链接：<input type="text" id="" name="ct_kan_url" value="'+vurl+'" class="dfinput200 neirong" />'
+						  	    	+'ID：<input type="text" id="" name="ct_kan_id" value="'+vid+'" class="dfinput200 neirong" />'
+						  	    	+'</li>';
+						  	    	
+		     					}else if(neirong2.substring(0,7)=='[audio]'){
+		     						var end=neirong2.indexOf('[/audio]');
+		     						var audio=neirong2.substring(7,end);
+		     						
+		     						var end_aimg=audio.indexOf('[/aimg]');
+		     						var aimg=audio.substring(6,end_aimg);
+		     						
+		     						var end_atitle=audio.indexOf('[/atitle]');
+		     						var atitle=audio.substring(end_aimg+7+8,end_atitle);
+		     						
+		     						var end_aurl=audio.indexOf('[/aurl]');
+		     						var aurl=audio.substring(end_atitle+9+6,end_aurl);
+		     						
+		     						var end_aid=audio.indexOf('[/aid]');
+		     						var aid=audio.substring(end_aurl+7+5,end_aid);
+		     						
+		     						div_centent.innerHTML=div_centent.innerHTML+'<li name="li_ting"><label>听：<b>*</b></label>'
+						  	    	+'图片地址：<input type="text" id="" name="ct_ting_img" value="'+aimg+'" class="dfinput200 neirong" />'
+						  	    	+'标题：<input type="text" id="" name="ct_ting_title" value="'+atitle+'" class="dfinput200 neirong" />'
+						  	    	+'链接：<input type="text" id="" name="ct_ting_url" value="'+aurl+'" class="dfinput200 neirong" />'
+						  	    	+'ID：<input type="text" id="" name="ct_ting_id" value="'+aid+'" class="dfinput200 neirong" />'
+						  	    	+'</li>';
+						  	    	
+		     					}else if(neirong2.substring(0,6)=='[read]'){
+		     						var end=neirong2.indexOf('[/read]');
+		     						var read=neirong2.substring(6,end);
+		     						
+		     						var end_rimg=read.indexOf('[/rimg]');
+		     						var rimg=read.substring(6,end_rimg);
+		     						
+		     						var end_rtitle=read.indexOf('[/rtitle]');
+		     						var rtitle=read.substring(end_rimg+7+8,end_rtitle);
+		     						
+		     						var end_rurl=read.indexOf('[/rurl]');
+		     						var rurl=read.substring(end_rtitle+9+6,end_rurl);
+		     						
+		     						var end_rid=read.indexOf('[/rid]');
+		     						var rid=read.substring(end_rurl+7+5,end_rid);
+		     						
+		     						div_centent.innerHTML=div_centent.innerHTML+'<li name="li_du"><label>读：<b>*</b></label>'
+						  	    	+'图片地址：<input type="text" id="" name="ct_du_img" value="'+rimg+'" class="dfinput200 neirong" />'
+						  	    	+'标题：<input type="text" id="" name="ct_du_title" value="'+rtitle+'" class="dfinput200 neirong" />'
+						  	    	+'链接：<input type="text" id="" name="ct_du_url" value="'+rurl+'" class="dfinput200 neirong" />'
+						  	    	+'ID：<input type="text" id="" name="ct_du_id" value="'+rid+'" class="dfinput200 neirong" />'
+						  	    	+'</li>';
+		     					}else if(neirong2.substring(0,6)=='[shop]'){
+		     						var end=neirong2.indexOf('[/shop]');
+		     						var shop=neirong2.substring(6,end);
+		     						
+		     						var end_simg=shop.indexOf('[/simg]');
+		     						var simg=shop.substring(6,end_simg);
+		     						
+		     						var end_stitle=shop.indexOf('[/stitle]');
+		     						var stitle=shop.substring(end_simg+7+8,end_stitle);
+		     						
+		     						var end_surl=shop.indexOf('[/surl]');
+		     						var surl=shop.substring(end_stitle+9+6,end_surl);
+		     						
+		     						var end_sid=shop.indexOf('[/sid]');
+		     						var sid=shop.substring(end_surl+7+5,end_sid);
+		     						
+		     						div_centent.innerHTML=div_centent.innerHTML+'<li name="li_sc"><label>商城：<b>*</b></label>'
+						 	    	+'图片地址：<input type="text" id="" name="ct_sc_img" value="'+simg+'" class="dfinput200 neirong" />'
+						 	    	+'标题：<input type="text" id="" name="ct_sc_title" value="'+stitle+'" class="dfinput200 neirong" />'
+						 	    	+'链接：<input type="text" id="" name="ct_sc_url" value="'+surl+'" class="dfinput200 neirong" />'
+						 	    	+'ID：<input type="text" id="" name="ct_sc_id" value="'+sid+'" class="dfinput200 neirong" />'
+						 	    	+'</li>';
+		     					}else if(neirong2.substring(0,6)=='[link]'){
+		     						var end=neirong2.indexOf('[/link]');
+		     						var link=neirong2.substring(6,end);
+		     						
+		     						var end_limg=link.indexOf('[/limg]');
+		     						var limg=link.substring(6,end_limg);
+		     						
+		     						var end_ltitle=link.indexOf('[/ltitle]');
+		     						var ltitle=link.substring(end_limg+7+8,end_ltitle);
+		     						
+		     						var end_lurl=link.indexOf('[/lurl]');
+		     						var lurl=link.substring(end_ltitle+9+6,end_lurl);
+		     						
+		     						var end_lid=link.indexOf('[/lid]');
+		     						var lid=link.substring(end_lurl+7+5,end_lid);
+		     						
+		     						div_centent.innerHTML=div_centent.innerHTML+'<li name="li_wl"><label>外链：<b>*</b></label>'
+						 	    	+'图片地址：<input type="text" id="" name="ct_wl_img" value="'+limg+'" class="dfinput200 neirong" />'
+						 	    	+'标题：<input type="text" id="" name="ct_wl_title" value="'+ltitle+'" class="dfinput200 neirong" />'
+						 	    	+'链接：<input type="text" id="" name="ct_wl_url" value="'+lurl+'" class="dfinput200 neirong" />'
+						 	    	+'ID：<input type="text" id="" name="ct_wl_id" value="'+lid+'" class="dfinput200 neirong" />'
+						 	    	+'</li>';
+						  	    	
+		     					}
+	     					}else{
+		     					div_centent.innerHTML=div_centent.innerHTML+'<li name="li_txt"><label>文本：<b>*</b></label><input type="text" id="" name="ct_txt" value="'+neirong2+'" class="dfinput neirong" /></li>';
+	     					}
+	     				}
+	     			
+	     			}
+	     			
+	     			/*
 	     			var arr=new Array();
 	     			var txt="";
 	     			var biaoqian="";
@@ -494,7 +636,16 @@
 	     					}
      						i=neirong.length-neirong2.length-1;
      						continue;
-	     				}else{
+	     				}
+	     				//else if(vin == '\\$')
+	     				//{
+	     					//if(txt!=''){
+	  							//div_centent.innerHTML=div_centent.innerHTML+'<li name="li_txt"><label>文本：<b>*</b></label><input type="text" id="" name="ct_txt" value="'+txt+'" class="dfinput neirong" /></li>';
+	  							//txt = '';
+		     				//}
+	     					//neirong2=neirong2.substring(1,neirong2.length);
+	     				//}
+	     				else{
 	     					txt+=vin;
 	     					neirong2=neirong2.substring(1,neirong2.length);
 	     				}
@@ -503,7 +654,7 @@
 	   						txt='';
 	   					}
 	     			}
-	     		
+	     		*/
 	     		}
 	     		
   		/*

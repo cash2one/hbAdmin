@@ -68,7 +68,7 @@ public class OfficialController {
 							t.setBuluoid(j.getString("buluoid"));
 							t.setBiaoti(j.getString("biaoti"));
 							t.setLeixing(j.getString("leixing"));
-							t.setNeirong(j.getString("neirong")!=null?j.getString("neirong").replaceAll("\\$\\$", ""):"");
+							t.setNeirong(j.getString("neirong")!=null?j.getString("neirong"):"");
 							t.setChakanshu(j.getString("chakanshu"));
 							t.setPinglunshu(j.getString("pinglunshu"));
 							t.setDidian(j.getString("didian"));

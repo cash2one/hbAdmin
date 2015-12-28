@@ -22,7 +22,7 @@
 				t.setBuluoid(j.getString("buluoid"));
 				t.setBiaoti(j.getString("biaoti"));
 				t.setLeixing(j.getString("leixing"));
-				t.setNeirong(j.getString("neirong")!=null?j.getString("neirong").replaceAll("\\n\\r","").replaceAll("\\$\\$",""):null);
+				t.setNeirong(j.getString("neirong"));//!=null?j.getString("neirong").replaceAll("\\n\\r",""):null);
 				t.setChakanshu(j.getString("chakanshu"));
 				t.setPinglunshu(j.getString("pinglunshu"));
 				t.setDidian(j.getString("didian"));
@@ -199,6 +199,8 @@
    		var neirong="<%=t.getNeirong()%>";
 	     		var div_centent=document.getElementById("div_centent");
 	     		if(neirong!=null && neirong.length>0){
+	     		
+	     		
 	     			var arr=new Array();
 	     			var txt="";
 	     			var biaoqian="";
@@ -212,7 +214,7 @@
 	     					if(neirong2.substring(0,5)=='[img]'){
 	     						//不为空添加文本
 		     					if(txt!=''){
-	  								div_centent.innerHTML=div_centent.innerHTML+'<p>'+txt+'</p>';
+	  								div_centent.innerHTML=div_centent.innerHTML+'<p><pre style="margin: 0;padding: 10px;background-color: #fff;word-wrap: break-word;">'+txt+'</pre></p>';
 		     						txt='';
 		     					}
 	     						var end=neirong2.indexOf('[/img]');
@@ -229,7 +231,7 @@
 	     					}else if(neirong2.substring(0,7)=='[video]'){
 	     						//不为空添加文本
 		     					if(txt!=''){
-	  								div_centent.innerHTML=div_centent.innerHTML+'<p>'+txt+'</p>';
+	  								div_centent.innerHTML=div_centent.innerHTML+'<p><pre style="margin: 0;padding: 10px;background-color: #fff;word-wrap: break-word;">'+txt+'</pre></p>';
 		     						txt='';
 		     					}
 	     					
@@ -258,7 +260,7 @@
 	     					}else if(neirong2.substring(0,7)=='[audio]'){
 	     						//不为空添加文本
 		     					if(txt!=''){
-	  								div_centent.innerHTML=div_centent.innerHTML+'<p>'+txt+'</p>';
+	  								div_centent.innerHTML=div_centent.innerHTML+'<p><pre style="margin: 0;padding: 10px;background-color: #fff;word-wrap: break-word;">'+txt+'</pre></p>';
 		     						txt='';
 		     					}
 	     					
@@ -286,7 +288,7 @@
 	     					}else if(neirong2.substring(0,6)=='[read]'){
 	     						//不为空添加文本
 		     					if(txt!=''){
-	  								div_centent.innerHTML=div_centent.innerHTML+'<p>'+txt+'</p>';
+	  								div_centent.innerHTML=div_centent.innerHTML+'<p><pre style="margin: 0;padding: 10px;background-color: #fff;word-wrap: break-word;">'+txt+'</pre></p>';
 		     						txt='';
 		     					}
 	     					
@@ -314,7 +316,8 @@
 	     					}else if(neirong2.substring(0,6)=='[shop]'){
 	     						//不为空添加文本
 		     					if(txt!=''){
-	  								div_centent.innerHTML=div_centent.innerHTML+'<p>'+txt+'</p>';
+	  								div_centent.innerHTML=div_centent.innerHTML+'<p><pre style="margin: 0;padding: 10px;background-color: #fff;word-wrap: break-word;">'+txt+'</pre></p>';
+	  								txt = '';
 		     					}
 	     					
 	     						var end=neirong2.indexOf('[/shop]');
@@ -340,7 +343,8 @@
 	     					}else if(neirong2.substring(0,6)=='[link]'){
 	     							//不为空添加文本
 		     					if(txt!=''){
-	  								div_centent.innerHTML=div_centent.innerHTML+'<p>'+txt+'</p>';
+	  								div_centent.innerHTML=div_centent.innerHTML+'<p><pre style="margin: 0;padding: 10px;background-color: #fff;word-wrap: break-word;">'+txt+'</pre></p>';
+	  								txt = '';
 		     					}
 	     					
 	     						var end=neirong2.indexOf('[/link]');
@@ -372,12 +376,20 @@
 	     					}
      						i=neirong.length-neirong2.length-1;
      						continue;
-	     				}else{
+	     				}else if(vin == '\$')
+	     				{
+	     					if(txt!=''){
+	  							div_centent.innerHTML=div_centent.innerHTML+'<p><pre style="margin: 0;padding: 10px;background-color: #fff;word-wrap: break-word;">'+txt+'</pre></p>';
+	  							txt = '';
+		     				}
+	     					neirong2=neirong2.substring(1,neirong2.length);
+	     				}
+	     				else{
 	     					txt+=vin;
 	     					neirong2=neirong2.substring(1,neirong2.length);
 	     				}
 		     			if(i==neirong.length-1 && txt!=''){
-							div_centent.innerHTML=div_centent.innerHTML+'<p>'+txt+'</p>';
+							div_centent.innerHTML=div_centent.innerHTML+'<p><pre style="margin: 0;padding: 10px;background-color: #fff;word-wrap: break-word;">'+txt+'</pre></p>';
 	   						txt='';
 	   					}
 	     			}
@@ -387,8 +399,60 @@
 	     	var setInte=setInterval(function(){
 	     		if(isComplete){
 	     			//列表滚动
-	     			setTimeout(function(){new iScroll($('.innerlist')[0], {desktopCompatibility:true});},10);
-	     			clearInterval(setInte);
+	     			var imglist = $('.innerlist img');
+var imgs = [];
+imglist.each(function(){
+     imgs.push($(this).attr('src'));
+})
+var myloadimg = function(c, d) {
+    var b = new Image();
+    b.src = c;
+    var a = function() {
+        d && d(b)
+    };
+    if (b.width) {
+        a()
+    } else {
+        b.onload = a
+    }
+    b.onerror = function() {
+        d && d(false)
+    }
+};
+var myloadimgs = function(c, h) {
+    var a = 0;
+    var f = [];
+    var b = [];
+    if (!c || 0 == c.length) {
+        h(f, b)
+    } else {
+        for (var d = 0; d < c.length; d++) {
+            a++;
+            var g = c[d];
+            (function(i) {
+                setTimeout(function() {
+                    myloadimg(i, function(j) {
+                        e(i, j)
+                    })
+                }, d * 10)
+            })(g)
+        }
+    }
+    function e(j, i) {
+        if (i) {
+            f.push({src: j,img: i})
+        } else {
+            b.push({src: j,img: i})
+        }
+        h(f, b)
+    }
+};
+myloadimgs(imgs, function(a,b){
+      if(a.length+b.length >= imgs.length){
+          setTimeout(function(){new iScroll($('.innerlist')[0], {desktopCompatibility:true});},10);
+     	 clearInterval(setInte);
+      }
+})
 	     		}else if(index_ === 20){
 	     			clearInterval(setInte);
 	     		}
