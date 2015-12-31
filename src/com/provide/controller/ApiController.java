@@ -32,7 +32,7 @@ public class ApiController extends _BaseController{
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		
 		String doMethod = (String) request.getParameter("do");
-		if(!doMethod.equals("push"))
+		if(!doMethod.equals("push")&&!doMethod.equals("getuserinfo"))
 		{
 			//接口请求，API_ID、版本号、方法名和方法参数校验
 			Map checkResultMap = apiService.CheckRequest(request);

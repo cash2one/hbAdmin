@@ -30,4 +30,5 @@
 	
 	<tie>http://139.196.44.92/tie</tie>
 	<img_url>http://139.196.44.92</img_url>
+	<userapi>http://192.168.3.199:8888/hbAdmin/domain?do=getuserinfo</userapi>
 </Config>

@@ -47,7 +47,7 @@ public class Listener implements ServletContextListener {
 			
 			Constant.TIEAPI = Xml.getXmlTagValue(path, "tie");
 			Constant.IMGURL=Xml.getXmlTagValue(path, "img_url");
-			
+			Constant.USERAPI = Xml.getXmlTagValue(path, "userapi");
 		} catch (Exception e) {
 			logger.info("Config.xml读取异常："+e.getMessage());
 		}

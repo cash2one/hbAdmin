@@ -34,4 +34,5 @@ public class Constant {
 	public static String TIEAPI=null;
 	
 	public static String IMGURL=null;
+	public static String USERAPI=null;
 }

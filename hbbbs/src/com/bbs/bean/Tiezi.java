@@ -48,7 +48,9 @@ public class Tiezi {
 	private String buluomingzi;
 	
 	private String page;
-	
+
+	private String userName;
+	private String userHead;
 	public Tiezi() {
 		super();
 	}
@@ -58,7 +60,7 @@ public class Tiezi {
 			String yonghuid, String zhuangtai, String tupian1, String tupian2,
 			String tupian3, String tupian4, String tupian5, String tupian6,
 			String jinghua, String created, String yirubuluo,
-			String yishoucang, String buluomingzi, String page) {
+			String yishoucang, String buluomingzi, String page,String name,String head) {
 		super();
 		this.id = id;
 		this.buluoid = buluoid;
@@ -82,8 +84,27 @@ public class Tiezi {
 		this.yishoucang = yishoucang;
 		this.buluomingzi = buluomingzi;
 		this.page = page;
+		this.userName = name;
+		this.userHead = head;
 	}
 
+	public String getUserName()
+	{
+		return userName;
+	}
+	public void setUserName(String name)
+	{
+		this.userName = name;
+	}
+	
+	public String getUserHead()
+	{
+		return userHead;
+	}
+	public void setUserHead(String head)
+	{
+		this.userHead = head;
+	}
 	public String getPage() {
 		return page;
 	}

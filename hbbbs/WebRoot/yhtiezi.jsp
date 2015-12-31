@@ -14,7 +14,8 @@
 		String json_data=HttpConnectionUtil.getData(url);
 		JSONObject json=JSONObject.fromObject(json_data);
 		Object data=json.get("jsonObj");
-		if(data!=null && !String.valueOf(data).equals("")){
+		if(data!=null && !String.valueOf(data).equals(""))
+		{
 			JSONObject j=JSONObject.fromObject(data);
 			if(j!=null){
 				t=new Tiezi();
@@ -37,6 +38,35 @@
 				t.setTupian5(j.getString("tupian5"));
 				t.setTupian6(j.getString("tupian6"));
 			}
+		}
+		
+		String userurl = Constant.USERAPI+"&version=1.0.0&appid=100&uid="+t.getYonghuid();
+		String uData=HttpConnectionUtil.getData(userurl);
+		JSONObject ujson=JSONObject.fromObject(uData);
+		Object jdata=ujson.get("data");
+		if(jdata!=null && !String.valueOf(jdata).equals(""))
+		{
+			JSONObject jData=JSONObject.fromObject(jdata);
+			Object oInfo=jData.get("userinfo");
+			if(oInfo!=null && !String.valueOf(oInfo).equals(""))
+			{
+				JSONObject info = JSONObject.fromObject(oInfo);
+				if(info!=null)
+				{
+					t.setUserName(info.getString("user_nickname"));
+					t.setUserHead(info.getString("user_avatar"));
+				}
+			}
+		}
+		
+		if(t.getUserHead() == null)
+		{
+			t.setUserHead("./rs/gft/img/pic_userHead_1.jpg");
+		}
+		
+		if(t.getUserName() == null)
+		{
+			t.setUserName("绘本树");
 		}
 	}
 	
@@ -89,8 +119,8 @@
     <div class="list">
 		<ul class="info row">
 			<li class="left">
-                <img src="./rs/gft/img/pic_userHead_1.jpg">
-                <span class="MameStyle">绘本树</span>
+                <img src=<%=t.getUserHead() %>>
+                <span class="MameStyle"><%=t.getUserName() %></span>
                 <span class="TimeStyle"><%=t.getCreated().substring(0,10) %></span>
             </li>
 			<li class="right">
