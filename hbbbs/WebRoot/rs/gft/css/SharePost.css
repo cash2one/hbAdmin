@@ -9,8 +9,8 @@ body{ min-height: 100%;}
         .list .row>*{height: 100%;}
         .list .row>.left{float: left;width: 50%;margin-right: 10px;}
         .list .row>.left>img{display: block;width: 50px;height: 50px;border-radius: 50%;float: left;}
-        .list .row>.left>span{text-align: left;line-height:25px;margin-left:60px;display: block;color: #adff2f;}
-        .list .row>.right{position:absolute;width:25%;height:25px;bottom:3px;right:0px;}
+        .list .row>.left>span{text-align: left;line-height:25px;margin-left:60px;display: block;color: #92b831;}
+        .list .row>.right{position:absolute;height:25px;bottom:3px;right:0px;}
 		.list .row>.right>img{display: block;width: 20px;height: 20px;float: left;}
 		.list .row>.right>span{text-align: left;display: block;color: #ccc;padding-left:25px;}
         .list .row>.Reply{position:absolute;width:30px;height:30px;bottom:3px;right:0px;}
@@ -20,7 +20,7 @@ body{ min-height: 100%;}
 		.share_Logo {position: absolute;height: 100%;background-size: cover; left:0px;}
 		.share_btn {position: absolute;height: 100%;background-size: cover; right:0px;}
 		.Topics{ background-color:#FFF; margin-bottom:10px;}
-		.MameStyle{ font-size:24px;}
+		.MameStyle{ font-size:18px;}
 		.TimeStyle{ color:#CCC!important;}
 		
 		.ShareRead{height:80px; margin:10px; padding:10px; background-color:#9C6; color:#FFF;border-radius: 5px;}
@@ -32,6 +32,11 @@ body{ min-height: 100%;}
 		.ShareSee>img{ width:60px; height:50px; float:left; margin-top:5px;}
 		.SeeText{ height:60px;width: 50%; line-height:60px; float:left; margin-left:10px;}
 		.SeePlay{ width:40px; height:40px; float:right; background-image:url(../img/BtnPlay@3x.png); background-size:cover;margin-top: 10px;}
+		
+		.ShareShop{height:80px; margin:10px; padding:10px; background-color:#c7c7c7; color:#FFF;border-radius: 5px;}
+		.ShareShop>img{ width:60px; height:50px; float:left; margin-top:5px;}
+		.ShopText{ height:60px;width: 50%; line-height:60px; float:left; margin-left:10px;}
+		.ShopPlay{ width:40px; height:40px; float:right; background-image:url(../img/BtnNext@3x.png); background-size:cover;margin-top: 10px;}
 		
 		.ShareListen{height:80px; margin:10px; padding:10px; background-color:#C39; color:#FFF;border-radius: 5px;}
 		.ShareListen>img{ width:60px; height:60px; float:left;}

@@ -22,7 +22,7 @@
 				t.setBuluoid(j.getString("buluoid"));
 				t.setBiaoti(j.getString("biaoti"));
 				t.setLeixing(j.getString("leixing"));
-				t.setNeirong(j.getString("neirong"));//!=null?j.getString("neirong").replaceAll("\\n\\r",""):null);
+				t.setNeirong(j.getString("neirong")!=null?j.getString("neirong").replaceAll("\"","”").replaceAll(";","；"):null);
 				t.setChakanshu(j.getString("chakanshu"));
 				t.setPinglunshu(j.getString("pinglunshu"));
 				t.setDidian(j.getString("didian"));
@@ -335,9 +335,16 @@
 	     						var end_sid=shop.indexOf('[/sid]');
 	     						var sid=shop.substring(end_surl+7+5,end_sid);
 	     						
-	     						div_centent.innerHTML=div_centent.innerHTML+'<p>'+stitle+'</p>'
-	     						+'<a href="'+surl+'" target="_blank">'
-	     						+'<img class="photo" title="'+stitle+'" alt="'+stitle+'"  src="'+simg+'"></a>';
+	     						div_centent.innerHTML=div_centent.innerHTML+
+	     						'<a href="'+surl+'" target="_blank">'
+	     						+'<div class="ShareShop">'
+    							+'<img title="'+stitle+'" alt="'+stitle+'"  src="'+simg+'"/>'
+    							+'<div class="ShopText">'+stitle+'</div></div></a>'
+    							//+'<div class="ShopPlay" onclick="javascript:window.open(\''+surl+'\')"></div>';
+	     						
+	     						//div_centent.innerHTML=div_centent.innerHTML+'<p>'+stitle+'</p>'
+	     						//+'<a href="'+surl+'" target="_blank">'
+	     						//+'<img class="photo" title="'+stitle+'" alt="'+stitle+'"  src="'+simg+'"></a>';
 					  	    	
 					  	    	neirong2=neirong2.substring(end+7,neirong2.length);
 	     					}else if(neirong2.substring(0,6)=='[link]'){

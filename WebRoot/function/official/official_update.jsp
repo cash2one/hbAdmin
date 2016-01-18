@@ -8,6 +8,10 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 	String version=Constant.version;
 	String appid=Constant.APPID;
+	String[] neirong=null;
+	if(request.getAttribute("neirong")!=null){
+		neirong=(String[]) request.getAttribute("neirong");
+	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -305,12 +309,20 @@
 		     <div id="div_centent">
 		     </div>
 	     	<script type="text/javascript">
-	     		var neirong='${tie.neirong}';
 	     		var div_centent=document.getElementById("div_centent");
-	     		if(neirong!=null && neirong.length>0){
-	     			var aryCon = neirong.split("$$");
-	     			for(var i=0;i<aryCon.length;i++){
-	     				var neirong2=aryCon[i];
+	     		//if(neirong!=null && neirong.length>0){
+	     			
+	     			//for(var i=0;i<neirong.length;i++){
+ 					//alert(1);
+	     			<% 
+					if(neirong!=null && neirong.length>0){
+					for(int i=0;i<neirong.length;i++){ 
+ 					%>
+ 					var neirong2="<%=neirong[i] %>";
+ 				
+	     			
+	     				//var neirong2=neirong[i];
+	     				//alert(neirong2);
 	     				if(neirong2 != null && neirong2 != ""){
 	     					var vin=neirong2.substring(0,1);
 	     					if(vin=='['){
@@ -447,7 +459,8 @@
 	     					}
 	     				}
 	     			
-	     			}
+	     			//}
+	     			<%} }%>
 	     			
 	     			/*
 	     			var arr=new Array();
@@ -655,7 +668,7 @@
 	   					}
 	     			}
 	     		*/
-	     		}
+	     		//}
 	     		
   		/*
   		
