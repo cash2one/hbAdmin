@@ -57,6 +57,8 @@ public class OfficialController {
 			}
 			String url=CollectionUtil.huoquXml("tie")+"?yonghuid="+yonghuid+"&tieziid="+id;
 			String str=HttpConnectionUtil.getData(url);
+			
+			
 			Tiezi t=null;
 			if(str!=null){
 				JSONObject json=JSONObject.fromObject(str);
@@ -68,7 +70,7 @@ public class OfficialController {
 							t.setBuluoid(j.getString("buluoid"));
 							t.setBiaoti(j.getString("biaoti"));
 							t.setLeixing(j.getString("leixing"));
-							t.setNeirong(j.getString("neirong")!=null?j.getString("neirong"):"");
+							t.setNeirong(j.getString("neirong")!=null?j.getString("neirong").replaceAll("\"","”").replaceAll(";","；"):"");
 							t.setChakanshu(j.getString("chakanshu"));
 							t.setPinglunshu(j.getString("pinglunshu"));
 							t.setDidian(j.getString("didian"));
@@ -82,6 +84,9 @@ public class OfficialController {
 			
 			if(t!=null){
 				request.setAttribute("tie", t);
+				String neirong[] =  t.getNeirong().split("\\$\\$");
+				
+				request.setAttribute("neirong",neirong);
 			}
 			
 			return "function/official/official_update";
@@ -119,7 +124,7 @@ public class OfficialController {
 			String yonghuid=(String)request.getParameter("yonghuid");
 			String buluoid=(String)request.getParameter("buluoid");
 			String biaoti=(String)request.getParameter("biaoti");
-			String neirong=(String)request.getParameter("neirong");
+			String neirong=(String)request.getParameter("neirong").replaceAll("\"","”").replaceAll(";","；");
 			String url=CollectionUtil.huoquXml("gaiguanfangtie")+"?tieziid="+id+"&yonghuid="+yonghuid+"&buluoid="+buluoid+"&biaoti="+URLEncoder.encode(biaoti,"UTF-8")+"&neirong="+URLEncoder.encode(neirong,"UTF-8")+"";
 			String str=HttpConnectionUtil.getData(url);
 			state=1;

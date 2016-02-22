@@ -27,4 +27,13 @@ public class MedalDaoImpl extends SqlSessionDaoSupport implements MedalDao{
 		
 		return ls.size();
 	}
+	
+	public int getResCount(Medal medal)
+	{
+		DataSourceContextHolder.setDbType("0");
+		List<Medal> ls = this.getSqlSession().selectList("MedalSql.getResReadCount", medal);
+		DataSourceContextHolder.clearDbType();
+		
+		return ls.size();
+	}
 }

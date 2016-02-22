@@ -57,4 +57,6 @@ public interface BabyService {
 	 * Push token
 	 */
 	public Map pushToken(HttpServletRequest request);
+	
+	public Map resReadCount(HttpServletRequest request);
 }

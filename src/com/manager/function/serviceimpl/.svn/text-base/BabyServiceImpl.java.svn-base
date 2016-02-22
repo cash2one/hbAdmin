@@ -594,6 +594,58 @@ public Map addpre(HttpServletRequest request) {
         logger.info("BabyServiceImpl.updateAvatar执行了"+diff+"毫秒");
 		return hsm;
 	}
+	
+	public Map resReadCount(HttpServletRequest request)
+	{
+		SimpleDateFormat adf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d1 = new Date();
+		logger.info("开始："+adf.format(d1));
+		
+		String result  = "0";
+		String message = "";
+		
+		String appId = (String) request.getParameter("appid");
+		String appKey = Constant.APPID_KEY.get(appId);
+		
+		JSONObject obj = new JSONObject();
+		int count = 0;
+		try{
+			String res_id = (String) request.getParameter("res_id");
+			boolean flag = false;
+			
+			
+			if(res_id==null||"".equals(res_id)){
+				result = "2";
+				message = initDataPool.getSP("2-4-211");
+			}else{
+				flag = true;
+			}
+			
+			
+			Medal medal = new Medal();
+			medal.setResourse_id(res_id);
+			
+			count = medalDao.getResCount(medal);
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			result = "error";
+			message = initDataPool.getSP("2-4-000");
+		}
+		
+		Map hsm = new LinkedHashMap();
+        hsm.put("version", Constant.version);
+        hsm.put("result", result);
+        hsm.put("message", message);
+        hsm.put("data", count+"");
+        
+        Date d2 = new Date();
+		logger.info("结束："+adf.format(d2));
+        long diff = (d2.getTime() - d1.getTime());
+        logger.info("BabyServiceImpl.updateAvatar执行了"+diff+"毫秒");
+		return hsm;
+	}
+	
 	public Map updateAvatar(HttpServletRequest request) {
 		
 		SimpleDateFormat adf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

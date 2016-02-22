@@ -751,7 +751,14 @@ public class ApiServiceImpl implements ApiService {
 			}
 			return null;
 		}
-		
+		//看过的资源次数
+		// http://192.168.3.199:8888/hbAdmin/domain?do=resReadCount&res_id=2&version=1.0.0&appid=100&sign=c443b3a9bfce61a7ebe4694fdf1e847e
+		if("resReadCount".equals(doMethod) ){
+			switch(versioncode){
+				case 100: return babyService.resReadCount(request);
+			}
+			return null;
+		}
 		//添加token
 		// http://192.168.3.199:8888/hbAdmin/domain?do=addtoken&token=sdfeasdfafe&version=1.0.0&appid=100&sign=c443b3a9bfce61a7ebe4694fdf1e847e
 		if("addtoken".equals(doMethod) ){

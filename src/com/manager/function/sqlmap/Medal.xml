@@ -15,4 +15,8 @@
 	<select id="find" resultMap="Medal" parameterType="medal">
 		<![CDATA[SELECT * FROM tbl_medal WHERE  baby_id=#{baby_id} and resourse_id = #{resourse_id} ]]>
 	</select>
+	
+	<select id="getResReadCount" resultMap="Medal" parameterType="medal">
+		<![CDATA[SELECT * FROM tbl_medal WHERE resourse_id = #{resourse_id} ]]>
+	</select>
 </mapper>

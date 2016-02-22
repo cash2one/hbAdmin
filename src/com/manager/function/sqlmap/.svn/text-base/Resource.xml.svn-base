@@ -170,9 +170,9 @@
 		<![CDATA[
 		SELECT * FROM (
 		SELECT (@rowNO := @rowNo+1) AS rowno,a.* FROM (
-		SELECT * FROM tbl_resource WHERE resource_status = 1 AND resource_content LIKE CONCAT('%',#{resource_content},'%')  union 
-		SELECT * FROM tbl_resource WHERE resource_status = 1 AND resource_keyword LIKE CONCAT('%',#{resource_content},'%')  union 
-		SELECT * FROM tbl_resource WHERE resource_status = 1 AND resource_author LIKE CONCAT('%',#{resource_content},'%')  ) a 
+		SELECT * FROM tbl_resource WHERE resource_status != 9 AND resource_content LIKE CONCAT('%',#{resource_content},'%')  union 
+		SELECT * FROM tbl_resource WHERE resource_status != 9 AND resource_keyword LIKE CONCAT('%',#{resource_content},'%')  union 
+		SELECT * FROM tbl_resource WHERE resource_status != 9 AND resource_author LIKE CONCAT('%',#{resource_content},'%')  ) a 
 		,(SELECT @rowNO :=0) b LIMIT 30
 		) cc ORDER BY rowno 
 		]]>
