@@ -621,7 +621,7 @@ public Map addpre(HttpServletRequest request) {
 				flag = true;
 			}
 			
-			
+			result = "1";
 			Medal medal = new Medal();
 			medal.setResourse_id(res_id);
 			

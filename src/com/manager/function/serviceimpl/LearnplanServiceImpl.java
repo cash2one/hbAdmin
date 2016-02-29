@@ -992,7 +992,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 					}else if(isOpen.equals("1") || (isOpen.equals("0") && planNum == 0)){
 						res1 = true;
 		
-						if(num>1){
+						if(num>0){
 							plan_id = (num+1) +"";
 						}
 						logger.info("new_plan: "+plan_id);
