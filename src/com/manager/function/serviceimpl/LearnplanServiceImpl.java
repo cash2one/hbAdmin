@@ -992,7 +992,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 					}else if(isOpen.equals("1") || (isOpen.equals("0") && planNum == 0)){
 						res1 = true;
 		
-						if(num>0){
+						if(planNum>0){
 							plan_id = (num+1) +"";
 						}
 						logger.info("new_plan: "+plan_id);
@@ -1092,7 +1092,7 @@ public class LearnplanServiceImpl implements LearnplanService {
 						}
 						
 						//获取阅读配置
-						Learnplan lp = this.learnplanDao.findOne(plan_id);
+						Learnplan lp = this.learnplanDao.findOne("1");
 						if(lp==null){
 							result  = "2";
 							message = initDataPool.getSP("2-4-216");

@@ -260,6 +260,7 @@ public class ResourceController {
 			String book_content=(String)request.getParameter("book_content");
 			
 			String between_age=(String)request.getParameter("between_age");
+			String topic_id=(String)request.getParameter("topic_id");
 			
 //			if(!CollectionUtil.checkNull(id)){jsonObj.put("res", "不能为空！");return null;}
 			if(!CollectionUtil.checkNull(resource_content)){jsonObj.put("res", "资源名称不能为空！");return null;}
@@ -351,6 +352,9 @@ public class ResourceController {
 			
 			if(CollectionUtil.checkNull(between_age)){
 				Resource.setBetween_age(between_age);
+			}
+			if(CollectionUtil.checkNull(topic_id)){
+				Resource.setTopic_id(topic_id);
 			}
 			Resource.setResource_status(resource_status);
 //			Resource.setCreate_date(create_date);
@@ -488,6 +492,7 @@ public class ResourceController {
 			String book_content=(String)request.getParameter("book_content");
 			
 			String between_age=(String)request.getParameter("between_age");
+			String topic_id=(String)request.getParameter("topic_id");
 			
 			if(!CollectionUtil.checkNull(id)){jsonObj.put("res", "序列号不能为空！");return null;}
 			if(!CollectionUtil.checkNull(resource_content)){jsonObj.put("res", "资源名称不能为空！");return null;}
@@ -603,6 +608,12 @@ public class ResourceController {
 				Resource.setBetween_age(between_age);
 			}else{
 				Resource.setBetween_age(null);
+			}
+			
+			if(CollectionUtil.checkNull(topic_id)){
+				Resource.setTopic_id(topic_id);
+			}else{
+				Resource.setTopic_id(null);
 			}
 			
 			Resource.setResource_status(resource_status);

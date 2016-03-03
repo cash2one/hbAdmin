@@ -24,13 +24,16 @@ import com.manager.function.dao.UserDao;
 import com.manager.function.dao.MedalDao;
 import com.manager.function.dao.TokenDao;
 import com.manager.function.dao.UserLearnPlanDao;
+import com.manager.function.dao.ResourceDao;
 import com.manager.function.entity.Baby;
 import com.manager.function.entity.BabyInfo;
 import com.manager.function.entity.User;
 import com.manager.function.entity.Medal;
 import com.manager.function.entity.Token;
 import com.manager.function.entity.UserLearnplan;
+//import com.manager.function.entity.Resource;
 import com.manager.function.service.BabyService;
+
 import com.manager.init.InitDataPool;
 import com.manager.util.CollectionUtil;
 import com.manager.util.Constant;
@@ -63,6 +66,16 @@ public class BabyServiceImpl implements BabyService {
 	private TokenDao tokenDao;
 	
 	private UserLearnPlanDao userLearnplanDao;
+	
+	private ResourceDao resourceDao;
+	
+	public ResourceDao getResourceDao() {
+		return resourceDao;
+	}
+
+	public void setResourceDao(ResourceDao resourceDao) {
+		this.resourceDao = resourceDao;
+	}
 
 	public UserLearnPlanDao getUserLearnplanDao() {
 		return userLearnplanDao;
@@ -609,6 +622,7 @@ public Map addpre(HttpServletRequest request) {
 		
 		JSONObject obj = new JSONObject();
 		int count = 0;
+
 		try{
 			String res_id = (String) request.getParameter("res_id");
 			boolean flag = false;
@@ -620,12 +634,14 @@ public Map addpre(HttpServletRequest request) {
 			}else{
 				flag = true;
 			}
+			if(flag)
+			{
+				result = "1";
+				Medal medal = new Medal();
+				medal.setResourse_id(res_id);
 			
-			result = "1";
-			Medal medal = new Medal();
-			medal.setResourse_id(res_id);
-			
-			count = medalDao.getResCount(medal);
+				count = medalDao.getResCount(medal);
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
@@ -638,6 +654,60 @@ public Map addpre(HttpServletRequest request) {
         hsm.put("result", result);
         hsm.put("message", message);
         hsm.put("data", count+"");
+        
+        Date d2 = new Date();
+		logger.info("结束："+adf.format(d2));
+        long diff = (d2.getTime() - d1.getTime());
+        logger.info("BabyServiceImpl.updateAvatar执行了"+diff+"毫秒");
+		return hsm;
+	}
+	
+	public Map resTopicId(HttpServletRequest request)
+	{
+		SimpleDateFormat adf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d1 = new Date();
+		logger.info("开始："+adf.format(d1));
+		
+		String result  = "0";
+		String message = "";
+		
+		String appId = (String) request.getParameter("appid");
+		String appKey = Constant.APPID_KEY.get(appId);
+		
+		JSONObject obj = new JSONObject();
+
+		String topic_id = "";
+		try{
+			String res_id = (String) request.getParameter("res_id");
+			boolean flag = false;
+			
+			if(res_id==null||"".equals(res_id)){
+				result = "2";
+				message = initDataPool.getSP("2-4-211");
+			}else{
+				flag = true;
+			}
+			if(flag)
+			{
+				result = "1";
+				topic_id = resourceDao.getOneRes(res_id).getTopic_id();
+				if(topic_id == null){
+					topic_id = "0";
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			result = "error";
+			message = initDataPool.getSP("2-4-000");
+		}
+		
+		Map hsm = new LinkedHashMap();
+        hsm.put("version", Constant.version);
+        hsm.put("result", result);
+        hsm.put("message", message);
+        hsm.put("data", topic_id);
+        
         
         Date d2 = new Date();
 		logger.info("结束："+adf.format(d2));

@@ -365,6 +365,7 @@
   	 	var start_img_size=document.getElementById("start_img_size").value;
   	 	var book_content=document.getElementById("book_content").value;
   	 	var between_age=document.getElementById("between_age").value;
+  	 	var topic_id=document.getElementById("topic_id").value;
   	 	if(resource_type_id=='4'){
   	 	
   	 	}else{
@@ -442,7 +443,8 @@
   	 				"start_img":start_img,
   	 				"start_img_size":start_img_size,
   	 				"book_content":book_content,
-  	 				"between_age":between_age
+  	 				"between_age":between_age,
+  	 				"topic_id":topic_id
              	   },
              dataType: "json",
              async:	false,
@@ -490,6 +492,7 @@
   		}
   		
   		$("#tzjs3").show();
+  		$("#tzjs4").show();
   }
   
   function 	onclickLevel(para){
@@ -750,6 +753,10 @@
 		    
 		    <li  id="tzjs3" style="display: none"><label>适合年龄：<b></b></label>
 		    	<textarea class="textinput" cols="25" rows="2" name="between_age" id="between_age" maxlength="50"></textarea>
+		    </li>
+		    
+		    <li  id="tzjs4" style="display: none"><label>关联帖子id：<b></b></label>
+		    	<textarea class="textinput" cols="25" rows="2" name="topic_id" id="topic_id" maxlength="50"></textarea>
 		    </li>
 		   	
 		   	<li id="tzjs" style="display: none"><label>拓展介绍：<b></b></label>

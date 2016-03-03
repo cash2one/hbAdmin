@@ -368,6 +368,7 @@
 			<property name="medalDao" ref="medalDao"></property>
 			<property name="tokenDao" ref="tokenDao"></property>
 			<property name="userLearnplanDao" ref="userLearnplanDao"></property>
+			<property name="resourceDao" ref="resourceDao"></property>
 		</bean>
 		<bean name="learnplanService" id="learnplanService" class="com.manager.function.serviceimpl.LearnplanServiceImpl">
 			<property name="learnplanDao" ref="learnplanDao"></property>

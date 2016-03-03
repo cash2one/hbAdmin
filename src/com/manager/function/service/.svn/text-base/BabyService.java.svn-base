@@ -59,4 +59,6 @@ public interface BabyService {
 	public Map pushToken(HttpServletRequest request);
 	
 	public Map resReadCount(HttpServletRequest request);
+	
+	public Map resTopicId(HttpServletRequest request);
 }

@@ -111,17 +111,17 @@ svn:wc:ra_dav:version-url
 V 89
 /svn/iread/!svn/ver/22/trunk/hbAdmin/src/com/manager/function/entity/WeekdayResource.java
 END
-EmailInfo.java
-K 25
-svn:wc:ra_dav:version-url
-V 84
-/svn/iread/!svn/ver/182/trunk/hbAdmin/src/com/manager/function/entity/EmailInfo.java
-END
 ResourceInfo.java
 K 25
 svn:wc:ra_dav:version-url
 V 87
 /svn/iread/!svn/ver/130/trunk/hbAdmin/src/com/manager/function/entity/ResourceInfo.java
+END
+EmailInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/iread/!svn/ver/182/trunk/hbAdmin/src/com/manager/function/entity/EmailInfo.java
 END
 GlobalProperty.java
 K 25
@@ -147,17 +147,17 @@ svn:wc:ra_dav:version-url
 V 82
 /svn/iread/!svn/ver/45/trunk/hbAdmin/src/com/manager/function/entity/ScoreLog.java
 END
-GlobalHobbyAttr.java
-K 25
-svn:wc:ra_dav:version-url
-V 89
-/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/entity/GlobalHobbyAttr.java
-END
 UserBilling.java
 K 25
 svn:wc:ra_dav:version-url
 V 85
 /svn/iread/!svn/ver/33/trunk/hbAdmin/src/com/manager/function/entity/UserBilling.java
+END
+GlobalHobbyAttr.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/iread/!svn/ver/23/trunk/hbAdmin/src/com/manager/function/entity/GlobalHobbyAttr.java
 END
 Token.java
 K 25
@@ -169,7 +169,7 @@ Resource.java
 K 25
 svn:wc:ra_dav:version-url
 V 83
-/svn/iread/!svn/ver/201/trunk/hbAdmin/src/com/manager/function/entity/Resource.java
+/svn/iread/!svn/ver/219/trunk/hbAdmin/src/com/manager/function/entity/Resource.java
 END
 GlobalLevel.java
 K 25
@@ -177,17 +177,17 @@ svn:wc:ra_dav:version-url
 V 85
 /svn/iread/!svn/ver/25/trunk/hbAdmin/src/com/manager/function/entity/GlobalLevel.java
 END
-BabyInfo.java
-K 25
-svn:wc:ra_dav:version-url
-V 83
-/svn/iread/!svn/ver/203/trunk/hbAdmin/src/com/manager/function/entity/BabyInfo.java
-END
 Weekday.java
 K 25
 svn:wc:ra_dav:version-url
 V 81
 /svn/iread/!svn/ver/17/trunk/hbAdmin/src/com/manager/function/entity/Weekday.java
+END
+BabyInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/iread/!svn/ver/203/trunk/hbAdmin/src/com/manager/function/entity/BabyInfo.java
 END
 TopicReply.java
 K 25

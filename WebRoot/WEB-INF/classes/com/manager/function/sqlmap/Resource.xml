@@ -50,6 +50,7 @@
 		<result property="start_img_size" column="start_img_size"/>
 		<result property="book_content" column="book_content"/>
 		<result property="between_age" column="between_age"/>
+		<result property="topic_id" column="topic_id"/>
 	</resultMap>
 	
 	<select id="get_1" resultMap="Resource" parameterType="resource">
@@ -61,7 +62,7 @@
 		date_format(a.update_date,'%Y-%m-%d %H:%i:%s') update_date,a.update_adminuser update_adminuser,b.type_name type_name,
 		a.resource_keyword resource_keyword,a.resource_author resource_author,a.read_content read_content,a.read_img read_img,
 		a.lian_content lian_content,a.lian_img lian_img,a.start_content start_content,a.start_img start_img,
-		a.read_img_size read_img_size,a.lian_img_size lian_img_size,a.start_img_size start_img_size,a.book_content book_content,a.between_age between_age
+		a.read_img_size read_img_size,a.lian_img_size lian_img_size,a.start_img_size start_img_size,a.book_content book_content,a.between_age between_age,a.topic_id topic_id
 		from tbl_resource a 
 		left join tbl_resource_type b on a.resource_type_id=b.id
 		INNER JOIN (SELECT resource_id FROM tbl_resource_info 
@@ -114,7 +115,7 @@
 		date_format(a.update_date,'%Y-%m-%d %H:%i:%s') update_date,a.update_adminuser update_adminuser,b.type_name type_name,
 		a.resource_keyword resource_keyword,a.resource_author resource_author,a.read_content read_content,a.read_img read_img,
 		a.lian_content lian_content,a.lian_img lian_img,a.start_content start_content,a.start_img start_img,
-		a.read_img_size read_img_size,a.lian_img_size lian_img_size,a.start_img_size start_img_size,a.book_content book_content,a.between_age between_age
+		a.read_img_size read_img_size,a.lian_img_size lian_img_size,a.start_img_size start_img_size,a.book_content book_content,a.between_age between_age,a.topic_id topic_id
 		from tbl_resource a 
 		left join tbl_resource_type b on a.resource_type_id=b.id
 		LEFT JOIN (SELECT resource_id FROM tbl_resource_info 
@@ -170,9 +171,9 @@
 		<![CDATA[
 		SELECT * FROM (
 		SELECT (@rowNO := @rowNo+1) AS rowno,a.* FROM (
-		SELECT * FROM tbl_resource WHERE resource_status = 1 AND resource_content LIKE CONCAT('%',#{resource_content},'%')  union 
-		SELECT * FROM tbl_resource WHERE resource_status = 1 AND resource_keyword LIKE CONCAT('%',#{resource_content},'%')  union 
-		SELECT * FROM tbl_resource WHERE resource_status = 1 AND resource_author LIKE CONCAT('%',#{resource_content},'%')  ) a 
+		SELECT * FROM tbl_resource WHERE resource_status != 9 AND resource_content LIKE CONCAT('%',#{resource_content},'%')  union 
+		SELECT * FROM tbl_resource WHERE resource_status != 9 AND resource_keyword LIKE CONCAT('%',#{resource_content},'%')  union 
+		SELECT * FROM tbl_resource WHERE resource_status != 9 AND resource_author LIKE CONCAT('%',#{resource_content},'%')  ) a 
 		,(SELECT @rowNO :=0) b LIMIT 30
 		) cc ORDER BY rowno 
 		]]>
@@ -213,7 +214,7 @@
 	
 	<select id="fList" resultType="Resource" parameterType="resource">
 		<![CDATA[
-		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,b.id AS ulp_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size,a.lian_img_size,a.start_img_size,a.book_content,a.between_age FROM tbl_resource a
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,b.id AS ulp_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size,a.lian_img_size,a.start_img_size,a.book_content,a.between_age,a.topic_id FROM tbl_resource a
 		INNER JOIN (SELECT * FROM tbl_favorite WHERE user_id = #{user_id}) b on a.id = b.resource_id where a.resource_status = 1 order by b.create_date desc
 		]]>
 	</select>
@@ -226,7 +227,7 @@
 	
 	<select id="learnplan" resultType="Resource" parameterType="resource">
 		<![CDATA[
-		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size,a.lian_img_size,a.start_img_size,a.book_content,a.between_age,b3.language_level FROM 
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size,a.lian_img_size,a.start_img_size,a.book_content,a.between_age,a.topic_id,b3.language_level FROM 
 		(SELECT * FROM tbl_resource WHERE  resource_status = 1 and id NOT IN(SELECT resource_id FROM tbl_user_learnplan WHERE baby_id = #{baby_id} )) a
 		INNER JOIN 
 		(SELECT resource_id,property_id,language_level FROM tbl_resource_info WHERE property_id IN (SELECT property_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY property_id )) b1 ON a.id=b1.resource_id 
@@ -239,7 +240,7 @@
 	
 	<select id="buquan" resultType="Resource" parameterType="resource">
 		<![CDATA[
-		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size,a.lian_img_size,a.start_img_size,a.book_content,a.between_age FROM 
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size,a.lian_img_size,a.start_img_size,a.book_content,a.between_age,a.topic_id FROM 
 		(SELECT * FROM tbl_resource WHERE resource_type_id = #{resource_type_id} and resource_status = 1 and id NOT IN(#{id}) and id NOT IN(SELECT resource_id FROM tbl_user_learnplan WHERE baby_id = #{baby_id} )) a
 		INNER JOIN 
 		(SELECT resource_id,level_id FROM tbl_resource_info WHERE level_id=(SELECT level_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY level_id ) ) b2 ON a.id=b2.resource_id 
@@ -249,7 +250,7 @@
 	
 	<select id="buquanpre" resultType="Resource" parameterType="resource">
 		<![CDATA[
-		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size,a.lian_img_size,a.start_img_size,a.book_content,a.between_age,b3.language_level FROM 
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size,a.lian_img_size,a.start_img_size,a.book_content,a.between_age,a.topic_id,b3.language_level FROM 
 		(SELECT * FROM tbl_resource WHERE resource_type_id = #{resource_type_id} and resource_status = 1 and id NOT IN(#{id}) and id NOT IN(SELECT resource_id FROM tbl_user_learnplan WHERE baby_id = #{baby_id} )) a
 		INNER JOIN 
 		(SELECT resource_id,level_id FROM tbl_resource_info WHERE level_id=(SELECT level_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY level_id ) ) b2 ON a.id=b2.resource_id
@@ -261,7 +262,7 @@
 	
 	<select id="buquan1" resultType="Resource" parameterType="resource">
 		<![CDATA[
-		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size read_img_size,a.lian_img_size lian_img_size,a.start_img_size start_img_size,a.book_content book_content,a.between_age between_age FROM 
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size read_img_size,a.lian_img_size lian_img_size,a.start_img_size start_img_size,a.book_content book_content,a.between_age between_age,a.topic_id topic_id FROM 
 		(SELECT * FROM tbl_resource WHERE resource_type_id = #{resource_type_id} and resource_status = 1 and id NOT IN(#{id}) and id NOT IN(SELECT resource_id FROM tbl_weekday_resource WHERE baby_id = #{baby_id} )) a
 		INNER JOIN 
 		(SELECT resource_id,level_id FROM tbl_resource_info WHERE level_id=(SELECT level_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY level_id ) ) b2 ON a.id=b2.resource_id 
@@ -271,7 +272,7 @@
 	
 	<select id="huiben" resultType="Resource" parameterType="resource">
 		<![CDATA[
-		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size,a.lian_img_size,a.start_img_size,a.book_content,a.between_age,b3.language_level FROM 
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size,a.lian_img_size,a.start_img_size,a.book_content,a.between_age,a.topic_id,b3.language_level FROM 
 		(SELECT * FROM tbl_resource WHERE  resource_status = 1 AND resource_type_id = 4 AND id NOT IN(SELECT resource_id FROM tbl_user_learnplan WHERE baby_id = #{baby_id} )) a
 		INNER JOIN 
 		(SELECT resource_id,level_id FROM tbl_resource_info WHERE level_id=(SELECT level_id FROM tbl_baby_info WHERE baby_id = #{baby_id} GROUP BY level_id ) ) b2 ON a.id=b2.resource_id 
@@ -283,7 +284,7 @@
 	
 	<select id="huibenbuquan" resultType="Resource" parameterType="resource">
 		<![CDATA[
-		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size,a.lian_img_size,a.start_img_size,a.book_content,a.between_age FROM
+		SELECT a.id,a.resource_content,a.resource_summary,a.img_index,a.img_index_size,a.img_list,a.img_list_size,a.img_main,a.img_main_size,a.resource_type_id,a.img_book_size,a.img_book,a.resource_author,a.read_content,a.read_img,a.lian_content,a.lian_img,a.start_content,a.start_img,a.read_img_size,a.lian_img_size,a.start_img_size,a.book_content,a.between_age,a.topic_id FROM
 		 tbl_resource a WHERE a.resource_type_id = 4 AND a.resource_status = 1 AND a.id NOT IN(${id}) and a.id NOT IN(SELECT resource_id FROM tbl_user_learnplan WHERE baby_id = #{baby_id} ) ORDER BY a.id 
 		]]>
 	</select>
@@ -305,7 +306,7 @@
 		date_format(create_date,'%Y-%m-%d %H:%i:%s') create_date,create_adminuser,
 		date_format(update_date,'%Y-%m-%d %H:%i:%s') update_date,update_adminuser,
 		resource_keyword,resource_author,read_content,read_img,
-		lian_content,lian_img,start_content,start_img,read_img_size,lian_img_size,start_img_size,book_content,between_age
+		lian_content,lian_img,start_content,start_img,read_img_size,lian_img_size,start_img_size,book_content,between_age,topic_id
 		from tbl_resource ]]>
 		<where>
 			<if test="id!=null and ''!=id">
@@ -535,7 +536,8 @@
 				lian_img_size  = #{lian_img_size},
 				start_img_size  = #{start_img_size},
 				book_content  = #{book_content},
-				between_age  = #{between_age}
+				between_age  = #{between_age},
+				topic_id  = #{topic_id}
 				where id=#{id}]]>
 	</update>
 	
@@ -551,10 +553,16 @@
 		<![CDATA[insert into tbl_resource(id,resource_content,resource_summary,resource_type_id,
 		img_index,img_index_size,img_list,img_list_size,img_main,img_main_size,img_book,img_book_size,resource_status,
 		create_date,create_adminuser,resource_author,resource_keyword,read_content,read_img,
-		lian_content,lian_img,start_content,start_img,read_img_size,lian_img_size,start_img_size,book_content,between_age) 
+		lian_content,lian_img,start_content,start_img,read_img_size,lian_img_size,start_img_size,book_content,between_age,topic_id) 
 		values (#{id},#{resource_content},#{resource_summary},#{resource_type_id},
 		#{img_index},#{img_index_size},#{img_list},#{img_list_size},#{img_main},#{img_main_size},#{img_book},#{img_book_size},#{resource_status},
 		now(),#{create_adminuser},#{resource_author},#{resource_keyword},#{read_content},#{read_img},
-		#{lian_content},#{lian_img},#{start_content},#{start_img},#{read_img_size},#{lian_img_size},#{start_img_size},#{book_content},#{between_age})]]>
+		#{lian_content},#{lian_img},#{start_content},#{start_img},#{read_img_size},#{lian_img_size},#{start_img_size},#{book_content},#{between_age},#{topic_id})]]>
 	</insert>
+	
+	<select id="getResTopic" resultType="resource" parameterType="resource">
+		<![CDATA[
+		SELECT * FROM tbl_resource WHERE id = #{id}
+		]]>
+	</select>
 </mapper>

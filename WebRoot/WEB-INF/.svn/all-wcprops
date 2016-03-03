@@ -31,7 +31,7 @@ applicationContext.xml
 K 25
 svn:wc:ra_dav:version-url
 V 76
-/svn/iread/!svn/ver/209/trunk/hbAdmin/WebRoot/WEB-INF/applicationContext.xml
+/svn/iread/!svn/ver/219/trunk/hbAdmin/WebRoot/WEB-INF/applicationContext.xml
 END
 dispatcher-servlet.xml
 K 25
